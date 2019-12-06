@@ -1,0 +1,42 @@
+<div class="wrapper">
+<app-admin></app-admin>
+  <main class="main-wrapper">
+    <section class="employees">
+      <fieldset class="wrapper-fieldset">
+        <legend class="wrapper-legend-employee"><span>Create new Employee</span></legend>
+        <form [formGroup]="form" (submit)="onSubmit()" >
+          <div class="fieldset-1" >
+            <div class="wrapper-input">
+              <input [formControlName]="'todo'" type="text" name="todo" id="name" placeholder="  Write a name" >
+              <button type="button" class="create-button" (click)="onSubmit()">Create</button>
+            </div>
+            <div class="employee-list" cdkDropList>
+                 <!--#workList="cdkDropList"-->
+                 <!--[cdkDropListData]="todoArray"-->
+                 <!--[cdkDropListConnectedTo]="[vacationList]"-->
+                 <!--(cdkDropListDropped)="drop($event)">-->
+              <ul>
+                <li class="name-list" *ngFor="let todo of todoArray; let i = index">
+                  <button (click)="onDeleteItem(i)">delete</button> {{todo}}
+                </li>
+              </ul>
+            </div>
+            <div class="fieldset-2" cdkDropList>
+                 <!--#vacationList="cdkDropList"-->
+                 <!--[cdkDropListData]="vacationArray"-->
+                 <!--[cdkDropListConnectedTo]="[workList]"-->
+                 <!--(cdkDropListDropped)="drop($event)">-->
+              <fieldset class="wrapper-fieldset-vacation">
+                <legend class="wrapper-legend-employee-vacation"><span> Employees on vacation</span></legend>
+                <ul class="wrapper-list">
+                  <li class="name-list-vacation" *ngFor="let todo of vacationArray; let i = index">{{todo}}</li>
+                </ul>
+              </fieldset>
+            </div>
+          </div>
+        </form>
+      </fieldset>
+    </section>
+  </main>
+
+</div>

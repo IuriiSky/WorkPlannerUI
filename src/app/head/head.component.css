@@ -1,0 +1,31 @@
+.header-wrapper {
+  display: flex;
+  background-color: azure;
+  justify-content: space-between;
+}
+
+.main-navigation {
+  display: flex;
+  justify-content:flex-end;
+}
+
+.main-menu {
+  display: flex;
+  align-items: center;
+  list-style-type: none;
+  margin-right: 20%;
+  padding-bottom: 1%;
+}
+
+a {
+  color: #000000;
+  font-size: 1em;
+  font-weight: 600;
+  padding: 0 30px;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+a:hover {
+  color: #fe7e11;
+}
