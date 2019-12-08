@@ -1,28 +1,46 @@
 .wrapper-admin {
+  background-color: #0f2b36;
   display: flex;
   flex-basis: 25%;
 }
 
+fieldset {
+  margin: 10px;
+}
+
+legend {
+  margin-left: 5%;
+}
+
+legend > span {
+  font-size: 1.5em;
+  color: #ffffff;
+}
+
 /* The sidebar menu */
 .sidenav {
-  background-color: #111; /* Black */
-  height: 100vh;
+  background-color: #eee8aa;
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - 100px);
+  padding: 10px;
+  margin: 10px;
+  /*position: relative;*/
 }
 
 /* The navigation menu links */
 .sidenav a {
   display: flex;
-  flex-direction: column;
   padding: 6px 8px 6px 16px;
   text-decoration: none;
   font-size: 25px;
-  color: #818181;
-//display: block;
+  color: #000000;
 }
 
 /* When you mouse over the navigation links, change their color */
 .sidenav a:hover {
-  color: #f1f1f1;
+  background-color: #0f2b36;
+  color: #ffffff;
 }
 
 /* Style page content */

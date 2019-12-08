@@ -1,0 +1,76 @@
+.wrapper {
+  display: flex;
+}
+
+.employee {
+  background-color: #0f2b36;
+  flex-grow: 1;
+}
+
+.all-workers {
+  margin: 10px;
+}
+
+legend {
+  margin-left: 15%;
+}
+
+legend > span {
+  font-size: 1.5em;
+  color: #ffffff;
+}
+
+.wrapper-lists {
+  background-color: #eee8aa;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 10px;
+  margin: 10px;
+}
+
+#name{
+  background-color: #ffffff;
+  flex-basis: 50%;
+  margin: 3%;
+  height: 2em;
+  width: 50%;
+}
+
+.create-button {
+  background-color: #0f2b36;
+  border: none;
+  border-radius: 20px;
+  color: white;
+  font-weight: 500;
+  font-size: 1em;
+  height: 30px;
+  margin: 3%;
+  padding: 0 5px;
+  width: 100px;
+}
+
+.create-button:hover {
+  background-color: green;
+  transition: 0.4s ease-out;
+}
+
+.current-employees {
+  flex-basis: 50%;
+  list-style-type: none;
+}
+
+.name-list {
+  color: #000000;
+  font-size: 1.3em;
+  list-style-type: none;
+  margin: 5% 0 5% 10%;
+}
+
+.name-list:last-child {
+  margin-bottom: 10%;
+}
+
+.name-list:hover {
+  background-color: #0f2b36;
+  color: #ffffff;
+}

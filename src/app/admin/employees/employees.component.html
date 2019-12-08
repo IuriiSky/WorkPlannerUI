@@ -1,0 +1,22 @@
+<div class="wrapper">
+  <app-admin></app-admin>
+  <main class="employee">
+    <form>
+      <fieldset class="all-workers">
+        <legend><span>Create new Employee</span></legend>
+        <div class="wrapper-lists">
+          <input type="text" name="todo" id="name" placeholder="  Write a name">
+          <button type="submit" class="create-button">Create</button>
+          <ul class="current-employees">
+            <li class="name-list" *ngFor="let employee of employees">{{employee.name}}</li>
+<!--            <li class="name-list">Iurii Petrenko</li>-->
+<!--            <li class="name-list">Iurii Savchenko</li>-->
+<!--            <li class="name-list">Iurii Dydka</li>-->
+<!--            <li class="name-list">Iurii Dobryu</li>-->
+<!--            <li class="name-list">Iurii Spat Oxota</li>-->
+          </ul>
+        </div>
+      </fieldset>
+    </form>
+  </main>
+</div>

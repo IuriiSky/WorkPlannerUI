@@ -2,13 +2,13 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent} from './home/home.component';
 import { AdminComponent} from './admin/admin.component';
-import { EmployeeComponent} from './admin/employee/employee.component';
+import { EmployeesComponent} from './admin/employees/employees.component';
 
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'admin', component: AdminComponent},
-  {path: 'employee', component: EmployeeComponent},
+  {path: 'Employees', component: EmployeesComponent},
 ];
 
 @NgModule({
