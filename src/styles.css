@@ -3,3 +3,21 @@
   margin: 0;
   padding: 0;
 }
+
+ :root {
+   --white-color: #ffffff;
+   --black-color: #000000;
+
+
+   --main-bg-color: #0f2b36;
+   --component-bg-color: #eee8aa;
+
+   /*Head*/
+   --header-text-color: var(--white-color);
+   --hover-bg-color: #dddddd;
+   --hover-text-color: var(--black-color);
+
+   /*Button*/
+   --bt-create-color: var(--main-bg-color);
+   --bt-create-hover-color: #008000;
+ }

@@ -3,7 +3,7 @@
 }
 
 .employee {
-  background-color: #0f2b36;
+  background-color: var(--main-bg-color);
   flex-grow: 1;
 }
 
@@ -17,19 +17,20 @@ legend {
 
 legend > span {
   font-size: 1.5em;
-  color: #ffffff;
+  color: var(--white-color);
 }
 
 .wrapper-lists {
-  background-color: #eee8aa;
+  background-color: var(--component-bg-color);
   display: flex;
-  flex-wrap: wrap;
+  justify-content: space-between;
   padding: 10px;
   margin: 10px;
+
 }
 
 #name{
-  background-color: #ffffff;
+  background-color: var(--white-color);
   flex-basis: 50%;
   margin: 3%;
   height: 2em;
@@ -37,10 +38,10 @@ legend > span {
 }
 
 .create-button {
-  background-color: #0f2b36;
+  background-color: var(--bt-create-color);
   border: none;
   border-radius: 20px;
-  color: white;
+  color: var(--white-color);
   font-weight: 500;
   font-size: 1em;
   height: 30px;
@@ -50,17 +51,16 @@ legend > span {
 }
 
 .create-button:hover {
-  background-color: green;
+  background-color: var(--bt-create-hover-color);
   transition: 0.4s ease-out;
 }
 
 .current-employees {
-  flex-basis: 50%;
   list-style-type: none;
 }
 
 .name-list {
-  color: #000000;
+  color: var(--black-color);
   font-size: 1.3em;
   list-style-type: none;
   margin: 5% 0 5% 10%;
@@ -71,6 +71,6 @@ legend > span {
 }
 
 .name-list:hover {
-  background-color: #0f2b36;
-  color: #ffffff;
+  background-color: var(--main-bg-color);
+  color: var(--white-color);
 }

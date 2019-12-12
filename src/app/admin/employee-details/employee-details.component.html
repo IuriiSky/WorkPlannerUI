@@ -1,0 +1,29 @@
+<div class="wrapper">
+  <app-admin></app-admin>
+  <main class="employee-details">
+    <form>
+      <fieldset class="worker">
+        <legend><span>{{employeeDetail.name}}</span></legend>
+        <div class="wrapper-lists-info" *ngIf="employeeDetail">
+          <p class="info"> Name: {{employeeDetail.name}}</p>
+          <p class="info"> Color: {{employeeDetail.colorCode}}</p>
+<!--          <p class="info"> Holiday: {{employeeDetail.holidays[0].startDate| date:'dd-MM-yyyy'}}</p>-->
+<!--          <p class="info" *ngFor=" let holiday of employeeDetail.holidays"> Start date:{{holiday.startDate| date: 'dd-MM-yyyy'}} <br>-->
+<!--          End date: {{holiday.endDate| date: 'dd-MM-yyyy'}}</p>-->
+
+<!--          <p class="info" *ngFor=" let holiday of employeeDetail.holidays"> Start date:{{holiday.startDate| date: 'dd-MM-yyyy'}} <br>-->
+<!--            End date: {{holiday.endDate| date: 'dd-MM-yyyy'}}</p>-->
+          <h3 class="info">Holidays:</h3>
+          <div class="info" *ngFor=" let holiday of employeeDetail.holidays">
+
+            <p> From:{{holiday.startDate| date: 'dd-MM-yyyy'}}   To: {{holiday.endDate| date: 'dd-MM-yyyy'}}  </p>
+          </div>
+
+          <div [ngStyle]="{'background-color': employeeDetail.colorCode}" id="canvas"> </div>
+        </div>
+      </fieldset>
+    </form>
+  </main>
+</div>
+
+<!--{startDate: "2019-12-08T00:00:00", endDate: "2020-12-08T00:00:00"}-->

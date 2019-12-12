@@ -12,6 +12,8 @@ import { AdminComponent } from './admin/admin.component';
 import { EmployeesComponent } from './admin/employees/employees.component';
   // Services
 import { EmployeesService} from './services/employees.service';
+import { EmployeeDetailsComponent } from './admin/employee-details/employee-details.component';
+import { EmployeeDetailsService } from './services/employee-details.service';
 
 
 @NgModule({
@@ -21,6 +23,7 @@ import { EmployeesService} from './services/employees.service';
     HeadComponent,
     AdminComponent,
     EmployeesComponent,
+    EmployeeDetailsComponent,
   ],
   imports: [
     BrowserModule,
@@ -30,7 +33,8 @@ import { EmployeesService} from './services/employees.service';
     ReactiveFormsModule,
     HttpClientModule,
   ],
-  providers: [EmployeesService],
+  providers: [EmployeesService,
+              EmployeeDetailsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

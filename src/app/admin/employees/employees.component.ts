@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Employees} from '../../shared/interfaces/employees';
+import { Employee} from '../../shared/interfaces/employee';
 import { EmployeesService} from '../../services/employees.service';
 import { Router } from '@angular/router';
 
@@ -10,14 +10,14 @@ import { Router } from '@angular/router';
 })
 export class EmployeesComponent implements OnInit {
 
-  public employees: Employees[];
+  public employees: Employee[];
 
   constructor(private employeesService: EmployeesService,
               private router: Router) {
   }
 
   ngOnInit() {
-    this.employeesService.getAllEmployees().subscribe((data: Employees[]) => {
+    this.employeesService.getAllEmployees().subscribe((data: Employee[]) => {
       this.employees = data;
     });
   }

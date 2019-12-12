@@ -1,14 +1,17 @@
 .wrapper-header {
+  border-bottom: 1px solid var(--hover-bg-color);
   display: flex;
   justify-content: space-between;
-  background-color: #0f2b36;
+  min-height: 50px;
+  background-color: var(--main-bg-color);
   padding: 20px 10px;
+  margin-bottom: 20px;
 }
 
 /* Style the header links */
 .wrapper-header a {
   float: left;
-  color: #ffffff;
+  color: var(--header-text-color);
   text-align: center;
   padding: 12px;
   text-decoration: none;
@@ -25,15 +28,15 @@
 
 /* Change the background color on mouse-over */
 .wrapper-header a:hover {
-  background-color: #ddd;
-  color: black;
+  background-color: var(--hover-bg-color);
+  color: var(--hover-text-color);
 }
 
 /* Style the active/current link*/
-.wrapper-header a.active {
-  background-color: dodgerblue;
-  color: white;
-}
+/*.wrapper-header a.active {*/
+/*  background-color: dodgerblue;*/
+/*  color: white;*/
+/*}*/
 
 /* Float the link section to the right */
 .header-right {
