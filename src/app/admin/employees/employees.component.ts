@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Employee} from '../../shared/interfaces/employee';
+import {CreateEmployee, Employee} from '../../shared/interfaces/employee';
 import { EmployeesService} from '../../services/employees.service';
 import { Router } from '@angular/router';
+import {FormControl, FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-employees',
@@ -10,15 +11,44 @@ import { Router } from '@angular/router';
 })
 export class EmployeesComponent implements OnInit {
 
-  public employees: Employee[];
-
   constructor(private employeesService: EmployeesService,
               private router: Router) {
   }
 
+  createEmployee: FormGroup;
+
+  showCreateForm = true;
+
+
+  public employees: Employee[];
+
+  public createNewEmployee: CreateEmployee = {
+    employeeName: '',
+    colorCode: '',
+  };
+
+  toggleCreateEmployee() {
+    this.showCreateForm = false;
+  }
+
+  toggleCancelEmployee() {
+    this.showCreateForm = true;
+  }
+
+  addEmployee() {
+    this.employeesService.createEmployee(this.createNewEmployee).subscribe(employee => {
+      this.createNewEmployee.employeeName = '';
+      this.createNewEmployee.colorCode = '';
+    });
+  }
   ngOnInit() {
     this.employeesService.getAllEmployees().subscribe((data: Employee[]) => {
       this.employees = data;
+    });
+
+    this.createEmployee = new FormGroup({
+      employeeName: new FormControl(''),
+      colorCode: new FormControl('')
     });
   }
 }

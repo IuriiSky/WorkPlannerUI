@@ -24,6 +24,7 @@ legend > span {
   background-color: var(--component-bg-color);
   display: flex;
   justify-content: space-between;
+  flex-direction: row-reverse;
   padding: 10px;
   margin: 10px;
 
@@ -37,7 +38,7 @@ legend > span {
   width: 50%;
 }
 
-.create-button {
+.added-button {
   background-color: var(--bt-create-color);
   border: none;
   border-radius: 20px;
@@ -50,7 +51,7 @@ legend > span {
   width: 100px;
 }
 
-.create-button:hover {
+.added-button:hover {
   background-color: var(--bt-create-hover-color);
   transition: 0.4s ease-out;
 }
@@ -73,4 +74,50 @@ legend > span {
 .name-list:hover {
   background-color: var(--main-bg-color);
   color: var(--white-color);
+}
+
+/*Create  new employee form*/
+.wrapper-create-form {
+  width: 40%;
+  height: 30%;
+  margin: 0 auto;
+  z-index: 1;
+}
+
+
+.create-form {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.create-form > label {
+  color: var(--white-color);
+  font-size: 20px;
+  padding: 10px;
+}
+
+input[type = "text"],
+input[type = "color"]{
+  background-color: var(--component-bg-color);
+  height: 30px;
+  width: 100%;
+}
+
+.create-employee {
+  background-color: var(--component-bg-color);
+  border: none;
+  border-radius: 20px;
+  color: var(--black-color);
+  font-weight: 500;
+  font-size: 1em;
+  height: 30px;
+  padding: 0 5px;
+  width: 100px;
+  margin: 30px auto 0;
+}
+
+
+.invisible {
+  display: none;
 }

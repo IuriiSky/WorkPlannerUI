@@ -3,18 +3,31 @@
   <main class="employee">
     <form>
       <fieldset class="all-workers">
-        <legend><span>Create new Employee</span></legend>
+        <legend><span>Employees</span></legend>
         <div class="wrapper-lists">
-<!--          <input type="text" name="todo" id="name" placeholder="  Write a name">-->
-
+          <button type="submit" class="added-button" (click)="toggleCreateEmployee()">Add</button>
           <ul class="current-employees">
             <li class="name-list" *ngFor="let employee of employees"
                 [routerLink]="['/Employees', employee.id]">{{employee.name}}</li>
           </ul>
-          <button type="submit" class="create-button">Create</button>
         </div>
       </fieldset>
     </form>
+    <div class="wrapper-create-form invisible" [ngClass]="{invisible: showCreateForm}">
+    <form action="" method="post">
+      <fieldset class="create-form" [formGroup]="createEmployee">
+        <legend><span>Create new employee</span></legend>
+          <label for="employee">Employee name:</label>
+          <input formControlName="employeeName" [(ngModel)]="createNewEmployee.employeeName"
+                 type="text" placeholder="Enter employee name" name="employee" id="employee">
+          <label for="colorPicker">Employee color:</label>
+          <input formControlName="colorCode" [(ngModel)]="createNewEmployee.colorCode"
+                 type="text" id="colorPicker">
+        <button  (click)="addEmployee()" class="create-employee">Create</button>
+        <button class="create-employee" (click)="toggleCancelEmployee()" >Cancel</button>
+      </fieldset>
+    </form>
+    </div>
 <!--              <div id="box">-->
 <!--                <label for="colorPicker">Border color:</label>-->
 <!--                <input type="color" value="#8888ff" id="colorPicker">-->
