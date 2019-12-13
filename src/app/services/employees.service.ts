@@ -24,11 +24,6 @@ export class EmployeesService {
   }
 
   createEmployee(employee: CreateEmployee) {
-    let body = {
-      'employee[employeeName]' : employee.employeeName,
-      'employee[colorCode]' : employee.colorCode,
-    };
-
-    return this.http.post<any>(this.baseApi + 'Employees/create', this.httpOptions);
+    return this.http.post<any>(this.baseApi + 'Employees/create',employee, this.httpOptions);
   }
 }
