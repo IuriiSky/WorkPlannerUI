@@ -5,33 +5,30 @@
       <fieldset class="all-workers">
         <legend><span>Employees</span></legend>
         <div class="wrapper-lists">
-          <button type="submit" class="added-button" (click)="toggleCreateEmployee()">Add</button>
+          <button type="submit" class="added-button primary-button" (click) = "toggleShowCreateForm()">Add</button>
           <ul class="current-employees">
-            <li class="name-list" *ngFor="let employee of employees"
-                [routerLink]="['/Employees', employee.id]">{{employee.name}}</li>
+            <li class="name-list" *ngFor="let employee of employees" [routerLink]="['/Employees', employee.id]">
+              <div class="show-color" [ngStyle]="{'background-color': employee.colorCode}"></div>
+              {{employee.name}}
+            </li>
           </ul>
         </div>
       </fieldset>
     </form>
-    <div class="wrapper-create-form invisible" [ngClass]="{invisible: showCreateForm}">
+    <div class="wrapper-create-form" [hidden] = "showCreateForm">
     <form action="" method="post">
-      <fieldset class="create-form" [formGroup]="createEmployee">
+      <fieldset class="create-form animate" [formGroup]="createEmployee">
         <legend><span>Create new employee</span></legend>
           <label for="employee">Employee name:</label>
           <input formControlName="employeeName" [(ngModel)]="createNewEmployee.employeeName"
-                 type="text" placeholder="Enter employee name" name="employee" id="employee">
+                 type="text" placeholder="Enter employee name" name="employee" id="employee" title="Enter name" autofocus required>
           <label for="colorPicker">Employee color:</label>
-          <input formControlName="colorCode" [(ngModel)]="createNewEmployee.colorCode"
-                 type="text" id="colorPicker">
-        <button  (click)="addEmployee()" class="create-employee">Create</button>
-        <button class="create-employee" (click)="toggleCancelEmployee()" >Cancel</button>
+          <input formControlName="colorCode" type="color" value="#8e2929" id="colorPicker" title="Click on the line and set the color"
+                 [(ngModel)]="createNewEmployee.colorCode" required>
+        <button  (click)="addEmployee()" class="create-button primary-button">Create</button>
+        <button class="cancel-button primary-button" (click)="toggleShowCreateForm()">Cancel</button>
       </fieldset>
     </form>
     </div>
-<!--              <div id="box">-->
-<!--                <label for="colorPicker">Border color:</label>-->
-<!--                <input type="color" value="#8888ff" id="colorPicker">-->
-<!--                <p id="output"></p>-->
-<!--              </div>-->
   </main>
 </div>

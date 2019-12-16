@@ -1,29 +1,51 @@
 <div class="wrapper">
   <app-admin></app-admin>
   <main class="employee-details">
-    <form>
-      <fieldset class="worker">
+      <fieldset>
         <legend><span>{{employeeDetail.name}}</span></legend>
-        <div class="wrapper-lists-info" *ngIf="employeeDetail">
-          <p class="info"> Name: {{employeeDetail.name}}</p>
-          <p class="info"> Color: {{employeeDetail.colorCode}}</p>
-<!--          <p class="info"> Holiday: {{employeeDetail.holidays[0].startDate| date:'dd-MM-yyyy'}}</p>-->
-<!--          <p class="info" *ngFor=" let holiday of employeeDetail.holidays"> Start date:{{holiday.startDate| date: 'dd-MM-yyyy'}} <br>-->
-<!--          End date: {{holiday.endDate| date: 'dd-MM-yyyy'}}</p>-->
-
-<!--          <p class="info" *ngFor=" let holiday of employeeDetail.holidays"> Start date:{{holiday.startDate| date: 'dd-MM-yyyy'}} <br>-->
-<!--            End date: {{holiday.endDate| date: 'dd-MM-yyyy'}}</p>-->
-          <h3 class="info">Holidays:</h3>
-          <div class="info" *ngFor=" let holiday of employeeDetail.holidays">
-
-            <p> From:{{holiday.startDate| date: 'dd-MM-yyyy'}}   To: {{holiday.endDate| date: 'dd-MM-yyyy'}}  </p>
+          <div class="worker">
+            <div id="sidenav-settings" class="sidenav-settings">
+              <button class="close-button" (click)="closeSidenavSetting()">CLS</button>
+              <button class="setting" (click)="toggleShowChangeNameForm()">Change name</button>
+              <button class="setting" (click)="toggleShowChangeColorForm()">Change color</button>
+              <button class="setting">Get holiday</button>
+            </div>
+            <div class="wrapper-lists-info" *ngIf="employeeDetail">
+              <button type="button" class="setting-button" (click)="openSidenavSettings()">Set</button>
+              <p class="info"> Name: {{employeeDetail.name}}</p>
+              <p class="info"> Color:
+                <span [ngStyle]="{'background-color': employeeDetail.colorCode}" [title]="employeeDetail.colorCode"
+                 id="color"> </span>
+              </p>
+            <h3 class="info">Holidays:</h3>
+            <div class="info" *ngFor=" let holiday of employeeDetail.holidays">
+              <div> From:{{holiday.startDate| date: 'dd-MM-yyyy'}}   To: {{holiday.endDate| date: 'dd-MM-yyyy'}}  </div>
+            </div>
+            </div>
           </div>
-
-          <div [ngStyle]="{'background-color': employeeDetail.colorCode}" id="canvas"> </div>
-        </div>
       </fieldset>
-    </form>
+    <div class="wrapper-create-form invisible" [ngClass]="{invisible: showChangeNameForm}">
+      <form action="" method="post">
+        <fieldset class="create-form animate" [formGroup]="modifyEmployee">
+          <legend><span>Change employee name</span></legend>
+          <label for="employee">Employee new name:</label>
+          <input formControlName="employeeName" [(ngModel)]="employeeUpdate.employeeName" type="text" placeholder="Enter employee name" name="employee" id="employee" title="Enter name" autofocus required>
+          <button class="create-button primary-button" (click)="updateName()">Change</button>
+          <button class="cancel-button primary-button" (click)="toggleShowChangeNameForm()">Cancel</button>
+        </fieldset>
+      </form>
+    </div>
+    <div class="wrapper-create-form invisible" [ngClass]="{invisible: showChangeColorForm}">
+      <form action="" method="post">
+        <fieldset class="create-form animate">
+          <legend><span>Change color</span></legend>
+          <label for="colorPicker">Employee color:</label>
+          <input type="color" value="#8e2929" id="colorPicker" required>
+          <button class="create-button primary-button">Change</button>
+          <button class="cancel-button primary-button" (click)="toggleShowChangeColorForm()">Cancel</button>
+        </fieldset>
+      </form>
+    </div>
   </main>
 </div>
 
-<!--{startDate: "2019-12-08T00:00:00", endDate: "2020-12-08T00:00:00"}-->

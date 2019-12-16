@@ -20,4 +20,5 @@
    /*Button*/
    --bt-create-color: var(--main-bg-color);
    --bt-create-hover-color: #008000;
+   --bt-cancel-hover-color: #ff0000;
  }

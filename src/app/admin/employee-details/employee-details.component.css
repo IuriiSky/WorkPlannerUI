@@ -7,7 +7,7 @@
   flex-grow: 1;
 }
 
-.worker {
+fieldset {
   margin: 10px;
 }
 
@@ -20,23 +20,161 @@ legend > span {
   color: #ffffff;
 }
 
+.worker {
+  margin: 10px;
+  display: flex;
+}
+
 .wrapper-lists-info {
   display: flex;
   flex-direction: column;
+  flex-grow: 1;
   background-color: var(--component-bg-color);
-  display: flex;
-  flex-wrap: wrap;
-  padding: 10px;
   margin: 10px;
   min-height: calc(100vh - 200px);
+  transition: margin-left .5s;
+
+}
+
+.sidenav-settings {
+  display: flex;
+  flex-direction: column;
+  height: inherit;
+  width: 0;
+  position: relative;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: var(--component-bg-color);
+  overflow-x: hidden;
+  transition: 0.5s;
+  margin: 10px 0;
+}
+
+.sidenav-settings:first-child {
+  padding-top: 2em;
 }
 
 .info {
-  font-size: 20px;
-  padding: 15px;
+  display: flex;
+  font-size: 1em;
+  padding: 15px 15px 10px 2em;
 }
 
-#canvas {
-  height: 20px;
-  width: 20px;
+#color {
+  margin-left: 20px;
+  height: 1em;
+  width: 1em;
+}
+
+.setting-button {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 2em;
+  height: 2em;
+}
+
+.close-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 2em;
+  height: 2em;
+}
+
+.setting {
+  margin: 5px auto;
+  font-size: 1em;
+  display: inline-block;
+  padding: 5px;
+  border-radius: 20px;
+  border: 1px solid #ff0000;
+}
+
+.setting:hover {
+  background-color: var(--main-bg-color);
+  color: var(--white-color);
+  transition: 0.4s ease-out;
+}
+
+/*Create  new employee form*/
+
+.invisible {
+  display: none;
+}
+
+.wrapper-create-form {
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--black-color);
+  opacity: 0.9;
+  padding-top: 60px;
+  transition: 0.4s ease-out;
+}
+
+.create-form {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  width: 40%;
+  height: 30%;
+  margin: 0 auto;
+}
+
+.create-form > label {
+  color: var(--white-color);
+  font-size: 20px;
+  padding: 10px;
+}
+
+input[type = "text"],
+input[type = "color"]{
+  background-color: var(--component-bg-color);
+  height: 30px;
+  width: 100%;
+}
+
+.create-button {
+  height: 30px;
+  padding: 0 5px;
+  width: 100px;
+  margin: 30px auto 0;
+}
+
+.create-button:hover {
+  background-color: var(--bt-create-hover-color);
+  transition: 0.4s ease-out;
+}
+
+.cancel-button {
+  height: 30px;
+  padding: 0 5px;
+  width: 100px;
+  margin: 30px auto 0;
+}
+
+.cancel-button:hover {
+  background-color: var(--bt-cancel-hover-color);
+  transition: 0.4s ease-out;
+}
+
+/* Add Zoom Animation */
+.animate {
+  -webkit-animation: animatezoom 0.6s;
+  animation: animatezoom 0.6s
+}
+
+@-webkit-keyframes animatezoom {
+  from {-webkit-transform: scale(0)}
+  to {-webkit-transform: scale(1)}
+}
+
+@keyframes animatezoom {
+  from {transform: scale(0)}
+  to {transform: scale(1)}
 }

@@ -19,7 +19,6 @@ export class EmployeesComponent implements OnInit {
 
   showCreateForm = true;
 
-
   public employees: Employee[];
 
   public createNewEmployee: CreateEmployee = {
@@ -27,20 +26,19 @@ export class EmployeesComponent implements OnInit {
     colorCode: '',
   };
 
-  toggleCreateEmployee() {
-    this.showCreateForm = false;
-  }
-
-  toggleCancelEmployee() {
-    this.showCreateForm = true;
+  toggleShowCreateForm() {
+    this.showCreateForm = !this.showCreateForm;
   }
 
   addEmployee() {
     this.employeesService.createEmployee(this.createNewEmployee).subscribe(employee => {
       this.createNewEmployee.employeeName = '';
       this.createNewEmployee.colorCode = '';
+      this.showCreateForm = false;
+      window.location.reload();
     });
   }
+
   ngOnInit() {
     this.employeesService.getAllEmployees().subscribe((data: Employee[]) => {
       this.employees = data;
