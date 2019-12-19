@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { DragDropModule } from '@angular/cdk/drag-drop';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
@@ -14,6 +13,11 @@ import { EmployeesComponent } from './admin/employees/employees.component';
 import { EmployeesService} from './services/employees.service';
 import { EmployeeDetailsComponent } from './admin/employee-details/employee-details.component';
 import { EmployeeDetailsService } from './services/employee-details.service';
+import { DatepickerComponent } from './admin/datepicker/datepicker.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+  // Angular Material
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule} from '@angular/material';
 
 
 @NgModule({
@@ -24,17 +28,21 @@ import { EmployeeDetailsService } from './services/employee-details.service';
     AdminComponent,
     EmployeesComponent,
     EmployeeDetailsComponent,
+    DatepickerComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    DragDropModule,
     ReactiveFormsModule,
     HttpClientModule,
+    BrowserAnimationsModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   providers: [EmployeesService,
-              EmployeeDetailsService],
+              EmployeeDetailsService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

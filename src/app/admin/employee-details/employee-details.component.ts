@@ -3,6 +3,7 @@ import { EmployeeDetailsService} from '../../services/employee-details.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import {CreateEmployee, Employee, EmployeeDetails, UpdateEmployee} from '../../shared/interfaces/employee';
 import {FormControl, FormGroup} from '@angular/forms';
+  // Angular Material
 
 @Component({
   selector: 'app-employee-details',
@@ -57,12 +58,17 @@ export class EmployeeDetailsComponent implements OnInit {
   }
 
   updateName() {
-    // this.employeeUpdate.employeeId = this.employeeDetail.id;
-    // this.employeeUpdate.colorCode = this.employeeDetail.colorCode;
     this.employeeDetailsService.updateEmployee(this.employeeUpdate).subscribe(employee => {
       this.initDetailsEmployee();
       this.showChangeNameForm = true;
-      });
+    });
+  }
+
+  updateColor() {
+    this.employeeDetailsService.updateEmployee(this.employeeUpdate).subscribe(employee => {
+      this.initDetailsEmployee();
+      this.showChangeColorForm = true;
+    });
   }
 
   private initUpdateEmployee() {
@@ -78,16 +84,6 @@ export class EmployeeDetailsComponent implements OnInit {
     });
   }
 
-  // putEmployee() {
-  //   this.employeeUpdate.id = this.employeeDetail.id;
-  //   this.employeeDetailsService.updateEmployee(this.employeeUpdate).subscribe(employee => {
-  //    this.employeeUpdate.employeeName = '';
-  //    this.showChangeNameForm = true;
-  //  });
-  // }
-
-
-
 ngOnInit() {
     this.initDetailsEmployee();
 
@@ -95,13 +91,5 @@ ngOnInit() {
     employeeName: new FormControl(''),
     colorCode: new FormControl('')
   });
-
-
-}
   }
-
-// public employeeUpdate: UpdateEmployee = {
-//   employeeId: this.employeeDetail.id,
-//   employeeName: this.employeeDetail.name,
-//   colorCode: this.employeeDetail.colorCode,
-// };
+}

@@ -9,6 +9,7 @@
               <button class="setting" (click)="toggleShowChangeNameForm()">Change name</button>
               <button class="setting" (click)="toggleShowChangeColorForm()">Change color</button>
               <button class="setting">Get holiday</button>
+              <app-datepicker></app-datepicker>
             </div>
             <div class="wrapper-lists-info" *ngIf="employeeDetail">
               <button type="button" class="setting-button" (click)="openSidenavSettings()">Set</button>
@@ -18,12 +19,16 @@
                  id="color"> </span>
               </p>
             <h3 class="info">Holidays:</h3>
-            <div class="info" *ngFor=" let holiday of employeeDetail.holidays">
-              <div> From:{{holiday.startDate| date: 'dd-MM-yyyy'}}   To: {{holiday.endDate| date: 'dd-MM-yyyy'}}  </div>
+            <div class="holidays" *ngFor=" let holiday of employeeDetail.holidays">
+              <div> From: <span class="date">{{holiday.startDate| date: 'dd-MM-yyyy'}}</span>
+                To: <span class="date"> {{holiday.endDate| date: 'dd-MM-yyyy'}} </span>
+              </div>
             </div>
             </div>
           </div>
       </fieldset>
+<!--    Sidenav components-->
+
     <div class="wrapper-create-form invisible" [ngClass]="{invisible: showChangeNameForm}">
       <form action="" method="post">
         <fieldset class="create-form animate" [formGroup]="modifyEmployee">
@@ -36,12 +41,12 @@
       </form>
     </div>
     <div class="wrapper-create-form invisible" [ngClass]="{invisible: showChangeColorForm}">
-      <form action="" method="post">
+      <form action="" method="post" [formGroup]="modifyEmployee">
         <fieldset class="create-form animate">
           <legend><span>Change color</span></legend>
           <label for="colorPicker">Employee color:</label>
-          <input type="color" value="#8e2929" id="colorPicker" required>
-          <button class="create-button primary-button">Change</button>
+          <input formControlName="colorCode" type="color" value="#8e2929" id="colorPicker" [(ngModel)]="employeeUpdate.colorCode" required>
+          <button class="create-button primary-button" (click)="updateColor()">Change</button>
           <button class="cancel-button primary-button" (click)="toggleShowChangeColorForm()">Cancel</button>
         </fieldset>
       </form>

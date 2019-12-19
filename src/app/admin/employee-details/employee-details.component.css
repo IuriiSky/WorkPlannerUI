@@ -61,6 +61,21 @@ legend > span {
   padding: 15px 15px 10px 2em;
 }
 
+ h3.info{
+   font-size: 1.5em;
+   padding-top: 1.5em;
+ }
+
+.holidays {
+  font-size: 1.2em;
+  padding: 0 0 20px 150px;
+}
+
+.date {
+  margin: 0 10px;
+  padding-right: 30px;
+}
+
 #color {
   margin-left: 20px;
   height: 1em;
