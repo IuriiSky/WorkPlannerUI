@@ -1,9 +1,9 @@
-import { Component, OnInit} from '@angular/core';
-import { EmployeeDetailsService} from '../../services/employee-details.service';
+import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import {CreateEmployee, Employee, EmployeeDetails, UpdateEmployee} from '../../shared/interfaces/employee';
-import {FormControl, FormGroup} from '@angular/forms';
-  // Angular Material
+import { CreateEmployee, Employee, EmployeeDetails, UpdateEmployee } from '../../shared/interfaces/employee';
+import { FormControl, FormGroup } from '@angular/forms';
+import { EmployeesService } from 'src/app/services/employees.service';
+// Angular Material
 
 @Component({
   selector: 'app-employee-details',
@@ -12,9 +12,9 @@ import {FormControl, FormGroup} from '@angular/forms';
 })
 export class EmployeeDetailsComponent implements OnInit {
 
-  constructor(public employeeDetailsService: EmployeeDetailsService,
-              private router: Router,
-              private route: ActivatedRoute) {
+  constructor(public employeeService: EmployeesService,
+    private router: Router,
+    private route: ActivatedRoute) {
     this.route.params.subscribe((params: Params) => {
       if (params.id) {
         this.employeeId = params.id;
@@ -24,8 +24,6 @@ export class EmployeeDetailsComponent implements OnInit {
 
   showChangeNameForm = true;
   showChangeColorForm = true;
-
-  private baseApi = 'http://workplanner.softwaris.eu/api/';
 
   modifyEmployee: FormGroup;
 
@@ -40,12 +38,12 @@ export class EmployeeDetailsComponent implements OnInit {
   };
 
   openSidenavSettings() {
-    document.getElementById('sidenav-settings').style.width =  '200px';
+    document.getElementById('sidenav-settings').style.width = '200px';
     document.getElementById('info').style.marginLeft = '200px';
   }
 
   closeSidenavSetting() {
-    document.getElementById('sidenav-settings').style.width =  '0';
+    document.getElementById('sidenav-settings').style.width = '0';
     document.getElementById('info').style.marginLeft = '0';
   }
 
@@ -58,14 +56,14 @@ export class EmployeeDetailsComponent implements OnInit {
   }
 
   updateName() {
-    this.employeeDetailsService.updateEmployee(this.employeeUpdate).subscribe(employee => {
+    this.employeeService.updateEmployee(this.employeeUpdate).subscribe(employee => {
       this.initDetailsEmployee();
       this.showChangeNameForm = true;
     });
   }
 
   updateColor() {
-    this.employeeDetailsService.updateEmployee(this.employeeUpdate).subscribe(employee => {
+    this.employeeService.updateEmployee(this.employeeUpdate).subscribe(employee => {
       this.initDetailsEmployee();
       this.showChangeColorForm = true;
     });
@@ -78,18 +76,18 @@ export class EmployeeDetailsComponent implements OnInit {
   }
 
   initDetailsEmployee() {
-    this.employeeDetailsService.getAllDetails(this.employeeId).subscribe((data: EmployeeDetails) => {
+    this.employeeService.getAllDetails(this.employeeId).subscribe((data: EmployeeDetails) => {
       this.employeeDetail = data;
       this.initUpdateEmployee();
     });
   }
 
-ngOnInit() {
+  ngOnInit() {
     this.initDetailsEmployee();
 
     this.modifyEmployee = new FormGroup({
-    employeeName: new FormControl(''),
-    colorCode: new FormControl('')
-  });
+      employeeName: new FormControl(''),
+      colorCode: new FormControl('')
+    });
   }
 }

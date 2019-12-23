@@ -1,29 +1,37 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-import { Employee, CreateEmployee } from '../shared/interfaces/employee';
+import { Employee, CreateEmployee, EmployeeDetails, UpdateEmployee } from '../shared/interfaces/employee';
 import { Observable } from 'rxjs';
+import { DataService } from './data.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EmployeesService {
 
-  constructor(private http: HttpClient) { }
-
-  baseApi = 'http://workplanner.softwaris.eu/api/';
-
-  private httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type':  'application/json',
-    })
-  };
+  baseApi :string;
+  httpOptions : any;
+  constructor(private http: HttpClient, private dataService: DataService) 
+  { 
+    this.baseApi = dataService.baseApiUrl + 'Employees/';
+    this.httpOptions = dataService.httpOptions;
+  }
 
   getAllEmployees(): Observable<Employee[]> {
-    return  this.http.get<Employee[]>(this.baseApi + 'Employees');
+    return  this.http.get<Employee[]>(this.baseApi);
   }
 
   createEmployee(employee: CreateEmployee) {
-    return this.http.post<any>(this.baseApi + 'Employees/create', employee, this.httpOptions);
+    //return this.http.post<any>(this.baseApi + 'create', employee, this.httpOptions);
+    return this.http.post<any>(this.baseApi + 'create', employee);
+  }
+  getAllDetails(id: number) {
+    return this.http.get<EmployeeDetails>(this.baseApi + id + '/details');
+  }
+
+  updateEmployee(employee: UpdateEmployee) {
+    return this.http.put<any>(this.baseApi + employee.employeeId + '/update', employee);
+    //return this.http.put<any>(this.baseApi + employee.employeeId + '/update', employee, this.httpOptions);
   }
 }

@@ -12,7 +12,6 @@ import { EmployeesComponent } from './admin/employees/employees.component';
   // Services
 import { EmployeesService} from './services/employees.service';
 import { EmployeeDetailsComponent } from './admin/employee-details/employee-details.component';
-import { EmployeeDetailsService } from './services/employee-details.service';
 import { DatepickerComponent } from './admin/datepicker/datepicker.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   // Angular Material
@@ -41,7 +40,6 @@ import {MatNativeDateModule} from '@angular/material';
     MatNativeDateModule
   ],
   providers: [EmployeesService,
-              EmployeeDetailsService,
   ],
   bootstrap: [AppComponent]
 })

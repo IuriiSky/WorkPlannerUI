@@ -8,7 +8,7 @@ export interface EmployeeDetails {
   id: number;
   name: string;
   colorCode: string;
-  holidays: [];
+  holidays: Holiday[];
 }
 
 export interface CreateEmployee {
@@ -20,4 +20,8 @@ export interface  UpdateEmployee {
   employeeId: number;
   employeeName:	string;
   colorCode:	string;
+}
+export interface Holiday{
+  startDate: string,
+  endDate: string,
 }
