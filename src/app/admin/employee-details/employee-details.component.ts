@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import { CreateEmployee, Employee, EmployeeDetails, UpdateEmployee } from '../../shared/interfaces/employee';
+import { CreateEmployeeCommand, EmployeeDto, EmployeeDetailsDto, UpdateEmployeeCommand } from '../../shared/interfaces/employee';
 import { FormControl, FormGroup } from '@angular/forms';
 import { EmployeesService } from 'src/app/services/employees.service';
 // Angular Material
@@ -27,11 +27,11 @@ export class EmployeeDetailsComponent implements OnInit {
 
   modifyEmployee: FormGroup;
 
-  public employeeDetail: EmployeeDetails;
+  public employeeDetail: EmployeeDetailsDto;
 
   public employeeId: number;
 
-  public employeeUpdate: UpdateEmployee = {
+  public employeeUpdate: UpdateEmployeeCommand = {
     employeeId: 0,
     employeeName: '',
     colorCode: ''
@@ -76,7 +76,7 @@ export class EmployeeDetailsComponent implements OnInit {
   }
 
   initDetailsEmployee() {
-    this.employeeService.getAllDetails(this.employeeId).subscribe((data: EmployeeDetails) => {
+    this.employeeService.getAllDetails(this.employeeId).subscribe((data: EmployeeDetailsDto) => {
       this.employeeDetail = data;
       this.initUpdateEmployee();
     });

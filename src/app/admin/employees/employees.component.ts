@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CreateEmployee, Employee } from '../../shared/interfaces/employee';
+import { CreateEmployeeCommand, EmployeeDto } from '../../shared/interfaces/employee';
 import { EmployeesService } from '../../services/employees.service';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup } from '@angular/forms';
@@ -19,9 +19,9 @@ export class EmployeesComponent implements OnInit {
 
   showCreateForm = true;
 
-  public employees: Employee[];
+  public employees: EmployeeDto[];
 
-  public createNewEmployee: CreateEmployee = {
+  public createNewEmployee: CreateEmployeeCommand = {
     employeeName: '',
     colorCode: '#ff0000',
   };
@@ -40,7 +40,7 @@ export class EmployeesComponent implements OnInit {
     });
   }
   getAllEmployees() {
-    this.employeesService.getAllEmployees().subscribe((data: Employee[]) => {
+    this.employeesService.getAllEmployees().subscribe((data: EmployeeDto[]) => {
       this.employees = data;
     });
   }
