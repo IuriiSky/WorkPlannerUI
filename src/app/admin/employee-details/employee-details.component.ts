@@ -76,7 +76,7 @@ export class EmployeeDetailsComponent implements OnInit {
   }
 
   initDetailsEmployee() {
-    this.employeeService.getAllDetails(this.employeeId).subscribe((data: EmployeeDetailsDto) => {
+    this.employeeService.getEmployeeDetails(this.employeeId).subscribe((data: EmployeeDetailsDto) => {
       this.employeeDetail = data;
       this.initUpdateEmployee();
     });

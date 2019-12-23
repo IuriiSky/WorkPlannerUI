@@ -31,7 +31,7 @@ export class PlanHolidayCommand {
   startDate: Date;
   endDate: Date;
 }
-export class DeleteHolidayCommand {
-  employeeId: number;
-  startDate: Date;
-}
+// export class DeleteHolidayCommand {
+//   employeeId: number;
+//   startDate: Date;
+// }
