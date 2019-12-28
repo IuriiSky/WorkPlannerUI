@@ -9,10 +9,9 @@ import { TaskDto, CreateTaskCommand, UpdateTaskCommand } from '../shared/interfa
 })
 export class TasksService {
 
-  baseApi :string;
-  httpOptions : any;
-  constructor(private http: HttpClient, private dataService: DataService) 
-  { 
+  baseApi: string;
+  httpOptions: any;
+  constructor(private http: HttpClient, private dataService: DataService) {
     this.baseApi = dataService.baseApiUrl + 'Tasks/';
     this.httpOptions = dataService.httpOptions;
   }
@@ -21,11 +20,11 @@ export class TasksService {
     return  this.http.get<TaskDto[]>(this.baseApi);
   }
 
-  createTask(task: CreateTaskCommand){
+  createTask(task: CreateTaskCommand) {
     return this.http.post<any>(this.baseApi + 'create', task);
   }
 
-  updateTask(task:UpdateTaskCommand){
+  updateTask(task: UpdateTaskCommand) {
     return this.http.put<any>(this.baseApi + task.taskId + '/update', task);
   }
 }

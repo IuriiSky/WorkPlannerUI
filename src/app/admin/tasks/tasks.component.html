@@ -1,0 +1,29 @@
+<div class="wrapper">
+  <app-admin></app-admin>
+  <main class="tasks">
+    <form>
+      <fieldset class="all-tasks">
+        <legend><span>Tasks</span></legend>
+        <div class="wrapper-lists">
+          <button type="submit" class="added-button primary-button" (click) = "toggleShowCreateForm()">Add</button>
+          <ul class="current-tasks">
+            <li class="name-list" *ngFor="let task of tasks">{{task.id}}. {{task.description}}
+            </li>
+          </ul>
+        </div>
+      </fieldset>
+    </form>
+    <div class="wrapper-create-form" [ngClass]="{invisible: showCreateForm}">
+      <form action="" method="post">
+        <fieldset class="create-form animate" [formGroup]="createTask">
+          <legend><span>Create new task</span></legend>
+          <label for="task">Task description:</label>
+          <input formControlName="taskDescription" [(ngModel)]="addNewTask.taskDescription"
+                 type="text" placeholder="Enter task description" name="task" id="task" title="Enter description" autofocus required>
+          <button (click)="createNewTask()" class="create-button primary-button">Create</button>
+          <button class="cancel-button primary-button" (click)="toggleShowCreateForm()">Cancel</button>
+        </fieldset>
+      </form>
+    </div>
+  </main>
+</div>

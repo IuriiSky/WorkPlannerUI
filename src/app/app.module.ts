@@ -9,6 +9,7 @@ import { HomeComponent } from './home/home.component';
 import { HeadComponent } from './head/head.component';
 import { AdminComponent } from './admin/admin.component';
 import { EmployeesComponent } from './admin/employees/employees.component';
+import { TasksComponent } from './admin/tasks/tasks.component';
   // Services
 import { EmployeesService} from './services/employees.service';
 import { EmployeeDetailsComponent } from './admin/employee-details/employee-details.component';
@@ -28,6 +29,7 @@ import {MatNativeDateModule} from '@angular/material';
     EmployeesComponent,
     EmployeeDetailsComponent,
     DatepickerComponent,
+    TasksComponent,
   ],
   imports: [
     BrowserModule,

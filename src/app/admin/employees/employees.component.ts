@@ -35,10 +35,11 @@ export class EmployeesComponent implements OnInit {
     this.employeesService.createEmployee(this.createNewEmployee).subscribe(employee => {
       this.createNewEmployee.employeeName = '';
       this.createNewEmployee.colorCode = '';
-      this.showCreateForm = false;
+      this.showCreateForm = true;
       this.getAllEmployees();
     });
   }
+
   getAllEmployees() {
     this.employeesService.getAllEmployees().subscribe((data: EmployeeDto[]) => {
       this.employees = data;

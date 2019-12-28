@@ -8,8 +8,20 @@
               <button class="close-button" (click)="closeSidenavSetting()">CLS</button>
               <button class="setting" (click)="toggleShowChangeNameForm()">Change name</button>
               <button class="setting" (click)="toggleShowChangeColorForm()">Change color</button>
-              <button class="setting">Get holiday</button>
-              <app-datepicker></app-datepicker>
+
+              <div class="holidays-wrapper">
+                <form>
+                  <fieldset class="set-holidays-date">
+                    <legend><span class="name-holidays-block">Get holidays</span></legend>
+                      <label for="start">Start date:</label>
+                      <input type="date" id="start" name="trip-start" [(ngModel)]="employeeHoliday.startDate">
+                      <label for="end">End date:</label>
+                      <input type="date" id="end" name="trip-end" [(ngModel)]="employeeHoliday.endDate">
+                    <button class="setting" (click)="getHolidays()">Get holiday</button>
+                  </fieldset>
+                </form>
+              </div>
+<!--              <app-datepicker></app-datepicker>-->
             </div>
             <div class="wrapper-lists-info" *ngIf="employeeDetail">
               <button type="button" class="setting-button" (click)="openSidenavSettings()">Set</button>

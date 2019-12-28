@@ -2,12 +2,12 @@
   display: flex;
 }
 
-.employee-details {
+.tasks {
   background-color: var(--main-bg-color);
   flex-grow: 1;
 }
 
-fieldset {
+.all-tasks {
   margin: 10px;
 }
 
@@ -17,108 +17,77 @@ legend {
 
 legend > span {
   font-size: 1.5em;
-  color: #ffffff;
-}
-
-.worker {
-  margin: 10px;
-  display: flex;
-}
-
-.wrapper-lists-info {
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-  background-color: var(--component-bg-color);
-  margin: 10px;
-  min-height: calc(100vh - 200px);
-  transition: margin-left .5s;
-
-}
-
-.sidenav-settings {
-  display: flex;
-  flex-direction: column;
-  height: inherit;
-  width: 0;
-  position: relative;
-  z-index: 1;
-  top: 0;
-  left: 0;
-  background-color: var(--component-bg-color);
-  overflow-x: hidden;
-  transition: 0.5s;
-  margin: 10px 0;
-}
-
-.sidenav-settings:first-child {
-  padding-top: 2em;
-}
-
-.info {
-  display: flex;
-  font-size: 1em;
-  padding: 15px 15px 10px 2em;
-}
-
- h3.info{
-   font-size: 1.5em;
-   padding-top: 1.5em;
- }
-
-.holidays {
-  font-size: 1.2em;
-  padding: 0 0 20px 150px;
-}
-
-.date {
-  margin: 0 10px;
-  padding-right: 30px;
-}
-
-#color {
-  margin-left: 20px;
-  height: 1em;
-  width: 1em;
-}
-
-.setting-button {
-  position: relative;
-  top: 0;
-  left: 0;
-  width: 2em;
-  height: 2em;
-}
-
-.close-button {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 2em;
-  height: 2em;
-}
-
-.setting {
-  margin: 5px auto;
-  font-size: 1em;
-  display: inline-block;
-  padding: 5px;
-  border-radius: 20px;
-  border: 1px solid #ff0000;
-}
-
-.setting:hover {
-  background-color: var(--main-bg-color);
   color: var(--white-color);
+}
+
+.wrapper-lists {
+  background-color: var(--component-bg-color);
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row-reverse;
+  padding: 10px;
+  margin: 10px;
+
+}
+
+#name{
+  background-color: var(--white-color);
+  flex-basis: 50%;
+  margin: 3%;
+  height: 2em;
+  width: 50%;
+}
+
+.primary-button {
+  background-color: var(--bt-create-color);
+  border: none;
+  border-radius: 20px;
+  color: var(--white-color);
+  font-weight: 500;
+  font-size: 1em;
+}
+
+.added-button {
+  height: 30px;
+  margin: 3%;
+  padding: 0 5px;
+  width: 100px;
+}
+
+.added-button:hover {
+  background-color: var(--bt-create-hover-color);
   transition: 0.4s ease-out;
 }
 
-/*Create  new employee form*/
-
-.invisible {
-  display: none;
+.current-current-tasks {
+  margin: 30px 0 0 40px;
+  list-style-type: none;
 }
 
+.name-list {
+  color: var(--black-color);
+  display: flex;
+  font-size: 1em;
+  list-style-type: none;
+  padding: 10px;
+}
+
+.name-list:last-child {
+  margin-bottom: 10%;
+}
+
+.name-list:hover {
+  background-color: var(--main-bg-color);
+  color: var(--white-color);
+}
+
+.show-color {
+  width: 1em;
+  height: 1em;
+  margin-right: 5px;
+}
+
+/*Create  new task form*/
 .wrapper-create-form {
   position: fixed;
   z-index: 1;
@@ -130,6 +99,10 @@ legend > span {
   opacity: 0.9;
   padding-top: 60px;
   transition: 0.4s ease-out;
+}
+
+.invisible {
+  display: none;
 }
 
 .create-form {
@@ -192,21 +165,4 @@ input[type = "color"]{
 @keyframes animatezoom {
   from {transform: scale(0)}
   to {transform: scale(1)}
-}
-
-/*Block set a holiday days*/
-
-.set-holidays-date {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: nowrap;
-  justify-content: center;
-}
-
-input[type="date"] {
-  margin: 20px auto;
-}
-
-legend > span.name-holidays-block {
-  color: #0f2b36;
 }

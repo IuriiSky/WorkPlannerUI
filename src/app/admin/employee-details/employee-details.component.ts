@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import { CreateEmployeeCommand, EmployeeDto, EmployeeDetailsDto, UpdateEmployeeCommand } from '../../shared/interfaces/employee';
+import { CreateEmployeeCommand, EmployeeDto, EmployeeDetailsDto, UpdateEmployeeCommand, PlanHolidayCommand } from '../../shared/interfaces/employee';
 import { FormControl, FormGroup } from '@angular/forms';
 import { EmployeesService } from 'src/app/services/employees.service';
+import {formatNumber} from '@angular/common';
 // Angular Material
 
 @Component({
@@ -18,6 +19,7 @@ export class EmployeeDetailsComponent implements OnInit {
     this.route.params.subscribe((params: Params) => {
       if (params.id) {
         this.employeeId = params.id;
+        this.employeeHoliday.employeeId = params.id;
       }
     });
   }
@@ -35,6 +37,12 @@ export class EmployeeDetailsComponent implements OnInit {
     employeeId: 0,
     employeeName: '',
     colorCode: ''
+  };
+
+  public  employeeHoliday: PlanHolidayCommand = {
+    employeeId: 0,
+    startDate: Date,
+    endDate: Date,
   };
 
   openSidenavSettings() {
@@ -79,6 +87,12 @@ export class EmployeeDetailsComponent implements OnInit {
     this.employeeService.getEmployeeDetails(this.employeeId).subscribe((data: EmployeeDetailsDto) => {
       this.employeeDetail = data;
       this.initUpdateEmployee();
+    });
+  }
+
+  getHolidays() {
+    this.employeeService.planEmployeeHoliday(this.employeeId, this.employeeHoliday).subscribe((data: PlanHolidayCommand) => {
+      this.employeeHoliday = data;
     });
   }
 

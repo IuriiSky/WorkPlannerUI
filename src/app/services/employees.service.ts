@@ -12,8 +12,8 @@ export class EmployeesService {
 
   baseApi :string;
   httpOptions : any;
-  constructor(private http: HttpClient, private dataService: DataService) 
-  { 
+  constructor(private http: HttpClient, private dataService: DataService)
+  {
     this.baseApi = dataService.baseApiUrl + 'Employees/';
     this.httpOptions = dataService.httpOptions;
   }
@@ -39,11 +39,11 @@ export class EmployeesService {
     //return this.http.put<any>(this.baseApi + employee.employeeId + '/update', employee, this.httpOptions);
   }
 
-  planEmployeeHoliday(employeeId:number,holiday: PlanHolidayCommand ){
-    return this.http.post<any>(this.baseApi + employeeId + '/createHoliday',holiday);
+  planEmployeeHoliday(employeeId: number, holiday: PlanHolidayCommand ) {
+    return this.http.post<any>(this.baseApi + employeeId + '/createHoliday', holiday);
   }
 
-  deleteHoliday(employeeId:number, holidayStart: string |Date ){
-    return this.http.delete<any>(this.baseApi+employeeId+'/deleteHoliday?holidayStart='+holidayStart);
+  deleteHoliday(employeeId: number, holidayStart: string |Date ) {
+    return this.http.delete<any>(this.baseApi + employeeId + '/deleteHoliday?holidayStart=' + holidayStart);
   }
 }

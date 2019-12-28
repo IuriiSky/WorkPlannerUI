@@ -21,9 +21,10 @@ export interface  UpdateEmployeeCommand {
   employeeName:	string;
   colorCode:	string;
 }
-export interface HolidayDto{
-  startDate: Date,
-  endDate: Date,
+
+export interface HolidayDto {
+  startDate: Date;
+  endDate: Date;
 }
 
 export class PlanHolidayCommand {
