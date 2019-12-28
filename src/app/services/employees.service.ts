@@ -18,7 +18,8 @@ export class EmployeesService {
     this.httpOptions = dataService.httpOptions;
   }
 
-  getAllEmployees(): Observable<EmployeeDto[]> {
+  getAllEmployees()//: Observable<EmployeeDto[]> 
+  {
     return  this.http.get<EmployeeDto[]>(this.baseApi);
   }
   getAvailableEmployees(date:Date|string) :Observable<EmployeeDto[]> {
