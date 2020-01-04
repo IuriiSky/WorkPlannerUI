@@ -23,16 +23,17 @@ export interface  UpdateEmployeeCommand {
 }
 
 export interface HolidayDto {
-  startDate: Date;
-  endDate: Date;
+  startDate: string;
+  endDate: string;
 }
 
-export class PlanHolidayCommand {
+export interface PlanHolidayCommand {
   employeeId: number;
-  startDate: Date;
-  endDate: Date;
+  startDate: string;
+  endDate: string;
 }
-// export class DeleteHolidayCommand {
-//   employeeId: number;
-//   startDate: Date;
-// }
+
+export interface DeleteHolidayCommand {
+  employeeId: number;
+  startDate: string;
+}

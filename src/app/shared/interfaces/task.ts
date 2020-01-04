@@ -1,13 +1,13 @@
-export class TaskDto {
+export interface TaskDto {
     id: number;
     description: string ;
 }
 
-export class CreateTaskCommand {
+export interface CreateTaskCommand {
     taskDescription: string;
 }
 
-export class UpdateTaskCommand {
+export interface UpdateTaskCommand {
     taskId: number;
     taskDescription: string ;
 }

@@ -27,7 +27,11 @@ legend > span {
   flex-direction: row-reverse;
   padding: 10px;
   margin: 10px;
+}
 
+.wrapper-lists > div {
+  display: flex;
+  flex-direction: column;
 }
 
 #name{
@@ -49,7 +53,7 @@ legend > span {
 
 .added-button {
   height: 30px;
-  margin: 3%;
+  margin: 20px 30px 20px 20px;
   padding: 0 5px;
   width: 100px;
 }

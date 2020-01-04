@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import { CreateEmployeeCommand, EmployeeDto, EmployeeDetailsDto, UpdateEmployeeCommand, PlanHolidayCommand } from '../../shared/interfaces/employee';
+import { EmployeeDetailsDto, UpdateEmployeeCommand, PlanHolidayCommand, DeleteHolidayCommand, HolidayDto } from '../../shared/interfaces/employee';
 import { FormControl, FormGroup } from '@angular/forms';
 import { EmployeesService } from 'src/app/services/employees.service';
-import {formatNumber} from '@angular/common';
+import {TaskDto} from '../../shared/interfaces/task';
+
 // Angular Material
 
 @Component({
@@ -14,12 +15,12 @@ import {formatNumber} from '@angular/common';
 export class EmployeeDetailsComponent implements OnInit {
 
   constructor(public employeeService: EmployeesService,
-    private router: Router,
-    private route: ActivatedRoute) {
+              private router: Router,
+              private route: ActivatedRoute) {
     this.route.params.subscribe((params: Params) => {
       if (params.id) {
         this.employeeId = params.id;
-        this.employeeHoliday.employeeId = params.id;
+        // this.employeeHoliday.employeeId = params.id;
       }
     });
   }
@@ -33,6 +34,8 @@ export class EmployeeDetailsComponent implements OnInit {
 
   public employeeId: number;
 
+  public  activeHoliday: HolidayDto;
+
   public employeeUpdate: UpdateEmployeeCommand = {
     employeeId: 0,
     employeeName: '',
@@ -41,8 +44,13 @@ export class EmployeeDetailsComponent implements OnInit {
 
   public  employeeHoliday: PlanHolidayCommand = {
     employeeId: 0,
-    startDate: Date,
-    endDate: Date,
+    startDate: '',
+    endDate: '',
+  };
+
+  public employeeDeleteHoliday: DeleteHolidayCommand = {
+    employeeId: 0,
+    startDate: '',
   };
 
   openSidenavSettings() {
@@ -90,15 +98,26 @@ export class EmployeeDetailsComponent implements OnInit {
     });
   }
 
-  getHolidays() {
-    this.employeeService.planEmployeeHoliday(this.employeeId, this.employeeHoliday).subscribe((data: PlanHolidayCommand) => {
-      this.employeeHoliday = data;
+  createHolidays() {
+    this.employeeHoliday.employeeId = Number(this.employeeId);
+    this.employeeService.planEmployeeHoliday(this.employeeId, this.employeeHoliday).subscribe(() => {
+      this.initDetailsEmployee();
+    });
+  }
+
+  setActiveHoliday(holidayDto: HolidayDto) {
+    this.activeHoliday = holidayDto;
+  }
+
+  deleteHolidays() {
+    this.employeeDeleteHoliday.startDate = this.activeHoliday.startDate;
+    this.employeeService.deleteHoliday(this.employeeId, this.employeeDeleteHoliday.startDate).subscribe((data: EmployeeDetailsDto) => {
+      this.initDetailsEmployee();
     });
   }
 
   ngOnInit() {
     this.initDetailsEmployee();
-
     this.modifyEmployee = new FormGroup({
       employeeName: new FormControl(''),
       colorCode: new FormControl('')

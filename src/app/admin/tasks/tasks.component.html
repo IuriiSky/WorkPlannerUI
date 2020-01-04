@@ -5,10 +5,10 @@
       <fieldset class="all-tasks">
         <legend><span>Tasks</span></legend>
         <div class="wrapper-lists">
-          <button type="submit" class="added-button primary-button" (click) = "toggleShowCreateForm()">Add</button>
+          <button type="submit" class="added-button primary-button" (click) = "toggleShowCreateForm()">New task</button>
           <ul class="current-tasks">
-            <li class="name-list" *ngFor="let task of tasks">{{task.id}}. {{task.description}}
-            </li>
+            <li class="name-list" *ngFor="let task of tasks" (click)="setActiveTask(task)"
+            (click)="toggleShowUpdateTaskForm()">{{task.id}}. {{task.description}}</li>
           </ul>
         </div>
       </fieldset>
@@ -19,9 +19,30 @@
           <legend><span>Create new task</span></legend>
           <label for="task">Task description:</label>
           <input formControlName="taskDescription" [(ngModel)]="addNewTask.taskDescription"
-                 type="text" placeholder="Enter task description" name="task" id="task" title="Enter description" autofocus required>
+                 type="text" placeholder="Enter task description"
+                 name="task"
+                 id="task"
+                 title="Enter description"
+                 autofocus required>
           <button (click)="createNewTask()" class="create-button primary-button">Create</button>
           <button class="cancel-button primary-button" (click)="toggleShowCreateForm()">Cancel</button>
+        </fieldset>
+      </form>
+    </div>
+<!--    Update task form-->
+    <div class="wrapper-create-form" [ngClass]="{invisible: showUpdateTaskForm}">
+      <form action="" method="post">
+        <fieldset class="create-form animate">
+          <legend><span>Update task</span></legend>
+          <label for="task">Task description:</label>
+          <input [(ngModel)]="rewriteTask.taskDescription"
+                 type="text" placeholder="Enter task description"
+                 name="task"
+                 id="update-task"
+                 title="Enter new description"
+                 autofocus required>
+          <button (click)="updateTask() " class="create-button primary-button">Update</button>
+          <button class="cancel-button primary-button" (click)="toggleShowUpdateTaskForm()">Cancel</button>
         </fieldset>
       </form>
     </div>

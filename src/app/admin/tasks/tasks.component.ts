@@ -20,11 +20,23 @@ export class TasksComponent implements OnInit {
     taskDescription: '',
 };
 
+  public  activeTask: TaskDto;
+
+  public rewriteTask: UpdateTaskCommand = {
+    taskId: 0,
+    taskDescription: '',
+  };
+
   createTask: FormGroup;
   showCreateForm = true;
+  showUpdateTaskForm = true;
 
   toggleShowCreateForm() {
     this.showCreateForm = !this.showCreateForm;
+  }
+
+  toggleShowUpdateTaskForm() {
+    this.showUpdateTaskForm = !this.showUpdateTaskForm;
   }
 
   getAllTasks() {
@@ -41,13 +53,23 @@ export class TasksComponent implements OnInit {
     });
   }
 
+  setActiveTask(taskDto: TaskDto) {
+    this.activeTask = taskDto;
+  }
+
+  updateTask() {
+    this.rewriteTask.taskId = Number(this.activeTask.id);
+    this.tasksService.updateTask(this.rewriteTask).subscribe(task => {
+      this.rewriteTask.taskDescription = this.addNewTask.taskDescription;
+      this.showUpdateTaskForm = true;
+      this.getAllTasks();
+    });
+  }
 
   ngOnInit() {
     this.getAllTasks();
-
     this.createTask = new FormGroup({
       taskDescription: new FormControl(''),
     });
   }
-
 }

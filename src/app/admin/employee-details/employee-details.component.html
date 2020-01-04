@@ -17,7 +17,7 @@
                       <input type="date" id="start" name="trip-start" [(ngModel)]="employeeHoliday.startDate">
                       <label for="end">End date:</label>
                       <input type="date" id="end" name="trip-end" [(ngModel)]="employeeHoliday.endDate">
-                    <button class="setting" (click)="getHolidays()">Get holiday</button>
+                    <button class="setting" (click)="createHolidays()">Create holiday</button>
                   </fieldset>
                 </form>
               </div>
@@ -34,6 +34,7 @@
             <div class="holidays" *ngFor=" let holiday of employeeDetail.holidays">
               <div> From: <span class="date">{{holiday.startDate| date: 'dd-MM-yyyy'}}</span>
                 To: <span class="date"> {{holiday.endDate| date: 'dd-MM-yyyy'}} </span>
+                <button (click)="setActiveHoliday(holiday)" (click)="deleteHolidays()">Del</button>
               </div>
             </div>
             </div>
@@ -46,7 +47,8 @@
         <fieldset class="create-form animate" [formGroup]="modifyEmployee">
           <legend><span>Change employee name</span></legend>
           <label for="employee">Employee new name:</label>
-          <input formControlName="employeeName" [(ngModel)]="employeeUpdate.employeeName" type="text" placeholder="Enter employee name" name="employee" id="employee" title="Enter name" autofocus required>
+          <input formControlName="employeeName" [(ngModel)]="employeeUpdate.employeeName" type="text"
+                 placeholder="Enter employee name" name="employee" id="employee" title="Enter name" autofocus required>
           <button class="create-button primary-button" (click)="updateName()">Change</button>
           <button class="cancel-button primary-button" (click)="toggleShowChangeNameForm()">Cancel</button>
         </fieldset>
