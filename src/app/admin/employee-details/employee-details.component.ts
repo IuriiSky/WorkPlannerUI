@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import { EmployeeDetailsDto, UpdateEmployeeCommand, PlanHolidayCommand, DeleteHolidayCommand, HolidayDto } from '../../shared/interfaces/employee';
+import { EmployeeDetailsDto, UpdateEmployeeCommand, PlanHolidayCommand, HolidayDto } from '../../shared/interfaces/employee';
 import { FormControl, FormGroup } from '@angular/forms';
 import { EmployeesService } from 'src/app/services/employees.service';
-import {TaskDto} from '../../shared/interfaces/task';
 
 // Angular Material
 
@@ -34,8 +33,6 @@ export class EmployeeDetailsComponent implements OnInit {
 
   public employeeId: number;
 
-  public  activeHoliday: HolidayDto;
-
   public employeeUpdate: UpdateEmployeeCommand = {
     employeeId: 0,
     employeeName: '',
@@ -48,10 +45,10 @@ export class EmployeeDetailsComponent implements OnInit {
     endDate: '',
   };
 
-  public employeeDeleteHoliday: DeleteHolidayCommand = {
-    employeeId: 0,
-    startDate: '',
-  };
+  // public employeeDeleteHoliday: DeleteHolidayCommand = {
+  //   employeeId: 0,
+  //   startDate: '',
+  // };
 
   openSidenavSettings() {
     document.getElementById('sidenav-settings').style.width = '200px';
@@ -105,14 +102,11 @@ export class EmployeeDetailsComponent implements OnInit {
     });
   }
 
-  setActiveHoliday(holidayDto: HolidayDto) {
-    this.activeHoliday = holidayDto;
-  }
 
-  deleteHolidays() {
-    this.employeeDeleteHoliday.startDate = this.activeHoliday.startDate;
-    this.employeeService.deleteHoliday(this.employeeId, this.employeeDeleteHoliday.startDate).subscribe((data: EmployeeDetailsDto) => {
-      this.initDetailsEmployee();
+  deleteHolidays(holiday: HolidayDto) {
+    this.employeeService.deleteHoliday(this.employeeId, holiday.startDate).subscribe((data: EmployeeDetailsDto) => {
+      this.employeeDetail = data;
+      this.initUpdateEmployee();
     });
   }
 

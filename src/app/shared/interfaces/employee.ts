@@ -33,7 +33,7 @@ export interface PlanHolidayCommand {
   endDate: string;
 }
 
-export interface DeleteHolidayCommand {
-  employeeId: number;
-  startDate: string;
-}
+// export interface DeleteHolidayCommand {
+//   employeeId: number;
+//   startDate: string;
+// }

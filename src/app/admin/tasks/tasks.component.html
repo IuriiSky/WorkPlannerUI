@@ -7,8 +7,8 @@
         <div class="wrapper-lists">
           <button type="submit" class="added-button primary-button" (click) = "toggleShowCreateForm()">New task</button>
           <ul class="current-tasks">
-            <li class="name-list" *ngFor="let task of tasks" (click)="setActiveTask(task)"
-            (click)="toggleShowUpdateTaskForm()">{{task.id}}. {{task.description}}</li>
+            <li class="name-list" *ngFor="let task of tasks" (click)="setActiveTask(task); toggleShowUpdateTaskForm()">
+              {{task.id}}. {{task.description}}</li>
           </ul>
         </div>
       </fieldset>

@@ -34,7 +34,7 @@
             <div class="holidays" *ngFor=" let holiday of employeeDetail.holidays">
               <div> From: <span class="date">{{holiday.startDate| date: 'dd-MM-yyyy'}}</span>
                 To: <span class="date"> {{holiday.endDate| date: 'dd-MM-yyyy'}} </span>
-                <button (click)="setActiveHoliday(holiday)" (click)="deleteHolidays()">Del</button>
+                <button (click)="deleteHolidays(holiday)">Del</button>
               </div>
             </div>
             </div>
