@@ -1,0 +1,30 @@
+
+  .wrapper-lists {
+    display: inline-block;
+    padding: 10px;
+    margin: 10px;
+  }
+
+  .current-employees {
+    margin: 0 0 0 10px;
+    list-style-type: none;
+  }
+  
+  .name-list {
+    color: var(--black-color);
+    display: flex;
+    font-size: 1em;
+    list-style-type: none;
+    padding: 10px;
+  }
+  
+  .name-list:hover {
+    background-color: var(--main-bg-color);
+    color: var(--white-color);
+  }
+  
+  .show-color {
+    width: 1em;
+    height: 1em;
+    margin-right: 5px;
+  }

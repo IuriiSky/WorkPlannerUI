@@ -4,7 +4,7 @@ import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
-//Helpers
+  // Helpers
 import { JwtInterceptor } from './_helpers/jwt.interceptor';
 import { ErrorInterceptor } from './_helpers/error.interceptor';
 
@@ -15,6 +15,7 @@ import { HeadComponent } from './head/head.component';
 import { AdminComponent } from './admin/admin.component';
 import { EmployeesComponent } from './admin/employees/employees.component';
 import { TasksComponent } from './admin/tasks/tasks.component';
+import { PlannerComponent } from './admin/planner/planner.component';
   // Services
 import { EmployeesService} from './services/employees.service';
 import { EmployeeDetailsComponent } from './admin/employee-details/employee-details.component';
@@ -23,6 +24,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   // Angular Material
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material';
+import { EmployeesListComponent } from './admin/employees-list/employees-list.component';
+import { TasksListComponent } from './admin/tasks-list/tasks-list.component';
 
 
 @NgModule({
@@ -35,6 +38,9 @@ import {MatNativeDateModule} from '@angular/material';
     EmployeeDetailsComponent,
     DatepickerComponent,
     TasksComponent,
+    PlannerComponent,
+    EmployeesListComponent,
+    TasksListComponent,
   ],
   imports: [
     BrowserModule,

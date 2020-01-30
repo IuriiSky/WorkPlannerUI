@@ -1,7 +1,7 @@
 .wrapper-admin {
   background-color: var(--main-bg-color);
   display: flex;
-  flex-basis: 25%;
+  /* flex-basis: 25%; */
 }
 
 fieldset {
@@ -34,7 +34,7 @@ legend > span {
   display: flex;
   padding: 6px 8px 6px 16px;
   text-decoration: none;
-  font-size: 25px;
+  font-size: 1.2em;
   color: var(--black-color);
 }
 

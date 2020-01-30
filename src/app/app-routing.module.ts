@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { HomeComponent} from './home/home.component';
-import { AdminComponent} from './admin/admin.component';
-import { EmployeesComponent} from './admin/employees/employees.component';
-import { EmployeeDetailsComponent} from './admin/employee-details/employee-details.component';
-import {TasksComponent} from './admin/tasks/tasks.component';
+import { HomeComponent } from './home/home.component';
+import { AdminComponent } from './admin/admin.component';
+import { EmployeesComponent } from './admin/employees/employees.component';
+import { EmployeeDetailsComponent } from './admin/employee-details/employee-details.component';
+import { TasksComponent } from './admin/tasks/tasks.component';
+import { PlannerComponent} from './admin/planner/planner.component';
 
 
 const routes: Routes = [
@@ -13,6 +14,7 @@ const routes: Routes = [
   {path: 'Employees', component: EmployeesComponent},
   {path: 'Employees/:id', component: EmployeeDetailsComponent},
   {path: 'Tasks', component: TasksComponent},
+  {path: 'Planner', component: PlannerComponent}
 ];
 
 @NgModule({

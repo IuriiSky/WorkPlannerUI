@@ -1,0 +1,18 @@
+.wrapper-planner {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.current-date {
+    background-color: brown;
+    width: 100%;
+}
+
+.time-line {
+    background-color: green;
+    width: 100%
+}
+
+app-employees-list{
+    border: 2px solid #000000;
+}

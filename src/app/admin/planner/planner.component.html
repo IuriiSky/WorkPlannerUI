@@ -1,0 +1,5 @@
+<div class="wrapper-planner">
+  <div class="current-date">Hello, I am Date</div>
+  <div class="time-line"> Hello, I am time-line</div>
+  <app-employees-list [employees]="employees" (voted)="setDisabledRout($event)"></app-employees-list>
+  <app-tasks-list [tasks]="tasks"></app-tasks-list>

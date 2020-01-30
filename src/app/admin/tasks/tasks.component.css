@@ -11,6 +11,13 @@
   margin: 10px;
 }
 
+.bg-wrapper {
+  background-color: var(--component-bg-color);
+  margin: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
 legend {
   margin-left: 15%;
 }
@@ -18,28 +25,6 @@ legend {
 legend > span {
   font-size: 1.5em;
   color: var(--white-color);
-}
-
-.wrapper-lists {
-  background-color: var(--component-bg-color);
-  display: flex;
-  justify-content: space-between;
-  flex-direction: row-reverse;
-  padding: 10px;
-  margin: 10px;
-}
-
-.wrapper-lists > div {
-  display: flex;
-  flex-direction: column;
-}
-
-#name{
-  background-color: var(--white-color);
-  flex-basis: 50%;
-  margin: 3%;
-  height: 2em;
-  width: 50%;
 }
 
 .primary-button {
@@ -61,34 +46,6 @@ legend > span {
 .added-button:hover {
   background-color: var(--bt-create-hover-color);
   transition: 0.4s ease-out;
-}
-
-.current-current-tasks {
-  margin: 30px 0 0 40px;
-  list-style-type: none;
-}
-
-.name-list {
-  color: var(--black-color);
-  display: flex;
-  font-size: 1em;
-  list-style-type: none;
-  padding: 10px;
-}
-
-.name-list:last-child {
-  margin-bottom: 10%;
-}
-
-.name-list:hover {
-  background-color: var(--main-bg-color);
-  color: var(--white-color);
-}
-
-.show-color {
-  width: 1em;
-  height: 1em;
-  margin-right: 5px;
 }
 
 /*Create  new task form*/

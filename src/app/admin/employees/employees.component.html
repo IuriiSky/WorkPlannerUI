@@ -4,17 +4,14 @@
     <form>
       <fieldset class="all-workers">
         <legend><span>Employees</span></legend>
-        <div class="wrapper-lists">
+        <div class="bg-wrapper">
+          <app-employees-list [employees]="employees" 
+          (voted)="routerLink=['/Employees', employee.id]"></app-employees-list>
           <button type="submit" class="added-button primary-button" (click) = "toggleShowCreateForm()">Add</button>
-          <ul class="current-employees">
-            <li class="name-list" *ngFor="let employee of employees" [routerLink]="['/Employees', employee.id]">
-              <div class="show-color" [ngStyle]="{'background-color': employee.colorCode}"></div>
-              {{employee.name}}
-            </li>
-          </ul>
         </div>
       </fieldset>
     </form>
+    
     <div class="wrapper-create-form" [hidden] = "showCreateForm">
     <form action="" method="post">
       <fieldset class="create-form animate" [formGroup]="createEmployee">
@@ -23,7 +20,7 @@
           <input formControlName="employeeName" [(ngModel)]="createNewEmployee.employeeName"
                  type="text" placeholder="Enter employee name" name="employee" id="employee" title="Enter name" autofocus required>
           <label for="colorPicker">Employee color:</label>
-          <input formControlName="colorCode" type="color" value="#8e2929" id="colorPicker" title="Click on the line and set the color"
+          <input formControlName="colorCode" type="color" id="colorPicker" title="Click on the line and set the color"
                  [(ngModel)]="createNewEmployee.colorCode" required>
         <button  (click)="addEmployee()" class="create-button primary-button">Create</button>
         <button class="cancel-button primary-button" (click)="toggleShowCreateForm()">Cancel</button>

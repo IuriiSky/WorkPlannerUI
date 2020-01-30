@@ -1,0 +1,12 @@
+<div  class="wrapper-lists">
+    <ul class="current-employees">
+      <li class="name-list" *ngFor="let employee of employees" 
+                            [routerLink]="['/Employees', employee.id]"
+                            routerLinkActive="active"
+                            (click)="vote(employee)"
+                            [routerLinkActiveOptions]="{ exact: true}" >
+        <div class="show-color" [ngStyle]="{'background-color': employee.colorCode}"></div>
+        {{employee.name}}
+      </li>
+    </ul>
+  </div>

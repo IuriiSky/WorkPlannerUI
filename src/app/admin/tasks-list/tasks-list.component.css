@@ -1,0 +1,32 @@
+  .wrapper-tasks {
+    display: inline-block;
+    padding: 10px;
+    margin: 10px;
+  }
+  
+  .wrapper-tasks > div {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .current-tasks {
+    list-style-type: none;
+  }
+  
+  .task-list {
+    color: var(--black-color);
+    display: flex;
+    font-size: 1em;
+    list-style-type: none;
+    padding: 10px;
+  }
+  
+  .task-list:last-child {
+    margin-bottom: 10%;
+  }
+  
+  .task-list:hover {
+    background-color: var(--main-bg-color);
+    color: var(--white-color);
+  }
+ 
