@@ -16,3 +16,9 @@
 app-employees-list{
     border: 2px solid #000000;
 }
+
+.default {
+    display: flex;
+    flex-grow: 0.5;
+    background-color: peru;
+}

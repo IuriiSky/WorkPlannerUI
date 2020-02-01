@@ -1,12 +1,9 @@
 <div  class="wrapper-lists">
-    <ul class="current-employees">
-      <li class="name-list" *ngFor="let employee of employees" 
-                            [routerLink]="['/Employees', employee.id]"
-                            routerLinkActive="active"
-                            (click)="vote(employee)"
-                            [routerLinkActiveOptions]="{ exact: true}" >
-        <div class="show-color" [ngStyle]="{'background-color': employee.colorCode}"></div>
-        {{employee.name}}
-      </li>
-    </ul>
-  </div>
+  <ul class="current-employees">
+    <li class="name-list" *ngFor="let employee of employees">
+      <span class="show-color" [ngStyle]="{'background-color': employee.colorCode}"></span>
+      <a *ngIf="clicable" [routerLink]="['/Employees', employee.id]" > {{employee.name}}</a>
+      <a *ngIf="!clicable" class="tablinks" (click)="vote(employees)">{{employee.name}}</a>
+    </li>
+  </ul>
+</div>

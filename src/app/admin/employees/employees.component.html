@@ -6,7 +6,8 @@
         <legend><span>Employees</span></legend>
         <div class="bg-wrapper">
           <app-employees-list [employees]="employees" 
-          (voted)="routerLink=['/Employees', employee.id]"></app-employees-list>
+                              [clicable]="true">
+          </app-employees-list>
           <button type="submit" class="added-button primary-button" (click) = "toggleShowCreateForm()">Add</button>
         </div>
       </fieldset>

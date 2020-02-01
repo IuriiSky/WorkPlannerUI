@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output} from '@angular/core';
 import { EmployeeDto } from '../../shared/interfaces/employee';
 
 
@@ -13,15 +13,14 @@ export class EmployeesListComponent implements OnInit {
   constructor() { }
 
   @Input('employees') employees:EmployeeDto[];
+  @Input('clicable') clicable: boolean;
   
   @Output() voted = new EventEmitter<any>();
-
-vote(agreed: any) {
-  console.log(agreed);
-  this.voted.emit(agreed);
   
-}
-
+  vote(agreed: any) {
+    this.voted.emit(agreed);
+  }
+  
   ngOnInit() {
   }
 

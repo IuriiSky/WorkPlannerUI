@@ -20,9 +20,8 @@ export class PlannerComponent implements OnInit {
   public tasks:TaskDto[];
 
 
-  canDeactivate(): void {
-    this.router.navigate(['/#']);
-  
+  openTabs(event) {
+    alert("It`s test")
   }
 
   ngOnInit() {

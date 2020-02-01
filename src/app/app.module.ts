@@ -16,16 +16,20 @@ import { AdminComponent } from './admin/admin.component';
 import { EmployeesComponent } from './admin/employees/employees.component';
 import { TasksComponent } from './admin/tasks/tasks.component';
 import { PlannerComponent } from './admin/planner/planner.component';
+import { EmployeesListComponent } from './admin/employees-list/employees-list.component';
+import { TasksListComponent } from './admin/tasks-list/tasks-list.component';
+
   // Services
 import { EmployeesService} from './services/employees.service';
 import { EmployeeDetailsComponent } from './admin/employee-details/employee-details.component';
 import { DatepickerComponent } from './admin/datepicker/datepicker.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
   // Angular Material
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material';
-import { EmployeesListComponent } from './admin/employees-list/employees-list.component';
-import { TasksListComponent } from './admin/tasks-list/tasks-list.component';
+import {MatTabsModule} from '@angular/material/tabs';
+
 
 
 @NgModule({
@@ -50,7 +54,8 @@ import { TasksListComponent } from './admin/tasks-list/tasks-list.component';
     HttpClientModule,
     BrowserAnimationsModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatTabsModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
