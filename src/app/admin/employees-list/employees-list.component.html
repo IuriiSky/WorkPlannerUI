@@ -1,9 +1,19 @@
-<div  class="wrapper-lists">
+<!-- <div  class="wrapper-lists">
   <ul class="current-employees">
     <li class="name-list" *ngFor="let employee of employees">
       <span class="show-color" [ngStyle]="{'background-color': employee.colorCode}"></span>
       <a *ngIf="clicable" [routerLink]="['/Employees', employee.id]" > {{employee.name}}</a>
       <a *ngIf="!clicable" class="tablinks" (click)="vote(employees)">{{employee.name}}</a>
+    </li>
+  </ul>
+</div> -->
+
+<div  class="wrapper-lists">
+  <ul class="current-employees">
+    <li class="name-list" *ngFor="let employee of employees">
+      <span class="show-color" [ngStyle]="{'background-color': employee.colorCode}"></span>
+      <a *ngIf="clicable" [routerLink]="['/Employees', employee.id]" > {{employee.name}}</a>
+      <a *ngIf="!clicable" class="tablinks" (click)="vote(employee)">{{employee.name}}</a>
     </li>
   </ul>
 </div>

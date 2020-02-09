@@ -1,10 +1,20 @@
 <div class="wrapper-planner">
   <div class="current-date">Hello, I am Date</div>
   <div class="time-line"> Hello, I am time-line</div>
-  <app-employees-list [employees]="employees"  
-                      [clicable]="false"
-                      (voted)="openTabs($event, id)">
-  </app-employees-list>
-  <div class="default"></div>
+  <div class="wrapper-employee-tasks">
+    <app-employees-list [employees]="employees"  
+                        [clicable]="false"
+                        (voted)="setActiveEmployee($event)">
+    </app-employees-list>
+    <div class="wrapper-task-list">
+      <div  class="default"*ngIf="activeEmployee" [ngStyle]="{'background-color': activeEmployee.colorCode}">
+        <div>
+          {{getTaskForEmployee()}}
+        </div>
+      </div>
+    </div>
+</div>
+
   <!-- <div id="{{employee.colorCode}}" class="tabcontent" *ngFor="let employee of employees"></div> -->
+
   <app-tasks-list [tasks]="tasks"></app-tasks-list>

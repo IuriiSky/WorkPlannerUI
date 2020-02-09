@@ -13,12 +13,19 @@
     width: 100%
 }
 
-app-employees-list{
-    border: 2px solid #000000;
+.wrapper-employee-tasks {
+    background-color: var(--component-bg-color);
+    display: flex;
+    width: 50%;
+}
+
+.wrapper-task-list {
+    display: flex;
+    flex-grow: 1;
+    background-color: var(--component-bg-color);
+    margin-top: 20px;
 }
 
 .default {
-    display: flex;
-    flex-grow: 0.5;
-    background-color: peru;
+    flex-grow: 1;
 }
