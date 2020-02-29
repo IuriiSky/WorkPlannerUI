@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, EventEmitter, Output} from '@angular/core';
 import { EmployeeDto } from '../../shared/interfaces/employee';
+import { NgClass } from '@angular/common';
 
 
 
@@ -13,6 +14,7 @@ export class EmployeesListComponent implements OnInit {
   constructor() { }
 
   @Input('employees') employees:EmployeeDto[];
+  @Input('selectedEmployee') selectedEmployee: EmployeeDto;
   @Input('clicable') clicable: boolean;
   
   @Output() voted = new EventEmitter<any>();

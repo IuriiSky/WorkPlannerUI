@@ -1,20 +1,30 @@
 <div class="wrapper-planner">
   <div class="current-date">Hello, I am Date</div>
   <div class="time-line"> Hello, I am time-line</div>
+  <div *ngIf="!activeEmployee"> Choose employee</div>
   <div class="wrapper-employee-tasks">
-    <app-employees-list [employees]="employees"  
-                        [clicable]="false"
-                        (voted)="setActiveEmployee($event)">
+    <app-employees-list [employees]="employees" [selectedEmployee]="activeEmployee" (voted)="setActiveEmployee($event)">
     </app-employees-list>
     <div class="wrapper-task-list">
-      <div  class="default"*ngIf="activeEmployee" [ngStyle]="{'background-color': activeEmployee.colorCode}">
-        <div>
-          {{getTaskForEmployee()}}
+      <!-- <div class="default" *ngIf="activeEmployee" [ngStyle]="{'background-color': 'grey'}"> -->
+        <div class="default" [ngStyle]="{'background-color': 'grey'}"
+          cdkDropList #todoList="cdkDropList" [cdkDropListData]="activeEmployeeTasks"
+          [cdkDropListConnectedTo]="[taskList]" (cdkDropListDropped)="drop($event)">
+          <div *ngFor="let activeTask of activeEmployeeTasks" cdkDrag>{{activeTask.id}}. {{activeTask.description}}
+          </div>
         </div>
-      </div>
+      <!-- </div> -->
+
     </div>
+
+    <div class="wrapper-task-list">
+      <div cdkDropList #taskList="cdkDropList" [cdkDropListData]="tasks" [cdkDropListConnectedTo]="[todoList]"
+        class="example-list" (cdkDropListDropped)="drop($event)">
+        <div *ngFor="let task of tasks" cdkDrag>{{task.id}}. {{task.description}}</div>
+      </div>
+
+    </div>
+  </div>
+
 </div>
-
-  <!-- <div id="{{employee.colorCode}}" class="tabcontent" *ngFor="let employee of employees"></div> -->
-
-  <app-tasks-list [tasks]="tasks"></app-tasks-list>
+<!-- <app-tasks-list [tasks]="tasks"></app-tasks-list> -->

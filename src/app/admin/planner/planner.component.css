@@ -23,9 +23,12 @@
     display: flex;
     flex-grow: 1;
     background-color: var(--component-bg-color);
-    margin-top: 20px;
 }
 
 .default {
     flex-grow: 1;
+}
+
+.active {
+    background-color: green;
 }
