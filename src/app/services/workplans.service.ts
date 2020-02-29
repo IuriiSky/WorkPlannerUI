@@ -33,7 +33,7 @@ export class WorkplansService {
     return this.http.put<any>(this.baseApi,workplan);
   }
 
-  dleteWorkPlan(workPlan:DeleteWorkPlanCommand){
+  deleteWorkPlan(workPlan:DeleteWorkPlanCommand){
     return this.http.put<any>(this.baseApi,workPlan);
   }
 }

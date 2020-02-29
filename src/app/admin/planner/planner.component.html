@@ -1,13 +1,34 @@
 <div class="wrapper-planner">
-  <div class="current-date">Hello, I am Date</div>
+  <div class="current-date">
+
+    <mat-form-field>
+            <mat-label>Current date</mat-label>
+            <!-- <input matInput [matDatepicker]="picker3" [value]="date.value"> -->
+            <input matInput [matDatepicker]="picker3" placeholder="Start Date" [(ngModel)]="currentDate" required>
+      <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+      <mat-datepicker #picker3></mat-datepicker>
+    </mat-form-field>
+
+
+
+  </div>
+
+  <!-- <div>
+    <mat-calendar></mat-calendar>
+    <mat-datepicker #picker3></mat-datepicker>
+  </div> -->
+
+
+
   <div class="time-line"> Hello, I am time-line</div>
+
   <div *ngIf="!activeEmployee"> Choose employee</div>
   <div class="wrapper-employee-tasks">
     <app-employees-list [employees]="employees" [selectedEmployee]="activeEmployee" (voted)="setActiveEmployee($event)">
     </app-employees-list>
     <div class="wrapper-task-list">
       <!-- <div class="default" *ngIf="activeEmployee" [ngStyle]="{'background-color': 'grey'}"> -->
-        <div class="default" [ngStyle]="{'background-color': 'grey'}"
+        <div id="todoList" class="default" [ngStyle]="{'background-color': 'grey'}"
           cdkDropList #todoList="cdkDropList" [cdkDropListData]="activeEmployeeTasks"
           [cdkDropListConnectedTo]="[taskList]" (cdkDropListDropped)="drop($event)">
           <div *ngFor="let activeTask of activeEmployeeTasks" cdkDrag>{{activeTask.id}}. {{activeTask.description}}
@@ -18,8 +39,8 @@
     </div>
 
     <div class="wrapper-task-list">
-      <div cdkDropList #taskList="cdkDropList" [cdkDropListData]="tasks" [cdkDropListConnectedTo]="[todoList]"
-        class="example-list" (cdkDropListDropped)="drop($event)">
+      <div id="taskList" cdkDropList #taskList="cdkDropList" [cdkDropListData]="tasks" 
+        [cdkDropListConnectedTo]="[todoList]" (cdkDropListDropped)="drop($event)">
         <div *ngFor="let task of tasks" cdkDrag>{{task.id}}. {{task.description}}</div>
       </div>
 
