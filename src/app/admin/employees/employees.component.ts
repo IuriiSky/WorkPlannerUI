@@ -31,7 +31,6 @@ export class EmployeesComponent implements OnInit {
   }
 
   addEmployee() {
-    console.log(this.createNewEmployee);
     this.employeesService.createEmployee(this.createNewEmployee).subscribe(employee => {
       this.createNewEmployee.employeeName = '';
       this.createNewEmployee.colorCode = '';

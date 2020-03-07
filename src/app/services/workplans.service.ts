@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { DataService } from './data.service';
 import { Observable } from 'rxjs';
 import { WorkPlanDto, CreateWorkPlanCommand, UpdateWorkPlanCommand, DeleteWorkPlanCommand } from '../shared/interfaces/work-plan';
@@ -34,6 +34,13 @@ export class WorkplansService {
   }
 
   deleteWorkPlan(workPlan:DeleteWorkPlanCommand){
-    return this.http.put<any>(this.baseApi,workPlan);
+    // let options = {
+    //   headers: new HttpHeaders({
+    //     'Content-Type': 'application/json'
+    //   }),
+    //   body:workPlan
+    // }
+    //return this.http.delete<any>(this.baseApi+'delete/',options);
+    return this.http.put<any>(this.baseApi+'delete',workPlan);
   }
 }

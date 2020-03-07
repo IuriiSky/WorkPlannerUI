@@ -30,6 +30,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule, MatFormFieldModule, MatInputModule} from '@angular/material';
 import {MatTabsModule} from '@angular/material/tabs';
 import {DragDropModule} from '@angular/cdk/drag-drop';
+import { DatePipe } from '@angular/common';
 
 
 
@@ -65,6 +66,7 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     EmployeesService,
+    DatePipe
   ],
   bootstrap: [AppComponent]
 })

@@ -16,9 +16,7 @@ export class TasksListComponent implements OnInit {
 
 
 vote(agreed: any) {
-  console.log(agreed);
   this.voted.emit(agreed);
-  
 }
 
   ngOnInit() {}

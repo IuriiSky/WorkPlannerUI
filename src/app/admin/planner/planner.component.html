@@ -22,16 +22,16 @@
 
   <div class="time-line"> Hello, I am time-line</div>
 
-  <div *ngIf="!activeEmployee"> Choose employee</div>
+  <div *ngIf="!employee"> Choose employee</div>
   <div class="wrapper-employee-tasks">
-    <app-employees-list [employees]="employees" [selectedEmployee]="activeEmployee" (voted)="setActiveEmployee($event)">
+    <app-employees-list [employees]="allEmployees" [selectedEmployee]="employee" (voted)="setActiveEmployee($event)">
     </app-employees-list>
     <div class="wrapper-task-list">
       <!-- <div class="default" *ngIf="activeEmployee" [ngStyle]="{'background-color': 'grey'}"> -->
         <div id="todoList" class="default" [ngStyle]="{'background-color': 'grey'}"
-          cdkDropList #todoList="cdkDropList" [cdkDropListData]="activeEmployeeTasks"
+          cdkDropList #todoList="cdkDropList" [cdkDropListData]="employeeTasks"
           [cdkDropListConnectedTo]="[taskList]" (cdkDropListDropped)="drop($event)">
-          <div *ngFor="let activeTask of activeEmployeeTasks" cdkDrag>{{activeTask.id}}. {{activeTask.description}}
+          <div *ngFor="let employeeTask of employeeTasks" cdkDrag>{{employeeTask.id}}. {{employeeTask.description}}
           </div>
         </div>
       <!-- </div> -->
@@ -39,9 +39,9 @@
     </div>
 
     <div class="wrapper-task-list">
-      <div id="taskList" cdkDropList #taskList="cdkDropList" [cdkDropListData]="tasks" 
+      <div id="taskList" cdkDropList #taskList="cdkDropList" [cdkDropListData]="remainingTasks" 
         [cdkDropListConnectedTo]="[todoList]" (cdkDropListDropped)="drop($event)">
-        <div *ngFor="let task of tasks" cdkDrag>{{task.id}}. {{task.description}}</div>
+        <div *ngFor="let task of remainingTasks" cdkDrag>{{task.id}}. {{task.description}}</div>
       </div>
 
     </div>
