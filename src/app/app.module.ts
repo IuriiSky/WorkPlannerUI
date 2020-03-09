@@ -18,6 +18,7 @@ import { TasksComponent } from './admin/tasks/tasks.component';
 import { PlannerComponent } from './admin/planner/planner.component';
 import { EmployeesListComponent } from './admin/employees-list/employees-list.component';
 import { TasksListComponent } from './admin/tasks-list/tasks-list.component';
+import { LoginComponent } from './login/login.component';
 
   // Services
 import { EmployeesService} from './services/employees.service';
@@ -33,7 +34,6 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
 import { DatePipe } from '@angular/common';
 
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,6 +47,7 @@ import { DatePipe } from '@angular/common';
     PlannerComponent,
     EmployeesListComponent,
     TasksListComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,

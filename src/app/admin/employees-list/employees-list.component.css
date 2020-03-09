@@ -15,21 +15,32 @@
     display: flex;
     font-size: 1em;
     list-style-type: none;
-    padding: 10px;
+    margin: 10px 20px 10px 20px;
+    /* padding: 10px; */
   }
   
   .name-list:hover {
     background-color: var(--main-bg-color);
-    color: var(--white-color);
   }
 
   .show-color {
     width: 1em;
     height: 1em;
-    margin-right: 5px;
+    margin: auto 5px;
+    text-align: center;
   }
 
   .active {
-    background-color: var(--main-bg-color);
+    background-color: orange;
     color: var(--white-color);
+}
+
+.link {
+  text-decoration: none;
+  color: var(--black-color);
+  padding: 10px;
+}
+
+.link:hover {
+  color: var(--white-color);
 }

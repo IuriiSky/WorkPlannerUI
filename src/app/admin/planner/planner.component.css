@@ -4,8 +4,27 @@
 }
 
 .current-date {
-    text-align: center;
-    width: 100%;
+    display: flex;
+    margin: 0 auto;
+}
+
+.button-day {
+    background-color: transparent;
+    border: none;
+    margin: 15px;
+    height: auto;
+    padding: 0 10px;
+}
+
+.previous-day-svg,
+.next-day-svg {
+    height: 25px;
+    width: 25px;
+}
+
+.previous-day-svg:hover,
+.next-day-svg:hover {
+    fill: #3f51b5;
 }
 
 .time-line {
@@ -13,10 +32,26 @@
     width: 100%
 }
 
+.chosee-employee {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    transition-delay: 0.5ms;
+}
+
+.attention {
+    font-size: 30px;
+    border: 2px solid red;
+    border-radius: 15px;
+    padding: 10px;
+    margin: 10px;
+}
+
 .wrapper-employee-tasks {
     background-color: var(--component-bg-color);
     display: flex;
-    width: 50%;
+    height: 100vh;
+    flex-grow: 1;
 }
 
 .wrapper-task-list {
@@ -25,7 +60,21 @@
     background-color: var(--component-bg-color);
 }
 
+.task {
+    padding: 10px;
+}
+
+.task:hover {
+    border: 2px solid var(--main-bg-color);
+}
+
+#taskList,
+#todoList {
+    list-style: none;
+}
+
 .default {
+    background-color: orange;
     flex-grow: 1;
 }
 

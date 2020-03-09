@@ -1,48 +1,68 @@
+<svg aria-hidden="true" style="position: absolute; width: 0; height: 0; overflow: hidden;" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <defs>
+    <symbol id="icon-circle-right" viewBox="0 0 32 32">
+      <path
+        d="M16 0c-8.837 0-16 7.163-16 16s7.163 16 16 16 16-7.163 16-16-7.163-16-16-16zM16 29c-7.18 0-13-5.82-13-13s5.82-13 13-13 13 5.82 13 13-5.82 13-13 13z">
+      </path>
+      <path d="M11.086 22.086l2.829 2.829 8.914-8.914-8.914-8.914-2.828 2.828 6.086 6.086z"></path>
+    </symbol>
+    <symbol id="icon-circle-left" viewBox="0 0 32 32">
+      <path
+        d="M16 32c8.837 0 16-7.163 16-16s-7.163-16-16-16-16 7.163-16 16 7.163 16 16 16zM16 3c7.18 0 13 5.82 13 13s-5.82 13-13 13-13-5.82-13-13 5.82-13 13-13z">
+      </path>
+      <path d="M20.914 9.914l-2.829-2.829-8.914 8.914 8.914 8.914 2.828-2.828-6.086-6.086z"></path>
+    </symbol>
+  </defs>
+</svg>
+
 <div class="wrapper-planner">
   <div class="current-date">
+    <button type="button" (click)="previousDay()" class="button-day" title="Previous day">
+      <svg class="previous-day-svg">
+        <use xlink:href="#icon-circle-left" />
+      </svg>
+    </button>
 
     <mat-form-field>
-            <mat-label>Current date</mat-label>
-            <!-- <input matInput [matDatepicker]="picker3" [value]="date.value"> -->
-            <input matInput [matDatepicker]="picker3" placeholder="Start Date" [(ngModel)]="currentDate" required>
+      <mat-label>Current date</mat-label>
+      <!-- <input matInput [matDatepicker]="picker3" [value]="date.value"> -->
+      <input matInput [matDatepicker]="picker3" placeholder="Start Date" [(ngModel)]="currentDate" required>
       <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
       <mat-datepicker #picker3></mat-datepicker>
     </mat-form-field>
-
-
-
+    <button type="button" (click)="nextDay()" class="button-day" title="Next day">
+      <svg class="next-day-svg">
+        <use xlink:href="#icon-circle-right" />
+      </svg>
+    </button>
   </div>
-
-  <!-- <div>
-    <mat-calendar></mat-calendar>
-    <mat-datepicker #picker3></mat-datepicker>
-  </div> -->
-
-
 
   <div class="time-line"> Hello, I am time-line</div>
 
-  <div *ngIf="!employee"> Choose employee</div>
+  <div *ngIf="!employee" class="chosee-employee">
+    <p class="attention">Please, choose employee</p>
+  </div>
+  
   <div class="wrapper-employee-tasks">
     <app-employees-list [employees]="allEmployees" [selectedEmployee]="employee" (voted)="setActiveEmployee($event)">
     </app-employees-list>
     <div class="wrapper-task-list">
       <!-- <div class="default" *ngIf="activeEmployee" [ngStyle]="{'background-color': 'grey'}"> -->
-        <div id="todoList" class="default" [ngStyle]="{'background-color': 'grey'}"
-          cdkDropList #todoList="cdkDropList" [cdkDropListData]="employeeTasks"
-          [cdkDropListConnectedTo]="[taskList]" (cdkDropListDropped)="drop($event)">
-          <div *ngFor="let employeeTask of employeeTasks" cdkDrag>{{employeeTask.id}}. {{employeeTask.description}}
-          </div>
-        </div>
+      <ul id="todoList" class="default" cdkDropList #todoList="cdkDropList"
+        [cdkDropListData]="employeeTasks" [cdkDropListConnectedTo]="[taskList]" (cdkDropListDropped)="drop($event)">
+        <li  class="task" *ngFor="let employeeTask of employeeTasks" cdkDrag>{{employeeTask.id}}. {{employeeTask.description}}
+        </li>
+      </ul>
       <!-- </div> -->
 
     </div>
 
     <div class="wrapper-task-list">
-      <div id="taskList" cdkDropList #taskList="cdkDropList" [cdkDropListData]="remainingTasks" 
+      <ul id="taskList" cdkDropList #taskList="cdkDropList" [cdkDropListData]="remainingTasks"
         [cdkDropListConnectedTo]="[todoList]" (cdkDropListDropped)="drop($event)">
-        <div *ngFor="let task of remainingTasks" cdkDrag>{{task.id}}. {{task.description}}</div>
-      </div>
+        <li  class="task" *ngFor="let task of remainingTasks" cdkDrag>{{task.id}}. {{task.description}}</li>
+    </ul>
 
     </div>
   </div>

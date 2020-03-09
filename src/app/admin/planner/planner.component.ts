@@ -113,6 +113,18 @@ export class PlannerComponent implements OnInit {
       
     });
   }
+
+  nextDay() {
+    let date = new Date(this.currentDate.getTime());
+    date.setDate(this.currentDate.getDate() + 1);
+    this.currentDate = date;
+  }
+
+  previousDay() {
+    let date = new Date(this.currentDate.getTime());
+    date.setDate(this.currentDate.getDate() - 1);
+    this.currentDate = date;
+  }
   
   ngOnInit() {
     this.employeesService.getAllEmployees().subscribe((data: EmployeeDto[]) => {
