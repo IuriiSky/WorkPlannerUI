@@ -20,8 +20,12 @@
   }
   
   .name-list:hover {
-    background-color: var(--main-bg-color);
-  }
+    background-color: rgba(25,118,210,.1);
+    color: var(--main-bg-color);
+    border-radius: 4px;
+    box-shadow: 0 5px 5px rgba(10,16,20,.24), 0 0 2px rgba(10,16,20,.12);
+    transition: box-shadow .5s;
+    }
 
   .show-color {
     width: 1em;
@@ -39,8 +43,4 @@
   text-decoration: none;
   color: var(--black-color);
   padding: 10px;
-}
-
-.link:hover {
-  color: var(--white-color);
 }

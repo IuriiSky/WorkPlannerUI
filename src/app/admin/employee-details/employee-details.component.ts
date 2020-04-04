@@ -27,6 +27,9 @@ export class EmployeeDetailsComponent implements OnInit {
   showChangeNameForm = true;
   showChangeColorForm = true;
 
+  showInfo = false;
+  showSettings = false;
+
   modifyEmployee: FormGroup;
 
   public employeeDetail: EmployeeDetailsDto;
@@ -50,15 +53,20 @@ export class EmployeeDetailsComponent implements OnInit {
   //   startDate: '',
   // };
 
-  openSidenavSettings() {
-    document.getElementById('sidenav-settings').style.width = '200px';
-    document.getElementById('info').style.marginLeft = '200px';
+  sidenavSettings() {
+    this.showInfo = !this.showInfo;
+    this.showSettings = !this.showSettings
   }
 
-  closeSidenavSetting() {
-    document.getElementById('sidenav-settings').style.width = '0';
-    document.getElementById('info').style.marginLeft = '0';
+  closeSidenavSettings() {
+    this.showSettings = false;
+    this.showInfo = false;
   }
+
+  // closeSidenavSetting() {
+  //   this.showInfo = !this.showInfo;
+  //   this.showSettings = !this.showSettings
+  // }
 
   toggleShowChangeNameForm() {
     this.showChangeNameForm = !this.showChangeNameForm;

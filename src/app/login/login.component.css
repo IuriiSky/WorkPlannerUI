@@ -1,6 +1,14 @@
 .wrapper-login {
     display: flex;
-    background-color: var(--component-bg-color);
+    background-color: rgba(25, 118, 210, 0.1);
+}
+
+.container {
+  background-color: rgba(25,118,210,.2);
+  color: var(--main-bg-color);
+  border-radius: 4px;
+  box-shadow: 0 0 0 2px rgb(177, 206, 235) inset, 0 0 0 4px white inset;
+  transition: box-shadow .5s;
 }
 
 /* Full-width input fields */
@@ -16,31 +24,36 @@ input[type=password] {
   
   /* Set a style for all buttons */
   .button {
-    background-color: var(--bt-create-hover-color);
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    cursor: pointer;
+    font-size: 1em;
+    display: inline-block;
     width: 100%;
+    height: 2.5em;
+    margin: auto auto;
+    border: none;
+    background-color: cadetblue;
+    border-radius: 5px;
+    box-shadow: 0 5px 5px rgba(10,16,20,.24), 0 0 2px rgba(10,16,20,.12);
+    transition: box-shadow .5s;
   }
   
   .button:hover {
-    opacity: 0.8;
+    box-shadow: 20px 20px 10px 0px rgba(0,0,0,0.5) inset;
+    transition: .5 linear;
   }
   
   /* Extra styles for the cancel button */
   .cancelbtn {
     width: auto;
+    margin-top: 10px;
     padding: 10px 18px;
     background-color: var(--bt-cancel-hover-color);
   }
 
-  .cancelbtn:hover {
+  /* .cancelbtn:hover {
     cursor: pointer;
     opacity: 0.8;
     background-color: brown;
-  }
+  } */
     
   .container {
     padding: 16px;
@@ -53,8 +66,21 @@ input[type=password] {
   
   /* Modal Content/Box */
   .modal-content {
-    background-color: #fefefe;
-    margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
-    border: 1px solid #888;
-    width: 40%; /* Could be more or less, depending on screen size */
+    margin: 5% auto 15% auto;
+    max-width: 450px;
   }
+
+
+@media only screen and (max-width: 640px) {
+  /* For mobile phones: */
+  .modal-content {
+    width: 80%;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  /* For mobile phones: */
+  .modal-content {
+    width: 80%;
+  }
+}

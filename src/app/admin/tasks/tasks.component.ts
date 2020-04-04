@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { TasksService } from '../../services/tasks.service';
 import { TaskDto, CreateTaskCommand, UpdateTaskCommand } from '../../shared/interfaces/task';
 import {Router} from '@angular/router';
 import {FormControl, FormGroup} from '@angular/forms';
+import { AdminComponent } from '../admin.component';
+
 
 @Component({
   selector: 'app-tasks',

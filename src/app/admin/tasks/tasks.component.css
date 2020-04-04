@@ -2,35 +2,36 @@
   display: flex;
 }
 
+.admin-links {
+  display: none;
+}
+
 .tasks {
-  background-color: var(--main-bg-color);
+  flex-wrap: wrap;
+  background-color: var(--white-color);
+  border-top: 20px solid var(--main-bg-color);
+  border-right: 10px solid var(--main-bg-color);
+  border-bottom: 20px solid var(--main-bg-color);
+  border-left: 10px solid var(--main-bg-color);
+  border-radius: 4px;
+  box-shadow: 0 15px 15px rgba(10,16,20,.24), 0 0 10px rgba(10,16,20,.12);
   flex-grow: 1;
-}
-
-.all-tasks {
-  margin: 10px;
-}
-
-.bg-wrapper {
-  background-color: var(--component-bg-color);
-  margin: 10px;
-  display: flex;
   justify-content: space-between;
+  margin-bottom: 20px;
+  transition: box-shadow .5s;
 }
 
-legend {
-  margin-left: 15%;
-}
-
-legend > span {
-  font-size: 1.5em;
-  color: var(--white-color);
+.heading {
+  text-align: center;
+  margin: 10px 10px 0;
+  font-size: 30px;
+  font-style: italic;
 }
 
 .primary-button {
-  background-color: var(--bt-create-color);
+  background-color: #6e6e6e;
   border: none;
-  border-radius: 20px;
+  border-radius: 4px;
   color: var(--white-color);
   font-weight: 500;
   font-size: 1em;
@@ -38,14 +39,20 @@ legend > span {
 
 .added-button {
   height: 30px;
-  margin: 20px 30px 20px 20px;
+  margin: 20px 30px 20px 10px;
   padding: 0 5px;
   width: 100px;
+  right: 0;
+  position: absolute;
 }
 
 .added-button:hover {
-  background-color: var(--bt-create-hover-color);
+  background-color: var(--main-bg-color);
   transition: 0.4s ease-out;
+  opacity: 0.9;
+  height: 35px;
+  width: 105px;
+  color: var(--black-color);
 }
 
 /*Create  new task form*/
@@ -75,9 +82,14 @@ legend > span {
   margin: 0 auto;
 }
 
+.legend-text {
+  color: var(--white-color);
+  font-size: 18px;
+}
+
 .create-form > label {
   color: var(--white-color);
-  font-size: 20px;
+  font-size: 18px;
   padding: 10px;
 }
 
@@ -126,4 +138,80 @@ input[type = "color"]{
 @keyframes animatezoom {
   from {transform: scale(0)}
   to {transform: scale(1)}
+}
+
+app-admin {
+  display: flex;
+  flex-direction: column;
+  width: 252px;
+  margin: 20px;
+}
+
+@media only screen and (max-width: 640px) {
+  /* For mobile phones: */
+  .wrapper {
+    justify-content: center;
+    flex-direction: column;
+  }
+
+ app-admin {
+  display: none;
+ }
+
+ .admin-links {
+  display: flex;
+  justify-content: center;
+ }
+
+ .admin-list {
+  display: flex;
+  list-style: none;
+ }
+
+ .bg-wrapper {
+  background-color: #fff;
+  border-radius: 4px;
+  box-shadow: 0 5px 5px rgba(10,16,20,.24), 0 0 2px rgba(10,16,20,.12);
+  transition: box-shadow .5s;
+  min-width: 145px;
+  margin: 24px 5px;
+ }
+
+ .link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  text-decoration: none;
+}
+
+.svg-size {
+  height: 20px;
+  width: 20px;
+  margin-right: 10px;
+}
+
+}
+
+
+@media only screen and (max-width: 480px) {
+  /* For mobile phones: */
+  .admin-list {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+   }
+
+   .bg-wrapper {
+    margin: 12px 5px;
+   }
+
+   .added-button {
+    height: 20px;
+    margin: 10px 20px 10px 10px;
+    padding: 0 5px;
+    width: 80px;
+    right: 0;
+    position: absolute;
+  }
 }
