@@ -85,9 +85,8 @@ export class PlannerComponent implements OnInit {
   }
 
   addTask(taskId: number){
-    let start = new Date();
+    let start = new Date(this.currentDate.getTime());
     start.setHours(6);
-
     let com: CreateWorkPlanCommand =
     {
       employeeId: this.employee.id,
@@ -103,32 +102,48 @@ export class PlannerComponent implements OnInit {
   }
   removeTask(taskId: number){
     let workPlan = this.employeeWorkPlan.find(wp => wp.taskId == taskId);
-    let com :DeleteWorkPlanCommand={
-      employeeId: workPlan.employeeId,
-      taskId: workPlan.taskId,
-      date: workPlan.date
-    };
-    console.log(com);
-    this.plannerService.deleteWorkPlan(com).subscribe((data:any) => {
+    if(workPlan === undefined){
+      let com :DeleteWorkPlanCommand={
+        employeeId: this.employee.id,
+        taskId: taskId,
+        date: this.currentDate
+      };
+      this.plannerService.deleteWorkPlan(com).subscribe((data:any) => {
+      });
+
+    }else{
+
+      let com :DeleteWorkPlanCommand={
+        employeeId: workPlan.employeeId,
+        taskId: workPlan.taskId,
+        date: workPlan.date
+      };
       
-    });
+      this.plannerService.deleteWorkPlan(com).subscribe((data:any) => {
+      });
+    }
   }
 
   nextDay() {
     let date = new Date(this.currentDate.getTime());
     date.setDate(this.currentDate.getDate() + 1);
     this.currentDate = date;
+    this.setActiveEmployee(this.employee);
   }
 
   previousDay() {
     let date = new Date(this.currentDate.getTime());
     date.setDate(this.currentDate.getDate() - 1);
     this.currentDate = date;
+    this.setActiveEmployee(this.employee);
   }
   
   ngOnInit() {
     this.employeesService.getAllEmployees().subscribe((data: EmployeeDto[]) => {
       this.allEmployees = data;
+      if(data.length > 0) {
+        this.setActiveEmployee(data[0]);
+      }
     });
     this.tasksService.getAllTasks().subscribe((data: TaskDto[]) => {
       this.allTasks = data;
