@@ -26,7 +26,6 @@ import { EmployeeDetailsComponent } from './admin/employee-details/employee-deta
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
   // Angular Material
-import { DatepickerComponent } from './admin/datepicker/datepicker.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule, MatFormFieldModule, MatInputModule} from '@angular/material';
 import {MatTabsModule} from '@angular/material/tabs';
@@ -42,7 +41,6 @@ import { DatePipe } from '@angular/common';
     AdminComponent,
     EmployeesComponent,
     EmployeeDetailsComponent,
-    DatepickerComponent,
     TasksComponent,
     PlannerComponent,
     EmployeesListComponent,

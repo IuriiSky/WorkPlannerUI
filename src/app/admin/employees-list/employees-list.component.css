@@ -1,13 +1,10 @@
-
   .wrapper-lists {
-    display: inline-block;
-    padding: 10px 0px 10px 10px;
-    margin: 10px 0px 10px 10px;
+    display: flex;
   }
 
   .current-employees {
-    margin: 0 0 0 10px;
     list-style-type: none;
+    width: 100%;
   }
   
   .name-list {
@@ -16,31 +13,40 @@
     font-size: 1em;
     list-style-type: none;
     margin: 10px 20px 10px 20px;
-    /* padding: 10px; */
-  }
-  
-  .name-list:hover {
     background-color: rgba(25,118,210,.1);
     color: var(--main-bg-color);
     border-radius: 4px;
     box-shadow: 0 5px 5px rgba(10,16,20,.24), 0 0 2px rgba(10,16,20,.12);
     transition: box-shadow .5s;
+    /* padding: 10px; */
+  }
+  
+  .name-list:hover {
+    border: none;
+    background-color: cadetblue;
+    border-radius: 5px;
+    box-shadow: 0 0 0 2px cadetblue inset, 0 0 0 4px white inset;
+    transition: 0.4s ease-out;
     }
 
   .show-color {
     width: 1em;
     height: 1em;
-    margin: auto 5px;
+    margin: auto 5px auto 15px;
     text-align: center;
   }
 
   .active {
-    background-color: orange;
-    color: var(--white-color);
+    border: none;
+    background-color: cadetblue;
+    border-radius: 5px;
+    box-shadow: 0 0 0 2px rgb(236, 136, 5)  inset, 0 0 0 4px white inset;
+    transition: 0.4s ease-out;
 }
 
 .link {
   text-decoration: none;
   color: var(--black-color);
   padding: 10px;
+  flex-grow: 1;
 }
