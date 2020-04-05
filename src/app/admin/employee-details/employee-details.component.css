@@ -9,7 +9,7 @@
 app-admin {
   display: flex;
   flex-direction: column;
-  width: 252px;
+  max-width: 252px;
   margin: 20px;
 }
 
@@ -56,6 +56,8 @@ app-admin {
   border: none;
 }
 
+/* Animation blocks */
+
 .worker {
   margin: 50px 10px 20px;
   display: flex;
@@ -69,30 +71,13 @@ app-admin {
 .animation-wraper {
   position: relative;
   display: flex;
-  flex-direction: column;
   flex-grow: 1;
   margin: 10px;
   background-color: rgba(25,118,210,.1);
   color: var(--main-bg-color);
   border-radius: 4px;
   box-shadow: 0 5px 5px rgba(10,16,20,.24), 0 0 2px rgba(10,16,20,.12);
-}
-
-.wrapper-lists-info {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-  background-color: rgba(25,118,210,.1);
-  color: var(--main-bg-color);
-  border-radius: 4px;
-  box-shadow: 0 5px 5px rgba(10,16,20,.24), 0 0 2px rgba(10,16,20,.12);
-}
-
-.animation {
-  transition: all 1.5s linear;
-  transform: rotateY(180deg);
-  opacity: 0.0;
+  perspective: 1000px;
 }
 
 .sidenav-settings {
@@ -107,15 +92,42 @@ app-admin {
   position: absolute;
   top: 0;
   left: 0;
-  opacity: 0.0;
+  transform: rotateY(180deg);
+}
+
+.wrapper-lists-info,
+.sidenav-settings {
+position: absolute;
+width: 100%;
+height: 100%;
+left: 0;
+top: 0;
+display: flex;
+justify-content: center;
+align-items: center;
+transition: 1s;
+backface-visibility: hidden;
+background-color: rgba(25,118,210,.1);
+box-shadow: 0 5px 5px rgba(10,16,20,.24), 0 0 2px rgba(10,16,20,.12);
+color: var(--main-bg-color);
+/* flex-direction: column; */
+}
+
+.animation {
+  transition: all 1s linear;
+  transform: rotateY(180deg);
 }
 
 .animationset {
-  transition: all 1.5s linear;
+  transition: all 1s linear;
   transform: rotateY(360deg);
-  opacity: 1;
 }
 
+.wrapper-lists-info {
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: inherit;
+}
 
 /*Block set a holiday days*/
 .holidays-wrapper {
@@ -126,6 +138,7 @@ app-admin {
   box-shadow: 0 5px 5px rgba(10,16,20,.24), 0 0 2px rgba(10,16,20,.12);
   transition: box-shadow .5s;
   border-radius: 5px;
+  height: 100%;
 }
 
 .holidays {
@@ -157,7 +170,12 @@ mat-datepicker-toggle-default-icon ng-star-inserted {
   border: none;
 }
 
-.svg-icon-cross,
+.svg-icon-cancel-circle {
+  height: 25px;
+  width: 25px; 
+  fill: red;
+}
+
 .svg-icon-bin  {
   height: 20px;
   width: 20px; 
@@ -199,6 +217,7 @@ mat-datepicker-toggle-default-icon ng-star-inserted {
   box-shadow: 0 5px 5px rgba(10,16,20,.24), 0 0 2px rgba(10,16,20,.12);
   transition: box-shadow .5s;
   border-radius: 5px;
+  height: 100%;
 }
 
 .info {

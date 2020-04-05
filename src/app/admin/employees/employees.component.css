@@ -51,6 +51,7 @@ app-admin {
   height: 30px;
   width: 30px;
   margin: 10px 20px 10px;
+  fill: var(--main-bg-color);
 }
 
 .svg-new-employee:hover {

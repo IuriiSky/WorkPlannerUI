@@ -14,11 +14,9 @@
     list-style-type: none;
     margin: 10px 20px 10px 20px;
     background-color: rgba(25,118,210,.1);
-    color: var(--main-bg-color);
     border-radius: 4px;
     box-shadow: 0 5px 5px rgba(10,16,20,.24), 0 0 2px rgba(10,16,20,.12);
     transition: box-shadow .5s;
-    /* padding: 10px; */
   }
   
   .name-list:hover {

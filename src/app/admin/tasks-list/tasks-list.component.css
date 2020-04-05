@@ -1,5 +1,5 @@
   .wrapper-tasks {
-    display: inline-block;
+    display: flex;
     padding: 10px;
     margin: 10px;
   }
@@ -11,6 +11,7 @@
   
   .current-tasks {
     list-style-type: none;
+    width: 100%;
   }
   
   .task-list {
@@ -18,7 +19,13 @@
     display: flex;
     font-size: 1em;
     list-style-type: none;
+    margin: 10px 20px 10px 20px;
+    background-color: rgba(25,118,210,.1);
+    border-radius: 4px;
+    box-shadow: 0 5px 5px rgba(10,16,20,.24), 0 0 2px rgba(10,16,20,.12);
+    transition: box-shadow .5s;
     padding: 10px;
+    justify-content: space-between;
   }
   
   .task-list:last-child {
@@ -26,10 +33,20 @@
   }
   
   .task-list:hover {
-    background-color: rgba(25,118,210,.1);
-    color: var(--main-bg-color);
-    border-radius: 4px;
-    box-shadow: 0 5px 5px rgba(10,16,20,.24), 0 0 2px rgba(10,16,20,.12);
-    transition: box-shadow .5s;
+    border: none;
+    background-color: cadetblue;
+    border-radius: 5px;
+    box-shadow: 0 0 0 2px cadetblue inset, 0 0 0 4px white inset;
+    transition: 0.4s ease-out;
+  }
+
+  .svg-icon-pencil2 {
+    height: 15px;;
+    width: 15px;
+    fill: var(--main-bg-color);
+  }
+
+  .task-list:hover .svg-icon-pencil2 {
+    fill: var(--black-color);
   }
  

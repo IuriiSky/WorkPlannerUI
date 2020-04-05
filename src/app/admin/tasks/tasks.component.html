@@ -10,6 +10,10 @@
     <symbol id="icon-list-numbered" viewBox="0 0 32 32">
       <path d="M12 26h20v4h-20zM12 14h20v4h-20zM12 2h20v4h-20zM6 0v8h-2v-6h-2v-2zM4 16.438v1.563h4v2h-6v-4.563l4-1.875v-1.563h-4v-2h6v4.563zM8 22v10h-6v-2h4v-2h-4v-2h4v-2h-4v-2z"></path>
     </symbol>
+    <symbol id="icon-cancel-circle" viewBox="0 0 32 32">
+      <path d="M16 0c-8.837 0-16 7.163-16 16s7.163 16 16 16 16-7.163 16-16-7.163-16-16-16zM16 29c-7.18 0-13-5.82-13-13s5.82-13 13-13 13 5.82 13 13-5.82 13-13 13z"></path>
+      <path d="M21 8l-5 5-5-5-3 3 5 5-5 5 3 3 5-5 5 5 3-3-5-5 5-5z"></path>
+  </symbol>
   </defs>
 </svg>
 <div class="wrapper">
@@ -46,12 +50,15 @@
 
   <!-- Main area for task  -->
   <main class="tasks">
-    <h2 class="heading">Task list</h2>
-    <app-tasks-list [tasks]="tasks" (voted)="setActiveTask($event); toggleShowUpdateTaskForm()"></app-tasks-list>
-      <button type="submit" class="added-button primary-button"
-        (click) = "toggleShowCreateForm()">
-        <span>New task</span>
-      </button>
+    <div class="wrapper-to-btn">
+      <h2 class="heading">Task list</h2>
+        <button type="submit" class="new-task-btn" (click) = "toggleShowCreateForm()" title="Create new task">
+          <svg class="svg-new-task">
+            <use xlink:href="#icon-cancel-circle"/>
+          </svg>
+        </button>
+    </div>
+  <app-tasks-list [tasks]="tasks" (voted)="setActiveTask($event); toggleShowUpdateTaskForm()"></app-tasks-list>
   </main>
     <!--    Create task form-->
     <div class="wrapper-create-form" [ngClass]="{invisible: showCreateForm}">

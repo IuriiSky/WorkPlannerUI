@@ -26,24 +26,25 @@
   margin: 10px 10px 0;
   font-size: 30px;
   font-style: italic;
+  width: 90%;
+  padding-left: 100px;
 }
 
-.primary-button {
-  background-color: #6e6e6e;
+.new-task-btn {
   border: none;
-  border-radius: 4px;
-  color: var(--white-color);
-  font-weight: 500;
-  font-size: 1em;
+  background: transparent;
 }
 
-.added-button {
+.svg-new-task {
   height: 30px;
-  margin: 20px 30px 20px 10px;
-  padding: 0 5px;
-  width: 100px;
-  right: 0;
-  position: absolute;
+  width: 30px;
+  margin: 10px 20px 10px;
+  transform: rotate(45deg);
+  fill: var(--main-bg-color);
+}
+
+.svg-new-task:hover {
+  fill: var(--bt-create-hover-color);
 }
 
 .added-button:hover {
@@ -53,6 +54,10 @@
   height: 35px;
   width: 105px;
   color: var(--black-color);
+}
+
+.wrapper-to-btn {
+  display: flex
 }
 
 /*Create  new task form*/
