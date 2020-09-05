@@ -3,6 +3,8 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { EmployeeDetailsDto, UpdateEmployeeCommand, PlanHolidayCommand, HolidayDto } from '../../shared/interfaces/employee';
 import { FormControl, FormGroup } from '@angular/forms';
 import { EmployeesService } from 'src/app/services/employees.service';
+import { LoadingService } from 'src/app/services/loading.service';
+import { BaseComponent } from 'src/app/shared/components/base/base.component';
 
 // Angular Material
 
@@ -11,11 +13,11 @@ import { EmployeesService } from 'src/app/services/employees.service';
   templateUrl: './employee-details.component.html',
   styleUrls: ['./employee-details.component.css']
 })
-export class EmployeeDetailsComponent implements OnInit {
+export class EmployeeDetailsComponent extends BaseComponent implements OnInit {
 
-  constructor(public employeeService: EmployeesService,
-              private router: Router,
-              private route: ActivatedRoute) {
+  constructor(public employeeService: EmployeesService,loadingService: LoadingService,
+    private route: ActivatedRoute) {
+    super(loadingService);
     this.route.params.subscribe((params: Params) => {
       if (params.id) {
         this.employeeId = params.id;
@@ -23,7 +25,6 @@ export class EmployeeDetailsComponent implements OnInit {
       }
     });
   }
-
   showChangeNameForm = true;
   showChangeColorForm = true;
 

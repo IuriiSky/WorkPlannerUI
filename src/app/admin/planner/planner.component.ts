@@ -12,20 +12,25 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material';
 import {FormControl} from '@angular/forms';
 import { DatePipe } from '@angular/common';
+import { BaseComponent } from 'src/app/shared/components/base/base.component';
+import { LoadingService } from 'src/app/services/loading.service';
 
 @Component({
   selector: 'app-planner',
   templateUrl: './planner.component.html',
   styleUrls: ['./planner.component.css']
 })
-export class PlannerComponent implements OnInit {
+export class PlannerComponent extends BaseComponent implements OnInit {
 
   constructor(
     private datepipe: DatePipe,
     private employeesService: EmployeesService,
     private tasksService: TasksService,
     private plannerService: WorkplansService,
-    private router: Router) { }
+    loadingService: LoadingService) 
+    {
+      super(loadingService);
+    }
 
   public currentDate: Date = new Date();
 
@@ -139,14 +144,18 @@ export class PlannerComponent implements OnInit {
   }
   
   ngOnInit() {
+    this.isLoading = true;
     this.employeesService.getAllEmployees().subscribe((data: EmployeeDto[]) => {
       this.allEmployees = data;
+      this.isLoading = false;
       if(data.length > 0) {
         this.setActiveEmployee(data[0]);
       }
     });
+    this.isLoading = true;
     this.tasksService.getAllTasks().subscribe((data: TaskDto[]) => {
       this.allTasks = data;
+      this.isLoading = false;
     })
   }
 

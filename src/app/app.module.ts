@@ -7,6 +7,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
   // Helpers
 import { JwtInterceptor } from './_helpers/jwt.interceptor';
 import { ErrorInterceptor } from './_helpers/error.interceptor';
+import {BusyInterceptor} from './_helpers/busy.interceptor';
 
   // Components
 import { AppComponent } from './app.component';
@@ -19,7 +20,8 @@ import { PlannerComponent } from './admin/planner/planner.component';
 import { EmployeesListComponent } from './admin/employees-list/employees-list.component';
 import { TasksListComponent } from './admin/tasks-list/tasks-list.component';
 import { LoginComponent } from './login/login.component';
-
+  // Shared components
+import { LoadingComponent } from './shared/Components/loading/loading.component';
   // Services
 import { EmployeesService} from './services/employees.service';
 import { EmployeeDetailsComponent } from './admin/employee-details/employee-details.component';
@@ -31,6 +33,9 @@ import {MatNativeDateModule, MatFormFieldModule, MatInputModule} from '@angular/
 import {MatTabsModule} from '@angular/material/tabs';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import { DatePipe } from '@angular/common';
+import { BaseComponent } from './shared/components/base/base.component';
+
+
 
 
 @NgModule({
@@ -46,6 +51,9 @@ import { DatePipe } from '@angular/common';
     EmployeesListComponent,
     TasksListComponent,
     LoginComponent,
+    LoadingComponent,
+    LoadingComponent,
+    BaseComponent,
   ],
   imports: [
     BrowserModule,
@@ -64,6 +72,7 @@ import { DatePipe } from '@angular/common';
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: BusyInterceptor,multi: true},
     EmployeesService,
     DatePipe
   ],

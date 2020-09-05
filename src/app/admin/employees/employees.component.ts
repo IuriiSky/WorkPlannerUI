@@ -3,18 +3,21 @@ import { CreateEmployeeCommand, EmployeeDto } from '../../shared/interfaces/empl
 import { EmployeesService } from '../../services/employees.service';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup } from '@angular/forms';
+import { BaseComponent } from 'src/app/shared/components/base/base.component';
+import { LoadingService } from 'src/app/services/loading.service';
+
 
 @Component({
   selector: 'app-employees',
   templateUrl: './employees.component.html',
   styleUrls: ['./employees.component.css']
 })
-export class EmployeesComponent implements OnInit {
+export class EmployeesComponent extends BaseComponent implements OnInit {
 
-  constructor(private employeesService: EmployeesService,
-    private router: Router) {
+  constructor(private employeesService: EmployeesService,loadingService: LoadingService) {
+    super(loadingService);
   }
-
+  
   createEmployee: FormGroup;
 
   showCreateForm = true;
@@ -47,7 +50,6 @@ export class EmployeesComponent implements OnInit {
 
   ngOnInit() {
     this.getAllEmployees();
-
     this.createEmployee = new FormGroup({
       employeeName: new FormControl(''),
       colorCode: new FormControl('')
