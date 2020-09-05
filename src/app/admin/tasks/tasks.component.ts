@@ -4,6 +4,8 @@ import { TaskDto, CreateTaskCommand, UpdateTaskCommand } from '../../shared/inte
 import {Router} from '@angular/router';
 import {FormControl, FormGroup} from '@angular/forms';
 import { AdminComponent } from '../admin.component';
+import { BaseComponent } from 'src/app/shared/components/base/base.component';
+import { LoadingService } from 'src/app/services/loading.service';
 
 
 @Component({
@@ -11,10 +13,12 @@ import { AdminComponent } from '../admin.component';
   templateUrl: './tasks.component.html',
   styleUrls: ['./tasks.component.css']
 })
-export class TasksComponent implements OnInit {
+export class TasksComponent extends BaseComponent implements OnInit {
 
-  constructor( private tasksService: TasksService,
-               private router: Router) { }
+  constructor( private tasksService: TasksService, loadingService : LoadingService) 
+  {
+    super(loadingService);
+  }
 
   public tasks: TaskDto[];
 
