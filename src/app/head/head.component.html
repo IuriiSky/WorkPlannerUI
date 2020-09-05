@@ -1,9 +1,18 @@
 <header class="wrapper-header">
-    <a routerLink="/" class="logo">CompanyLogo</a>
-    <div class="header-right">
-      <a routerLink="/login">Login</a>
-    </div>
+  <div class="logo-wrapper">
+    <a routerLink="/" class="logo">
+      <img src="assets/images/logo.png" alt="Dansk Metal">
+    </a>
+  </div>
+  <div class="choose-department">
+    <button class="department">Department-1</button>
+    <button class="department">Department-2</button>
+  </div>
+  <div class="back-to-admin" *ngIf="isUserLoggedIn">
+    <a routerLink="/admin" class="login" title="Back to menu">Menu</a>
+  </div>
+  <div class="header-login">
+    <a *ngIf="!isUserLoggedIn" routerLink="/login" class="login" title="LogIn">Login</a>
+    <a *ngIf="isUserLoggedIn" routerLink="/" class="login" title="LogOut">LogOut</a>
+  </div>
 </header>
-
-
-
