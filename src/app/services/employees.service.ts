@@ -12,7 +12,7 @@ export class EmployeesService {
 
   baseApi :string;
   httpOptions : any;
-  constructor(private http: HttpClient, private dataService: DataService)
+  constructor(private http: HttpClient, dataService: DataService)
   {
     this.baseApi = dataService.baseApiUrl + 'Employees/';
     this.httpOptions = dataService.httpOptions;

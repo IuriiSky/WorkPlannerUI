@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {delay} from 'rxjs/operators';
 import { LoadingService } from 'src/app/services/loading.service';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
   selector: 'app-base',
@@ -9,7 +10,8 @@ import { LoadingService } from 'src/app/services/loading.service';
 export class BaseComponent implements OnInit {
 
   constructor(
-    private _loading: LoadingService
+    private _loading: LoadingService,
+    
   ) { }
 
   isLoading: boolean = false;

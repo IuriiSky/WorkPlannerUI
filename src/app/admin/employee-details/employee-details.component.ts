@@ -5,6 +5,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { EmployeesService } from 'src/app/services/employees.service';
 import { LoadingService } from 'src/app/services/loading.service';
 import { BaseComponent } from 'src/app/shared/components/base/base.component';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
 // Angular Material
 
@@ -15,7 +16,7 @@ import { BaseComponent } from 'src/app/shared/components/base/base.component';
 })
 export class EmployeeDetailsComponent extends BaseComponent implements OnInit {
 
-  constructor(public employeeService: EmployeesService,loadingService: LoadingService,
+  constructor(public employeeService: EmployeesService,loadingService: LoadingService,private auth : AuthenticationService,
     private route: ActivatedRoute) {
     super(loadingService);
     this.route.params.subscribe((params: Params) => {
