@@ -21,7 +21,7 @@ import { EmployeesListComponent } from './admin/employees-list/employees-list.co
 import { TasksListComponent } from './admin/tasks-list/tasks-list.component';
 import { LoginComponent } from './login/login.component';
   // Shared components
-import { LoadingComponent } from './shared/Components/loading/loading.component';
+import { LoadingComponent } from './shared/components/loading/loading.component';
   // Services
 import { EmployeesService} from './services/employees.service';
 import { EmployeeDetailsComponent } from './admin/employee-details/employee-details.component';
