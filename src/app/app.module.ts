@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
   // Helpers
-import { JwtInterceptor } from './_helpers/jwt.interceptor';
+//import { JwtInterceptor } from './_helpers/jwt.interceptor';
 import { ErrorInterceptor } from './_helpers/error.interceptor';
 import {BusyInterceptor} from './_helpers/busy.interceptor';
 
@@ -33,7 +33,6 @@ import {MatNativeDateModule, MatFormFieldModule, MatInputModule} from '@angular/
 import {MatTabsModule} from '@angular/material/tabs';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import { DatePipe } from '@angular/common';
-import { BaseComponent } from './shared/components/base/base.component';
 
 
 
@@ -53,7 +52,6 @@ import { BaseComponent } from './shared/components/base/base.component';
     LoginComponent,
     LoadingComponent,
     LoadingComponent,
-    BaseComponent,
   ],
   imports: [
     BrowserModule,

@@ -4,7 +4,6 @@ import { EmployeeDetailsDto, UpdateEmployeeCommand, PlanHolidayCommand, HolidayD
 import { FormControl, FormGroup } from '@angular/forms';
 import { EmployeesService } from 'src/app/services/employees.service';
 import { LoadingService } from 'src/app/services/loading.service';
-import { BaseComponent } from 'src/app/shared/components/base/base.component';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 
 // Angular Material
@@ -14,11 +13,9 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
   templateUrl: './employee-details.component.html',
   styleUrls: ['./employee-details.component.css']
 })
-export class EmployeeDetailsComponent extends BaseComponent implements OnInit {
+export class EmployeeDetailsComponent implements OnInit {
 
-  constructor(public employeeService: EmployeesService,loadingService: LoadingService,private auth : AuthenticationService,
-    private route: ActivatedRoute) {
-    super(loadingService);
+  constructor(public employeeService: EmployeesService, private route: ActivatedRoute) {
     this.route.params.subscribe((params: Params) => {
       if (params.id) {
         this.employeeId = params.id;
