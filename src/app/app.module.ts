@@ -6,7 +6,6 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
   // Helpers
 //import { JwtInterceptor } from './_helpers/jwt.interceptor';
-import { ErrorInterceptor } from './_helpers/error.interceptor';
 import {BusyInterceptor} from './_helpers/busy.interceptor';
 
   // Components
@@ -33,6 +32,7 @@ import {MatNativeDateModule, MatFormFieldModule, MatInputModule} from '@angular/
 import {MatTabsModule} from '@angular/material/tabs';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import { DatePipe } from '@angular/common';
+import { AuthModule } from './auth/auth.module';
 
 
 
@@ -65,11 +65,12 @@ import { DatePipe } from '@angular/common';
     MatTabsModule,
     DragDropModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    AuthModule
   ],
   providers: [
     // { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    // { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: BusyInterceptor,multi: true},
     EmployeesService,
     DatePipe

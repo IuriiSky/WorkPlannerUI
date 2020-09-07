@@ -1,43 +1,3 @@
-// import { Injectable } from '@angular/core';
-// import { BehaviorSubject, Observable } from 'rxjs';
-// import { map } from 'rxjs/operators';
-// import { User } from '../shared/interfaces/user';
-// import { HttpClient } from '@angular/common/http';
-// import { environment } from 'src/environments/environment';
-
-// @Injectable({
-//   providedIn: 'root'
-// })
-// export class AuthenticationService {
-//   private currentUserSubject: BehaviorSubject<User>;
-//   public currentUser: Observable<User>;
-
-//   constructor(private http: HttpClient) {
-//     this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
-//     this.currentUser = this.currentUserSubject.asObservable();
-//   }
-
-//   public get currentUserValue(): User {
-//     return this.currentUserSubject.value;
-//   }
-
-//   login(username: string, password: string) {
-//     return this.http.post<any>(`${environment.apiUrl}/users/authenticate`, { username, password })
-//       .pipe( map(user => {
-//         // store user details and jwt token in local storage to keep user logged in between page refreshes
-//         localStorage.setItem('currentUser', JSON.stringify(user));
-//         this.currentUserSubject.next(user);
-//         return user;
-//       }));
-//   }
-
-//   logout() {
-//     // remove user from local storage to log user out
-//     localStorage.removeItem('currentUser');
-//     this.currentUserSubject.next(null);
-//   }
-
-// }
 
 import { Injectable, OnInit } from '@angular/core';
 import { BehaviorSubject, Observable, Observer,of } from 'rxjs';
@@ -46,7 +6,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { IOpenIdConfig, IToken, User } from './models';
 import { map, switchMap } from 'rxjs/operators';
-import { error } from 'protractor';
 
 
 @Injectable({
@@ -64,29 +23,42 @@ export class AuthenticationService  {
   
 
   constructor(private http: HttpClient) {
-    console.log('Auth constr');
     
+    console.log('Auth ctor')
     this.userSubject = new BehaviorSubject<User>(storage.get("user"));
     this.user = this.userSubject.asObservable();
 
     this.tokenSubject = new BehaviorSubject<IToken>(storage.get("token"));
     this.token = this.tokenSubject.asObservable();
+    //this.initOpenIdConfig();
+    this.initOID();
   }
   
+  private initOID(){
+    let url : string = environment.identityServerUrl;
+      if (!url.endsWith("/")) { url += "/"; }
+      url += '.well-known/openid-configuration';
+      this.http.get<IOpenIdConfig>(url).subscribe((res)=>{
+        this.openIdConfig = res;
+      })
+
+  }
+
   private initOpenIdConfig(): Observable<IOpenIdConfig> {
     if(this.openIdConfig){
-      console.log('openid');
+      console.log('opendid from static');
       return of(this.openIdConfig);
     }
     else
     {
-      console.log('openid2');
+      console.log('opendid from remote');
       let url : string = environment.identityServerUrl;
       if (!url.endsWith("/")) { url += "/"; }
       url += '.well-known/openid-configuration';
 
       return this.http.get<IOpenIdConfig>(url).pipe(
-        map((response:IOpenIdConfig) => {
+        map(
+          (response:IOpenIdConfig) => {
           console.log(response);
           this.openIdConfig = response;
           return response;
@@ -104,9 +76,6 @@ isAdmin():boolean {
   }
 
   login(username: string, password: string): Observable<IToken> {
-
-    console.log('doLogin');
-    
     return this.initOpenIdConfig().pipe(switchMap(res => {
       return this.requestToken(username,password).pipe(
         map((response:IToken)=>{
@@ -115,17 +84,6 @@ isAdmin():boolean {
         })
       )
     }))
-      
-
-    //  subscribe((res) => {
-    //   console.log(res);
-    //   this.requestToken(username,password).subscribe((token) => {
-    //     this.setToken(token);
-    //     return this.user;
-    //   }, (error)=>{
-    //     throw(error);
-    //   });
-    // })
   }
 
   private requestToken(username: string, password: string):Observable<IToken>{

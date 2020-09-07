@@ -139,15 +139,16 @@ export class PlannerComponent implements OnInit {
   }
   
   ngOnInit() {
+    this.tasksService.getAllTasks().subscribe((data: TaskDto[]) => {
+      this.allTasks = data;
+    });
+
     this.employeesService.getAllEmployees().subscribe((data: EmployeeDto[]) => {
       this.allEmployees = data;
       if(data.length > 0) {
         this.setActiveEmployee(data[0]);
       }
     });
-    this.tasksService.getAllTasks().subscribe((data: TaskDto[]) => {
-      this.allTasks = data;
-    })
   }
 
 }
