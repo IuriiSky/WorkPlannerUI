@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 import { TaskDto } from '../../shared/interfaces/task';
-import { LoadingService } from 'src/app/services/loading.service';
 
 @Component({
   selector: 'app-tasks-list',

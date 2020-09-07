@@ -3,9 +3,6 @@ import { TasksService } from '../../services/tasks.service';
 import { TaskDto, CreateTaskCommand, UpdateTaskCommand } from '../../shared/interfaces/task';
 import {Router} from '@angular/router';
 import {FormControl, FormGroup} from '@angular/forms';
-import { AdminComponent } from '../admin.component';
-import { LoadingService } from 'src/app/services/loading.service';
-
 
 @Component({
   selector: 'app-tasks',

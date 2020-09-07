@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CreateEmployeeCommand, EmployeeDto } from '../../shared/interfaces/employee';
 import { EmployeesService } from '../../services/employees.service';
-import { Router } from '@angular/router';
 import { FormControl, FormGroup } from '@angular/forms';
-import { LoadingService } from 'src/app/services/loading.service';
 
 
 @Component({

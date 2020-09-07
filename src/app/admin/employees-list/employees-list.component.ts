@@ -1,9 +1,5 @@
 import { Component, OnInit, Input, EventEmitter, Output} from '@angular/core';
 import { EmployeeDto } from '../../shared/interfaces/employee';
-import { NgClass } from '@angular/common';
-import { LoadingService } from 'src/app/services/loading.service';
-
-
 
 @Component({
   selector: 'app-employees-list',

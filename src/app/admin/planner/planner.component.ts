@@ -12,7 +12,6 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material';
 import {FormControl} from '@angular/forms';
 import { DatePipe } from '@angular/common';
-import { LoadingService } from 'src/app/services/loading.service';
 
 @Component({
   selector: 'app-planner',
