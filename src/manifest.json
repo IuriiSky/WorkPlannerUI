@@ -1,0 +1,21 @@
+{
+    "short_name": "DSoft Player",
+    "name": "DavidsSoft Player",
+    "icons": [
+      {
+        "src": "/dist/logo.png",
+        "type": "image/png",
+        "sizes": "192x192"
+      },
+      {
+        "src": "/dist/logo-512.png",
+        "type": "image/png",
+        "sizes": "512x512"
+      }
+    ],
+    "display": "fullscreen",
+    "orientation": "portrait",
+    "background_color": "#252831",
+    "theme_color": "#252831",
+    "start_url": "/?webapp=true"
+  }

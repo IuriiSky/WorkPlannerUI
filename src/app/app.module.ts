@@ -20,7 +20,7 @@ import { EmployeesListComponent } from './admin/employees-list/employees-list.co
 import { TasksListComponent } from './admin/tasks-list/tasks-list.component';
 import { LoginComponent } from './login/login.component';
   // Shared components
-import { LoadingComponent } from './shared/Components/loading/loading.component';
+import { LoadingComponent } from './shared/components/loading/loading.component';
   // Services
 import { EmployeesService} from './services/employees.service';
 import { EmployeeDetailsComponent } from './admin/employee-details/employee-details.component';
@@ -39,6 +39,7 @@ import { AuthModule } from './auth/auth.module';
 
 @NgModule({
   declarations: [
+    LoadingComponent,
     AppComponent,
     HomeComponent,
     HeadComponent,
@@ -49,9 +50,7 @@ import { AuthModule } from './auth/auth.module';
     PlannerComponent,
     EmployeesListComponent,
     TasksListComponent,
-    LoginComponent,
-    LoadingComponent,
-    LoadingComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

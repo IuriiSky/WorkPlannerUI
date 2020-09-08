@@ -1,15 +1,57 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <title>WorkPlanner</title>
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="manifest" href="/manifest.json">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
-<!--  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap" rel="stylesheet">-->
-<!--  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">-->
+
+
+  <!-- APPLE START -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="DSoft Player">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="theme-color" content="#252831">
+ <!-- iPhone SPLASHSCREEN-->
+ <link href="/dist/apple/startup-image-320x460.png" media="(device-width: 320px)" rel="apple-touch-startup-image">
+ <!-- iPhone (Retina) SPLASHSCREEN-->
+ <link href="/dist//apple/startup-image-640x920.png" media="(device-width: 320px) and (device-height: 460px) and (-webkit-device-pixel-ratio: 2)"
+     rel="apple-touch-startup-image">
+ <!-- iPhone 5 (Retina) SPLASHSCREEN-->
+ <link href="/dist/apple/startup-image-640x1096.png" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)"
+     rel="apple-touch-startup-image">
+ <!-- iPad (non-Retina) (Portrait) -->
+ <link href="/dist/apple/startup-image-768x1004.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)"
+     rel="apple-touch-startup-image" />
+ <!-- iPad (non-Retina) (Landscape) -->
+ <link href="/dist/apple/startup-image-1024x748.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)"
+     rel="apple-touch-startup-image" />
+ <!-- iPad (Retina) (Portrait) -->
+ <link href="/dist/apple/startup-image-1536x2008.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait) and (-webkit-min-device-pixel-ratio: 2)"
+     rel="apple-touch-startup-image" />
+ <!-- iPad (Retina) (Landscape) -->
+ <link href="/dist/apple/startup-image-2048x1496.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape) and (-webkit-min-device-pixel-ratio: 2)"
+     rel="apple-touch-startup-image" />
+
+  <!-- APPLE SLUT -->
+
+
+  <!--  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap" rel="stylesheet">-->
+  <!--  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">-->
 </head>
+
 <body>
   <app-root></app-root>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function () {
+        navigator.serviceWorker.register('/service-worker.js');
+      });
+    }
+  </script>
 </body>
+
 </html>
