@@ -13,8 +13,7 @@ export class JwtInterceptor implements HttpInterceptor {
     constructor(public authenticationService: AuthenticationService) { }
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        console.log('hello from jwt interceptor');
-        if (!request.url.includes("token")){
+        if (!request.url.includes("token") && !request.url.includes("openid-configuration")){
             if(this.authenticationService){
                 //if token
                 //if tkoen expired so fornye

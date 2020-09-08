@@ -1,11 +1,10 @@
 
-import { Injectable, OnInit } from '@angular/core';
-import { BehaviorSubject, Observable, Observer, of } from 'rxjs';
+import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable, Observer } from 'rxjs';
 import * as storage from '../_helpers/localstorage';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { IOpenIdConfig, IToken, User } from './models';
-import { map, switchMap } from 'rxjs/operators';
 import { LocalStorage } from '../decorators/localstorage.decorator';
 
 
@@ -15,40 +14,30 @@ import { LocalStorage } from '../decorators/localstorage.decorator';
 })
 export class AuthenticationService {
 
-  @LocalStorage() myVar: string = "123";
-
   private openIdConfig: IOpenIdConfig;
 
-  private userSubject: BehaviorSubject<User>;
-  public user: Observable<User>;
+  @LocalStorage() user: User;
+  userSubject: BehaviorSubject<User>;
+  public observableUser: Observable<User>;
 
-  private tokenSubject: BehaviorSubject<IToken>;
-  private token: Observable<IToken>;
+  @LocalStorage() token: IToken;
+  tokenSubject: BehaviorSubject<IToken>;
+  private observableToken: Observable<IToken>;
 
 
   constructor(private http: HttpClient) {
 
     console.log('Auth ctor')
-    this.userSubject = new BehaviorSubject<User>(storage.get("user"));
-    this.user = this.userSubject.asObservable();
+    this.userSubject = new BehaviorSubject<User>(this.user);
+    this.observableUser = this.userSubject.asObservable();
 
-    this.tokenSubject = new BehaviorSubject<IToken>(storage.get("token"));
-    this.token = this.tokenSubject.asObservable();
-    //this.initOpenIdConfig();
-    //this.initOID();
+    this.tokenSubject = new BehaviorSubject<IToken>(this.token);
+    this.observableToken = this.tokenSubject.asObservable();
+    
   }
 
-  private initOID() {
-    let url: string = environment.identityServerUrl;
-    if (!url.endsWith("/")) { url += "/"; }
-    url += '.well-known/openid-configuration';
-    this.http.get<IOpenIdConfig>(url).subscribe((res) => {
-      this.openIdConfig = res;
-    })
 
-  }
-
-  private initOpenIdConfig(): Observable<boolean> {
+  private ensureOpenIdConfig(): Observable<boolean> {
     return this.wrapResult((res) => {
       if (this.openIdConfig) {
         res.markDone(true);
@@ -65,19 +54,6 @@ export class AuthenticationService {
 
       }
     });
-
-    // if (this.openIdConfig) {
-    //   return of(this.openIdConfig);
-    // }
-    // else {
-    //   let url: string = environment.identityServerUrl;
-    //   if (!url.endsWith("/")) { url += "/"; }
-    //   url += '.well-known/openid-configuration';
-    //   this.http.get<IOpenIdConfig>(url).subscribe((res) => {
-    //     this.openIdConfig = res;
-    //     onDone();
-    //   })
-    // }
   }
 
 
@@ -98,13 +74,16 @@ export class AuthenticationService {
   login(username: string, password: string): Observable<boolean> {
 
     return this.wrapResult((res) => {
-      this.initOpenIdConfig().subscribe(() => {
-        this.requestToken(username, password).subscribe((tokenRes) => {
-          this.setToken(tokenRes);
-          res.markDone(true);
-        }, () => {
-          res.markError(false);
-        });
+      this.ensureOpenIdConfig().subscribe(() => {
+        this.requestToken(username, password).subscribe(
+          (tokenRes) => {
+            this.setToken(tokenRes);
+            res.markDone(true);
+          }, 
+          (err) => {
+            console.log(err);
+            res.markError(false);
+          });
       });
     });
   }
@@ -130,7 +109,7 @@ export class AuthenticationService {
     return returnObservable;
   }
 
-  private requestToken(username: string, password: string): Observable<IToken> {
+  private requestToken(username: string, password: string): Observable<any> {
     let body =
     {
       username: username,
@@ -164,9 +143,10 @@ export class AuthenticationService {
   }
 
   setToken(token: IToken) {
-    storage.set('token', token);
+    this.token = token;
+
     let user = new User(token);
-    storage.set('user', user);
+    this.user = user;
     this.userSubject.next(user);
   }
 }

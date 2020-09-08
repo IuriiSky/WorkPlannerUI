@@ -15,9 +15,11 @@ export class LoginComponent implements OnInit {
   doLogin()
   {
     this.authService.login(this.login,this.password).subscribe( () =>{
+      console.log('login succes');
       //redirect
     },() => 
     {
+      console.log('login mislykkes');
       //show eeror to user
     });
   }
