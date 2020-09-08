@@ -16,6 +16,9 @@ export class JwtInterceptor implements HttpInterceptor {
         console.log('hello from jwt interceptor');
         if (!request.url.includes("token")){
             if(this.authenticationService){
+                //if token
+                //if tkoen expired so fornye
+                //if 
                 // add authorization header with jwt token if available
                 let currentUser = this.authenticationService.currentUserValue;
                 //console.log('user:', currentUser);

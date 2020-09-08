@@ -14,7 +14,12 @@ export class LoginComponent implements OnInit {
   
   doLogin()
   {
-    this.authService.login(this.login,this.password);
+    this.authService.login(this.login,this.password).subscribe( () =>{
+      //redirect
+    },() => 
+    {
+      //show eeror to user
+    });
   }
 
   ngOnInit() {
