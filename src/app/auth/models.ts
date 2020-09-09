@@ -15,6 +15,7 @@ export interface IToken {
     token_expires: Date;
     refresh_token?: string;
     info? : any;
+    isAdmin: boolean;
     
     constructor(token: IToken) {
       this.access_token = token.access_token;
@@ -24,6 +25,12 @@ export interface IToken {
       var date = new Date();
       date.setSeconds(date.getSeconds() + token.expires_in);
       this.token_expires = date;
+
+      this.isAdmin = false;
+    }
+
+    isTokenExpired():boolean{
+      return this.token_expires <= new Date();
     }
   }
   
