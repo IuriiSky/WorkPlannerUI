@@ -1,12 +1,12 @@
 
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, Observer } from 'rxjs';
+import { BehaviorSubject, Observable, Observer, of } from 'rxjs';
+import { tap, map, catchError } from 'rxjs/operators'
 import * as storage from '../_helpers/localstorage';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { IOpenIdConfig, IToken, User } from './models';
 import { LocalStorage } from '../decorators/localstorage.decorator';
-
 
 
 @Injectable({
@@ -33,7 +33,7 @@ export class AuthenticationService {
 
     this.tokenSubject = new BehaviorSubject<IToken>(this.token);
     this.observableToken = this.tokenSubject.asObservable();
-    
+
   }
 
 
@@ -56,6 +56,19 @@ export class AuthenticationService {
     });
   }
 
+  getConfig(): Promise<Object> {
+    console.log('loading configuration');
+    let url: string = environment.identityServerUrl;
+    if (!url.endsWith("/")) { url += "/"; }
+    url += '.well-known/openid-configuration';
+
+    return this.http.get<IOpenIdConfig>(url).pipe(
+      tap(config => {
+        this.openIdConfig = config;
+      })
+    ).toPromise();
+  }
+
 
   isAdmin(): boolean {
     throw new Error("Method not implemented.");
@@ -71,26 +84,36 @@ export class AuthenticationService {
     return this.userSubject.value;
   }
 
-  login(username: string, password: string): Observable<boolean> {
+  // login(username: string, password: string): Observable<boolean> {
 
-    return this.wrapResult((res) => {
-      this.ensureOpenIdConfig().subscribe(() => {
-        this.requestToken(username, password).subscribe(
-          (tokenRes) => {
-            this.setToken(tokenRes);
-            res.markDone(true);
-          }, 
-          (err) => {
-            console.log(err);
-            res.markError(false);
-          });
-      });
-    });
+  //   return this.wrapResult((res) => {
+  //     this.ensureOpenIdConfig().subscribe(() => {
+  //       this.requestToken(username, password).subscribe(
+  //         (tokenRes) => {
+  //           this.setToken(tokenRes);
+  //           res.markDone(true);
+  //         }, 
+  //         (err) => {
+  //           console.log(err);
+  //           res.markError(false);
+  //         });
+  //     });
+  //   });
+  // }
+
+  login(username: string, password: string): Observable<IToken> {
+    return this.requestToken(username, password).pipe(
+      catchError(this.handleLoginError<IToken>('login', undefined))
+    );
+  }
+  private handleLoginError<T>(operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
+      console.log('error catched')
+      // Let the app keep running by returning an empty result.
+      return of(result as T);
+    };
   }
 
-  // refresh():Observable<boolean>{
-
-  // }
 
 
   wrapResult(method: Function) {
@@ -109,7 +132,7 @@ export class AuthenticationService {
     return returnObservable;
   }
 
-  private requestToken(username: string, password: string): Observable<any> {
+  requestToken(username: string, password: string): Observable<IToken> {
     let body =
     {
       username: username,
@@ -121,10 +144,44 @@ export class AuthenticationService {
     };
     let headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
 
-    return this.http.post<any>(
-      this.openIdConfig.token_endpoint,
-      this.encodeToUrl(body),
-      { headers: headers });
+    // return this.http.post<any>(this.openIdConfig.token_endpoint, this.encodeToUrl(body), { headers: headers, observe: "body" })
+    // .pipe(
+    //   map(token =>{
+    //     this.setToken(token)
+    //     return token;
+    //   })
+    // );
+
+    // return this.http.post<any>(this.openIdConfig.token_endpoint, this.encodeToUrl(body), { headers: headers})
+    // .pipe(
+    //   catchError((error:any)=>{
+    //     console.log(error);
+    //     var result = error;
+    //     return of(result);
+    //   })
+    // );
+    // return this.http.post<IToken>(this.openIdConfig.token_endpoint, this.encodeToUrl(body), { headers: headers})
+    // .pipe(
+    //   catchError(error =>{
+    //     return Observable.throw(error);
+    //   })
+    // );
+
+
+    return this.wrapResult((r) => {
+      try {
+        console.log("HIT");
+        this.http.post<IToken>(this.openIdConfig.token_endpoint, this.encodeToUrl(body), { headers: headers})
+        .subscribe(
+          data => console.log('success', data),
+          error => console.log('oops', error)
+        );
+      }
+      catch (ex) {
+        console.log("HIT e");
+        r.markError();
+      }
+    });
   }
 
 

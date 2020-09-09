@@ -14,7 +14,8 @@ export class LoginComponent implements OnInit {
   
   doLogin()
   {
-    this.authService.login(this.login,this.password).subscribe( () =>{
+   
+    this.authService.requestToken(this.login,this.password).subscribe( () =>{
       console.log('login succes');
       //redirect
     },() => 
