@@ -24,16 +24,47 @@ export class BusyInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     this._loading.setLoading(true, request.url);
-    return next.handle(request)
-      .pipe(catchError((err) => {
+    // console.log("No of requests--->" + this.requests.length);
+    // this.loaderService.isLoading.next(true);
+
+    return Observable.create(observer => {
+      const subscription = next.handle(request)
+        .subscribe(
+          event => {
+            if (event instanceof HttpResponse) {
+              this._loading.setLoading(false, request.url);
+              observer.next(event);
+            }
+          },
+          err => {
+            this._loading.setLoading(false, request.url);
+            observer.error(err);
+          },
+          () => {
+            this._loading.setLoading(false, request.url);
+            observer.complete();
+          });
+      // remove request from queue when cancelled
+      return () => {
         this._loading.setLoading(false, request.url);
-        return err;
-      }))
-      .pipe(map<HttpEvent<any>, any>((evt: HttpEvent<any>) => {
-        if (evt instanceof HttpResponse) {
-          this._loading.setLoading(false, request.url);
-        }
-        return evt;
-      }));
+        subscription.unsubscribe();
+      };
+    });
   }
 }
+
+//   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+//     this._loading.setLoading(true, request.url);
+//     return next.handle(request)
+//       .pipe(catchError((err) => {
+//         this._loading.setLoading(false, request.url);
+//         return err;
+//       }))
+//       .pipe(map<HttpEvent<any>, any>((evt: HttpEvent<any>) => {
+//         if (evt instanceof HttpResponse) {
+//           this._loading.setLoading(false, request.url);
+//         }
+//         return evt;
+//       }));
+//   }
+// }
