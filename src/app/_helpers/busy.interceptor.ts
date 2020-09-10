@@ -24,8 +24,6 @@ export class BusyInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     this._loading.setLoading(true, request.url);
-    // console.log("No of requests--->" + this.requests.length);
-    // this.loaderService.isLoading.next(true);
 
     return Observable.create(observer => {
       const subscription = next.handle(request)

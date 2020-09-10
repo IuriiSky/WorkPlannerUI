@@ -35,7 +35,6 @@ export class AuthenticationService {
   }
 
   getConfig(): Promise<Object> {
-    console.log('loading configuration');
     let url: string = environment.identityServerUrl;
     if (!url.endsWith("/")) { url += "/"; }
     url += '.well-known/openid-configuration';
@@ -46,7 +45,40 @@ export class AuthenticationService {
       })
     ).toPromise();
   }
+  login(username: string, password: string): Observable<User> {
+    return this.requestTokenWithUserCredentials(username, password).pipe(
+           map(token =>{
+             this.setToken(token);
+             let user = new User(token);
+             return user;
+           })
+    );
+  }
+  requestTokenWithUserCredentials(username: string, password: string): Observable<IToken> {
+    let body =
+    {
+      username: username,
+      password: password,
+      grant_type: "password",
+      client_id: environment.clientId,
+      client_secret: environment.clientSecret,
+      scope: environment.scope
+    };
+    let headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
+    return this.http.post<IToken>(this.openIdConfig.token_endpoint, this.encodeToUrl(body), { headers: headers});
+  }
 
+  requestTokenWithRefreshToken(refreshToken:string):Observable<IToken> {
+    let body = {
+      grant_type: "refresh_token",
+      refresh_token: refreshToken,
+      client_id: environment.clientId,
+      client_secret: environment.clientSecret,
+      scope: environment.scope
+    }
+    let headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
+    return this.http.post<IToken>(this.openIdConfig.token_endpoint, this.encodeToUrl(body), { headers: headers});
+  }
 
   isAdmin(): boolean {
     throw new Error("Method not implemented.");
@@ -62,39 +94,8 @@ export class AuthenticationService {
     return this.userSubject.value;
   }
 
-  login(username: string, password: string): Observable<User> {
-    return this.requestToken(username, password).pipe(
-           map(token =>{
-             this.setToken(token);
-             let user = new User(token);
-             console.log(user);
-             return user;
-           })
-    );
-  }
 
-  requestToken(username: string, password: string): Observable<IToken> {
-    let body =
-    {
-      username: username,
-      password: password,
-      grant_type: "password",
-      client_id: environment.clientId,
-      client_secret: environment.clientSecret,
-      scope: environment.scope
-    };
-    let headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
-    return this.http.post<IToken>(this.openIdConfig.token_endpoint, this.encodeToUrl(body), { headers: headers});
-  }
-
-
-  private encodeToUrl(object: any): string {
-    var strings = [];
-    for (var property in object) {
-      strings.push(encodeURIComponent(property) + "=" + encodeURIComponent(object[property]));
-    }
-    return strings.join("&");
-  }
+  
 
 
   logout() {
@@ -124,6 +125,13 @@ export class AuthenticationService {
     });
 
     return returnObservable;
+  }
+  private encodeToUrl(object: any): string {
+    var strings = [];
+    for (var property in object) {
+      strings.push(encodeURIComponent(property) + "=" + encodeURIComponent(object[property]));
+    }
+    return strings.join("&");
   }
 }
 
