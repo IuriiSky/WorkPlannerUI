@@ -1,11 +1,11 @@
 .wrapper-header {
   margin-bottom: 20px;
-  padding: 20px 10px;
+  padding: 20px 0;
   text-align: center;
 }
 
-.header-login {
-  margin-top: 30px;
+.humburger-menu-wrapper {
+  display: none;
 }
 
 .header-login a {
@@ -21,16 +21,83 @@
   text-transform: uppercase;
 }
 
-.header-login a:focus,
-.header-login a:hover {
+.login:hover,
+.department:hover {
   color: var(--red-color);
   border-bottom: 3px solid var(--white-color);
   cursor: pointer;
 }
 
+/* Humburger button */
+
+.ham {
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 400ms;
+  user-select: none;
+}
+.hamRotate.active {
+  transform: rotate(45deg);
+}
+.hamRotate180.active {
+  transform: rotate(180deg);
+}
+.line {
+  fill:none;
+  transition: stroke-dasharray 400ms, stroke-dashoffset 400ms;
+  stroke: var(--white-color);
+  stroke-width:5.5;
+  stroke-linecap:round;
+}
+.ham1 .top {
+  stroke-dasharray: 40 139;
+}
+.ham1 .bottom {
+  stroke-dasharray: 40 180;
+}
+.ham1.active .top {
+  stroke-dashoffset: -98px;
+}
+.ham1.active .bottom {
+  stroke-dashoffset: -138px;
+}
+
+.ham.hamRotate.ham1.active > .line{
+  stroke: red;
+}
+
+.ham.hamRotate.ham1.active + .humburger-menu-wrapper {
+  display: block;
+  position: absolute;
+  top: 150px;
+  width: 100%;
+  }
+
+.humburger-menu-list {
+  background: var(--black-color);
+}
+
+.humburger-menu-item {
+  padding: 10px 0;
+  border-bottom: 3px solid var(--main-bg-color);
+  font-size: 16px;
+  font-family: var(--font-AHs);
+}
+
+.login,
 .department {
-  margin: 10px;
-  padding: 10px;
+  color: var(--header-text-color);
+  font-weight: bold;
+  height: 20px;
+  letter-spacing: 5px;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.department {
+  background: none;
+  border: none;
   font-size: 16px;
 }
 
@@ -46,5 +113,52 @@
     display: flex;
     justify-content: center;
     margin-top: 0px;
+  }
+
+  .ham,
+  .hamRotate,
+  .ham1, 
+  .active {
+    display: none;
+  }
+
+  .ham.hamRotate.ham1.active + .humburger-menu-wrapper {
+    position: relative;
+    top: 0;
+  }
+
+  .humburger-menu-wrapper {
+    display: block;
+    opacity: 0.8;
+    width: 100%;
+  }
+
+  .humburger-menu-list {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-start;
+    list-style: none;
+    padding-bottom: 7px;
+    border-bottom: 5px solid var(--main-bg-color);
+  }
+
+  .humburger-menu-item {
+    padding: 18px 0 4px;
+    border-bottom: 3px solid var(--red-color);
+    font-size: 16px;
+    margin: 0 30px;
+  }
+
+  .logo > img {
+    background-color: var(--black-color);
+    opacity: 0.8;
+  }
+
+  .department {
+    border-bottom: 3px solid transparent;
+  }
+
+  .department-active {
+    color: green;
   }
 }
