@@ -1,44 +1,168 @@
 .wrapper-header {
-  border-bottom: 1px solid var(--hover-bg-color);
-  display: flex;
-  justify-content: space-between;
-  min-height: 50px;
-  background-color: var(--main-bg-color);
-  padding: 20px 10px;
   margin-bottom: 20px;
-}
-
-/* Style the header links */
-.wrapper-header a {
-  float: left;
-  color: var(--header-text-color);
+  padding: 20px 0;
   text-align: center;
-  padding: 12px;
-  text-decoration: none;
-  font-size: 18px;
-  line-height: 25px;
-  border-radius: 4px;
+  background-image: url(src/assets/images/just-rust-1492977.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
-/* Style the logo link (notice that we set the same value of line-height and font-size to prevent the header to increase when the font gets bigger */
-.wrapper-header a.logo {
-  font-size: 25px;
+.humburger-menu-wrapper {
+  display: none;
+}
+
+.header-login a {
+  color: var(--header-text-color);
+  border-bottom: 3px solid var(--red-color);
+  font-size: 16px;
+  font-family: var(--font-AHs);
   font-weight: bold;
+  letter-spacing: 5px;
+  padding: 12px 30px;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
 }
 
-/* Change the background color on mouse-over */
-.wrapper-header a:hover {
-  background-color: var(--hover-bg-color);
-  color: var(--hover-text-color);
+.login:hover,
+.department:hover {
+  color: var(--red-color);
+  border-bottom: 3px solid var(--white-color);
+  cursor: pointer;
 }
 
-/* Style the active/current link*/
-/*.wrapper-header a.active {*/
-/*  background-color: dodgerblue;*/
-/*  color: white;*/
-/*}*/
+/* Humburger button */
 
-/* Float the link section to the right */
-.header-right {
-  justify-content: flex-end;
+.ham {
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 400ms;
+  user-select: none;
+}
+.hamRotate.active {
+  transform: rotate(45deg);
+}
+.hamRotate180.active {
+  transform: rotate(180deg);
+}
+.line {
+  fill:none;
+  transition: stroke-dasharray 400ms, stroke-dashoffset 400ms;
+  stroke: var(--white-color);
+  stroke-width:5.5;
+  stroke-linecap:round;
+}
+.ham1 .top {
+  stroke-dasharray: 40 139;
+}
+.ham1 .bottom {
+  stroke-dasharray: 40 180;
+}
+.ham1.active .top {
+  stroke-dashoffset: -98px;
+}
+.ham1.active .bottom {
+  stroke-dashoffset: -138px;
+}
+
+.ham.hamRotate.ham1.active > .line{
+  stroke: red;
+}
+
+.ham.hamRotate.ham1.active + .humburger-menu-wrapper {
+  display: block;
+  position: absolute;
+  top: 150px;
+  width: 100%;
+  }
+
+.humburger-menu-list {
+  background: var(--black-color);
+}
+
+.humburger-menu-item {
+  padding: 10px 0;
+  border-bottom: 3px solid var(--main-bg-color);
+  font-size: 16px;
+  font-family: var(--font-AHs);
+}
+
+.login,
+.department {
+  color: var(--header-text-color);
+  font-weight: bold;
+  height: 20px;
+  letter-spacing: 5px;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.department {
+  background: none;
+  border: none;
+  font-size: 16px;
+}
+
+/* For Tablet*/
+@media only screen and (min-width: 768px) {
+  .wrapper-header {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .header-login {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    margin-top: 0px;
+  }
+
+  .ham,
+  .hamRotate,
+  .ham1, 
+  .active {
+    display: none;
+  }
+
+  .ham.hamRotate.ham1.active + .humburger-menu-wrapper {
+    position: relative;
+    top: 0;
+  }
+
+  .humburger-menu-wrapper {
+    display: block;
+    opacity: 0.8;
+    width: 100%;
+  }
+
+  .humburger-menu-list {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-start;
+    list-style: none;
+    padding-bottom: 7px;
+    border-bottom: 5px solid var(--main-bg-color);
+  }
+
+  .humburger-menu-item {
+    padding: 18px 0 4px;
+    border-bottom: 3px solid var(--red-color);
+    font-size: 16px;
+    margin: 0 30px;
+  }
+
+  .logo > img {
+    background-color: var(--black-color);
+    opacity: 0.8;
+  }
+
+  .department {
+    border-bottom: 3px solid transparent;
+  }
+
+  .department-active {
+    color: green;
+  }
 }
