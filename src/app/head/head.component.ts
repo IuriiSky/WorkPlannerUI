@@ -28,8 +28,8 @@ export class HeadComponent implements OnInit {
   }
   
 
-public selectDepartament1: boolean = false;
-public selectDepartament2: boolean = true;
+public selectDepartament1: boolean = true;
+public selectDepartament2: boolean = false;
 
 chooseDepartament(){
     this.selectDepartament1 = !this.selectDepartament1;   

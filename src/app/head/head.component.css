@@ -2,6 +2,10 @@
   margin-bottom: 20px;
   padding: 20px 0;
   text-align: center;
+  background-image: url(src/assets/images/just-rust-1492977.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .humburger-menu-wrapper {

@@ -4,14 +4,6 @@
   padding: 0;
 }
 
-body {
-  background-image: url(src/assets/images/1393534019-rusted_metal_texture_05.jpg);
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  height: 100vh;
-}
-
  :root {
    --white-color: #ffffff;
    --black-color: #000000;
