@@ -18,12 +18,13 @@ export class LoginComponent implements OnInit {
   {
     this.authService.login(this.login,this.password).subscribe(
       (user:User) =>{
-        console.log('login succes');
+        console.log('login succes. User -->', user);
+
         if(user.isAdmin){
-          this.router.navigate(['/admin']);
+          this.router.navigate(['/Tasks']);
 
         }else{
-          this.router.navigate(['/Planner']);
+          this.router.navigate(['/Tasks']);
         }
     },(error =>{
       console.log('login not success');

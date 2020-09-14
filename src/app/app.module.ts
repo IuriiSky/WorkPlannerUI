@@ -5,8 +5,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
   // Helpers
-//import { JwtInterceptor } from './_helpers/jwt.interceptor';
 import {BusyInterceptor} from './_helpers/busy.interceptor';
+import { JwtInterceptor } from './auth/jwt.interceptor';
 
   // Components
 import { AppComponent } from './app.component';
@@ -33,9 +33,6 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import { DatePipe } from '@angular/common';
 import { AuthModule } from './auth/auth.module';
-
-
-
 
 @NgModule({
   declarations: [
@@ -69,9 +66,9 @@ import { AuthModule } from './auth/auth.module';
     AuthModule
   ],
   providers: [
-    // { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    // { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: BusyInterceptor,multi: true},
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    // { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     EmployeesService,
     DatePipe
   ],

@@ -22,16 +22,22 @@ export interface IToken {
       this.refresh_token = token.refresh_token;
       this.info = jwt_decode(token.access_token);
   
-      var date = new Date();
-      date.setSeconds(date.getSeconds() + token.expires_in);
-      this.token_expires = date;
-
-      this.isAdmin = false;
+       var date = new Date();
+       let buffer = 10;
+       date.setSeconds(date.getSeconds() + token.expires_in - buffer);
+       this.token_expires = date;
     }
 
-    isTokenExpired():boolean{
-      return this.token_expires <= new Date();
-    }
+    // public get isTokenExpired() : boolean {
+    //   if(this.token_expires){
+    //     let expired = new Date() >= new Date(this.token_expires);
+    //     console.log(expired);
+    //     return expired;
+    //   }
+    //   else{
+    //     return true;
+    //   }
+    // }
   }
   
   export interface IOpenIdConfig {

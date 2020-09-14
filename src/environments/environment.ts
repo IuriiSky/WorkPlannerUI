@@ -4,11 +4,13 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:64162//api',
+  apiUrl: 'http://localhost:64162/api',
   identityServerUrl:'http://localhost:64162/',
   clientId: 'WebClient',
   clientSecret : 'verylongsectet',
   scope : 'IdentityServerApi offline_access',
+
+  authPaths: {api : "api"},
 };
 
 /*

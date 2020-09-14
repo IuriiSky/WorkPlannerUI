@@ -5,4 +5,6 @@ export const environment = {
   clientId: 'WebClient',
   clientSecret : 'verylongsectet',
   scope : 'IdentityServerApi offline_access',
+
+  authPaths: {api : "api"},
 };
