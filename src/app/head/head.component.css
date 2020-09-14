@@ -1,4 +1,6 @@
 .wrapper-header {
+  display: flex;
+  justify-content: space-between;
   margin-bottom: 20px;
   padding: 20px 0;
   text-align: center;
@@ -6,6 +8,10 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+}
+
+.logo-wrapper {
+  margin-left: 20px;
 }
 
 .humburger-menu-wrapper {
@@ -39,6 +45,7 @@
   -webkit-tap-highlight-color: transparent;
   transition: transform 400ms;
   user-select: none;
+  margin-right: 25px;
 }
 .hamRotate.active {
   transform: rotate(45deg);
@@ -73,7 +80,7 @@
 .ham.hamRotate.ham1.active + .humburger-menu-wrapper {
   display: block;
   position: absolute;
-  top: 150px;
+  top: 80px;
   width: 100%;
   }
 
