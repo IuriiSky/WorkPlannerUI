@@ -42,7 +42,7 @@ input[type=password] {
     font-size: 16px;
     height: 40px;
     border: none;
-    background-color: var(--main-bg-color);
+    background-color: var(--red-color); 
     box-shadow: 0 5px 5px rgba(10,16,20,.24), 0 0 2px rgba(10,16,20,.12);
     transition: box-shadow .5s;
     margin-top: 5px;
@@ -50,11 +50,7 @@ input[type=password] {
   
   .button:hover {
     transition: all 1s ease 0s;
-    border: 10px solid white;
-    background: var(--white-color);
+    border: 10px solid var(--main-bg-color);
+    background: var(--main-bg-color);
   }
   
-  .cancelbtn {
-    margin-top: 15px;
-    background-color: var(--bt-cancel-hover-color);
-  }
