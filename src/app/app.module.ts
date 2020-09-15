@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
   // Helpers
-import {BusyInterceptor} from './_helpers/busy.interceptor';
+//import {BusyInterceptor} from './_helpers/busy.interceptor';
 import { JwtInterceptor } from './auth/jwt.interceptor';
 
   // Components
@@ -66,7 +66,7 @@ import { AuthModule } from './auth/auth.module';
     AuthModule
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: BusyInterceptor,multi: true},
+    //{ provide: HTTP_INTERCEPTORS, useClass: BusyInterceptor,multi: true},
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     // { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     EmployeesService,

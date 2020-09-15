@@ -135,22 +135,9 @@ export class AuthenticationService {
     return this.http.post<IToken>(this.openIdConfig.token_endpoint, this.encodeToUrl(body), { headers: headers});
   }
 
-  // isAdmin(): boolean {
-  //   throw new Error("Method not implemented.");
-
-  //   // this.login("U", "P").subscribe(() => {
-  //   //   //ALWAYS SUCCESS
-  //   // }, () => {
-  //   //   //ALWAYS ERROR!
-  //   // })
-  // }
-
-
   logout() {
-    console.log('logout');
     this.user = null;
     this.userSubject.next(null);
-    //this.router.navigate(['/login']);
   }
 
   
