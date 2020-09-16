@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CreateEmployeeCommand, EmployeeDto } from '../../shared/interfaces/employee';
 import { EmployeesService } from '../../services/employees.service';
-import { Router } from '@angular/router';
 import { FormControl, FormGroup } from '@angular/forms';
-import { BaseComponent } from 'src/app/shared/components/base/base.component';
-import { LoadingService } from 'src/app/services/loading.service';
 
 
 @Component({
@@ -12,10 +9,10 @@ import { LoadingService } from 'src/app/services/loading.service';
   templateUrl: './employees.component.html',
   styleUrls: ['./employees.component.css']
 })
-export class EmployeesComponent extends BaseComponent implements OnInit {
+export class EmployeesComponent implements OnInit {
 
-  constructor(private employeesService: EmployeesService,loadingService: LoadingService) {
-    super(loadingService);
+  constructor(private employeesService: EmployeesService) {
+    
   }
   
   createEmployee: FormGroup;

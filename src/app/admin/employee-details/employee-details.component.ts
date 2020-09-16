@@ -3,8 +3,6 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { EmployeeDetailsDto, UpdateEmployeeCommand, PlanHolidayCommand, HolidayDto } from '../../shared/interfaces/employee';
 import { FormControl, FormGroup } from '@angular/forms';
 import { EmployeesService } from 'src/app/services/employees.service';
-import { LoadingService } from 'src/app/services/loading.service';
-import { BaseComponent } from 'src/app/shared/components/base/base.component';
 
 // Angular Material
 
@@ -13,11 +11,9 @@ import { BaseComponent } from 'src/app/shared/components/base/base.component';
   templateUrl: './employee-details.component.html',
   styleUrls: ['./employee-details.component.css']
 })
-export class EmployeeDetailsComponent extends BaseComponent implements OnInit {
+export class EmployeeDetailsComponent implements OnInit {
 
-  constructor(public employeeService: EmployeesService,loadingService: LoadingService,
-    private route: ActivatedRoute) {
-    super(loadingService);
+  constructor(public employeeService: EmployeesService, private route: ActivatedRoute) {
     this.route.params.subscribe((params: Params) => {
       if (params.id) {
         this.employeeId = params.id;
