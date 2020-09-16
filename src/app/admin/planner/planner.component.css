@@ -27,9 +27,44 @@
     fill: #3f51b5;
 }
 
-.time-line {
-    background-color: green;
-    width: 100%
+
+/* Custom calendar styles */
+
+.wrapper-custom-calendar {
+  background-color: grey;
+  display: flex;
+}
+
+.custom-calendar > .card {
+  min-width: 200px;
+  width: 100%;
+}
+
+.custom-calendar > .card > .card-footer:hover {
+  color: #6e6e6e;
+}
+
+.day {
+  margin: 0 3px;
+}
+
+.simple-calendar > .card > .card-footer {
+  margin-top: 0;
+}
+
+mat-form-field {
+  display: none;
+  width: 1px;
+  visibility: hidden;
+}
+
+.material-button {
+  background: transparent;
+  border: none;
+  display: block;
+  margin: 0px auto;
+  padding: 10px 0px;
+  width: 100%;
 }
 
 #taskList,

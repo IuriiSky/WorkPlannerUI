@@ -26,27 +26,64 @@
   </defs>
 </svg>
 
-<div class="wrapper-planner">
-  <div class="current-date">
-    <button type="button" (click)="previousDay()" class="button-day" title="Previous day">
-      <svg class="previous-day-svg">
-        <use xlink:href="#icon-circle-left" />
-      </svg>
-    </button>
 
-    <mat-form-field>
-      <mat-label>Current date</mat-label>
-      <!-- <input matInput [matDatepicker]="picker3" [value]="date.value"> -->
-      <input matInput [matDatepicker]="picker3" placeholder="Start Date" [(ngModel)]="currentDate" required>
-      <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
-      <mat-datepicker #picker3></mat-datepicker>
-    </mat-form-field>
-    <button type="button" (click)="nextDay()" class="button-day" title="Next day">
-      <svg class="next-day-svg">
-        <use xlink:href="#icon-circle-right" />
-      </svg>
-    </button>
+<div class="wrapper-custom-calendar">
+  <div class="custom-calendar">
+    <div class="card">
+      <div class="current-date">
+        <button type="button" (click)="previousDay()" class="button-day" title="Previous day">
+          <svg class="previous-day-svg">
+            <use xlink:href="#icon-circle-left" />
+          </svg>
+        </button>
+  
+        <mat-form-field>
+          <mat-label>Current date</mat-label>
+            <input matInput [matDatepicker]="picker3" [value]="date.value">
+            <input matInput [matDatepicker]="picker3" placeholder="Start Date" [(ngModel)]="currentDate" required>
+            <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+            <mat-datepicker #picker3></mat-datepicker>
+        </mat-form-field>
+
+        <button type="button" (click)="nextDay()" class="button-day" title="Next day">
+          <svg class="next-day-svg">
+            <use xlink:href="#icon-circle-right" />
+          </svg>
+        </button>
+      </div>
+      <p class="card-footer">
+        <span class="day">Mo</span>
+        <span class="day">Tu</span>
+        <span class="day">We</span>
+        <span class="day">Th</span>
+        <span class="day">Fr</span>
+        <span class="day">Sa</span>
+        <span class="day">Su</span>
+      </p>
+    </div>
   </div>
+  
+  <div class="simple-calendar">
+    <div class="card">
+        <mat-form-field>
+          <input matInput [matDatepicker]="picker" >
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        
+        <button mat-button (click)="picker.open()" class="material-button">
+          <svg class="svg-size">
+            <use xlink:href="#icon-calendar"/>
+          </svg>
+        </button>
+
+        <p class="card-footer">Calendar</p>
+    </div>
+  </div>
+</div>
+  
+  
+  <div class="wrapper-planner">
+
   <div class="page-wrapper">
     <div class="admin-block background-block">
       <div class="planner card">
@@ -59,7 +96,7 @@
       </div>
       <div class="employee-settings card">
         <a class="link" routerLink="/Employees">
-          <svg class="svg-size" >
+          <svg class="svg-size">
             <use xlink:href="#icon-users"/>
           </svg>
         </a>
