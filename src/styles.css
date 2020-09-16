@@ -4,12 +4,21 @@
   padding: 0;
 }
 
+body {
+  background-image: url(src/assets/images/1393534019-rusted_metal_texture_05.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+}
+
  :root {
    --white-color: #ffffff;
    --black-color: #000000;
+   --red-color: #ff0000;
 
 
-   --main-bg-color: #1976d2;;
+   --main-bg-color: #3aa8ce;;
    --component-bg-color: #eee8aa;
 
    /*Head*/
@@ -20,7 +29,10 @@
    /*Button*/
    --bt-create-color: var(--main-bg-color);
    --bt-create-hover-color: #008000;
-   --bt-cancel-hover-color: #ff0000;
+   --bt-cancel-hover-color: var(--red-color);
+
+   /*Font family*/
+   --font-AHs: Arial, Helvetica, sans-serif;
  }
 
 /*html, body { height: 100%; }*/

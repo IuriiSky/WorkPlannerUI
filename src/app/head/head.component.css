@@ -1,44 +1,50 @@
 .wrapper-header {
-  border-bottom: 1px solid var(--hover-bg-color);
-  display: flex;
-  justify-content: space-between;
-  min-height: 50px;
-  background-color: var(--main-bg-color);
-  padding: 20px 10px;
   margin-bottom: 20px;
-}
-
-/* Style the header links */
-.wrapper-header a {
-  float: left;
-  color: var(--header-text-color);
+  padding: 20px 10px;
   text-align: center;
-  padding: 12px;
-  text-decoration: none;
-  font-size: 18px;
-  line-height: 25px;
-  border-radius: 4px;
 }
 
-/* Style the logo link (notice that we set the same value of line-height and font-size to prevent the header to increase when the font gets bigger */
-.wrapper-header a.logo {
-  font-size: 25px;
+.header-login {
+  margin-top: 30px;
+}
+
+.header-login a {
+  color: var(--header-text-color);
+  border-bottom: 3px solid var(--red-color);
+  font-size: 16px;
+  font-family: var(--font-AHs);
   font-weight: bold;
+  letter-spacing: 5px;
+  padding: 12px 30px;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
 }
 
-/* Change the background color on mouse-over */
-.wrapper-header a:hover {
-  background-color: var(--hover-bg-color);
-  color: var(--hover-text-color);
+.header-login a:focus,
+.header-login a:hover {
+  color: var(--red-color);
+  border-bottom: 3px solid var(--white-color);
+  cursor: pointer;
 }
 
-/* Style the active/current link*/
-/*.wrapper-header a.active {*/
-/*  background-color: dodgerblue;*/
-/*  color: white;*/
-/*}*/
+.department {
+  margin: 10px;
+  padding: 10px;
+  font-size: 16px;
+}
 
-/* Float the link section to the right */
-.header-right {
-  justify-content: flex-end;
+/* For Tablet*/
+@media only screen and (min-width: 768px) {
+  .wrapper-header {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .header-login {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    margin-top: 0px;
+  }
 }
