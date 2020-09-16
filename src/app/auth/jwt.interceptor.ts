@@ -20,8 +20,7 @@ export class JwtInterceptor implements HttpInterceptor {
         }
         if (request.url.includes("openid-configuration") 
              || request.url.includes(this.authenticationService.openIdConfig.token_endpoint) 
-             || request.url.includes(this.authenticationService.openIdConfig.revocation_endpoint) 
-            ){
+             || request.url.includes(this.authenticationService.openIdConfig.revocation_endpoint)){
             return next.handle(request);
         }
 
@@ -32,27 +31,10 @@ export class JwtInterceptor implements HttpInterceptor {
         }
 
         return this.authenticationService.getUser().pipe(
-            catchError((error: any) =>{
-                if (error){
-                    this.authenticationService.logout();
-                }
-                else{
-                    return throwError(error);
-                }
-            }),
             mergeMap((user:User)=>{
                 request = this.addAuthenticationToken(request,user);
-                return next.handle(request).pipe(
-                    catchError((error: HttpErrorResponse) =>{
-                        if (error && error.status === 401){
-                            this.authenticationService.logout();
-                        }
-                        else{
-                            return throwError(error);
-                        }
-                    })
-                );
-            }),
+                return next.handle(request);
+            })
            
         )
     }

@@ -42,15 +42,13 @@ export class AuthenticationService {
     if(!this.refreshTokenInProgress){
       if(!this.user) {
         return throwError("User not logget in...")
-     }
+      }
     }
-    
-     if(!this.isTokenExpired(this.user))
-     {
-       return of(this.user);
-     }
-     else{
-       return this.refreshToken().pipe(
+    if(!this.isTokenExpired(this.user)){
+      return of(this.user);
+    }
+    else{
+      return this.refreshToken().pipe(
         catchError((err) => {
           this.user = null;
           this.userSubject.next(null);
