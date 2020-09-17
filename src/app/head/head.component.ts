@@ -14,8 +14,8 @@ export class HeadComponent implements OnInit {
   constructor(private loading: LoadingService,private authService: AuthenticationService,private router: Router) { }
   isLoading: boolean = false;
 
-  nameDepartament1 = 'Departament-1';
-  nameDepartament2 = 'Departament-2';
+  nameDepartament1 = 'Teknisk afd.';
+  nameDepartament2 = 'Service afd.';
 
   public humburgerMenu: boolean = false;
 
@@ -25,6 +25,9 @@ export class HeadComponent implements OnInit {
   public isUserLoggedIn: boolean = true;
   toggle(){
     this.isUserLoggedIn = !this.isUserLoggedIn;
+  }
+  doLogout(){
+    this.authService.logout();
   }
 
   openCloseHamburgerMenu() {
@@ -62,7 +65,11 @@ setDepartamentValue() {
       .pipe(delay(0))
       .subscribe((user)=>{
         if(user === null && !this.authService.refreshTokenInProgress){
+          this.isUserLoggedIn = false;
           this.router.navigate(['/login']);
+        }
+        else{
+          this.isUserLoggedIn = true;
         }
       });
   }

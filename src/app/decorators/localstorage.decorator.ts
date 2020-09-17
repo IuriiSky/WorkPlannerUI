@@ -13,16 +13,19 @@ export function LocalStorage(group?: string) {
     const setter = (newVal) => {
       if (isFirstSet) {
         const existingVal = storage.get(id);
-
         if (!existingVal) {
           storage.set(id, newVal);
         }
-
         isFirstSet = false;
+      }
+      else if(newVal === null || newVal === undefined )
+      {
+        storage.remove(id);
+        isFirstSet = true;
       }
       else {
         storage.set(id, newVal);
-      }
+      }  
 
     };
 

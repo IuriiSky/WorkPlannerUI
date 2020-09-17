@@ -13,10 +13,11 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class AuthenticationService {
+  
 
   openIdConfig: IOpenIdConfig;
 
-  @LocalStorage()  private user: User;
+  @LocalStorage('user')  private user: User;
   userSubject: BehaviorSubject<User>;
   
   refreshTokenInProgress = false;
@@ -37,6 +38,15 @@ export class AuthenticationService {
     ).toPromise();
   }
 
+  isAdmin(user: User):boolean {
+    return user.info.Role === "admin";
+  }
+  isUserLoggedIn():boolean{
+    return !this.isUserNotLoggedIn();
+  }
+  isUserNotLoggedIn():boolean{
+    return this.user === undefined && !this.refreshTokenInProgress;
+  }
 
    getUser(): Observable<User> {
     if(!this.refreshTokenInProgress){

@@ -27,7 +27,8 @@
         <a  routerLink="/login" class="login" title="LogIn">Login</a>
       </li>
       <li *ngIf="isUserLoggedIn" class="humburger-menu-item">
-        <a routerLink="/" class="login" title="LogOut">LogOut</a>
+        <!-- <a routerLink="/" class="login" title="LogOut">LogOut</a> -->
+        <a (click)="doLogout()" class="login" title="LogOut">LogOut</a>
       </li>
       <li *ngIf="isUserLoggedIn" class="humburger-menu-item">
         <button  id="departmen-1"
@@ -41,9 +42,9 @@
                 (click)="chooseDepartament()"
                 [ngClass]="selectDepartament2 ? 'department-active' : 'department'">{{nameDepartament2}}</button>
       </li>
-      <li class="humburger-menu-item">
+      <!-- <li class="humburger-menu-item">
         <button (click)=toggle()>ToggleLogin</button>
-      </li>
+      </li> -->
     </ul>
   </div>
 </header>
