@@ -4,7 +4,7 @@ export function get(value: string) {
     }
 }
 export function set(value: string, data: any) {
-    if (!data) {
+    if (data === null || data === undefined || data === '') {
         remove(value);
     }
     else if (typeof localStorage !== 'undefined') {

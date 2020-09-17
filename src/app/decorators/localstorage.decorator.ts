@@ -5,28 +5,13 @@ export function LocalStorage(group?: string) {
 
     var id = group + '_' + key.toString();
 
-    var isFirstSet = true;
+    //var isFirstSet = true;
 
     const getter = () => {
       return storage.get(id);
     };
     const setter = (newVal) => {
-      if (isFirstSet) {
-        const existingVal = storage.get(id);
-        if (!existingVal) {
-          storage.set(id, newVal);
-        }
-        isFirstSet = false;
-      }
-      else if(newVal === null || newVal === undefined )
-      {
-        storage.remove(id);
-        isFirstSet = true;
-      }
-      else {
-        storage.set(id, newVal);
-      }  
-
+      storage.set(id, newVal);
     };
 
     Object.defineProperty(target, key, {
@@ -37,3 +22,36 @@ export function LocalStorage(group?: string) {
     });
   }
 };
+
+// export function LocalStorage(group?: string) {
+//   return function (target: Object, key: string | symbol) {
+
+//     var id = group + '_' + key.toString();
+
+//     var isFirstSet = true;
+
+//     const getter = () => {
+//       return storage.get(id);
+//     };
+//     const setter = (newVal) => {
+//       if (isFirstSet) {
+//         const existingVal = storage.get(id);
+//         if (!existingVal) {
+//           storage.set(id, newVal);
+//         }
+//         isFirstSet = false;
+//       }
+//       else {
+//         storage.set(id, newVal);
+//       }  
+
+//     };
+
+//     Object.defineProperty(target, key, {
+//       get: getter,
+//       set: setter,
+//       enumerable: true,
+//       configurable: true,
+//     });
+//   }
+// };
