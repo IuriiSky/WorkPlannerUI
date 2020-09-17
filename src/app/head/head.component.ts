@@ -3,6 +3,7 @@ import { LoadingService } from '../services/loading.service';
 import { delay } from 'rxjs/operators';
 import { AuthenticationService } from '../auth/authentication.service';
 import { Router } from '@angular/router';
+import { DepartamentService } from '../services/departament.service';
 
 @Component({
   selector: 'app-head',
@@ -11,21 +12,23 @@ import { Router } from '@angular/router';
 })
 export class HeadComponent implements OnInit {
 
-  constructor(private loading: LoadingService,private authService: AuthenticationService,private router: Router) { }
+  constructor(
+    private loading: LoadingService,
+    private authService: AuthenticationService,
+    private departmentService : DepartamentService,
+    private router: Router) 
+  { 
+    //this.isUserLoggedIn = authService.isUserLoggedIn();
+  }
   isLoading: boolean = false;
+  isUserLoggedIn: boolean;
 
+  selectedDepartment: number = 1;
   nameDepartament1 = 'Teknisk afd.';
   nameDepartament2 = 'Service afd.';
 
   public humburgerMenu: boolean = false;
 
-  public requestDepartamentValue: string = '';
-
-  // Plug
-  public isUserLoggedIn: boolean = true;
-  toggle(){
-    this.isUserLoggedIn = !this.isUserLoggedIn;
-  }
   doLogout(){
     this.authService.logout();
   }
@@ -33,28 +36,17 @@ export class HeadComponent implements OnInit {
   openCloseHamburgerMenu() {
     this.humburgerMenu = !this.humburgerMenu;
   }
-  
-
-public selectDepartament1: boolean = true;
-public selectDepartament2: boolean = false;
-
-chooseDepartament(){
-    this.selectDepartament1 = !this.selectDepartament1;   
-    this.selectDepartament2 = !this.selectDepartament2;
-    this.setDepartamentValue();    
-}
-
-setDepartamentValue() {
-  if (this.selectDepartament1 === true) {
-    this.requestDepartamentValue = '1';
-  } else { 
-    this.requestDepartamentValue = '2'
+  selectDepartament(departmentId:number){
+    this.selectedDepartment = departmentId;
+    this.departmentService.setSelectedDepartment(departmentId);
   }
-  
-  return this.requestDepartamentValue;
-}
-
+  isDeparmentSelected(department:number){
+    return this.selectedDepartment === department;
+  }
   ngOnInit() {
+    this.isUserLoggedIn = this.authService.isUserLoggedIn();
+    this.selectedDepartment =  this.departmentService.departmentSubject.getValue();
+
     this.listenToLoading();
     this.listenToUserChanged();
   }
@@ -64,7 +56,8 @@ setDepartamentValue() {
     this.authService.userSubject
       .pipe(delay(0))
       .subscribe((user)=>{
-        if(user === null && !this.authService.refreshTokenInProgress){
+        let userValid = user !== null && user !== undefined;
+        if( !userValid && !this.authService.refreshTokenInProgress){
           this.isUserLoggedIn = false;
           this.router.navigate(['/login']);
         }
@@ -73,6 +66,7 @@ setDepartamentValue() {
         }
       });
   }
+
   /**
    * Listen to the loadingSub property in the LoadingService class. This drives the
    * display of the loading spinner.

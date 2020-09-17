@@ -4,6 +4,9 @@ export function LocalStorage(group?: string) {
   return function (target: Object, key: string | symbol) {
 
     var id = group + '_' + key.toString();
+    if(group === null || group === undefined){
+      id = key.toString();
+    }
 
     //var isFirstSet = true;
 

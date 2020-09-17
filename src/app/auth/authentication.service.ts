@@ -6,8 +6,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { IOpenIdConfig, IToken, User } from './models';
 import { LocalStorage } from '../decorators/localstorage.decorator';
-import { Router } from '@angular/router';
-
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +15,7 @@ export class AuthenticationService {
 
   openIdConfig: IOpenIdConfig;
 
-  @LocalStorage('user')  private user: User;
+  @LocalStorage()  private user: User;
   userSubject: BehaviorSubject<User>;
   
   refreshTokenInProgress = false;
@@ -45,7 +43,7 @@ export class AuthenticationService {
     return !this.isUserNotLoggedIn();
   }
   isUserNotLoggedIn():boolean{
-    return this.user === undefined && !this.refreshTokenInProgress;
+    return (this.user === undefined || this.userSubject === null) && !this.refreshTokenInProgress;
   }
 
    getUser(): Observable<User> {
