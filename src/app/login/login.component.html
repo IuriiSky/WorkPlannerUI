@@ -1,13 +1,11 @@
 <div class="wrapper-login">
-     
   <form class="modal-content" action="/action_page.php" method="post">
     <div class="container">
-      <label for="uname"><b>Username</b></label>
-      <input type="text" placeholder="Enter Username" name="uname" required>
-      <label for="psw"><b>Password</b></label>
-      <input type="password" placeholder="Enter Password" name="psw" required>
-      <button class="button" type="submit" routerLink="/admin">Login</button>
-      <button type="button" routerLink="/" class="cancelbtn button">Cancel</button>
+      <label for="uname">Username</label>
+      <input type="text" [(ngModel)]="login" placeholder="Enter Username" name="uname" required>
+      <label for="psw">Password</label>
+      <input type="password" [(ngModel)]="password" placeholder="Enter Password" name="psw" required>
+      <button class="button" type="submit" (click) = "doLogin()"><span>Login</span></button>
     </div>
   </form>
 </div>

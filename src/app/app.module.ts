@@ -5,9 +5,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
   // Helpers
-import { JwtInterceptor } from './_helpers/jwt.interceptor';
-import { ErrorInterceptor } from './_helpers/error.interceptor';
 import {BusyInterceptor} from './_helpers/busy.interceptor';
+import { JwtInterceptor } from './auth/jwt.interceptor';
 
   // Components
 import { AppComponent } from './app.component';
@@ -21,7 +20,7 @@ import { EmployeesListComponent } from './admin/employees-list/employees-list.co
 import { TasksListComponent } from './admin/tasks-list/tasks-list.component';
 import { LoginComponent } from './login/login.component';
   // Shared components
-import { LoadingComponent } from './shared/Components/loading/loading.component';
+import { LoadingComponent } from './shared/components/loading/loading.component';
   // Services
 import { EmployeesService} from './services/employees.service';
 import { EmployeeDetailsComponent } from './admin/employee-details/employee-details.component';
@@ -33,10 +32,7 @@ import {MatNativeDateModule, MatFormFieldModule, MatInputModule} from '@angular/
 import {MatTabsModule} from '@angular/material/tabs';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import { DatePipe } from '@angular/common';
-import { BaseComponent } from './shared/components/base/base.component';
-
-
-
+import { AuthModule } from './auth/auth.module';
 
 @NgModule({
   declarations: [
@@ -53,7 +49,6 @@ import { BaseComponent } from './shared/components/base/base.component';
     LoginComponent,
     LoadingComponent,
     LoadingComponent,
-    BaseComponent,
   ],
   imports: [
     BrowserModule,
@@ -67,12 +62,13 @@ import { BaseComponent } from './shared/components/base/base.component';
     MatTabsModule,
     DragDropModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    AuthModule
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: BusyInterceptor,multi: true},
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    // { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     EmployeesService,
     DatePipe
   ],

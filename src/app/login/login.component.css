@@ -1,86 +1,56 @@
+.header-login {
+  display: none;
+}
+
 .wrapper-login {
-    display: flex;
-    background-color: rgba(25, 118, 210, 0.1);
+  display: flex;
+  justify-content: center;
+}
+
+.modal-content {
+  max-width: 450px;
+  margin: 0 30px;
 }
 
 .container {
-  background-color: rgba(25,118,210,.2);
-  color: var(--main-bg-color);
-  border-radius: 4px;
-  box-shadow: 0 0 0 2px rgb(177, 206, 235) inset, 0 0 0 4px white inset;
-  transition: box-shadow .5s;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
 }
 
-/* Full-width input fields */
+label {
+  font-size: 16px;
+  font-family: var(--font-AHs);
+  letter-spacing: 3px;
+  margin: 0 auto;
+  text-transform: uppercase;
+}
+
 input[type=text], 
 input[type=password] {
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
     display: inline-block;
-    border: 1px solid #ccc;
+    border: 3px solid var(--main-bg-color);
     box-sizing: border-box;
   }
   
-  /* Set a style for all buttons */
   .button {
-    font-size: 1em;
-    display: inline-block;
-    width: 100%;
-    height: 2.5em;
-    margin: auto auto;
+    font-size: 16px;
+    height: 40px;
     border: none;
-    background-color: cadetblue;
-    border-radius: 5px;
+    background-color: var(--red-color); 
     box-shadow: 0 5px 5px rgba(10,16,20,.24), 0 0 2px rgba(10,16,20,.12);
     transition: box-shadow .5s;
+    margin-top: 5px;
   }
   
   .button:hover {
-    box-shadow: 20px 20px 10px 0px rgba(0,0,0,0.5) inset;
-    transition: .5 linear;
+    transition: all 1s ease 0s;
+    border: 10px solid var(--main-bg-color);
+    background: var(--main-bg-color);
   }
   
-  /* Extra styles for the cancel button */
-  .cancelbtn {
-    width: auto;
-    margin-top: 10px;
-    padding: 10px 18px;
-    background-color: var(--bt-cancel-hover-color);
-  }
-
-  /* .cancelbtn:hover {
-    cursor: pointer;
-    opacity: 0.8;
-    background-color: brown;
-  } */
-    
-  .container {
-    padding: 16px;
-  }
-  
-  span.psw {
-    float: right;
-    padding-top: 16px;
-  }
-  
-  /* Modal Content/Box */
-  .modal-content {
-    margin: 5% auto 15% auto;
-    max-width: 450px;
-  }
-
-
-@media only screen and (max-width: 640px) {
-  /* For mobile phones: */
-  .modal-content {
-    width: 80%;
-  }
-}
-
-@media only screen and (max-width: 480px) {
-  /* For mobile phones: */
-  .modal-content {
-    width: 80%;
-  }
-}

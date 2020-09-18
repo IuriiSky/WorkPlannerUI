@@ -7,9 +7,10 @@
  :root {
    --white-color: #ffffff;
    --black-color: #000000;
+   --red-color: #ff0000;
 
 
-   --main-bg-color: #1976d2;;
+   --main-bg-color: #3aa8ce;;
    --component-bg-color: #eee8aa;
 
    /*Head*/
@@ -20,7 +21,10 @@
    /*Button*/
    --bt-create-color: var(--main-bg-color);
    --bt-create-hover-color: #008000;
-   --bt-cancel-hover-color: #ff0000;
+   --bt-cancel-hover-color: var(--red-color);
+
+   /*Font family*/
+   --font-AHs: Arial, Helvetica, sans-serif;
  }
 
 /*html, body { height: 100%; }*/
@@ -48,6 +52,7 @@
   opacity: 1;
   pointer-events: all;
 }
+
 @media screen and (max-width: 480px) {
   .loader-wrap {
       position: fixed;
@@ -60,6 +65,7 @@
       z-index: 999;
       pointer-events: none;
     }
+
     .loader-content {
       position: absolute;
       left: 50%;
@@ -67,6 +73,7 @@
       -webkit-transform: translate(-50%, -50%);
       transform: translate(-50%, -50%);
     }
+    
     .show-loading .loader-wrap {
       opacity: 1;
       pointer-events: all;

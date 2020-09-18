@@ -14,6 +14,9 @@ export interface EmployeeDetailsDto {
 export interface CreateEmployeeCommand {
   employeeName: string;
   colorCode: string;
+  login: string,
+  password: string,
+  departmentId: number
 }
 
 export interface  UpdateEmployeeCommand {

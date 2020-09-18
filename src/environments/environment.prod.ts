@@ -1,4 +1,8 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://localhost:44386/api'
+  apiUrl: 'http://workplanner.softwaris.eu/api/',
+  identityServerUrl:'http://workplanner.softwaris.eu/',
+  clientId: 'WebClient',
+  clientSecret : 'verylongsectet',
+  scope : 'IdentityServerApi offline_access',
 };

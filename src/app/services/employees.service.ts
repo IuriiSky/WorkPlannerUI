@@ -12,16 +12,22 @@ export class EmployeesService {
 
   baseApi :string;
   httpOptions : any;
-  constructor(private http: HttpClient, private dataService: DataService)
+  constructor(private http: HttpClient, dataService: DataService)
   {
     this.baseApi = dataService.baseApiUrl + 'Employees/';
     this.httpOptions = dataService.httpOptions;
   }
 
-  getAllEmployees()//: Observable<EmployeeDto[]> 
+  getAllEmployees() : Observable<EmployeeDto[]> 
   {
     return  this.http.get<EmployeeDto[]>(this.baseApi);
   }
+
+  getAllEmployeesInDepartment(departmentId:number): Observable<EmployeeDto[]> 
+  {
+    return  this.http.get<EmployeeDto[]>(this.baseApi+'inDepartment?departmentId='+departmentId);
+  }
+
   getAvailableEmployees(date:Date|string) :Observable<EmployeeDto[]> {
     return this.http.get<EmployeeDto[]>(this.baseApi);
   }
@@ -31,13 +37,11 @@ export class EmployeesService {
   }
 
   createEmployee(employee: CreateEmployeeCommand) {
-    //return this.http.post<any>(this.baseApi + 'create', employee, this.httpOptions);
     return this.http.post<any>(this.baseApi + 'create', employee);
   }
 
   updateEmployee(employee: UpdateEmployeeCommand) {
     return this.http.put<any>(this.baseApi + employee.employeeId + '/update', employee);
-    //return this.http.put<any>(this.baseApi + employee.employeeId + '/update', employee, this.httpOptions);
   }
 
   planEmployeeHoliday(employeeId: number, holiday: PlanHolidayCommand ) {
