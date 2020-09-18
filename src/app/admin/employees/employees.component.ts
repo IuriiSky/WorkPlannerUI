@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { CreateEmployeeCommand, EmployeeDto } from '../../shared/interfaces/employee';
 import { EmployeesService } from '../../services/employees.service';
 import { FormControl, FormGroup } from '@angular/forms';
+import { DepartamentService } from 'src/app/services/departament.service';
+import { delay } from 'rxjs/operators';
 
 
 @Component({
@@ -11,7 +13,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 })
 export class EmployeesComponent implements OnInit {
 
-  constructor(private employeesService: EmployeesService) {
+  constructor(private employeesService: EmployeesService,private departmentService: DepartamentService) {
     
   }
   
@@ -40,7 +42,8 @@ export class EmployeesComponent implements OnInit {
   }
 
   getAllEmployees() {
-    this.employeesService.getAllEmployees().subscribe((data: EmployeeDto[]) => {
+    let departmentId = this.departmentService.departmentSubject.getValue();
+    this.employeesService.getAllEmployeesInDepartment(departmentId).subscribe((data: EmployeeDto[]) => {
       this.employees = data;
     });
   }
@@ -51,5 +54,14 @@ export class EmployeesComponent implements OnInit {
       employeeName: new FormControl(''),
       colorCode: new FormControl('')
     });
+    this.listenToDepartment();
+  }
+
+  listenToDepartment() {
+    this.departmentService.departmentSubject
+      .pipe(delay(0))
+      .subscribe(() => {
+        this.getAllEmployees();
+      })
   }
 }

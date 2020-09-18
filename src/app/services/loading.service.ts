@@ -35,7 +35,7 @@ export class LoadingService {
           this.loadingMap.delete(url);
           this.checkForEmpty();
         }
-      } , 3500);
+      } , 5000);
     }
     else if (loading === false && this.loadingMap.has(url)) {
       this.loadingMap.delete(url);

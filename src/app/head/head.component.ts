@@ -46,9 +46,6 @@ export class HeadComponent implements OnInit {
   ngOnInit() {
     this.isUserLoggedIn = this.authService.isUserLoggedIn();
     this.selectedDepartment =  this.departmentService.departmentSubject.getValue();
-    if(this.selectedDepartment === null || this.selectedDepartment === undefined){
-      this.selectDepartment(1);
-    }
 
     this.listenToLoading();
     this.listenToUserChanged();
