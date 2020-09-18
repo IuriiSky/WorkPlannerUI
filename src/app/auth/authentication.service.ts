@@ -119,35 +119,57 @@ export class AuthenticationService {
       username: username,
       password: password,
       grant_type: "password",
-      client_id: environment.clientId,
-      client_secret: environment.clientSecret,
       scope: environment.scope
     };
-    let headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
-    return this.http.post<IToken>(this.openIdConfig.token_endpoint, this.encodeToUrl(body), { headers: headers});
+    return this.post(body,this.openIdConfig.token_endpoint);
   }
 
   
   private requestTokenWithRefreshToken(refreshToken:string):Observable<IToken> {
-    console.log('request refresh');
     let body = {
       grant_type: "refresh_token",
       refresh_token: refreshToken,
-      client_id: environment.clientId,
-      client_secret: environment.clientSecret,
       scope: environment.scope
     }
+
+    return this.post(body,this.openIdConfig.token_endpoint);
+  }
+  private revokeToken():Observable<any>{
+    if(this.user && this.user.refresh_token){
+      let refreshToken = this.user.refresh_token;
+      let body =
+      {
+          token: refreshToken,
+          token_type_hint: "refresh_token",
+      };
+      return this.post(body,this.openIdConfig.revocation_endpoint);
+    }
+  }
+
+  private post(body:any, endpoint:string):Observable<any>{
+    body.client_id = environment.clientId;
+    body.client_secret = environment.clientSecret;
     let headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
-    return this.http.post<IToken>(this.openIdConfig.token_endpoint, this.encodeToUrl(body), { headers: headers});
+    return this.http.post<any>(endpoint,this.encodeToUrl(body),{headers});
   }
 
   logout() {
-    this.user = null;
-    this.userSubject.next(null);
+    this.revokeToken().subscribe(()=>{
+      this.user = null;
+      this.userSubject.next(null);
+    },()=>{
+      this.user = null;
+      this.userSubject.next(null);
+    });
   }
 
-  
-
+  private encodeToUrl(object: any): string {
+    var strings = [];
+    for (var property in object) {
+      strings.push(encodeURIComponent(property) + "=" + encodeURIComponent(object[property]));
+    }
+    return strings.join("&");
+  }
   // wrapResult(method: Function) {
   //   var returnObservable = Observable.create((observer: Observer<any>) => {
   //     var result = {
@@ -163,13 +185,6 @@ export class AuthenticationService {
 
   //   return returnObservable;
   // }
-  private encodeToUrl(object: any): string {
-    var strings = [];
-    for (var property in object) {
-      strings.push(encodeURIComponent(property) + "=" + encodeURIComponent(object[property]));
-    }
-    return strings.join("&");
-  }
 }
 
 

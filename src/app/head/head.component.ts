@@ -36,7 +36,7 @@ export class HeadComponent implements OnInit {
   openCloseHamburgerMenu() {
     this.humburgerMenu = !this.humburgerMenu;
   }
-  selectDepartament(departmentId:number){
+  selectDepartment(departmentId:number){
     this.selectedDepartment = departmentId;
     this.departmentService.setSelectedDepartment(departmentId);
   }
@@ -46,6 +46,9 @@ export class HeadComponent implements OnInit {
   ngOnInit() {
     this.isUserLoggedIn = this.authService.isUserLoggedIn();
     this.selectedDepartment =  this.departmentService.departmentSubject.getValue();
+    if(this.selectedDepartment === null || this.selectedDepartment === undefined){
+      this.selectDepartment(1);
+    }
 
     this.listenToLoading();
     this.listenToUserChanged();
