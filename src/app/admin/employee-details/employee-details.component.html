@@ -69,13 +69,13 @@
         <div class="wrapper-lists-info animation" 
             *ngIf="employeeDetail" 
             [ngClass]="{animation: showInfo}">
-          <p class="info"> Name: {{employeeDetail.name}}</p>
-          <p class="info"> Color:
+          <p class="info"> Navn: {{employeeDetail.name}}</p>
+          <p class="info"> Farve:
             <span [ngStyle]="{'background-color': employeeDetail.colorCode}" 
             [title]="employeeDetail.colorCode"
             id="color"> </span>
           </p>
-          <h3 class="info">Holidays:</h3>
+          <h3 *ngIf = "employeeDetail.holidays.length > 0" class="info">Planlagte ferie:</h3>
           <div class="holidays" *ngFor=" let holiday of employeeDetail.holidays">
             <div><span> From: </span><span class="date">{{holiday.startDate| date: 'dd-MM-yyyy'}}</span>
                 <span>To: </span><span class="date"> {{holiday.endDate| date: 'dd-MM-yyyy'}} </span>
@@ -90,9 +90,9 @@
         <div class="sidenav-settings animationset"
             [ngClass]="{animationset: showSettings}">         
           <div class="holidays-wrapper">
-              <h3 class="holidays">Set Hollidays</h3>
+              <h3 class="holidays">Ny ferie</h3>
                 <mat-form-field>
-                  <mat-label>Start date</mat-label>
+                  <mat-label>Start dato</mat-label>
                   <input matInput [matDatepicker]="picker3" 
                          placeholder="Start Date"
                          [(ngModel)]="employeeHoliday.startDate"
@@ -102,7 +102,7 @@
                 </mat-form-field>
 
                 <mat-form-field>
-                  <mat-label>End date</mat-label>
+                  <mat-label>Slut dato</mat-label>
                   <input matInput [matDatepicker]="picker2" 
                          placeholder="End Date"
                          [(ngModel)]="employeeHoliday.endDate"  
@@ -110,11 +110,11 @@
                   <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
                   <mat-datepicker #picker2></mat-datepicker>
                 </mat-form-field>
-              <button class="create-holidays-btn" (click)="createHolidays()">Create holiday</button>
+              <button class="create-holidays-btn" (click)="createHolidays()">Opret ferie</button>
           </div>
           <div class="changes-btn">
-            <button class="change-name" (click)="toggleShowChangeNameForm()">Change name</button>
-            <button class="change-color" (click)="toggleShowChangeColorForm()">Change color</button>
+            <button class="change-name" (click)="toggleShowChangeInfoForm()">Ret bruger oplysninger</button>
+            <button class="change-color" (click)="toggleShowChangeCredentialsForm()">Ret legitimations oplysninger</button>
           </div>
           <button class="close-button" (click)="closeSidenavSettings()">
             <svg class="svg-icon-cancel-circle">
@@ -126,26 +126,41 @@
     </div>
 
 <!--    Sidenav components-->
-    <div class="wrapper-create-form invisible" [ngClass]="{invisible: showChangeNameForm}">
+    <div class="wrapper-create-form invisible" [ngClass]="{invisible: showChangeInfoForm}">
       <form action="" method="post">
         <fieldset class="create-form animate" [formGroup]="modifyEmployee">
-          <legend><span>Change employee name</span></legend>
-          <label for="employee">Employee new name:</label>
+          <legend><span>Ret brugeroplysninger</span></legend>
+          
+          <label for="employee">Ny navn:</label>
           <input formControlName="employeeName" [(ngModel)]="employeeUpdate.employeeName" type="text"
-                 placeholder="Enter employee name" name="employee" id="employee" title="Enter name" autofocus required>
-          <button class="create-button primary-button" (click)="updateName()">Change</button>
-          <button class="cancel-button primary-button" (click)="toggleShowChangeNameForm()">Cancel</button>
+                 placeholder="Angiv medarbejders navn" name="employee" id="employee" title="Medarbejders navn" autofocus required>
+          
+          <label for="colorPicker">Farve:</label>
+          <input formControlName="colorCode" type="color" id="colorPicker" [(ngModel)]="employeeUpdate.colorCode" required>      
+          
+          <button class="create-button primary-button" (click)="updateUserInfo()">Godkend</button>
+          <button class="cancel-button primary-button" (click)="toggleShowChangeInfoForm()">Fortryd</button>
         </fieldset>
       </form>
     </div>
-    <div class="wrapper-create-form invisible" [ngClass]="{invisible: showChangeColorForm}">
-      <form action="" method="post" [formGroup]="modifyEmployee">
+
+    <div class="wrapper-create-form invisible" [ngClass]="{invisible: showChangeCredentialsForm}">
+      <form action="" method="post" [formGroup]="modifyCredentials">
         <fieldset class="create-form animate">
-          <legend><span>Change color</span></legend>
-          <label for="colorPicker">Employee color:</label>
-          <input formControlName="colorCode" type="color" value="#8e2929" id="colorPicker" [(ngModel)]="employeeUpdate.colorCode" required>
-          <button class="create-button primary-button" (click)="updateColor()">Change</button>
-          <button class="cancel-button primary-button" (click)="toggleShowChangeColorForm()">Cancel</button>
+
+          <legend><span>Ret legitimations oplysninger</span></legend>
+
+          <label for="password">Ny navn:</label>
+          <input formControlName="password" [(ngModel)]="credentialsUpdate.password" type="text"
+                 placeholder="Angiv ny kodeord" name="password" id="password" title="Angiv ny kodeord til medarbejder" autofocus required>
+
+          <label for="activeStatus">Adgang til systemet:</label>
+          <input formControlName="isActive" type="checkbox" id="activeStatus" [(ngModel)]="credentialsUpdate.isActive" 
+          value="ya" required>
+          <!-- {{credentialsUpdate.isActive ? Ya : Nej}} -->
+          
+          <button class="create-button primary-button" (click)="updateCredentials()">Godkend</button>
+          <button class="cancel-button primary-button" (click)="toggleShowChangeCredentialsForm()">Fortryd</button>
         </fieldset>
       </form>
     </div>
