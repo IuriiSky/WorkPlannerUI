@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { EmployeeDto } from 'src/app/shared/interfaces/employee';
 import { EmployeesService } from 'src/app/services/employees.service';
 import { TasksService } from 'src/app/services/tasks.service';
@@ -12,21 +12,27 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material';
 import {FormControl} from '@angular/forms';
 import { DatePipe } from '@angular/common';
+import { Subscription } from 'rxjs';
+import { DepartamentService } from 'src/app/services/departament.service';
+import { delay } from 'rxjs/operators';
 
 @Component({
   selector: 'app-planner',
   templateUrl: './planner.component.html',
   styleUrls: ['./planner.component.css']
 })
-export class PlannerComponent implements OnInit {
+export class PlannerComponent implements OnInit,OnDestroy {
 
   constructor(
     private datepipe: DatePipe,
+    private departmentService: DepartamentService,
     private employeesService: EmployeesService,
     private tasksService: TasksService,
     private plannerService: WorkplansService) 
     {    }
+  
 
+  departmentSubscription: Subscription;
   public currentDate: Date = new Date();
 
   public allEmployees:EmployeeDto[];
@@ -138,17 +144,34 @@ export class PlannerComponent implements OnInit {
     this.setActiveEmployee(this.employee);
   }
   
+
+  getAllEmployees() {
+    let departmentId = this.departmentService.departmentSubject.getValue();
+    this.employeesService.getAllEmployeesInDepartment(departmentId).subscribe((data: EmployeeDto[]) => {
+      this.allEmployees = data;
+      if(data.length > 0) {
+        this.setActiveEmployee(data[0]);
+      }
+    });
+  }
+
+  listenToDepartment() {
+    this.departmentSubscription = this.departmentService.departmentSubject
+      .pipe(delay(0))
+      .subscribe(() => {
+        this.getAllEmployees();
+      })
+  }
+
   ngOnInit() {
+    this.listenToDepartment();
     this.tasksService.getAllTasks().subscribe((data: TaskDto[]) => {
       this.allTasks = data;
-
-      this.employeesService.getAllEmployees().subscribe((data: EmployeeDto[]) => {
-        this.allEmployees = data;
-        if(data.length > 0) {
-          this.setActiveEmployee(data[0]);
-        }
-      });
     });
+  }
+
+  ngOnDestroy(): void {
+    this.departmentSubscription.unsubscribe();
   }
 
 }
