@@ -29,6 +29,9 @@ export class EmployeesComponent implements OnInit, OnDestroy {
   public createNewEmployee: CreateEmployeeCommand = {
     employeeName: '',
     colorCode: '#ff0000',
+    login: '',
+    password: '',
+    departmentId : 0
   };
 
   toggleShowCreateForm() {
@@ -36,9 +39,13 @@ export class EmployeesComponent implements OnInit, OnDestroy {
   }
 
   addEmployee() {
+    this.createNewEmployee.departmentId = this.departmentService.departmentSubject.getValue();
     this.employeesService.createEmployee(this.createNewEmployee).subscribe(employee => {
       this.createNewEmployee.employeeName = '';
       this.createNewEmployee.colorCode = '';
+      this.createNewEmployee.login = '';
+      this.createNewEmployee.password = '';
+      this.createNewEmployee.departmentId = 0;
       this.showCreateForm = true;
       this.getAllEmployees();
     });
@@ -63,7 +70,9 @@ export class EmployeesComponent implements OnInit, OnDestroy {
     this.listenToDepartment();
     this.createEmployee = new FormGroup({
       employeeName: new FormControl(''),
-      colorCode: new FormControl('')
+      colorCode: new FormControl(''),
+      login: new FormControl(''),
+      password: new FormControl(''),
     });
   }
   ngOnDestroy(): void {
