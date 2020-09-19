@@ -43,8 +43,8 @@ export class EmployeesService {
   updateEmployee(employee: UpdateEmployeeCommand) {
     return this.http.put<any>(this.baseApi + employee.employeeId + '/update', employee);
   }
-  updateCredentials(employee: UpdateEmployeeCredentialsCommand) {
-    return this.http.put<any>(this.baseApi + employee.employeeId + '/updatecredentials', employee);
+  updateCredentials(updateCredentialsCommand: UpdateEmployeeCredentialsCommand) {
+    return this.http.put<any>(this.baseApi + updateCredentialsCommand.employeeId + '/updatecredentials', updateCredentialsCommand);
   }
 
   planEmployeeHoliday(employeeId: number, holiday: PlanHolidayCommand ) {

@@ -89,7 +89,7 @@ export class EmployeeDetailsComponent implements OnInit {
   }
 
   updateCredentials() {
-    this.employeeService.updateEmployee(this.employeeUpdate).subscribe(employee => {
+    this.employeeService.updateCredentials(this.credentialsUpdate).subscribe(employee => {
       this.initDetailsEmployee();
       this.showChangeCredentialsForm = true;
     });
