@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-import { EmployeeDto, CreateEmployeeCommand, EmployeeDetailsDto, UpdateEmployeeCommand, PlanHolidayCommand } from '../shared/interfaces/employee';
+import { EmployeeDto, CreateEmployeeCommand, EmployeeDetailsDto, UpdateEmployeeCommand, PlanHolidayCommand, UpdateEmployeeCredentialsCommand } from '../shared/interfaces/employee';
 import { Observable } from 'rxjs';
 import { DataService } from './data.service';
 
@@ -42,6 +42,9 @@ export class EmployeesService {
 
   updateEmployee(employee: UpdateEmployeeCommand) {
     return this.http.put<any>(this.baseApi + employee.employeeId + '/update', employee);
+  }
+  updateCredentials(updateCredentialsCommand: UpdateEmployeeCredentialsCommand) {
+    return this.http.put<any>(this.baseApi + updateCredentialsCommand.employeeId + '/updatecredentials', updateCredentialsCommand);
   }
 
   planEmployeeHoliday(employeeId: number, holiday: PlanHolidayCommand ) {

@@ -7,6 +7,7 @@ export interface EmployeeDto {
 export interface EmployeeDetailsDto {
   id: number;
   name: string;
+  isActive: boolean;
   colorCode: string;
   holidays: HolidayDto[];
 }
@@ -24,6 +25,12 @@ export interface  UpdateEmployeeCommand {
   employeeName:	string;
   colorCode:	string;
 }
+export interface  UpdateEmployeeCredentialsCommand {
+  employeeId: number;
+  password:	string;
+  isActive:	boolean;
+}
+
 
 export interface HolidayDto {
   startDate: string;
