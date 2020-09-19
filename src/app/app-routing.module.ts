@@ -7,15 +7,16 @@ import { EmployeeDetailsComponent } from './admin/employee-details/employee-deta
 import { TasksComponent } from './admin/tasks/tasks.component';
 import { PlannerComponent} from './admin/planner/planner.component';
 import { LoginComponent } from './login/login.component';
+import { AdminGuard } from './auth/admin.guard';
 
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
-  {path: 'admin', component: AdminComponent},
-  {path: 'Employees', component: EmployeesComponent},
-  {path: 'Employees/:id', component: EmployeeDetailsComponent},
-  {path: 'Tasks', component: TasksComponent},
-  {path: 'Planner', component: PlannerComponent},
+  {path: 'admin', component: AdminComponent, canActivate: [AdminGuard]},
+  {path: 'Employees', component: EmployeesComponent, canActivate: [AdminGuard]},
+  {path: 'Employees/:id', component: EmployeeDetailsComponent, canActivate: [AdminGuard]},
+  {path: 'Tasks', component: TasksComponent, canActivate: [AdminGuard]},
+  {path: 'Planner', component: PlannerComponent, canActivate: [AdminGuard]},
   {path: 'login', component: LoginComponent}
 ];
 

@@ -44,7 +44,7 @@ export class HeadComponent implements OnInit {
     return this.selectedDepartment === department;
   }
   ngOnInit() {
-    this.isUserLoggedIn = this.authService.isUserLoggedIn();
+    this.isUserLoggedIn = this.authService.isUserLoggedIn() && this.authService.isAdminUser();
     this.selectedDepartment =  this.departmentService.departmentSubject.getValue();
 
     this.listenToLoading();
@@ -62,7 +62,7 @@ export class HeadComponent implements OnInit {
           this.router.navigate(['/login']);
         }
         else{
-          this.isUserLoggedIn = true;
+          this.isUserLoggedIn = this.authService.hasAdminRole(user);
         }
       });
   }
