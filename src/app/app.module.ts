@@ -22,7 +22,7 @@ import { LoginComponent } from './login/login.component';
   // Shared components
 import { LoadingComponent } from './shared/components/loading/loading.component';
   // Services
-import { EmployeesService} from './services/employees.service';
+import { EmployeesService} from './services/dataservices/employees.service';
 import { EmployeeDetailsComponent } from './admin/employee-details/employee-details.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -33,6 +33,7 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import { DatePipe } from '@angular/common';
 import { AuthModule } from './auth/auth.module';
+import { EmployeeTasksComponent } from './employee/employee-tasks/employee-tasks.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { AuthModule } from './auth/auth.module';
     LoginComponent,
     LoadingComponent,
     LoadingComponent,
+    EmployeeTasksComponent,
   ],
   imports: [
     BrowserModule,

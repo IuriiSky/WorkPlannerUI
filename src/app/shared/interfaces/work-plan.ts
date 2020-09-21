@@ -12,16 +12,16 @@ export class CreateWorkPlanCommand {
     employeeId: number;
     taskId: number;
     date: Date;
-    startTime: Date;
-    endTime: Date;
+    // startTime: Date;
+    // endTime: Date;
 }
 
 export class UpdateWorkPlanCommand{
     employeeId: number;
     taskId: number;
     date: Date;
-    startTime: Date;
-    endTime: Date;
+    // startTime: Date;
+    // endTime: Date;
 }
 
 export class DeleteWorkPlanCommand {

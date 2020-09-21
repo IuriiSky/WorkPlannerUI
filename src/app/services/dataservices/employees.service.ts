@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-import { EmployeeDto, CreateEmployeeCommand, EmployeeDetailsDto, UpdateEmployeeCommand, PlanHolidayCommand, UpdateEmployeeCredentialsCommand } from '../shared/interfaces/employee';
+import { EmployeeDto, CreateEmployeeCommand, EmployeeDetailsDto, UpdateEmployeeCommand, PlanHolidayCommand, UpdateEmployeeCredentialsCommand } from '../../shared/interfaces/employee';
 import { Observable } from 'rxjs';
-import { DataService } from './data.service';
+import { environment } from 'src/environments/environment';
+//import { DataService } from './data.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,11 +12,9 @@ import { DataService } from './data.service';
 export class EmployeesService {
 
   baseApi :string;
-  httpOptions : any;
-  constructor(private http: HttpClient, dataService: DataService)
+  constructor(private http: HttpClient)
   {
-    this.baseApi = dataService.baseApiUrl + 'Employees/';
-    this.httpOptions = dataService.httpOptions;
+    this.baseApi = environment.apiUrl + 'Employees/';
   }
 
   getAllEmployees() : Observable<EmployeeDto[]> 

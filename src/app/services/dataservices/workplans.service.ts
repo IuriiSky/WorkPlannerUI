@@ -1,20 +1,23 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { DataService } from './data.service';
+//import { DataService } from './data.service';
 import { Observable } from 'rxjs';
-import { WorkPlanDto, CreateWorkPlanCommand, UpdateWorkPlanCommand, DeleteWorkPlanCommand } from '../shared/interfaces/work-plan';
+import { WorkPlanDto, CreateWorkPlanCommand, UpdateWorkPlanCommand, DeleteWorkPlanCommand } from '../../shared/interfaces/work-plan';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class WorkplansService {
+  
+  getEmployeesOwnTasks(stringDate: string): Observable<WorkPlanDto[]>{
+    return this.http.get<WorkPlanDto[]>(this.baseApi+ 'employee?date='+stringDate );
+  }
 
   baseApi :string;
-  httpOptions : any;
-  constructor(private http: HttpClient, private dataService: DataService) 
+  constructor(private http: HttpClient) 
   { 
-    this.baseApi = dataService.baseApiUrl + 'WorkPlans/';
-    this.httpOptions = dataService.httpOptions;
+    this.baseApi = environment.apiUrl + 'WorkPlans/';
   }
 
   getWorkPlans(date: Date|string): Observable<WorkPlanDto[]>{
@@ -22,7 +25,7 @@ export class WorkplansService {
   }
 
   getWorkPlansForEmployee(date: Date|string, employeeId:number): Observable<WorkPlanDto[]>{
-    return this.http.get<WorkPlanDto[]>(this.baseApi + date + '/employee/' + employeeId);
+    return this.http.get<WorkPlanDto[]>(this.baseApi+ 'employee/' +  employeeId + '/' + date );
   }
 
   createWorkPlan(workplan: CreateWorkPlanCommand){
@@ -34,13 +37,6 @@ export class WorkplansService {
   }
 
   deleteWorkPlan(workPlan:DeleteWorkPlanCommand){
-    // let options = {
-    //   headers: new HttpHeaders({
-    //     'Content-Type': 'application/json'
-    //   }),
-    //   body:workPlan
-    // }
-    //return this.http.delete<any>(this.baseApi+'delete/',options);
     return this.http.put<any>(this.baseApi+'delete',workPlan);
   }
 }
