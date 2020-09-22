@@ -3,35 +3,6 @@
     flex-wrap: wrap;
 }
 
-.current-date {
-    display: flex;
-    margin: 0 auto;
-}
-
-.button-day {
-    background-color: transparent;
-    border: none;
-    margin: 15px;
-    height: auto;
-    padding: 0 10px;
-}
-
-.previous-day-svg,
-.next-day-svg {
-    height: 25px;
-    width: 25px;
-}
-
-.previous-day-svg:hover,
-.next-day-svg:hover {
-    fill: #3f51b5;
-}
-
-.time-line {
-    background-color: green;
-    width: 100%
-}
-
 #taskList,
 #todoList {
     list-style: none;
@@ -90,13 +61,10 @@
     border-radius: 5px;
 }
   .card {
-    /* width: 20%; */
     background-color: #fff;
     border-radius: 4px;
     box-shadow: 0 5px 5px rgba(10,16,20,.24), 0 0 2px rgba(10,16,20,.12);
     transition: box-shadow .5s;
-    max-width: 100px;
-    min-width: 50px;
     margin: 24px 8px;
   }
   

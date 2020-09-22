@@ -19,7 +19,7 @@ import { delay } from 'rxjs/operators';
 @Component({
   selector: 'app-planner',
   templateUrl: './planner.component.html',
-  styleUrls: ['./planner.component.css']
+  styleUrls: ['./planner.component.css'],
 })
 export class PlannerComponent implements OnInit,OnDestroy {
 
@@ -42,9 +42,6 @@ export class PlannerComponent implements OnInit,OnDestroy {
   public employeeTasks : TaskDto[];
   public remainingTasks : TaskDto[];
   private employeeWorkPlan : WorkPlanDto[];
-
-
-  
 
   drop(event: CdkDragDrop<TaskDto[]>) {
     if(!this.employee) return;
