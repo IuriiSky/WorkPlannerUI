@@ -3,22 +3,16 @@ import { TasksService } from '../../services/tasks.service';
 import { TaskDto, CreateTaskCommand, UpdateTaskCommand } from '../../shared/interfaces/task';
 import {Router} from '@angular/router';
 import {FormControl, FormGroup} from '@angular/forms';
-import { AdminComponent } from '../admin.component';
-import { BaseComponent } from 'src/app/shared/components/base/base.component';
-import { LoadingService } from 'src/app/services/loading.service';
-
 
 @Component({
   selector: 'app-tasks',
   templateUrl: './tasks.component.html',
   styleUrls: ['./tasks.component.css']
 })
-export class TasksComponent extends BaseComponent implements OnInit {
+export class TasksComponent implements OnInit {
 
-  constructor( private tasksService: TasksService, loadingService : LoadingService) 
-  {
-    super(loadingService);
-  }
+  constructor( private tasksService: TasksService) 
+  {  }
 
   public tasks: TaskDto[];
 

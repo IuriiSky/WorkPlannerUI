@@ -53,7 +53,7 @@
   <main class="employee">
     <div class="wrapper-to-btn">
     <h2 class="heading">Employees</h2>
-      <button type="submit" class="new-employee-btn" (click) = "toggleShowCreateForm()" title="Create new employee">
+      <button type="submit" class="new-employee-btn" (click) = "toggleShowCreateForm()" title="Opret medarbejder">
         <svg class="svg-new-employee">
           <use xlink:href="#icon-user-plus"/>
         </svg>
@@ -67,15 +67,26 @@
     <div class="wrapper-create-form" [hidden] = "showCreateForm">
     <form action="" method="post">
       <fieldset class="create-form animate" [formGroup]="createEmployee">
-        <legend><span class="legend-text">Create new employee</span></legend>
-          <label for="employee">Employee name:</label>
+        <legend><span class="legend-text">Ny medarbejder</span></legend>
+
+          <label for="employee">Navn:</label>
           <input formControlName="employeeName" [(ngModel)]="createNewEmployee.employeeName"
-                 type="text" placeholder="Enter employee name" name="employee" id="employee" title="Enter name" autofocus required>
-          <label for="colorPicker">Employee color:</label>
+                 type="text" placeholder="Angiv medarbejder navn" name="employee" id="employee" title="Medarbejder navn" autofocus required>
+
+          <label for="colorPicker">Farve:</label>
           <input formControlName="colorCode" type="color" id="colorPicker" title="Click on the line and set the color"
                  [(ngModel)]="createNewEmployee.colorCode" required>
-        <button  (click)="addEmployee()" class="create-button primary-button">Create</button>
-        <button class="cancel-button primary-button" (click)="toggleShowCreateForm()">Cancel</button>
+
+          <label for="login">Login:</label>
+          <input formControlName="login" [(ngModel)]="createNewEmployee.login"
+                 type="text" placeholder="Angiv login" name="login" id="login" title="Medarbejder login" autofocus required>
+
+          <label for="password">Adgangskode:</label>
+          <input formControlName="password" [(ngModel)]="createNewEmployee.password"
+                 type="text" placeholder="Angiv adgangskodeogin" name="password" id="password" title="Medarbejder password" autofocus required>
+
+        <button  (click)="addEmployee()" class="create-button primary-button">Opret</button>
+        <button class="cancel-button primary-button" (click)="toggleShowCreateForm()">Fortryd</button>
       </fieldset>
     </form>
     </div>

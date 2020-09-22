@@ -1,3 +1,4 @@
+<loading [show]="isLoading"></loading>
 <header class="wrapper-header">
   <div class="logo-wrapper">
     <a routerLink="/" class="logo">
@@ -21,27 +22,21 @@
           d="m 30,67 h 40 c 12.796276,0 15.357889,-11.717785 15.357889,-26.851538 0,-15.133752 -4.786586,-27.274118 -16.667516,-27.274118 -11.88093,0 -18.499247,6.994427 -18.435284,17.125656 l 0.252538,40" />
   </svg>
   <div class="humburger-menu-wrapper" (click)="openCloseHamburgerMenu()">
-    <ul class="humburger-menu-list">
-      <li *ngIf="!isUserLoggedIn" class="humburger-menu-item">
-        <a  routerLink="/login" class="login" title="LogIn">Login</a>
-      </li>
+    <ul *ngIf="isUserLoggedIn" class="humburger-menu-list">
       <li *ngIf="isUserLoggedIn" class="humburger-menu-item">
-        <a routerLink="/" class="login" title="LogOut">LogOut</a>
-      </li>
-      <li *ngIf="isUserLoggedIn" class="humburger-menu-item">
-        <button  id="departmen-1"
-                class="department" 
-                (click)="chooseDepartament()"
-                [ngClass]="selectDepartament1 ? 'department-active' : 'department'">{{nameDepartament1}}</button>
-      </li>
-      <li *ngIf="isUserLoggedIn" class="humburger-menu-item">
-        <button id="department-2"
-                class="department"
-                (click)="chooseDepartament()"
-                [ngClass]="selectDepartament2 ? 'department-active' : 'department'">{{nameDepartament2}}</button>
+        <a (click)="doLogout()" class="login" title="LogOut">LogOut</a>
       </li>
       <li class="humburger-menu-item">
-        <button (click)=toggle()>ToggleLogin</button>
+        <button id="department-2"
+                class="department"
+                (click)="selectDepartment(2)"
+                [ngClass]="isDeparmentSelected(2) ? 'department-active' : 'department'">{{nameDepartament2}}</button>
+      </li>
+      <li class="humburger-menu-item">
+        <button  id="departmen-1"
+                class="department" 
+                (click)="selectDepartment(1)"
+                [ngClass]="isDeparmentSelected(1) ? 'department-active' : 'department'">{{nameDepartament1}}</button>
       </li>
     </ul>
   </div>

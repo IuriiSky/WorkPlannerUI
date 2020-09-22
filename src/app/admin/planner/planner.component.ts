@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { EmployeeDto } from 'src/app/shared/interfaces/employee';
 import { EmployeesService } from 'src/app/services/employees.service';
 import { TasksService } from 'src/app/services/tasks.service';
@@ -12,26 +12,27 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material';
 import {FormControl} from '@angular/forms';
 import { DatePipe } from '@angular/common';
-import { BaseComponent } from 'src/app/shared/components/base/base.component';
-import { LoadingService } from 'src/app/services/loading.service';
+import { Subscription } from 'rxjs';
+import { DepartamentService } from 'src/app/services/departament.service';
+import { delay } from 'rxjs/operators';
 
 @Component({
   selector: 'app-planner',
   templateUrl: './planner.component.html',
   styleUrls: ['./planner.component.css'],
 })
-export class PlannerComponent extends BaseComponent implements OnInit {
+export class PlannerComponent implements OnInit,OnDestroy {
 
   constructor(
     private datepipe: DatePipe,
+    private departmentService: DepartamentService,
     private employeesService: EmployeesService,
     private tasksService: TasksService,
-    private plannerService: WorkplansService,
-    loadingService: LoadingService) 
-    {
-      super(loadingService);
-    }
+    private plannerService: WorkplansService) 
+    {    }
+  
 
+  departmentSubscription: Subscription;
   public currentDate: Date = new Date();
 
   public allEmployees:EmployeeDto[];
@@ -41,42 +42,6 @@ export class PlannerComponent extends BaseComponent implements OnInit {
   public employeeTasks : TaskDto[];
   public remainingTasks : TaskDto[];
   private employeeWorkPlan : WorkPlanDto[];
-
-
- 
-
-  // getCurrentWeek() {
-
-  //   let week = [];
-    
-  //   for (let i = 1; i <= 7; i++) {
-  //     let first = this.currentDate.getDate() - this.currentDate.getDay() + i 
-  //     let day = new Date(this.currentDate.setDate(first)).toISOString().slice(0, 10)
-  //     week.push(day)
-  //   };
-    
-  //   console.log(week);
-  // }
-
-
-//   getWeekNumber(d) {
-//     // Copy date so don't modify original
-//     d = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
-//     // Set to nearest Thursday: current date + 4 - current day number
-//     // Make Sunday's day number 7
-//     d.setUTCDate(d.getUTCDate() + 4 - (d.getUTCDay()||7));
-//     // Get first day of year
-//     let yearStart = new Date(Date.UTC(d.getUTCFullYear(),0,1));
-//     // Calculate full weeks to nearest Thursday
-//     let weekNo = Math.ceil(( ( (d - yearStart) / 86400000) + 1)/7);
-//     // Return array of year and week number
-
-//     return [d.getUTCFullYear(), weekNo];
-   
-      
-// }
-
- 
 
   drop(event: CdkDragDrop<TaskDto[]>) {
     if(!this.employee) return;
@@ -176,20 +141,34 @@ export class PlannerComponent extends BaseComponent implements OnInit {
     this.setActiveEmployee(this.employee);
   }
   
-  ngOnInit() {
-    this.isLoading = true;
-    this.employeesService.getAllEmployees().subscribe((data: EmployeeDto[]) => {
+
+  getAllEmployees() {
+    let departmentId = this.departmentService.departmentSubject.getValue();
+    this.employeesService.getAllEmployeesInDepartment(departmentId).subscribe((data: EmployeeDto[]) => {
       this.allEmployees = data;
-      this.isLoading = false;
       if(data.length > 0) {
         this.setActiveEmployee(data[0]);
       }
     });
-    this.isLoading = true;
+  }
+
+  listenToDepartment() {
+    this.departmentSubscription = this.departmentService.departmentSubject
+      .pipe(delay(0))
+      .subscribe(() => {
+        this.getAllEmployees();
+      })
+  }
+
+  ngOnInit() {
+    this.listenToDepartment();
     this.tasksService.getAllTasks().subscribe((data: TaskDto[]) => {
       this.allTasks = data;
-      this.isLoading = false;
-    })
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.departmentSubscription.unsubscribe();
   }
 
 }

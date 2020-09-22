@@ -5,9 +5,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
   // Helpers
-import { JwtInterceptor } from './_helpers/jwt.interceptor';
-import { ErrorInterceptor } from './_helpers/error.interceptor';
 import {BusyInterceptor} from './_helpers/busy.interceptor';
+import { JwtInterceptor } from './auth/jwt.interceptor';
 
   // Components
 import { AppComponent } from './app.component';
@@ -33,12 +32,9 @@ import {MatNativeDateModule, MatFormFieldModule, MatInputModule, DateAdapter} fr
 import {MatTabsModule} from '@angular/material/tabs';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import { DatePipe } from '@angular/common';
-import { BaseComponent } from './shared/components/base/base.component';
+import { AuthModule } from './auth/auth.module';
 import { CalendarComponent } from './calendar/calendar.component';
 import { MyDateAdapter } from './calendar/my.date.adapter';
-
-
-
 
 @NgModule({
   declarations: [
@@ -55,7 +51,6 @@ import { MyDateAdapter } from './calendar/my.date.adapter';
     LoginComponent,
     LoadingComponent,
     LoadingComponent,
-    BaseComponent,
     CalendarComponent,
   ],
   imports: [
@@ -70,12 +65,13 @@ import { MyDateAdapter } from './calendar/my.date.adapter';
     MatTabsModule,
     DragDropModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    AuthModule
   ],
   providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: BusyInterceptor,multi: true},
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: BusyInterceptor, multi: true},
+    // { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     { provide: DateAdapter, useClass: MyDateAdapter},
     EmployeesService,
     DatePipe
