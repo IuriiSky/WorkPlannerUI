@@ -29,11 +29,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
   // Angular Material
 import {MatDatepickerModule} from '@angular/material/datepicker';
-import {MatNativeDateModule, MatFormFieldModule, MatInputModule} from '@angular/material';
+import {MatNativeDateModule, MatFormFieldModule, MatInputModule, DateAdapter} from '@angular/material';
 import {MatTabsModule} from '@angular/material/tabs';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import { DatePipe } from '@angular/common';
 import { BaseComponent } from './shared/components/base/base.component';
+import { CalendarComponent } from './calendar/calendar.component';
+import { MyDateAdapter } from './calendar/my.date.adapter';
 
 
 
@@ -54,6 +56,7 @@ import { BaseComponent } from './shared/components/base/base.component';
     LoadingComponent,
     LoadingComponent,
     BaseComponent,
+    CalendarComponent,
   ],
   imports: [
     BrowserModule,
@@ -72,7 +75,8 @@ import { BaseComponent } from './shared/components/base/base.component';
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: BusyInterceptor,multi: true},
+    { provide: HTTP_INTERCEPTORS, useClass: BusyInterceptor, multi: true},
+    { provide: DateAdapter, useClass: MyDateAdapter},
     EmployeesService,
     DatePipe
   ],

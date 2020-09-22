@@ -18,7 +18,7 @@ import { LoadingService } from 'src/app/services/loading.service';
 @Component({
   selector: 'app-planner',
   templateUrl: './planner.component.html',
-  styleUrls: ['./planner.component.css']
+  styleUrls: ['./planner.component.css'],
 })
 export class PlannerComponent extends BaseComponent implements OnInit {
 
@@ -43,7 +43,40 @@ export class PlannerComponent extends BaseComponent implements OnInit {
   private employeeWorkPlan : WorkPlanDto[];
 
 
-  
+ 
+
+  // getCurrentWeek() {
+
+  //   let week = [];
+    
+  //   for (let i = 1; i <= 7; i++) {
+  //     let first = this.currentDate.getDate() - this.currentDate.getDay() + i 
+  //     let day = new Date(this.currentDate.setDate(first)).toISOString().slice(0, 10)
+  //     week.push(day)
+  //   };
+    
+  //   console.log(week);
+  // }
+
+
+//   getWeekNumber(d) {
+//     // Copy date so don't modify original
+//     d = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
+//     // Set to nearest Thursday: current date + 4 - current day number
+//     // Make Sunday's day number 7
+//     d.setUTCDate(d.getUTCDate() + 4 - (d.getUTCDay()||7));
+//     // Get first day of year
+//     let yearStart = new Date(Date.UTC(d.getUTCFullYear(),0,1));
+//     // Calculate full weeks to nearest Thursday
+//     let weekNo = Math.ceil(( ( (d - yearStart) / 86400000) + 1)/7);
+//     // Return array of year and week number
+
+//     return [d.getUTCFullYear(), weekNo];
+   
+      
+// }
+
+ 
 
   drop(event: CdkDragDrop<TaskDto[]>) {
     if(!this.employee) return;
