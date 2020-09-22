@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import {MatCardModule} from '@angular/material/card';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
   // Helpers
 import {BusyInterceptor} from './_helpers/busy.interceptor';
@@ -68,6 +69,7 @@ import { EmployeeTasksComponent } from './employee/employee-tasks/employee-tasks
     MatFormFieldModule,
     MatInputModule,
     MatCardModule,
+    MatSlideToggleModule,
     AuthModule
   ],
   // exports:[

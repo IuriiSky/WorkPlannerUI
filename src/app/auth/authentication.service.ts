@@ -37,11 +37,17 @@ export class AuthenticationService {
   }
 
   hasAdminRole(user: User):boolean {
-    return user.info.Role === "admin";
+    if(user && user.info){
+      return user.info.Role == "admin";
+    }
+    return false;
   }
 
   hasUserRole(user: User):boolean {
-    return user.info.Role === "user";
+    if(user && user.info){
+      return user.info.Role === "user";
+    }
+    return false;
   }
   
   isUserLoggedIn():boolean{

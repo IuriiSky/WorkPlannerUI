@@ -11,7 +11,7 @@ import { EmployeeTaskDto, WorkPlanDto } from 'src/app/shared/interfaces/work-pla
 export class EmployeeTasksComponent implements OnInit {
 
   constructor(private plannerService: WorkplansService,private datepipe: DatePipe,) { }
-  private employeeWorkPlan : EmployeeTaskDto[];
+  private employeeTasks : EmployeeTaskDto[];
   
   groupedTask: Map<Date, EmployeeTaskDto[]> = new Map<Date, EmployeeTaskDto[]>();;
 
@@ -33,7 +33,7 @@ export class EmployeeTasksComponent implements OnInit {
     let stringDate = this.datepipe.transform(new Date(), 'yyyy-MM-dd')
     this.plannerService.getEmployeesOwnTasks(stringDate).subscribe((data : EmployeeTaskDto[]) => {
       this.mapTasks(data);
-      this.employeeWorkPlan = data;
+      this.employeeTasks = data;
     });
   }
 

@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
         if(this.authService.hasAdminRole(user)){
           this.router.navigate(['/admin']);
         }else{
-          this.router.navigate(['employeesTasks']);
+          this.router.navigate(['/employeesTasks']);
         }
     },(error =>{
     }));

@@ -1,10 +1,18 @@
-<p>employee-tasks works!</p>
-
-<mat-card>Simple card</mat-card>
-<div *ngFor="let group of groupedTask | keyvalue" >
-    {{group.key }} 
-
-    <!-- <div *ngFor="let task og groupedTask.get(group.key)">
-        <mat-card>{{task.description}}</mat-card>
-    </div> -->
+<div *ngFor="let task of employeeTasks" >
+    <div class="task">
+        <mat-card>
+            <mat-card-subtitle>
+                {{task.date | date:'dd-MM-yyyy'}}
+            </mat-card-subtitle>
+            <mat-card-content>
+                {{task.description}}
+            </mat-card-content>
+            <mat-card-actions>
+                <mat-slide-toggle class="slider">Slide me!</mat-slide-toggle>
+            </mat-card-actions>
+            <!-- <mat-card-footer>
+                <mat-slide-toggle>Slide me!</mat-slide-toggle>
+            </mat-card-footer> -->
+        </mat-card>
+    </div>
 </div>

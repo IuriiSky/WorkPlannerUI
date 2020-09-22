@@ -1,6 +1,6 @@
 export class EmployeeTaskDto{
     taskId: number;
-    taskDescription: string;
+    description: string;
     isDone: boolean;
     date: Date;
 }
