@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 //import { DataService } from './data.service';
 import { Observable } from 'rxjs';
-import { WorkPlanDto, CreateWorkPlanCommand, UpdateWorkPlanCommand, DeleteWorkPlanCommand } from '../../shared/interfaces/work-plan';
+import { WorkPlanDto, CreateWorkPlanCommand, UpdateWorkPlanCommand, DeleteWorkPlanCommand, EmployeeTaskDto } from '../../shared/interfaces/work-plan';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -10,14 +10,16 @@ import { environment } from 'src/environments/environment';
 })
 export class WorkplansService {
   
-  getEmployeesOwnTasks(stringDate: string): Observable<WorkPlanDto[]>{
-    return this.http.get<WorkPlanDto[]>(this.baseApi+ 'employee?date='+stringDate );
-  }
+  
 
   baseApi :string;
   constructor(private http: HttpClient) 
   { 
     this.baseApi = environment.apiUrl + 'WorkPlans/';
+  }
+
+  getEmployeesOwnTasks(stringDate: string): Observable<EmployeeTaskDto[]>{
+    return this.http.get<EmployeeTaskDto[]>(environment.apiUrl + 'employeeTasks?startDate=' + stringDate + '&endDate=' + stringDate);
   }
 
   getWorkPlans(date: Date|string): Observable<WorkPlanDto[]>{

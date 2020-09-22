@@ -4,6 +4,8 @@ import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
+import {MatCardModule} from '@angular/material/card';
+
   // Helpers
 import {BusyInterceptor} from './_helpers/busy.interceptor';
 import { JwtInterceptor } from './auth/jwt.interceptor';
@@ -65,8 +67,12 @@ import { EmployeeTasksComponent } from './employee/employee-tasks/employee-tasks
     DragDropModule,
     MatFormFieldModule,
     MatInputModule,
+    MatCardModule,
     AuthModule
   ],
+  // exports:[
+  //   MatCardModule
+  // ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: BusyInterceptor,multi: true},
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

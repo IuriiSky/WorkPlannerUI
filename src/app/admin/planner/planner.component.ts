@@ -61,11 +61,12 @@ export class PlannerComponent implements OnInit,OnDestroy {
     } 
   }
 
-  setActiveEmployee(empl: EmployeeDto){
+  private setActiveEmployee(empl: EmployeeDto){
     this.employee = empl;
     this.getWorkPlanForEmployee(this.currentDate,empl.id);
   }
-  getWorkPlanForEmployee(date: Date, employeeId : number){
+
+  private getWorkPlanForEmployee(date: Date, employeeId : number){
     
     let stringDate = this.datepipe.transform(date, 'yyyy-MM-dd');
     this.plannerService.getWorkPlansForEmployee(stringDate, employeeId).subscribe((data : WorkPlanDto[]) => {
@@ -73,7 +74,8 @@ export class PlannerComponent implements OnInit,OnDestroy {
       this.recalculateTask(data);
     });
   }
-  recalculateTask(workPlan :WorkPlanDto[]){
+
+  private recalculateTask(workPlan :WorkPlanDto[]){
     this.employeeTasks = this.allTasks.filter(t => {
       return workPlan.some(wp => wp.taskId == t.id);
     });
