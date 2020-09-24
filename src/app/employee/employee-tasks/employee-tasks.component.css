@@ -1,3 +1,52 @@
+.separator {
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+.separator::before, .separator::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid #000;
+}
+.separator::before {
+    margin-right: .25em;
+}
+.separator::after {
+    margin-left: .25em;
+}
+.button {
+    height: 30px;
+    padding: 0 5px;
+    width: auto;
+    margin: 30px auto 0;
+  }
+  
+.button:hover {
+    background-color: var(--bt-create-hover-color);
+    transition: 0.4s ease-out;
+  }
+
+  .primary-button {
+    /* background-color: #6e6e6e; */
+    border: none;
+    border-radius: 4px;
+    color: var(--white-color);
+    font-weight: 500;
+    font-size: 1em;
+  }
+
+.todaytasks{
+    background-color: greenyellow;
+    padding: 30px;
+}
+.tommorrowtasks{
+    background-color: yellow;
+    padding: 30px;
+}
+.weektasks{
+    background-color: red;
+    padding: 30px;
+}
 .task {
     margin: 10px;
     margin-top: 20px;

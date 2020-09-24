@@ -18,8 +18,11 @@ export class WorkplansService {
     this.baseApi = environment.apiUrl + 'WorkPlans/';
   }
 
-  getEmployeesOwnTasks(stringDate: string): Observable<EmployeeTaskDto[]>{
-    return this.http.get<EmployeeTaskDto[]>(environment.apiUrl + 'employeeTasks?startDate=' + stringDate + '&endDate=' + stringDate);
+  getEmployeesOwnTasksForDate(date: string): Observable<EmployeeTaskDto[]>{
+    return this.http.get<EmployeeTaskDto[]>(environment.apiUrl + 'employeeTasks?startDate=' + date + '&endDate=' + date);
+  }
+  getEmployeesOwnTasksForDateRange(startDate: string, endDate: string): Observable<EmployeeTaskDto[]>{
+    return this.http.get<EmployeeTaskDto[]>(environment.apiUrl + 'employeeTasks?startDate=' + startDate + '&endDate=' + endDate);
   }
 
   getWorkPlans(date: Date|string): Observable<WorkPlanDto[]>{
