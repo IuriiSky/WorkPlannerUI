@@ -34,6 +34,7 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import { DatePipe } from '@angular/common';
 import { BaseComponent } from './shared/components/base/base.component';
+import { NavigationComponent } from './navigation/navigation.component';
 
 
 
@@ -54,6 +55,7 @@ import { BaseComponent } from './shared/components/base/base.component';
     LoadingComponent,
     LoadingComponent,
     BaseComponent,
+    NavigationComponent,
   ],
   imports: [
     BrowserModule,

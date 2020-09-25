@@ -1,9 +1,13 @@
 .wrapper {
   display: flex;
+  flex-wrap: wrap;
 }
 
-.admin-links {
-  display: none;
+.wrapper-navigation {
+  background: lavender;
+  display: flex;
+  justify-content: center;
+  width: 100%;
 }
 
 .employee {
@@ -22,13 +26,6 @@
   transition: box-shadow .5s;
 }
 
-app-admin {
-  display: flex;
-  flex-direction: column;
-  width: 252px;
-  margin: 20px;
-}
-
 .wrapper-to-btn {
   display: flex
 }
@@ -39,7 +36,6 @@ app-admin {
   font-size: 30px;
   font-style: italic;
   width: 90%;
-  padding-left: 100px;
 }
 
 .new-employee-btn {
@@ -153,60 +149,8 @@ input[type = "color"]{
   to {transform: scale(1)}
 }
 
-@media only screen and (max-width: 640px) {
-  /* For mobile phones: */
-  .wrapper {
-    justify-content: center;
-    flex-direction: column;
+@media only screen and (min-width: 768px) {
+  .wrapper-navigation {
+    padding-bottom: 10px;
   }
-
-  app-admin {
-    display: none;
- }
-
- .admin-links {
-  display: flex;
-  justify-content: center;
- }
-
- .admin-list {
-  display: flex;
-  list-style: none;
- }
-
- .bg-wrapper {
-  background-color: #fff;
-  border-radius: 4px;
-  box-shadow: 0 5px 5px rgba(10,16,20,.24), 0 0 2px rgba(10,16,20,.12);
-  transition: box-shadow .5s;
-  min-width: 145px;
-  margin: 24px 5px;
- }
-
- .link {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 10px;
-  text-decoration: none;
-}
-
-.svg-size {
-  height: 20px;
-  width: 20px;
-  margin-right: 10px;
-}
-}
-
-@media only screen and (max-width: 480px) {
-  /* For mobile phones: */
-  .admin-list {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-   }
-
-   .bg-wrapper {
-    margin: 12px 5px;
-   }
 }
