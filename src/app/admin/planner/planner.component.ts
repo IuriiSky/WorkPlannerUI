@@ -14,7 +14,7 @@ import { delay } from 'rxjs/operators';
 @Component({
   selector: 'app-planner',
   templateUrl: './planner.component.html',
-  styleUrls: ['./planner.component.css']
+  styleUrls: ['./planner.component.css'],
 })
 export class PlannerComponent implements OnInit,OnDestroy {
 

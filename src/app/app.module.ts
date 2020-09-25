@@ -31,12 +31,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
   // Angular Material
 import {MatDatepickerModule} from '@angular/material/datepicker';
-import {MatNativeDateModule, MatFormFieldModule, MatInputModule} from '@angular/material';
+import {MatNativeDateModule, MatFormFieldModule, MatInputModule, DateAdapter} from '@angular/material';
 import {MatTabsModule} from '@angular/material/tabs';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import { DatePipe } from '@angular/common';
 import { AuthModule } from './auth/auth.module';
 import { EmployeeTasksComponent } from './employee/employee-tasks/employee-tasks.component';
+import { CalendarComponent } from './calendar/calendar.component';
+import { MyDateAdapter } from './calendar/my.date.adapter';
 
 @NgModule({
   declarations: [
@@ -54,6 +56,7 @@ import { EmployeeTasksComponent } from './employee/employee-tasks/employee-tasks
     LoadingComponent,
     LoadingComponent,
     EmployeeTasksComponent,
+    CalendarComponent,
   ],
   imports: [
     BrowserModule,
@@ -79,6 +82,7 @@ import { EmployeeTasksComponent } from './employee/employee-tasks/employee-tasks
     { provide: HTTP_INTERCEPTORS, useClass: BusyInterceptor,multi: true},
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     // { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    { provide: DateAdapter, useClass: MyDateAdapter},
     EmployeesService,
     DatePipe
   ],
