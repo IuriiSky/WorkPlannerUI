@@ -28,7 +28,8 @@ export class PlannerComponent implements OnInit,OnDestroy {
   
 
   departmentSubscription: Subscription;
-  public currentDate: Date = new Date();
+  //public currentDate: Date = new Date();
+  public currentDate: Date;
 
   public allEmployees:EmployeeDto[];
   public allTasks:TaskDto[];
@@ -59,6 +60,13 @@ export class PlannerComponent implements OnInit,OnDestroy {
         this.employeeTasks.splice(index, 1);
       }
     } 
+  }
+
+  dateChanged(date:Date){
+    this.currentDate = date;
+    if(this.employee) {
+      this.setActiveEmployee(this.employee);
+    }
   }
 
   public setActiveEmployee(empl: EmployeeDto){
@@ -119,22 +127,22 @@ export class PlannerComponent implements OnInit,OnDestroy {
     }
   }
 
-  nextDay() {
-    let date = new Date(this.currentDate.getTime());
-    date.setDate(this.currentDate.getDate() + 1);
-    this.currentDate = date;
-    this.setActiveEmployee(this.employee);
-  }
+  // nextDay() {
+  //   let date = new Date(this.currentDate.getTime());
+  //   date.setDate(this.currentDate.getDate() + 1);
+  //   this.currentDate = date;
+  //   this.setActiveEmployee(this.employee);
+  // }
 
-  previousDay() {
-    let date = new Date(this.currentDate.getTime());
-    date.setDate(this.currentDate.getDate() - 1);
-    this.currentDate = date;
-    this.setActiveEmployee(this.employee);
-  }
+  // previousDay() {
+  //   let date = new Date(this.currentDate.getTime());
+  //   date.setDate(this.currentDate.getDate() - 1);
+  //   this.currentDate = date;
+  //   this.setActiveEmployee(this.employee);
+  // }
   
 
-  getAllEmployees() {
+  private getAllEmployees() {
     let departmentId = this.departmentService.departmentSubject.getValue();
     this.employeesService.getAllEmployeesInDepartment(departmentId).subscribe((data: EmployeeDto[]) => {
       this.allEmployees = data;
@@ -153,9 +161,9 @@ export class PlannerComponent implements OnInit,OnDestroy {
   }
 
   ngOnInit() {
-    this.listenToDepartment();
     this.tasksService.getAllTasks().subscribe((data: TaskDto[]) => {
       this.allTasks = data;
+      this.listenToDepartment();
     });
   }
 

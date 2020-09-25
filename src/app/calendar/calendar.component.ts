@@ -1,4 +1,4 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ViewEncapsulation} from '@angular/core';
 import { DatePipe } from '@angular/common';
 import {MatDatepickerInputEvent} from '@angular/material/datepicker';
@@ -12,10 +12,13 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class CalendarComponent  implements OnInit {
 
+  @Output() selectedDate = new EventEmitter<Date>();
+
   constructor(private datepipe: DatePipe)  { }
 
-    days:string[] = ["Mo","Tu","We","Th","Fr","Sa","Su"];
-    moths:string[] = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+    //days:string[] = ["Man","Tir","Ons","Tor","Fre","Lør","Søn"];
+    days:string[] = ["Ma","Ti","On","To","Fr","Lø","Sø"];
+    moths:string[] = ["Januar","Februar","Marts","April","Maj","Juni","Juli","August","September","Oktober","November","December"];
 
     currentDateSubject : BehaviorSubject<Date>;
     currentDate: Date;
@@ -89,6 +92,7 @@ export class CalendarComponent  implements OnInit {
         this.currentMonth = this.moths[date.getMonth()];
         this.currentMonthDay = date.getDate();
         this.currentWeekDay = this.getDayOfWeek(date);
+        this.selectedDate.emit(date);
       })
     }
 
