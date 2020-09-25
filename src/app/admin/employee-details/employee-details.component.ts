@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import { EmployeeDetailsDto, UpdateEmployeeCommand, PlanHolidayCommand, HolidayDto } from '../../shared/interfaces/employee';
+import { EmployeeDetailsDto, UpdateEmployeeCommand, PlanHolidayCommand, HolidayDto, UpdateEmployeeCredentialsCommand } from '../../shared/interfaces/employee';
 import { FormControl, FormGroup } from '@angular/forms';
-import { EmployeesService } from 'src/app/services/employees.service';
-import { LoadingService } from 'src/app/services/loading.service';
-import { BaseComponent } from 'src/app/shared/components/base/base.component';
+import { EmployeesService } from 'src/app/services/dataservices/employees.service';
 
 // Angular Material
 
@@ -13,11 +11,9 @@ import { BaseComponent } from 'src/app/shared/components/base/base.component';
   templateUrl: './employee-details.component.html',
   styleUrls: ['./employee-details.component.css']
 })
-export class EmployeeDetailsComponent extends BaseComponent implements OnInit {
+export class EmployeeDetailsComponent implements OnInit {
 
-  constructor(public employeeService: EmployeesService,loadingService: LoadingService,
-    private route: ActivatedRoute) {
-    super(loadingService);
+  constructor(public employeeService: EmployeesService, private route: ActivatedRoute) {
     this.route.params.subscribe((params: Params) => {
       if (params.id) {
         this.employeeId = params.id;
@@ -25,13 +21,14 @@ export class EmployeeDetailsComponent extends BaseComponent implements OnInit {
       }
     });
   }
-  showChangeNameForm = true;
-  showChangeColorForm = true;
+  showChangeInfoForm = true;
+  showChangeCredentialsForm = true;
 
   showInfo = false;
   showSettings = false;
 
   modifyEmployee: FormGroup;
+  modifyCredentials: FormGroup;
 
   public employeeDetail: EmployeeDetailsDto;
 
@@ -41,6 +38,11 @@ export class EmployeeDetailsComponent extends BaseComponent implements OnInit {
     employeeId: 0,
     employeeName: '',
     colorCode: ''
+  };
+  public credentialsUpdate : UpdateEmployeeCredentialsCommand = {
+    employeeId: 0,
+    password: '',
+    isActive: true,
   };
 
   public  employeeHoliday: PlanHolidayCommand = {
@@ -69,25 +71,27 @@ export class EmployeeDetailsComponent extends BaseComponent implements OnInit {
   //   this.showSettings = !this.showSettings
   // }
 
-  toggleShowChangeNameForm() {
-    this.showChangeNameForm = !this.showChangeNameForm;
+  toggleShowChangeInfoForm() {
+    this.showChangeInfoForm = !this.showChangeInfoForm;
+    this.initUpdateEmployee();
   }
 
-  toggleShowChangeColorForm() {
-    this.showChangeColorForm = !this.showChangeColorForm;
+  toggleShowChangeCredentialsForm() {
+    this.showChangeCredentialsForm = !this.showChangeCredentialsForm;
+    this.initUpdateEmployee();
   }
 
-  updateName() {
+  updateUserInfo() {
     this.employeeService.updateEmployee(this.employeeUpdate).subscribe(employee => {
       this.initDetailsEmployee();
-      this.showChangeNameForm = true;
+      this.showChangeInfoForm = true;
     });
   }
 
-  updateColor() {
-    this.employeeService.updateEmployee(this.employeeUpdate).subscribe(employee => {
+  updateCredentials() {
+    this.employeeService.updateCredentials(this.credentialsUpdate).subscribe(employee => {
       this.initDetailsEmployee();
-      this.showChangeColorForm = true;
+      this.showChangeCredentialsForm = true;
     });
   }
 
@@ -95,6 +99,9 @@ export class EmployeeDetailsComponent extends BaseComponent implements OnInit {
     this.employeeUpdate.employeeId = this.employeeDetail.id;
     this.employeeUpdate.employeeName = this.employeeDetail.name;
     this.employeeUpdate.colorCode = this.employeeDetail.colorCode;
+
+    this.credentialsUpdate.employeeId = this.employeeDetail.id;
+    this.credentialsUpdate.isActive = this.employeeDetail.isActive;
   }
 
   initDetailsEmployee() {
@@ -124,6 +131,11 @@ export class EmployeeDetailsComponent extends BaseComponent implements OnInit {
     this.modifyEmployee = new FormGroup({
       employeeName: new FormControl(''),
       colorCode: new FormControl('')
+    });
+
+    this.modifyCredentials = new FormGroup({
+      password: new FormControl(''),
+      isActive: new FormControl('')
     });
   }
 }

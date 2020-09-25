@@ -1,38 +1,35 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { EmployeeDto } from 'src/app/shared/interfaces/employee';
-import { EmployeesService } from 'src/app/services/employees.service';
-import { TasksService } from 'src/app/services/tasks.service';
-import { Router } from '@angular/router';
+import { EmployeesService } from 'src/app/services/dataservices/employees.service';
+import { TasksService } from 'src/app/services/dataservices/tasks.service';
 import { TaskDto } from 'src/app/shared/interfaces/task';
-import { WorkplansService } from 'src/app/services/workplans.service';
+import { WorkplansService } from 'src/app/services/dataservices/workplans.service';
 import { CreateWorkPlanCommand, WorkPlanDto, DeleteWorkPlanCommand } from 'src/app/shared/interfaces/work-plan';
-import { CdkDragDrop, transferArrayItem, moveItemInArray} from '@angular/cdk/drag-drop';
-import { FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {MatDatepickerModule} from '@angular/material/datepicker';
-import {MatNativeDateModule} from '@angular/material';
-import {FormControl} from '@angular/forms';
+import { CdkDragDrop} from '@angular/cdk/drag-drop';
 import { DatePipe } from '@angular/common';
-import { BaseComponent } from 'src/app/shared/components/base/base.component';
-import { LoadingService } from 'src/app/services/loading.service';
+import { Subscription } from 'rxjs';
+import { DepartamentService } from 'src/app/services/departament.service';
+import { delay } from 'rxjs/operators';
 
 @Component({
   selector: 'app-planner',
   templateUrl: './planner.component.html',
-  styleUrls: ['./planner.component.css']
+  styleUrls: ['./planner.component.css'],
 })
-export class PlannerComponent extends BaseComponent implements OnInit {
+export class PlannerComponent implements OnInit,OnDestroy {
 
   constructor(
     private datepipe: DatePipe,
+    private departmentService: DepartamentService,
     private employeesService: EmployeesService,
     private tasksService: TasksService,
-    private plannerService: WorkplansService,
-    loadingService: LoadingService) 
-    {
-      super(loadingService);
-    }
+    private plannerService: WorkplansService) 
+    {    }
+  
 
-  public currentDate: Date = new Date();
+  departmentSubscription: Subscription;
+  //public currentDate: Date = new Date();
+  public currentDate: Date;
 
   public allEmployees:EmployeeDto[];
   public allTasks:TaskDto[];
@@ -41,9 +38,6 @@ export class PlannerComponent extends BaseComponent implements OnInit {
   public employeeTasks : TaskDto[];
   public remainingTasks : TaskDto[];
   private employeeWorkPlan : WorkPlanDto[];
-
-
-  
 
   drop(event: CdkDragDrop<TaskDto[]>) {
     if(!this.employee) return;
@@ -68,11 +62,19 @@ export class PlannerComponent extends BaseComponent implements OnInit {
     } 
   }
 
-  setActiveEmployee(empl: EmployeeDto){
+  dateChanged(date:Date){
+    this.currentDate = date;
+    if(this.employee) {
+      this.setActiveEmployee(this.employee);
+    }
+  }
+
+  public setActiveEmployee(empl: EmployeeDto){
     this.employee = empl;
     this.getWorkPlanForEmployee(this.currentDate,empl.id);
   }
-  getWorkPlanForEmployee(date: Date, employeeId : number){
+
+  private getWorkPlanForEmployee(date: Date, employeeId : number){
     
     let stringDate = this.datepipe.transform(date, 'yyyy-MM-dd');
     this.plannerService.getWorkPlansForEmployee(stringDate, employeeId).subscribe((data : WorkPlanDto[]) => {
@@ -80,7 +82,8 @@ export class PlannerComponent extends BaseComponent implements OnInit {
       this.recalculateTask(data);
     });
   }
-  recalculateTask(workPlan :WorkPlanDto[]){
+
+  private recalculateTask(workPlan :WorkPlanDto[]){
     this.employeeTasks = this.allTasks.filter(t => {
       return workPlan.some(wp => wp.taskId == t.id);
     });
@@ -89,23 +92,18 @@ export class PlannerComponent extends BaseComponent implements OnInit {
     });
   }
 
-  addTask(taskId: number){
-    let start = new Date(this.currentDate.getTime());
-    start.setHours(6);
+  private addTask(taskId: number){
     let com: CreateWorkPlanCommand =
     {
       employeeId: this.employee.id,
       taskId: taskId,
       date: this.currentDate,
-      startTime: start,
-      endTime: this.currentDate,
     };
     this.plannerService.createWorkPlan(com).subscribe((data:any) => {
       
     });
-    //reload list
   }
-  removeTask(taskId: number){
+  private removeTask(taskId: number){
     let workPlan = this.employeeWorkPlan.find(wp => wp.taskId == taskId);
     if(workPlan === undefined){
       let com :DeleteWorkPlanCommand={
@@ -129,34 +127,48 @@ export class PlannerComponent extends BaseComponent implements OnInit {
     }
   }
 
-  nextDay() {
-    let date = new Date(this.currentDate.getTime());
-    date.setDate(this.currentDate.getDate() + 1);
-    this.currentDate = date;
-    this.setActiveEmployee(this.employee);
-  }
+  // nextDay() {
+  //   let date = new Date(this.currentDate.getTime());
+  //   date.setDate(this.currentDate.getDate() + 1);
+  //   this.currentDate = date;
+  //   this.setActiveEmployee(this.employee);
+  // }
 
-  previousDay() {
-    let date = new Date(this.currentDate.getTime());
-    date.setDate(this.currentDate.getDate() - 1);
-    this.currentDate = date;
-    this.setActiveEmployee(this.employee);
-  }
+  // previousDay() {
+  //   let date = new Date(this.currentDate.getTime());
+  //   date.setDate(this.currentDate.getDate() - 1);
+  //   this.currentDate = date;
+  //   this.setActiveEmployee(this.employee);
+  // }
   
-  ngOnInit() {
-    this.isLoading = true;
-    this.employeesService.getAllEmployees().subscribe((data: EmployeeDto[]) => {
+
+  private getAllEmployees() {
+    let departmentId = this.departmentService.departmentSubject.getValue();
+    this.employeesService.getAllEmployeesInDepartment(departmentId).subscribe((data: EmployeeDto[]) => {
       this.allEmployees = data;
-      this.isLoading = false;
       if(data.length > 0) {
         this.setActiveEmployee(data[0]);
       }
     });
-    this.isLoading = true;
+  }
+
+  listenToDepartment() {
+    this.departmentSubscription = this.departmentService.departmentSubject
+      .pipe(delay(0))
+      .subscribe(() => {
+        this.getAllEmployees();
+      })
+  }
+
+  ngOnInit() {
     this.tasksService.getAllTasks().subscribe((data: TaskDto[]) => {
       this.allTasks = data;
-      this.isLoading = false;
-    })
+      this.listenToDepartment();
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.departmentSubscription.unsubscribe();
   }
 
 }

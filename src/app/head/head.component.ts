@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { LoadingService } from '../services/loading.service';
+import { delay } from 'rxjs/operators';
+import { AuthenticationService } from '../auth/authentication.service';
+import { Router } from '@angular/router';
 import { DepartamentService } from '../services/departament.service';
 
 @Component({
@@ -8,46 +12,75 @@ import { DepartamentService } from '../services/departament.service';
 })
 export class HeadComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private loading: LoadingService,
+    private authService: AuthenticationService,
+    private departmentService : DepartamentService,
+    private router: Router) 
+  { 
+    //this.isUserLoggedIn = authService.isUserLoggedIn();
+  }
+  isLoading: boolean = false;
+  isUserLoggedIn: boolean;
+  isAdmin: boolean;
 
-  nameDepartament1 = 'Departament-1';
-  nameDepartament2 = 'Departament-2';
+  selectedDepartment: number = 1;
+  nameDepartament1 = 'Teknisk afd.';
+  nameDepartament2 = 'Service afd.';
 
   public humburgerMenu: boolean = false;
 
-  public requestDepartamentValue: string = '';
-
-  // Plug
-  public isUserLoggedIn: boolean = true;
-  toggle(){
-    this.isUserLoggedIn = !this.isUserLoggedIn;
+  doLogout(){
+    this.authService.logout();
   }
 
   openCloseHamburgerMenu() {
     this.humburgerMenu = !this.humburgerMenu;
   }
-  
-
-public selectDepartament1: boolean = true;
-public selectDepartament2: boolean = false;
-
-chooseDepartament(){
-    this.selectDepartament1 = !this.selectDepartament1;   
-    this.selectDepartament2 = !this.selectDepartament2;
-    this.setDepartamentValue();    
-}
-
-setDepartamentValue() {
-  if (this.selectDepartament1 === true) {
-    this.requestDepartamentValue = '1';
-  } else { 
-    this.requestDepartamentValue = '2'
+  selectDepartment(departmentId:number){
+    this.selectedDepartment = departmentId;
+    this.departmentService.setSelectedDepartment(departmentId);
   }
-  
-  return this.requestDepartamentValue;
-}
-
+  isDeparmentSelected(department:number){
+    return this.selectedDepartment === department;
+  }
   ngOnInit() {
+    this.isUserLoggedIn = this.authService.isLoggedIn();
+    this.isAdmin = this.authService.isAdmin();
+    this.selectedDepartment =  this.departmentService.departmentSubject.getValue();
+
+    this.listenToLoading();
+    this.listenToUserChanged();
+  }
+
+
+  listenToUserChanged() {
+    this.authService.userSubject
+      .pipe(delay(0))
+      .subscribe((user)=>{
+        let userValid = user !== null && user !== undefined;
+        if( !userValid && !this.authService.refreshTokenInProgress){
+          this.isUserLoggedIn = false;
+          this.isAdmin = false;
+          this.router.navigate(['/login']);
+        }
+        else{
+          this.isUserLoggedIn = this.authService.isLoggedIn();
+          this.isAdmin = this.authService.isAdmin();
+        }
+      });
+  }
+
+  /**
+   * Listen to the loadingSub property in the LoadingService class. This drives the
+   * display of the loading spinner.
+   */
+  listenToLoading(): void {
+    this.loading.loadingSub
+      .pipe(delay(0)) // This prevents a ExpressionChangedAfterItHasBeenCheckedError for subsequent requests
+      .subscribe((loading) => {
+        this.isLoading = loading;
+      });
   }
 
 }

@@ -18,11 +18,12 @@
   <div class="wrapper-navigation">
     <app-navigation></app-navigation>
   </div>
-    
-      <app-employees-list [employees]="allEmployees" 
+  <app-calendar (selectedDate)="dateChanged($event)"></app-calendar>
+ <div class="employee-list-block background-block">
+    <app-employees-list [employees]="allEmployees" 
                           [selectedEmployee]="employee" 
                           (voted)="setActiveEmployee($event)">
-      </app-employees-list>
+    </app-employees-list>
 
     <div class="todo-list-block background-block">
       <ul id="todoList" 
@@ -32,10 +33,10 @@
           [cdkDropListData]="employeeTasks" 
           [cdkDropListConnectedTo]="[taskList]" 
           (cdkDropListDropped)="drop($event)">
-          <li class="task" 
+        <li class="task" 
               *ngFor="let employeeTask of employeeTasks" 
               cdkDrag>{{employeeTask.id}}. {{employeeTask.description}}
-          </li>
+        </li>
       </ul>
     </div>
     <div class="task-list-block background-block">
@@ -50,4 +51,5 @@
         </li>
       </ul>
     </div>
+  </div>
 </div>
