@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CreateEmployeeCommand, EmployeeDto } from '../../shared/interfaces/employee';
-import { EmployeesService } from '../../services/employees.service';
+import { EmployeesService } from '../../services/dataservices/employees.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { DepartamentService } from 'src/app/services/departament.service';
 import { delay } from 'rxjs/operators';

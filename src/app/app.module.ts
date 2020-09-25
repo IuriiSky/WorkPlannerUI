@@ -4,6 +4,9 @@ import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
+import {MatCardModule} from '@angular/material/card';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+
   // Helpers
 import {BusyInterceptor} from './_helpers/busy.interceptor';
 import { JwtInterceptor } from './auth/jwt.interceptor';
@@ -22,7 +25,7 @@ import { LoginComponent } from './login/login.component';
   // Shared components
 import { LoadingComponent } from './shared/components/loading/loading.component';
   // Services
-import { EmployeesService} from './services/employees.service';
+import { EmployeesService} from './services/dataservices/employees.service';
 import { EmployeeDetailsComponent } from './admin/employee-details/employee-details.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -33,6 +36,7 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import { DatePipe } from '@angular/common';
 import { AuthModule } from './auth/auth.module';
+import { EmployeeTasksComponent } from './employee/employee-tasks/employee-tasks.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { MyDateAdapter } from './calendar/my.date.adapter';
 
@@ -51,6 +55,7 @@ import { MyDateAdapter } from './calendar/my.date.adapter';
     LoginComponent,
     LoadingComponent,
     LoadingComponent,
+    EmployeeTasksComponent,
     CalendarComponent,
   ],
   imports: [
@@ -66,8 +71,13 @@ import { MyDateAdapter } from './calendar/my.date.adapter';
     DragDropModule,
     MatFormFieldModule,
     MatInputModule,
+    MatCardModule,
+    MatSlideToggleModule,
     AuthModule
   ],
+  // exports:[
+  //   MatCardModule
+  // ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: BusyInterceptor,multi: true},
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

@@ -1,0 +1,60 @@
+<div class="todaytasks">
+    <div class="separator">I DAG</div>
+    <div *ngFor="let task of todaysTasks">
+        <mat-card [ngClass]="task.isDone ? 'task-done' : 'task'" >
+            <mat-card-title>
+                {{task.isDone ? 'Færdig' : 'Planlagt'}}
+            </mat-card-title>
+            <mat-card-content>
+                {{task.description}}
+            </mat-card-content>
+            <mat-card-actions class="centered">
+                <mat-slide-toggle class="slider"
+                    [(ngModel)]="task.isDone" 
+                    (change)="slideToggled(task)"
+                    > 
+                </mat-slide-toggle>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+    <div *ngIf=!tommorowTasks>
+        <button class="button primary-button" (click)="getTommorowTasks()">Hent for i morgen</button>
+    </div>
+</div>
+
+<div class="tommorrowtasks" *ngIf=tommorowTasks>
+    <div class="separator">I MORGEN </div>
+    <div *ngFor="let task of tommorowTasks">
+        <mat-card [ngClass]="task.isDone ? 'task-done' : 'task'">
+            <mat-card-subtitle>
+                {{task.date | date:'dd-MM-yyyy'}}
+            </mat-card-subtitle>
+            <mat-card-content>
+                {{task.description}}
+            </mat-card-content>
+            <mat-card-actions class="centered">
+                <mat-slide-toggle [disabled]="true" class="slider"></mat-slide-toggle>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+    <div *ngIf=!weekTasks>
+        <button class="button primary-button" (click)="getWeekTasks()">Hent for hele ugen</button>
+    </div>
+</div>
+
+<div class="weektasks" *ngIf=weekTasks>
+    <div class="separator">I UGE </div>
+    <div *ngFor="let task of weekTasks">
+        <mat-card [ngClass]="task.isDone ? 'task-done' : 'task'">
+            <mat-card-subtitle>
+                {{task.date | date:'dd-MM-yyyy'}}
+            </mat-card-subtitle>
+            <mat-card-content>
+                {{task.description}}
+            </mat-card-content>
+            <mat-card-actions class="centered">
+                <mat-slide-toggle [disabled]="true" class="slider"></mat-slide-toggle>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+</div>

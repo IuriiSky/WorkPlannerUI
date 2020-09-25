@@ -22,6 +22,7 @@ export class HeadComponent implements OnInit {
   }
   isLoading: boolean = false;
   isUserLoggedIn: boolean;
+  isAdmin: boolean;
 
   selectedDepartment: number = 1;
   nameDepartament1 = 'Teknisk afd.';
@@ -44,7 +45,8 @@ export class HeadComponent implements OnInit {
     return this.selectedDepartment === department;
   }
   ngOnInit() {
-    this.isUserLoggedIn = this.authService.isUserLoggedIn() && this.authService.isAdminUser();
+    this.isUserLoggedIn = this.authService.isLoggedIn();
+    this.isAdmin = this.authService.isAdmin();
     this.selectedDepartment =  this.departmentService.departmentSubject.getValue();
 
     this.listenToLoading();
@@ -59,10 +61,12 @@ export class HeadComponent implements OnInit {
         let userValid = user !== null && user !== undefined;
         if( !userValid && !this.authService.refreshTokenInProgress){
           this.isUserLoggedIn = false;
+          this.isAdmin = false;
           this.router.navigate(['/login']);
         }
         else{
-          this.isUserLoggedIn = this.authService.hasAdminRole(user);
+          this.isUserLoggedIn = this.authService.isLoggedIn();
+          this.isAdmin = this.authService.isAdmin();
         }
       });
   }

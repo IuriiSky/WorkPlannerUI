@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { EmployeeDetailsDto, UpdateEmployeeCommand, PlanHolidayCommand, HolidayDto, UpdateEmployeeCredentialsCommand } from '../../shared/interfaces/employee';
 import { FormControl, FormGroup } from '@angular/forms';
-import { EmployeesService } from 'src/app/services/employees.service';
+import { EmployeesService } from 'src/app/services/dataservices/employees.service';
 
 // Angular Material
 
