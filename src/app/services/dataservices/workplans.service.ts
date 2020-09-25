@@ -11,6 +11,7 @@ import { environment } from 'src/environments/environment';
 export class WorkplansService {
   
   
+  
 
   baseApi :string;
   constructor(private http: HttpClient) 
@@ -23,6 +24,10 @@ export class WorkplansService {
   }
   getEmployeesOwnTasksForDateRange(startDate: string, endDate: string): Observable<EmployeeTaskDto[]>{
     return this.http.get<EmployeeTaskDto[]>(environment.apiUrl + 'employeeTasks?startDate=' + startDate + '&endDate=' + endDate);
+  }
+  updateEmployeeTask(task: EmployeeTaskDto) {
+    return this.http.put<any>(environment.apiUrl + 'employeeTasks/update',task);
+    throw new Error('Method not implemented.');
   }
 
   getWorkPlans(date: Date|string): Observable<WorkPlanDto[]>{
@@ -40,6 +45,8 @@ export class WorkplansService {
   updateWorkPlan(workplan: UpdateWorkPlanCommand){
     return this.http.put<any>(this.baseApi,workplan);
   }
+
+  
 
   deleteWorkPlan(workPlan:DeleteWorkPlanCommand){
     return this.http.put<any>(this.baseApi+'delete',workPlan);

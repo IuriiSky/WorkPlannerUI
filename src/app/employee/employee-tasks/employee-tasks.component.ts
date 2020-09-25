@@ -1,7 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { WorkplansService } from 'src/app/services/dataservices/workplans.service';
-import { EmployeeTaskDto, WorkPlanDto } from 'src/app/shared/interfaces/work-plan';
+import { EmployeeTaskDto } from 'src/app/shared/interfaces/work-plan';
 
 @Component({
   selector: 'app-employee-tasks',
@@ -11,35 +11,23 @@ import { EmployeeTaskDto, WorkPlanDto } from 'src/app/shared/interfaces/work-pla
 export class EmployeeTasksComponent implements OnInit {
 
   constructor(private plannerService: WorkplansService,private datepipe: DatePipe,) { }
-  private todaysTasks : EmployeeTaskDto[];
-  private tommorowTasks : EmployeeTaskDto[];
-  private weekTasks : EmployeeTaskDto[];
+  public todaysTasks : EmployeeTaskDto[];
+  public tommorowTasks : EmployeeTaskDto[];
+  public weekTasks : EmployeeTaskDto[];
   private today : Date;
-  // groupedTask: Map<Date, EmployeeTaskDto[]> = new Map<Date, EmployeeTaskDto[]>();;
-
-  // mapTasks(employeeTasks : EmployeeTaskDto[]){
-  //   employeeTasks.forEach(task => {
-  //     if (this.groupedTask.has(task.date)){
-  //       let dateTasks = this.groupedTask.get(task.date);
-  //       dateTasks.push(task);
-  //       this.groupedTask.set(task.date,dateTasks);
-  //     }else
-  //     {
-  //       this.groupedTask.set(task.date,[task])
-  //     }
-  //   });
-  //   console.log(this.groupedTask);
-  // }
-  onChange(event:any,task:EmployeeTaskDto){
-    console.log(event);
-    console.log(task);
+  
+  slideToggled(task:EmployeeTaskDto){
+    this.plannerService.updateEmployeeTask(task).subscribe(
+      (data : any) => {
+        this.todaysTasks.sort((t1,t2)=>{
+          return (t1.isDone === t2.isDone)?0: t1.isDone? 1 : -1;
+        })
+    },
+    (err)=>{
+      console.log(err);  
+    });
   }
-  // onChange(taskid:number,date:Date,event:any){
-  //   console.log(taskid);
-  //   console.log(date);
-  //   console.log(event);
-  // }
-
+  
   getTommorowTasks(){
     let tommorow = new Date();
     tommorow.setDate(this.today.getDate() + 1);

@@ -61,7 +61,7 @@ export class PlannerComponent implements OnInit,OnDestroy {
     } 
   }
 
-  private setActiveEmployee(empl: EmployeeDto){
+  public setActiveEmployee(empl: EmployeeDto){
     this.employee = empl;
     this.getWorkPlanForEmployee(this.currentDate,empl.id);
   }

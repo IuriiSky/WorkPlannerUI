@@ -50,18 +50,18 @@ export class AuthenticationService {
     return false;
   }
   
-  isUserLoggedIn():boolean{
-    return !this.isUserNotLoggedIn();
+  isLoggedIn():boolean{
+    return !this.isNotLoggedIn();
   }
-  isUserNotLoggedIn():boolean{
+  isNotLoggedIn():boolean{
     return (this.user === undefined || this.userSubject === null) && !this.refreshTokenInProgress;
   }
 
-  isAdminUser():boolean {
-    return this.isUserLoggedIn && this.hasAdminRole(this.user);
+  isAdmin():boolean {
+    return this.isLoggedIn && this.hasAdminRole(this.user);
   }
   isUser():boolean {
-    return this.isUserLoggedIn && this.hasUserRole(this.user);
+    return this.isLoggedIn && this.hasUserRole(this.user);
   }
 
    getUser(): Observable<User> {

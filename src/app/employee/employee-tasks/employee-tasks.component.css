@@ -18,7 +18,7 @@
     height: 30px;
     width: auto;
     padding: 5px;
-    margin: -20px -68px; 
+    margin: 15px -68px; 
     position:relative;
     top:50%; 
     left:50%;
@@ -40,21 +40,33 @@
 
 .todaytasks{
     background-color:#cdd0c9;
-    padding: 30px;
+    padding: 20px;
 }
 .tommorrowtasks{
     background-color: #abab86;
-    padding: 30px;
+    padding: 20px;
 }
 .weektasks{
     background-color: #ad8585;
-    padding: 30px;
+    padding: 20px;
 }
 .task {
     margin: 10px;
     margin-top: 20px;
     margin-bottom: 20px;
+    background-color: #f5bd88;
+    font-size: 18px;
   }
+  .centered{
+    text-align: center;
+  }
+  .task-done {
+    margin: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    background-color: #92e697;
+  }
+  
   .slider{
       text-align: center;
       margin-bottom: 10px;

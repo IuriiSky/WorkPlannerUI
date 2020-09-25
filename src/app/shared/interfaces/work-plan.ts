@@ -10,24 +10,18 @@ export class WorkPlanDto {
     taskId: number;
     taskDescription: string ;
     date: Date;
-    // startTime: Date;
-    // endTime: Date;
 }
 
 export class CreateWorkPlanCommand {
     employeeId: number;
     taskId: number;
     date: Date;
-    // startTime: Date;
-    // endTime: Date;
 }
 
 export class UpdateWorkPlanCommand{
     employeeId: number;
     taskId: number;
     date: Date;
-    // startTime: Date;
-    // endTime: Date;
 }
 
 export class DeleteWorkPlanCommand {
