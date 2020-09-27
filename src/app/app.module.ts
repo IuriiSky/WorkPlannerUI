@@ -7,9 +7,10 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import {MatCardModule} from '@angular/material/card';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
-  // Helpers
+// Helpers
 import {BusyInterceptor} from './_helpers/busy.interceptor';
 import { JwtInterceptor } from './auth/jwt.interceptor';
+import { ErrorInterceptor } from './_helpers/error.interceptor';
 
   // Components
 import { AppComponent } from './app.component';
@@ -81,7 +82,7 @@ import { MyDateAdapter } from './calendar/my.date.adapter';
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: BusyInterceptor,multi: true},
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    // { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     { provide: DateAdapter, useClass: MyDateAdapter},
     EmployeesService,
     DatePipe
