@@ -26,8 +26,8 @@ export class EmployeesService {
     return  this.http.get<EmployeeDto[]>(this.baseApi+'inDepartment?departmentId='+departmentId);
   }
 
-  getAvailableEmployees(date:Date|string) :Observable<EmployeeDto[]> {
-    return this.http.get<EmployeeDto[]>(this.baseApi);
+  getAvailableEmployeesInDepartment(date:Date|string,departmentId:number) :Observable<EmployeeDto[]> {
+    return this.http.get<EmployeeDto[]>(this.baseApi + 'available?date=' + date + '&departmentId=' + departmentId);
   }
 
   getEmployeeDetails(employeeId: number) {
