@@ -1,10 +1,10 @@
 <div class="wrapper-login">
   <form class="modal-content" action="/action_page.php" method="post">
     <div class="container">
-      <label for="uname">Username</label>
-      <input type="text" [(ngModel)]="login" placeholder="Enter Username" name="uname" required>
-      <label for="psw">Password</label>
-      <input type="password" [(ngModel)]="password" placeholder="Enter Password" name="psw" required>
+      <label for="uname">Brugernavn</label>
+      <input type="text" [(ngModel)]="login" placeholder="Angiv brugenavn" name="uname" required>
+      <label for="psw">Kodeord</label>
+      <input type="password" [(ngModel)]="password" placeholder="Angiv kodeord" name="psw" required>
       <button class="button" type="submit" (click) = "doLogin()"><span>Login</span></button>
     </div>
   </form>
