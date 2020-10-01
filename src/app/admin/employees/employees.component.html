@@ -25,7 +25,7 @@
   <!-- Main area for employee  -->
   <main class="employee">
     <div class="wrapper-to-btn">
-    <h2 class="heading">Employees</h2>
+    <h2 class="heading">Medarbejdere</h2>
       <button type="submit" class="new-employee-btn" (click) = "toggleShowCreateForm()" title="Opret medarbejder">
         <svg class="svg-new-employee">
           <use xlink:href="#icon-user-plus"/>
@@ -37,7 +37,7 @@
       </app-employees-list>
   </main>
 
-    <div class="wrapper-create-form" [hidden] = "showCreateForm">
+  <div class="wrapper-create-form" [hidden] = "showCreateForm">
     <form action="" method="post">
       <fieldset class="create-form animate" [formGroup]="createEmployee">
         <legend><span class="legend-text">Ny medarbejder</span></legend>
@@ -56,11 +56,11 @@
 
           <label for="password">Adgangskode:</label>
           <input formControlName="password" [(ngModel)]="createNewEmployee.password"
-                 type="text" placeholder="Angiv adgangskodeogin" name="password" id="password" title="Medarbejder password" autofocus required>
+                 type="text" placeholder="Angiv adgangskoden" name="password" id="password" title="Medarbejder adganskoden" autofocus required>
 
         <button  (click)="addEmployee()" class="create-button primary-button">Opret</button>
         <button class="cancel-button primary-button" (click)="toggleShowCreateForm()">Fortryd</button>
       </fieldset>
     </form>
-    </div>
+  </div>
 </div>

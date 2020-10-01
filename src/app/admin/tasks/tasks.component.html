@@ -20,12 +20,11 @@
   <div class="wrapper-navigation">
     <app-navigation></app-navigation>
   </div>
-
   <!-- Main area for task  -->
   <main class="tasks">
     <div class="wrapper-to-btn">
-      <h2 class="heading">Task list</h2>
-        <button type="submit" class="new-task-btn" (click) = "toggleShowCreateForm()" title="Create new task">
+      <h2 class="heading">Opgaver</h2>
+        <button type="submit" class="new-task-btn" (click) = "toggleShowCreateForm()" title="Opret ny opgave">
           <svg class="svg-new-task">
             <use xlink:href="#icon-cancel-circle"/>
           </svg>
@@ -37,34 +36,34 @@
     <div class="wrapper-create-form" [ngClass]="{invisible: showCreateForm}">
       <form action="" method="post">
         <fieldset class="create-form animate" [formGroup]="createTask">
-          <legend><span class="legend-text">Create new task</span></legend>
-          <label for="task">Task description:</label>
+          <legend><span class="legend-text">Opret ny opgave</span></legend>
+          <label for="task">Opgave beskrivelse:</label>
           <input formControlName="taskDescription" [(ngModel)]="addNewTask.taskDescription"
-                 type="text" placeholder="Enter task description"
+                 type="text" placeholder="Angiv opgave beskrivelse"
                  name="task"
                  id="task"
-                 title="Enter description"
+                 title="Angiv description"
                  autofocus required>
           <button (click)="createNewTask()" class="create-button primary-button">Create</button>
-          <button class="cancel-button primary-button" (click)="toggleShowCreateForm()">Cancel</button>
+          <button class="cancel-button primary-button" (click)="toggleShowCreateForm()">Fortryd</button>
         </fieldset>
       </form>
     </div>
-<!--    Update task form-->
+<!--    Godkend task form-->
     <div class="wrapper-create-form" [ngClass]="{invisible: showUpdateTaskForm}">
       <form action="" method="post">
         <fieldset class="create-form animate">
-          <legend><span class="legend-text">Update task</span></legend>
-          <label for="task">Task description:</label>
+          <legend><span class="legend-text">Redigere opgave</span></legend>
+          <label for="task">Opgave beskrivelse:</label>
           <input [(ngModel)]="rewriteTask.taskDescription"
-                 type="text" placeholder="Enter task description"
+                 type="text" placeholder="Angiv opgave beskrivelse"
                  name="task"
                  id="update-task"
-                 title="Enter new description"
+                 title="Angiv ny beskrivelse"
                  autofocus required>
-          <button (click)="updateTask() " class="create-button primary-button">Update</button>
-          <button class="cancel-button primary-button" (click)="toggleShowUpdateTaskForm()">Cancel</button>
+          <button (click)="updateTask() " class="create-button primary-button">Godkend</button>
+          <button class="cancel-button primary-button" (click)="toggleShowUpdateTaskForm()">Fortryd</button>
         </fieldset>
       </form>
     </div>
-  </div>
+</div>

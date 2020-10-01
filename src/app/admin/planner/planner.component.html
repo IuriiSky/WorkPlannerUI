@@ -19,13 +19,13 @@
     <app-navigation></app-navigation>
   </div>
   <app-calendar (selectedDate)="dateChanged($event)"></app-calendar>
- <div class="employee-list-block background-block">
-    <app-employees-list [employees]="allEmployees" 
+  <div class="employee-list-block background-block">
+      <app-employees-list [employees]="allEmployees" 
                           [selectedEmployee]="employee" 
                           (voted)="setActiveEmployee($event)">
-    </app-employees-list>
-
-    <div class="todo-list-block background-block">
+      </app-employees-list>
+  </div>
+  <div class="todo-list-block background-block">
       <ul id="todoList" 
           class="default" 
           cdkDropList 
@@ -38,8 +38,8 @@
               cdkDrag>{{employeeTask.id}}. {{employeeTask.description}}
         </li>
       </ul>
-    </div>
-    <div class="task-list-block background-block">
+  </div>
+  <div class="task-list-block background-block">
       <ul id="taskList" 
           cdkDropList #taskList="cdkDropList" 
           [cdkDropListData]="remainingTasks"
@@ -50,6 +50,5 @@
             cdkDrag>{{task.id}}. {{task.description}}
         </li>
       </ul>
-    </div>
   </div>
 </div>

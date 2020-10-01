@@ -10,16 +10,17 @@ export class AdminGuard implements CanActivate {
   constructor(private authService: AuthenticationService,private router : Router) {}
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    if(!this.authService.isAdmin())
+    //if(this.authService.isAdmin() || this.authService.isSuperAdmin())
+    if(this.authService.isAdmin())
     {
-       this.router.navigate(['/login'],{
-        queryParams: {
-          return: state.url
-        }
-       });
-
-       return false;
+       return true;
     }
-    return true;
+    this.router.navigate(['/login'],{
+      queryParams: {
+        return: state.url
+      }
+     });
+
+     return false;
   }
 }
