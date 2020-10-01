@@ -17,7 +17,6 @@ import { delay } from 'rxjs/operators';
   styleUrls: ['./planner.component.css'],
 })
 export class PlannerComponent implements OnInit,OnDestroy {
-
   constructor(
     private datepipe: DatePipe,
     private departmentService: DepartamentService,
@@ -28,8 +27,7 @@ export class PlannerComponent implements OnInit,OnDestroy {
   
 
   departmentSubscription: Subscription;
-  //public currentDate: Date = new Date();
-  public currentDate: Date;
+  public currentDate: Date = new Date();
 
   public allEmployees:EmployeeDto[];
   public allTasks:TaskDto[];
@@ -64,14 +62,23 @@ export class PlannerComponent implements OnInit,OnDestroy {
 
   dateChanged(date:Date){
     this.currentDate = date;
-    if(this.employee) {
-      this.setActiveEmployee(this.employee);
-    }
+    this.getAvailableEmployees(date);
   }
 
-  public setActiveEmployee(empl: EmployeeDto){
+  public employeeSelected(empl: EmployeeDto){
     this.employee = empl;
     this.getWorkPlanForEmployee(this.currentDate,empl.id);
+  }
+
+  private setActiveEmployee(employees: EmployeeDto[]){
+    if(this.employee){
+      let employeeAvaiable = employees.find(e => e.id === this.employee.id) !== undefined;
+      if(employeeAvaiable){
+        this.getWorkPlanForEmployee(this.currentDate,this.employee.id);
+        return;
+      }
+    }
+    this.employeeSelected(employees[0]);
   }
 
   private getWorkPlanForEmployee(date: Date, employeeId : number){
@@ -127,28 +134,12 @@ export class PlannerComponent implements OnInit,OnDestroy {
     }
   }
 
-  // nextDay() {
-  //   let date = new Date(this.currentDate.getTime());
-  //   date.setDate(this.currentDate.getDate() + 1);
-  //   this.currentDate = date;
-  //   this.setActiveEmployee(this.employee);
-  // }
-
-  // previousDay() {
-  //   let date = new Date(this.currentDate.getTime());
-  //   date.setDate(this.currentDate.getDate() - 1);
-  //   this.currentDate = date;
-  //   this.setActiveEmployee(this.employee);
-  // }
-  
-
-  private getAllEmployees() {
+  private getAvailableEmployees(forDate: Date) {
     let departmentId = this.departmentService.departmentSubject.getValue();
-    this.employeesService.getAllEmployeesInDepartment(departmentId).subscribe((data: EmployeeDto[]) => {
+    let stringDate = this.datepipe.transform(forDate, 'yyyy-MM-dd');
+    this.employeesService.getAvailableEmployeesInDepartment(stringDate,departmentId).subscribe((data: EmployeeDto[]) => {
       this.allEmployees = data;
-      if(data.length > 0) {
-        this.setActiveEmployee(data[0]);
-      }
+      this.setActiveEmployee(data);
     });
   }
 
@@ -156,7 +147,7 @@ export class PlannerComponent implements OnInit,OnDestroy {
     this.departmentSubscription = this.departmentService.departmentSubject
       .pipe(delay(0))
       .subscribe(() => {
-        this.getAllEmployees();
+        this.getAvailableEmployees(this.currentDate);
       })
   }
 
@@ -170,5 +161,4 @@ export class PlannerComponent implements OnInit,OnDestroy {
   ngOnDestroy(): void {
     this.departmentSubscription.unsubscribe();
   }
-
 }

@@ -77,8 +77,8 @@
           </p>
           <h3 *ngIf = "employeeDetail.holidays.length > 0" class="info">Planlagte ferie:</h3>
           <div class="holidays" *ngFor=" let holiday of employeeDetail.holidays">
-            <div><span> From: </span><span class="date">{{holiday.startDate| date: 'dd-MM-yyyy'}}</span>
-                <span>To: </span><span class="date"> {{holiday.endDate| date: 'dd-MM-yyyy'}} </span>
+            <div><span> Fra: </span><span class="date">{{holiday.startDate| date: 'dd-MM-yyyy'}}</span>
+                <span>Til: </span><span class="date"> {{holiday.endDate| date: 'dd-MM-yyyy'}} </span>
                 <button class="delete-holiday-btn" (click)="deleteHolidays(holiday)">
                   <svg class="svg-icon-bin">
                     <use xlink:href="#icon-bin"/>

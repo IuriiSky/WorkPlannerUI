@@ -45,7 +45,7 @@
     <div class="employee-list-block background-block">
       <app-employees-list [employees]="allEmployees" 
                           [selectedEmployee]="employee" 
-                          (voted)="setActiveEmployee($event)">
+                          (voted)="employeeSelected($event)">
       </app-employees-list>
     </div>
     <div class="todo-list-block background-block">
