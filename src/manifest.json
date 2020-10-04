@@ -3,9 +3,9 @@
     "name": "Taz Plan",
     "icons": [
       {
-        "src": "/assets/images/logo.png",
+        "src": "/assets/images/192x192.png",
         "type": "image/png",
-        "sizes": "193x57"
+        "sizes": "192x192"
       }
     ],
     "display": "fullscreen",
