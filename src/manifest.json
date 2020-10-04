@@ -1,0 +1,16 @@
+{
+    "short_name": "TazPlan",
+    "name": "Taz Plan",
+    "icons": [
+      {
+        "src": "/assets/images/logo.png",
+        "type": "image/png",
+        "sizes": "193x57"
+      }
+    ],
+    "display": "fullscreen",
+    "orientation": "portrait",
+    "background_color": "#252831",
+    "theme_color": "#252831",
+    "start_url": "/?webapp=true"
+  }
