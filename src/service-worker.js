@@ -6,7 +6,8 @@ self.addEventListener('install', function (event) {
   event.waitUntil(
     caches.open(swVersionIdentification).then(function (cache) {
       return cache.addAll([
-        '/assets/images/192x192.png'
+        '/assets/images/192x192.png',
+        '/assets/images/logo.png',
       ]);
     })
   );
