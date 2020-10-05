@@ -23,6 +23,7 @@
   justify-content: space-between;
   margin-bottom: 20px;
   transition: box-shadow .5s;
+  height: 100vh;
 }
 
 .heading {
@@ -30,13 +31,14 @@
   margin: 10px 10px 0;
   font-size: 30px;
   font-style: italic;
-  width: 90%;
-  padding-left: 100px;
+  flex-grow: 1;
 }
 
 .new-task-btn {
   border: none;
   background: transparent;
+  position: relative;
+  right: 20px;
 }
 
 .svg-new-task {
@@ -61,7 +63,8 @@
 }
 
 .wrapper-to-btn {
-  display: flex
+  display: flex;
+  justify-content: center;
 }
 
 /*Create  new task form*/
@@ -152,5 +155,17 @@ input[type = "color"]{
 @media only screen and (min-width: 768px) {
   .wrapper-navigation {
     padding-bottom: 10px;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .wrapper {
+    background-color: lavender;
+  } 
+
+  .tasks {
+    flex-grow: 0;
+    margin: 0 auto;
+    width: 50%;  
   }
 }

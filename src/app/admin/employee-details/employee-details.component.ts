@@ -21,11 +21,10 @@ export class EmployeeDetailsComponent implements OnInit {
       }
     });
   }
+
+  showCreateWeekend = true;
   showChangeInfoForm = true;
   showChangeCredentialsForm = true;
-
-  showInfo = false;
-  showSettings = false;
 
   modifyEmployee: FormGroup;
   modifyCredentials: FormGroup;
@@ -56,21 +55,6 @@ export class EmployeeDetailsComponent implements OnInit {
   //   startDate: '',
   // };
 
-  sidenavSettings() {
-    this.showInfo = !this.showInfo;
-    this.showSettings = !this.showSettings
-  }
-
-  closeSidenavSettings() {
-    this.showSettings = false;
-    this.showInfo = false;
-  }
-
-  // closeSidenavSetting() {
-  //   this.showInfo = !this.showInfo;
-  //   this.showSettings = !this.showSettings
-  // }
-
   toggleShowChangeInfoForm() {
     this.showChangeInfoForm = !this.showChangeInfoForm;
     this.initUpdateEmployee();
@@ -79,6 +63,10 @@ export class EmployeeDetailsComponent implements OnInit {
   toggleShowChangeCredentialsForm() {
     this.showChangeCredentialsForm = !this.showChangeCredentialsForm;
     this.initUpdateEmployee();
+  }
+
+  toggleCreateWeekend() {
+    this.showCreateWeekend = !this.showCreateWeekend;
   }
 
   updateUserInfo() {
