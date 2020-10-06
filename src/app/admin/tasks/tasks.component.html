@@ -17,37 +17,9 @@
   </defs>
 </svg>
 <div class="wrapper">
-  <!-- Admin list link -->
-  <div class="admin-links">
-    <ul class="admin-list">
-      <li class="bg-wrapper">
-        <a class="link" routerLink="/planner">
-          <svg class="svg-size">
-            <use xlink:href="#icon-calendar"/>
-          </svg>
-          <span>Planner</span> 
-        </a>
-      </li>
-      <li class="bg-wrapper">
-        <a class="link" routerLink="/employees">
-          <svg class="svg-size" >
-            <use xlink:href="#icon-users"/>
-          </svg>
-          <span>Medarbejdere</span> 
-        </a>
-      </li>
-      <li class="bg-wrapper">
-        <a class="link" routerLink="/tasks">
-          <svg class="svg-size">
-            <use xlink:href="#icon-list-numbered"/>
-          </svg>
-          <span>Tasks</span>
-        </a>
-      </li>
-    </ul>
+  <div class="wrapper-navigation">
+    <app-navigation></app-navigation>
   </div>
-    <app-admin></app-admin>
-
   <!-- Main area for task  -->
   <main class="tasks">
     <div class="wrapper-to-btn">
@@ -94,4 +66,4 @@
         </fieldset>
       </form>
     </div>
-  </div>
+</div>

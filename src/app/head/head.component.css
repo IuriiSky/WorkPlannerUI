@@ -1,7 +1,6 @@
 .wrapper-header {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 20px;
   padding: 20px 0;
   text-align: center;
   background-image: url(src/assets/images/just-rust-1492977.jpg);

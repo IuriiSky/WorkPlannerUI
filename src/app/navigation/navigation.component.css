@@ -1,0 +1,54 @@
+.navigation {
+    display: block;
+    width: 100%;
+  }
+  
+  .list-options {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+  }
+  
+  .option {
+    padding: 10px 10px 5px;
+    margin-right: 20px;
+  }
+  
+  .svg-size {
+    height: 25px;
+    width: 25px;
+  }
+  
+  .card-nav-footer {
+    display: none;
+  }
+  
+  /* For Tablet*/
+  @media only screen and (min-width: 768px) {
+    .card-nav-footer {
+      display: block;
+      color: var(--black-color);
+      margin-left: 5px;
+    }
+  
+    .option {
+      display: flex;
+      align-items: center;
+      border-bottom: 2px solid var(--black-color);
+    }
+  
+    .option:hover .svg-size {
+      fill: var(--main-bg-color);
+    }
+  
+    .option:hover .card-footer {
+      border-bottom: 2px solid var(--main-bg-color);
+      margin-bottom: -2px;
+    }
+  
+    .link {
+      display: flex;
+      align-items: flex-end;
+      text-decoration: none;
+    }
+  }
