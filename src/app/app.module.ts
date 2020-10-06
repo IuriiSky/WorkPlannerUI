@@ -32,7 +32,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
   // Angular Material
 import {MatDatepickerModule} from '@angular/material/datepicker';
-import {MatNativeDateModule, MatFormFieldModule, MatInputModule, DateAdapter} from '@angular/material';
+import {MatNativeDateModule, MatFormFieldModule, MatInputModule, DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material';
 import {MatTabsModule} from '@angular/material/tabs';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import { DatePipe } from '@angular/common';
@@ -40,7 +40,8 @@ import { NavigationComponent } from './navigation/navigation.component';
 import { AuthModule } from './auth/auth.module';
 import { EmployeeTasksComponent } from './employee/employee-tasks/employee-tasks.component';
 import { CalendarComponent } from './calendar/calendar.component';
-import { MyDateAdapter } from './calendar/my.date.adapter';
+import { MomentUtcDateAdapter } from './decorators/moment-utc-date-adapter';
+import { MatMomentDateModule, MAT_MOMENT_DATE_FORMATS } from '@angular/material-moment-adapter';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,7 @@ import { MyDateAdapter } from './calendar/my.date.adapter';
     LoadingComponent,
     NavigationComponent,
     EmployeeTasksComponent,
-    CalendarComponent,
+    CalendarComponent
   ],
   imports: [
     BrowserModule,
@@ -76,7 +77,8 @@ import { MyDateAdapter } from './calendar/my.date.adapter';
     MatInputModule,
     MatCardModule,
     MatSlideToggleModule,
-    AuthModule
+    AuthModule,
+    MatMomentDateModule
   ],
   // exports:[
   //   MatCardModule
@@ -85,7 +87,8 @@ import { MyDateAdapter } from './calendar/my.date.adapter';
     { provide: HTTP_INTERCEPTORS, useClass: BusyInterceptor,multi: true},
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-    { provide: DateAdapter, useClass: MyDateAdapter},
+    { provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS },
+    { provide: DateAdapter, useClass: MomentUtcDateAdapter },
     EmployeesService,
     DatePipe
   ],

@@ -38,8 +38,7 @@
   <h2 class="heading">{{employeeDetail.name}}</h2>
   <div class="current-user-information">        
     <div class="wrapper-lists-info" 
-          *ngIf="employeeDetail" 
-          [ngClass]="{animation: showInfo}">
+          *ngIf="employeeDetail">
       <p class="info"> Navn: {{employeeDetail.name}}</p>
       <p class="info"> Farve: <span [ngStyle]="{'background-color': employeeDetail.colorCode}" 
                                     [title]="employeeDetail.colorCode"
