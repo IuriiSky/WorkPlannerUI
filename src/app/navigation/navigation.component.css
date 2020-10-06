@@ -19,13 +19,13 @@
     width: 25px;
   }
   
-  .card-footer {
+  .card-nav-footer {
     display: none;
   }
   
   /* For Tablet*/
   @media only screen and (min-width: 768px) {
-    .card-footer {
+    .card-nav-footer {
       display: block;
       color: var(--black-color);
       margin-left: 5px;

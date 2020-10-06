@@ -13,3 +13,155 @@
 app-calendar {
   width: 100%;
 }
+
+.wrapper-employee-list-block {
+  display: block;
+  margin: 10px 10px 0px;
+  width: 100%;
+}
+
+.employee-list-block {
+  display: block;
+  width: 100%;
+  border-radius: 5px;
+}
+
+.employee-list-block:before {
+  content: 'chosee employee';
+  background-color: lightseagreen;
+  display: flex;
+  justify-content: flex-end;
+  padding: 2px 10px;
+  font-weight: bold;
+  font-style: italic;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.title-list {
+  text-align: center;
+  padding: 10px;
+  text-align: center;
+  border-left: 3px solid lightseagreen;
+  border-right: 3px solid lightseagreen;
+  border-bottom: 3px solid lightseagreen;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  font-weight: bold;
+}
+
+.wrapper-employee-list {
+  border-left: 3px solid lightseagreen;
+  border-right: 3px solid lightseagreen;
+  border-bottom: 3px solid lightseagreen;
+  box-sizing: border-box;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.invisible {
+  display: none;
+}
+
+.background-block {
+  margin: 0px 5px;
+  box-shadow: 0 5px 5px rgba(10,16,20,.24), 0 0 2px rgba(10,16,20,.12);
+  transition: box-shadow .5s;
+  border-radius: 5px;
+  width: 100%;
+}
+
+
+.todo-list-block {
+  border: 3px solid olivedrab;
+  margin: 10px 10px 0;
+  min-height: 150px;
+}
+
+.todo-list-block:before {
+  content: 'todo list';
+  background-color: olivedrab;
+  display: flex;
+  justify-content: flex-end;
+  padding: 2px 10px;
+  font-weight: bold;
+  font-style: italic;
+}
+
+.task-list-block {
+  border: 3px solid orange;
+  margin: 10px 10px 0;
+  min-height: 150px;
+}
+
+.task-list-block:before {
+  content: 'task list';
+  background-color: orange;
+  display: flex;
+  justify-content: flex-end;
+  padding: 2px 10px;
+  font-weight: bold;
+  font-style: italic;
+}
+
+#taskList,
+#todoList {
+  list-style: none;
+  min-height: 100px;
+  width: 100%;
+}
+
+.task {
+  background-color: rgba(25,118,210,.1);
+  color: var(--black-color);
+  border-radius: 4px;
+  box-shadow: 0 5px 5px rgba(10,16,20,.24), 0 0 2px rgba(10,16,20,.12);
+  height: 1em;
+  transition: box-shadow .5s;
+  margin: 10px 20px;
+  padding: 12px;
+  height: auto;
+}
+
+.task:hover {
+  border: none;
+  background-color: cadetblue;
+  border-radius: 5px;
+  box-shadow: 0 0 0 2px rgb(236, 136, 5) inset, 0 0 0 4px white inset;
+  transition: 0.4s ease-out
+}
+
+@media only screen and (min-width: 768px) {
+  .employee-list-block {
+    background: var(--white-color);
+    max-width: 768px;
+    margin: 10px auto 0;
+    width: 100%;
+  }
+
+  .todo-list-block,
+  .task-list-block {
+    flex: 0 0 50%;
+    margin: 10px 0px 0px;
+    box-sizing: border-box;
+    background: var(--white-color);
+  }
+
+  .wrapper-navigation {
+    padding-bottom: 10px;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+
+  .wrapper-planner {
+    justify-content: center;
+    background: lavender;
+  }
+
+  .todo-list-block,
+  .task-list-block {
+    max-width: 502px;
+    margin: 10px 5px;
+  }
+}
