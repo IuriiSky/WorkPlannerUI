@@ -13,42 +13,25 @@
     </symbol>
   </defs>
 </svg>
-<app-calendar (selectedDate)="dateChanged($event)"></app-calendar>
-  <div class="wrapper-planner">
-  <div class="page-wrapper">
-    <div class="admin-block background-block">
-      <div class="planner card">
-        <a class="link" routerLink="/planner">
-          <svg class="svg-size">
-            <use xlink:href="#icon-calendar"/>
-          </svg>  
-        </a>
-        <p class="card-footer">Planner</p>
-      </div>
-      <div class="employee-settings card">
-        <a class="link" routerLink="/employees">
-          <svg class="svg-size" >
-            <use xlink:href="#icon-users"/>
-          </svg>
-        </a>
-        <p class="card-footer">Medarbejdere</p>
-      </div>
-      <div class="task-settings card">
-        <a class="link" routerLink="/tasks">
-          <svg class="svg-size">
-            <use xlink:href="#icon-list-numbered"/>
-          </svg>
-        </a>
-        <p class="card-footer">Opgaver</p>
-      </div>
+
+<div class="wrapper-planner">
+  <div class="wrapper-navigation">
+    <app-navigation></app-navigation>
+  </div>
+  <app-calendar (selectedDate)="dateChanged($event)"></app-calendar>
+  <div class="wrapper-employee-list-block"> 
+  <div class="employee-list-block">
+    <div class="title-list" (click)="toggleShowEmployeeList()">{{employee.name}}</div>
+      <div class="wrapper-employee-list" [ngClass]="{invisible: hideEmployeeList}">
+        <app-employees-list [employees]="allEmployees" 
+                            [selectedEmployee]="employee" 
+                            (voted)="setActiveEmployee($event)"
+                            (click)="toggleShowEmployeeList()">
+        </app-employees-list>
     </div>
-    <div class="employee-list-block background-block">
-      <app-employees-list [employees]="allEmployees" 
-                          [selectedEmployee]="employee" 
-                          (voted)="employeeSelected($event)">
-      </app-employees-list>
-    </div>
-    <div class="todo-list-block background-block">
+  </div>
+  </div>
+  <div class="todo-list-block background-block">
       <ul id="todoList" 
           class="default" 
           cdkDropList 
@@ -56,13 +39,13 @@
           [cdkDropListData]="employeeTasks" 
           [cdkDropListConnectedTo]="[taskList]" 
           (cdkDropListDropped)="drop($event)">
-          <li class="task" 
+        <li class="task" 
               *ngFor="let employeeTask of employeeTasks" 
               cdkDrag>{{employeeTask.id}}. {{employeeTask.description}}
-          </li>
+        </li>
       </ul>
-    </div>
-    <div class="task-list-block background-block">
+  </div>
+  <div class="task-list-block background-block">
       <ul id="taskList" 
           cdkDropList #taskList="cdkDropList" 
           [cdkDropListData]="remainingTasks"
@@ -72,7 +55,6 @@
             *ngFor="let task of remainingTasks" 
             cdkDrag>{{task.id}}. {{task.description}}
         </li>
-    </ul>
-    </div>
+      </ul>
   </div>
 </div>

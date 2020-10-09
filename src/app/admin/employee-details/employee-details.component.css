@@ -1,179 +1,70 @@
-.wrapper {
+.wrapper-navigation {
+  background: lavender;
   display: flex;
-}
-
-.admin-links {
-  display: none;
-}
-
-app-admin {
-  display: flex;
-  flex-direction: column;
-  max-width: 252px;
-  margin: 20px;
+  justify-content: center;
+  width: 100%;
 }
 
 .employee-details {
-  flex-wrap: wrap;
-  background-color: var(--white-color);
   border-top: 20px solid var(--main-bg-color);
   border-right: 10px solid var(--main-bg-color);
   border-bottom: 20px solid var(--main-bg-color);
   border-left: 10px solid var(--main-bg-color);
   border-radius: 4px;
-  box-shadow: 0 15px 15px rgba(10,16,20,.24), 0 0 10px rgba(10,16,20,.12);
-  flex-grow: 1;
-  justify-content: space-between;
-  margin-bottom: 20px;
-  transition: box-shadow .5s;
-  text-align: center;
-  position: relative;
+  box-sizing: border-box;
 }
 
 .heading {
-  display: inline-block;
+  display: block;
   text-align: center;
-  margin: 10px 10px 0;
+  margin: 10px;
   font-size: 30px;
   font-style: italic;
+  border-bottom: 1px solid black;
 }
 
-.svg-size {
-  height: 30px;
-  width: 30px;
-}
-
-.svg-size:hover {
-  fill: var(--main-bg-color);
-  animation: spin 2s infinite linear;
-}
-
-.setting-button {
-  position: absolute;
-  right: 10px;
-  margin: 10px;
-  background-color: transparent;
-  border: none;
-}
-
-/* Animation blocks */
-
-.worker {
-  margin: 50px 10px 20px;
+.current-user-information {
   display: flex;
-  position: absolute; 
-  left:0;
-  right:0;
-  top:0;
-  bottom:0;
-}
-
-.animation-wraper {
-  position: relative;
-  display: flex;
-  flex-grow: 1;
-  margin: 10px;
-  background-color: rgba(25,118,210,.1);
-  color: var(--main-bg-color);
-  border-radius: 4px;
-  box-shadow: 0 5px 5px rgba(10,16,20,.24), 0 0 2px rgba(10,16,20,.12);
-  perspective: 1000px;
-}
-
-.sidenav-settings {
-  display: flex;
-  flex-grow: 1;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(25,118,210,.1);
-  color: var(--main-bg-color);
-  border-radius: 4px;
-  box-shadow: 0 5px 5px rgba(10,16,20,.24), 0 0 2px rgba(10,16,20,.12);
-  position: absolute;
-  top: 0;
-  left: 0;
-  transform: rotateY(180deg);
-}
-
-.wrapper-lists-info,
-.sidenav-settings {
-position: absolute;
-width: 100%;
-height: 100%;
-left: 0;
-top: 0;
-display: flex;
-justify-content: center;
-align-items: center;
-transition: 1s;
-backface-visibility: hidden;
-background-color: rgba(25,118,210,.1);
-box-shadow: 0 5px 5px rgba(10,16,20,.24), 0 0 2px rgba(10,16,20,.12);
-color: var(--main-bg-color);
-/* flex-direction: column; */
-}
-
-.animation {
-  transition: all 1s linear;
-  transform: rotateY(180deg);
-}
-
-.animationset {
-  transition: all 1s linear;
-  transform: rotateY(360deg);
 }
 
 .wrapper-lists-info {
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: inherit;
+  width: 100%;
 }
 
-/*Block set a holiday days*/
-.holidays-wrapper {
+.info {
   display: flex;
-  flex-direction: column;
-  width: 50%;
-  margin-right: 10px;
-  box-shadow: 0 5px 5px rgba(10,16,20,.24), 0 0 2px rgba(10,16,20,.12);
-  transition: box-shadow .5s;
-  border-radius: 5px;
-  height: 100%;
+  font-size: 16px;
+  margin: 10px 0px;
+  padding: 0 10px;
 }
 
-.holidays {
-  color: var(--black-color);
-  font-style: italic;
-  font-size: 20px;
-  font-style: italic;
-  text-align: center;
-  margin: 10px 0px 20px;
+ h3.info{
+   display: block;
+   text-align: center;
+   font-size: 22px;
+   margin-top: 10px;
+ }
+
+ #color {
+  margin-left: 20px;
+  height: 1em;
+  width: 1em;
 }
 
-mat-form-field {
-  width: 50%;
-  margin: 10px auto 0;
+.date-from,
+.date-to {
+  padding-left: 10px;
 }
 
-mat-datepicker-toggle-default-icon ng-star-inserted {
-  height: 30px;
-  width: 30px;
+.date {
+  margin: 0 5px;
+  padding-left: 5px;
 }
 
-.close-button {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 2em;
-  height: 2em;
+.delete-holiday-btn {
   background-color: transparent;
   border: none;
-}
-
-.svg-icon-cancel-circle {
-  height: 25px;
-  width: 25px; 
-  fill: red;
+  display: inline-block;
 }
 
 .svg-icon-bin  {
@@ -182,19 +73,87 @@ mat-datepicker-toggle-default-icon ng-star-inserted {
   fill: red;
 }
 
-.delete-holiday-btn {
-  background-color: transparent;
-  border: none;
+.change-user-information {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+.user-change-options {
+  list-style: none;
+  width: 90%;
+}
+
+.option-item {
+  padding: 5px 20px;
+  font-size: 16px;
+  border: 1px solid var(--black-color);
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 5px;
+}
+
+.option-item:last-child {
+  margin-bottom: 20px;
+}
+
+.title-item {
+  display: flex;
+  justify-content: space-between;
+}
+
+.title-item::after {
+  content: '';
+  background-image: url(src/assets/images/plus.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: block;
+  width: 15px;
+  height: 15px;
+}
+
+
+.wrapper-create-form {
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 5px 5px rgba(10,16,20,.24), 0 0 2px rgba(10,16,20,.12);
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+.invisible {
+  display: none;
+}
+
+.holidays {
+  text-align: center;
+  padding: 5px 0px;
+}
+
+.holidays-title,
+.changes-title {
+  text-align: center;
+}
+
+mat-form-field {
+  margin: 10px auto 0;
+}
+
+mat-datepicker-toggle-default-icon ng-star-inserted {
+  height: 30px;
+  width: 30px;
 }
 
 .create-holidays-btn,
-.change-name,
-.change-color {
-  font-size: 1em;
+.create-button,
+.cancel-button {
+  font-size: 16px;
   display: inline-block;
-  width: 30%;
-  height: 2.5em;
-  margin: auto auto;
+  padding: 5px;
+  margin: auto auto 10px;
   border: none;
   background-color: cadetblue;
   border-radius: 5px;
@@ -203,115 +162,129 @@ mat-datepicker-toggle-default-icon ng-star-inserted {
 }
 
 .create-holidays-btn:hover,
-.change-name:hover,
-.change-color:hover {
+.create-button:hover {
   box-shadow: 0 0 0 2px cadetblue inset, 0 0 0 4px white inset;
   transition: 0.4s ease-out;
-}
+} 
 
-/* Block change name and color  */
-.changes-btn {
-  display: flex;
-  width: 50%;
-  margin-left: 10px;
-  box-shadow: 0 5px 5px rgba(10,16,20,.24), 0 0 2px rgba(10,16,20,.12);
-  transition: box-shadow .5s;
-  border-radius: 5px;
-  height: 100%;
-}
-
-.info {
-  display: flex;
-  font-size: 1em;
-  padding: 15px 15px 10px 2em;
-}
-
- h3.info{
-   font-size: 1.5em;
-   padding-top: 1.5em;
- }
-
-.date {
-  margin: 0 10px;
-  padding-right: 30px;
-}
-
-#color {
-  margin-left: 20px;
-  height: 1em;
-  width: 1em;
-}
-
-/*Create  new employee form*/
-
-.invisible {
-  display: none;
-}
-
-.wrapper-create-form {
-  position: fixed;
-  z-index: 1;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background-color: var(--black-color);
-  opacity: 0.9;
-  padding-top: 60px;
+.cancel-button:hover {
+  box-shadow: 0 0 0 2px red inset, 0 0 0 4px white inset;
   transition: 0.4s ease-out;
 }
 
 .create-form {
-  display: flex;
-  flex-direction: column;
-  padding: 20px;
-  width: 40%;
-  height: 30%;
+  border: none;
   margin: 0 auto;
-}
-
-.create-form > label {
-  color: var(--white-color);
-  font-size: 20px;
-  padding: 10px;
-}
-
-legend > span {
-  color: var(--white-color);
-}
-
-input[type = "text"],
-input[type = "color"]{
-  height: 30px;
+  max-width: 200px;
+  text-align: center;
   width: 100%;
 }
 
-.create-button {
-  height: 30px;
-  padding: 0 5px;
-  width: 100px;
-  margin: 30px auto 0;
-}
-
-.create-button:hover {
-  background-color: var(--bt-create-hover-color);
-  transition: 0.4s ease-out;
+.change-information {
+  margin: 0 10px;
 }
 
 .cancel-button {
-  height: 30px;
-  padding: 0 5px;
-  width: 100px;
-  margin: 30px auto 0;
+  background-color: var(--red-color);
+  min-width: 90px;
+  margin-left: 5px;
 }
 
-.cancel-button:hover {
-  background-color: var(--bt-cancel-hover-color);
-  transition: 0.4s ease-out;
+.create-button {
+  min-width: 90px;
+  margin-right: 5px;
+}
+
+/* Checkbox style*/
+.custom-checkbox {
+  position: absolute;
+  z-index: -1;
+  opacity: 0;
+}
+
+.custom-checkbox+label {
+  display: inline-flex;
+  align-items: center;
+  user-select: none;
+  margin-bottom: 20px;
+}
+
+.custom-checkbox+label::before {
+  content: '';
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  flex-shrink: 0;
+  flex-grow: 0;
+  border: 1px solid #adb5bd;
+  border-radius: 0.25em;
+  margin-right: 0.5em;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 50% 50%;
+}
+
+.custom-checkbox:checked+label::before {
+  border-color: #0b76ef;
+  background-color: #0b76ef;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23fff' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3e%3c/svg%3e");
+}
+
+.custom-checkbox:not(:disabled):not(:checked)+label:hover::before {
+  border-color: #b3d7ff;
+}
+
+.custom-checkbox:not(:disabled):active+label::before {
+  background-color: #b3d7ff;
+  border-color: #b3d7ff;
+}
+
+.custom-checkbox:focus+label::before {
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.custom-checkbox:focus:not(:checked)+label::before {
+  border-color: #80bdff;
+}
+
+.custom-checkbox:disabled+label::before {
+  background-color: #e9ecef;
+}
+/* Finish checkbox style*/
+
+
+@media only screen and (min-width: 768px) {
+  .employee-details {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .heading {
+    flex: 0 0 97%;
+  }
+
+  .current-user-information,
+  .change-user-information {
+    flex: 0 0 50%;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .wrapper {
+    background-color: lavender;
+    height: 100vh;
+  }
+
+  .employee-details {
+    background: var(--white-color);
+    margin: 10px auto;
+    max-width: 1024px;
+    width: 100%;
+  }
 }
 
 /* Add Zoom Animation */
-.animate {
+/* .animate {
   -webkit-animation: animatezoom 0.6s;
   animation: animatezoom 0.6s
 }
@@ -324,72 +297,18 @@ input[type = "color"]{
 @keyframes animatezoom {
   from {transform: scale(0)}
   to {transform: scale(1)}
-}
+} */
 
 /* Setting animation */
-@keyframes spin {
+/* @keyframes spin {
   100% {
     transform: rotate(360deg);
   }
-}
+} */
 
 /* Block animation */
-@keyframes around {
+/* @keyframes around {
   100% {
   transform: rotateY(180deg);
   }
-}
-
-@media only screen and (max-width: 640px) {
-  /* For mobile phones: */
-
- app-admin {
-  display: none;
- }
-
- .admin-links {
-  display: flex;
-  justify-content: center;
- }
-
- .admin-list {
-  display: flex;
-  list-style: none;
- }
-
- .bg-wrapper {
-  background-color: #fff;
-  border-radius: 4px;
-  box-shadow: 0 5px 5px rgba(10,16,20,.24), 0 0 2px rgba(10,16,20,.12);
-  transition: box-shadow .5s;
-  min-width: 145px;
-  margin: 24px 5px;
- }
-
- .link {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 10px;
-  text-decoration: none;
-}
-
-.svg-size {
-  height: 20px;
-  width: 20px;
-  margin-right: 10px;
-}
-}
-
-@media only screen and (max-width: 480px) {
-  /* For mobile phones: */
-  .admin-list {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-   }
-
-   .bg-wrapper {
-    margin: 12px 5px;
-   }
-  }
+} */

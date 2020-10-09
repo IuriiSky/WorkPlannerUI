@@ -25,6 +25,7 @@ export class PlannerComponent implements OnInit,OnDestroy {
     private plannerService: WorkplansService) 
     {    }
   
+  hideEmployeeList = true;
 
   departmentSubscription: Subscription;
   public currentDate: Date = new Date();
@@ -36,6 +37,10 @@ export class PlannerComponent implements OnInit,OnDestroy {
   public employeeTasks : TaskDto[];
   public remainingTasks : TaskDto[];
   private employeeWorkPlan : WorkPlanDto[];
+
+  toggleShowEmployeeList() {
+    this.hideEmployeeList = !this.hideEmployeeList;
+  }
 
   drop(event: CdkDragDrop<TaskDto[]>) {
     if(!this.employee) return;
