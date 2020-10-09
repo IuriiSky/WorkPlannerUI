@@ -27,7 +27,7 @@ app-calendar {
 }
 
 .employee-list-block:before {
-  content: 'chosee employee';
+  content: 'Vælg medarbejder';
   background-color: lightseagreen;
   display: flex;
   justify-content: flex-end;
@@ -79,7 +79,7 @@ app-calendar {
 }
 
 .todo-list-block:before {
-  content: 'todo list';
+  content: 'Dagens opgaver';
   background-color: olivedrab;
   display: flex;
   justify-content: flex-end;
@@ -95,7 +95,7 @@ app-calendar {
 }
 
 .task-list-block:before {
-  content: 'task list';
+  content: 'Alle opgave';
   background-color: orange;
   display: flex;
   justify-content: flex-end;
