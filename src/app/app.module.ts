@@ -23,6 +23,7 @@ import { PlannerComponent } from './admin/planner/planner.component';
 import { EmployeesListComponent } from './admin/employees-list/employees-list.component';
 import { TasksListComponent } from './admin/tasks-list/tasks-list.component';
 import { LoginComponent } from './login/login.component';
+import { TaskOverviewComponent } from './admin/task-overview/task-overview.component';
   // Shared components
 import { LoadingComponent } from './shared/components/loading/loading.component';
   // Services
@@ -60,7 +61,8 @@ import { MatMomentDateModule, MAT_MOMENT_DATE_FORMATS } from '@angular/material-
     LoadingComponent,
     NavigationComponent,
     EmployeeTasksComponent,
-    CalendarComponent
+    CalendarComponent,
+    TaskOverviewComponent
   ],
   imports: [
     BrowserModule,

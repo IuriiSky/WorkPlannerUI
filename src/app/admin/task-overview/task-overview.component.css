@@ -1,0 +1,71 @@
+.wrapper-navigation {
+  background: lavender;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  }
+
+.employees-list {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+}
+
+.name-employee {
+  border-radius: 5px;
+  border: 2px solid black;
+  margin: 5px;
+}
+
+.name {
+  display: block;
+  text-align: center;
+  padding: 5px 0;
+  background: cadetblue;
+}
+
+.tasks-list {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 5px;
+  list-style: none; 
+}
+
+.task {
+  padding: 2px;
+  border: 1px solid black;
+  margin: 3px;
+  border-radius: 5px;
+}
+
+.complete {
+  background: chartreuse;
+}
+
+@media only screen and (min-width: 768px) {
+.wrapper-navigation {
+    padding-bottom: 10px;
+  }
+
+  .name-employee {
+    display: flex;
+  }
+
+.name {
+  display: flex;
+  padding: 5px;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 20px;
+  letter-spacing: 1px;
+  flex: 0 0 25%;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .wrapper-lists {
+    margin: 0 auto;
+    max-width: 1024px;
+  }
+}

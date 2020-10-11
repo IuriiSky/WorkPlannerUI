@@ -9,6 +9,7 @@ import { PlannerComponent} from './admin/planner/planner.component';
 import { LoginComponent } from './login/login.component';
 import { AdminGuard } from './auth/admin.guard';
 import { EmployeeTasksComponent } from './employee/employee-tasks/employee-tasks.component';
+import { TaskOverviewComponent } from './admin/task-overview/task-overview.component';
 
 
 const routes: Routes = [
@@ -19,7 +20,8 @@ const routes: Routes = [
   {path: 'tasks', component: TasksComponent, canActivate: [AdminGuard]},
   {path: 'planner', component: PlannerComponent, canActivate: [AdminGuard]},
   {path: 'employeesTasks', component: EmployeeTasksComponent },
-  {path: 'login', component: LoginComponent}
+  {path: 'login', component: LoginComponent},
+  {path: 'overview', component: TaskOverviewComponent}
 ];
 
 @NgModule({
