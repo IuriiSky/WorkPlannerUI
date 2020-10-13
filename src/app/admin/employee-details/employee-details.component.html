@@ -87,7 +87,7 @@
         </div>
       </li>
       <li class="option-item">
-        <span class="title-item" (click)="toggleShowChangeInfoForm()">Change information</span>
+        <span class="title-item" (click)="toggleShowChangeInfoForm()">Ret info</span>
         <div class="wrapper-create-form" [ngClass]="{invisible: showChangeInfoForm}">
           <h3 class="changes-title">Ret brugeroplysninger</h3>
           <form action="" method="post">
@@ -122,7 +122,7 @@
       </li>
 
       <li class="option-item">
-        <span class="title-item" (click)="toggleShowChangeCredentialsForm()">Change credentials</span>
+        <span class="title-item" (click)="toggleShowChangeCredentialsForm()">Ret adgang</span>
         <div class="wrapper-create-form" [ngClass]="{invisible: showChangeCredentialsForm}">
           <h3 class="changes-title">Ret legitimations oplysninger</h3>
           <form action="" method="post" [formGroup]="modifyCredentials">

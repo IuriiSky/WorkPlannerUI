@@ -20,16 +20,16 @@
   </div>
   <app-calendar (selectedDate)="dateChanged($event)"></app-calendar>
   <div class="wrapper-employee-list-block"> 
-  <div class="employee-list-block">
-    <div class="title-list" (click)="toggleShowEmployeeList()">{{employee?.name}}</div>
-      <div class="wrapper-employee-list" [ngClass]="{invisible: hideEmployeeList}">
-        <app-employees-list [employees]="allEmployees" 
-                            [selectedEmployee]="employee" 
-                            (voted)="employeeSelected($event)"
-                            (click)="toggleShowEmployeeList()">
-        </app-employees-list>
+    <div class="employee-list-block">
+     <div class="title-list" (click)="toggleShowEmployeeList()">{{selectedEmployee?.name}}</div>
+       <div class="wrapper-employee-list" [ngClass]="{invisible: hideEmployeeList}">
+         <app-employees-list [employees]="allEmployees" 
+                             [selectedEmployee]="selectedEmployee" 
+                             (voted)="employeeSelected($event)"
+                             (click)="toggleShowEmployeeList()">
+         </app-employees-list>
+     </div>
     </div>
-  </div>
   </div>
   <div class="todo-list-block background-block">
       <ul id="todoList" 
@@ -41,7 +41,8 @@
           (cdkDropListDropped)="drop($event)">
         <li class="task" 
               *ngFor="let employeeTask of employeeTasks" 
-              cdkDrag>{{employeeTask.id}}. {{employeeTask.description}}
+              cdkDrag>
+              {{employeeTask.id}}. {{employeeTask.description}}
         </li>
       </ul>
   </div>
@@ -56,5 +57,8 @@
             cdkDrag>{{task.id}}. {{task.description}}
         </li>
       </ul>
+  </div>
+  <div style="display: block; width: 100%;">
+    {{selectedTask?.description}}
   </div>
 </div>
