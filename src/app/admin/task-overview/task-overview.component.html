@@ -20,11 +20,11 @@
 
 <div  class="wrapper-lists">
     <ul class="employees-list" >
-      <li class="name-employee" *ngFor="let user of users">
-          <div class="name"><span>{{user}}</span></div>
+      <li class="name-employee" *ngFor="let userTask of taskOverview">
+          <div class="name"><span>{{userTask.employeeName}}</span></div>
           <ul class="tasks-list">
-              <li class="task " *ngFor="let task of tasks"
-              [ngClass]="employee == selectedEmployee ? 'active' : '' ">{{task}}</li>
+              <li class="task " *ngFor="let task of userTask.tasks"
+              [ngClass]="task.isDone ? 'complete' : '' ">{{task.taskDescription}}</li>
           </ul>
       </li>
     </ul>
