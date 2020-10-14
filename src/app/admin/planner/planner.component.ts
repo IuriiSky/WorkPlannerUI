@@ -132,21 +132,6 @@ export class PlannerComponent implements OnInit,OnDestroy {
     }
   }
 
-  // nextDay() {
-  //   let date = new Date(this.currentDate.getTime());
-  //   date.setDate(this.currentDate.getDate() + 1);
-  //   this.currentDate = date;
-  //   this.setActiveEmployee(this.employee);
-  // }
-
-  // previousDay() {
-  //   let date = new Date(this.currentDate.getTime());
-  //   date.setDate(this.currentDate.getDate() - 1);
-  //   this.currentDate = date;
-  //   this.setActiveEmployee(this.employee);
-  // }
-  
-
   private getAllEmployees() {
     let departmentId = this.departmentService.departmentSubject.getValue();
     this.employeesService.getAllEmployeesInDepartment(departmentId).subscribe((data: EmployeeDto[]) => {
