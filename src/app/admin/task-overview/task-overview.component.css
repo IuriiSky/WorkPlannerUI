@@ -1,3 +1,7 @@
+#icon-eye {
+  fill: var(--bt-create-hover-color);
+}
+
 .wrapper-navigation {
   background: lavender;
   display: flex;

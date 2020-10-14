@@ -1,3 +1,7 @@
+#icon-users {
+  fill: var(--bt-create-hover-color);
+}
+
 .wrapper {
   display: flex;
   flex-wrap: wrap;
