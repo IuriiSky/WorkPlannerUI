@@ -10,6 +10,7 @@ export class WorkPlanDto {
     taskId: number;
     taskDescription: string ;
     date: Date;
+    isDone: boolean;
 }
 
 export class CreateWorkPlanCommand {
