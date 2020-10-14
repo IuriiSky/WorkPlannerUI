@@ -23,7 +23,6 @@
   <div class="wrapper-navigation">
     <app-navigation></app-navigation>
   </div>
-  <!-- Main area for task  -->
   <main class="tasks">
     <div class="wrapper-to-btn">
       <h2 class="heading">Opgaver</h2>
@@ -34,21 +33,24 @@
         </button>
     </div>
   <app-tasks-list [tasks]="tasks" (voted)="setActiveTask($event); toggleShowUpdateTaskForm()"></app-tasks-list>
-  </main>
     <!--    Create task form-->
     <div class="wrapper-create-form" [ngClass]="{invisible: showCreateForm}">
       <form action="" method="post">
-        <fieldset class="create-form animate" [formGroup]="createTask">
-          <legend><span class="legend-text">Opret ny opgave</span></legend>
-          <label for="task">Opgave beskrivelse:</label>
-          <input formControlName="taskDescription" [(ngModel)]="addNewTask.taskDescription"
-                 type="text" placeholder="Angiv opgave beskrivelse"
-                 name="task"
-                 id="task"
-                 title="Angiv description"
-                 autofocus required>
-          <button (click)="createNewTask()" class="create-button primary-button">Create</button>
-          <button class="cancel-button primary-button" (click)="toggleShowCreateForm()">Fortryd</button>
+        <fieldset class="create-form animate" [formGroup]="createTask"> 
+          <mat-form-field class="change-information">
+            <mat-label>Opgave beskrivelse:</mat-label>
+            <input matInput
+                  formControlName="taskDescription"
+                  [(ngModel)]="addNewTask.taskDescription"
+                  type="text"
+                  placeholder="Angiv opgave beskrivelse"
+                  name="task"
+                  id="task"
+                  title="Angiv description"
+                  autofocus required>
+          </mat-form-field>
+        <button class="create-button" (click)="createNewTask()">Godkend</button>
+        <button class="cancel-button" (click)="toggleShowCreateForm()">Fortryd</button>
         </fieldset>
       </form>
     </div>
@@ -56,17 +58,21 @@
     <div class="wrapper-create-form" [ngClass]="{invisible: showUpdateTaskForm}">
       <form action="" method="post">
         <fieldset class="create-form animate">
-          <legend><span class="legend-text">Redigere opgave</span></legend>
-          <label for="task">Opgave beskrivelse:</label>
-          <input [(ngModel)]="rewriteTask.taskDescription"
-                 type="text" placeholder="Angiv opgave beskrivelse"
-                 name="task"
-                 id="update-task"
-                 title="Angiv ny beskrivelse"
-                 autofocus required>
-          <button (click)="updateTask() " class="create-button primary-button">Godkend</button>
-          <button class="cancel-button primary-button" (click)="toggleShowUpdateTaskForm()">Fortryd</button>
+          <mat-form-field class="change-information">
+            <mat-label>Opgave beskrivelse:</mat-label>
+            <input matInput
+                  [(ngModel)]="rewriteTask.taskDescription"
+                  type="text"
+                  placeholder="Angiv opgave beskrivelse"
+                  name="task"
+                  id="update-task"
+                  title="Angiv ny beskrivelse"
+                  autofocus required>
+          </mat-form-field>
+        <button class="create-button" (click)="updateTask()">Godkend</button>
+        <button class="cancel-button" (click)="toggleShowUpdateTaskForm()">Fortryd</button>
         </fieldset>
       </form>
     </div>
+  </main>
 </div>
