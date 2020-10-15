@@ -69,14 +69,12 @@
     
     <div class="simple-calendar">
       <div class="card">
-          <mat-form-field class="mat-form-field-simple">
-            <input matInput [matDatepicker]="picker" 
-              [(ngModel)]="currentDate" 
-              (dateChange)="dateChangeFromCalendar($event)"
-              required>
-            <mat-datepicker #picker></mat-datepicker>
-          </mat-form-field>
-          
+            <input class="hidden-input"
+                  [matDatepicker]="picker"
+                  [(ngModel)]="currentDate"
+                  (dateChange)="dateChangeFromCalendar($event)"
+                  required>
+            <mat-datepicker #picker panelClass="datepickerOne"></mat-datepicker>
           <button mat-button (click)="picker.open()" class="material-button">
             <svg class="svg-size">
               <use xlink:href="#calendar"/>
