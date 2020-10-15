@@ -14,6 +14,9 @@
       <path d="M12 23c0-4.726 2.996-8.765 7.189-10.319 0.509-1.142 0.811-2.411 0.811-3.681 0-4.971 0-9-6-9s-6 4.029-6 9c0 3.096 1.797 6.191 4 7.432v1.649c-6.784 0.555-12 3.888-12 7.918h12.416c-0.271-0.954-0.416-1.96-0.416-3z"></path>
       <path d="M23 14c-4.971 0-9 4.029-9 9s4.029 9 9 9c4.971 0 9-4.029 9-9s-4.029-9-9-9zM28 24h-4v4h-2v-4h-4v-2h4v-4h2v4h4v2z"></path>
   </symbol>
+  <symbol id="icon-eye" viewBox="0 0 28 28">
+    <path d="M26 15c-1.484-2.297-3.516-4.266-5.953-5.516 0.625 1.062 0.953 2.281 0.953 3.516 0 3.859-3.141 7-7 7s-7-3.141-7-7c0-1.234 0.328-2.453 0.953-3.516-2.438 1.25-4.469 3.219-5.953 5.516 2.672 4.125 6.984 7 12 7s9.328-2.875 12-7zM14.75 9c0-0.406-0.344-0.75-0.75-0.75-2.609 0-4.75 2.141-4.75 4.75 0 0.406 0.344 0.75 0.75 0.75s0.75-0.344 0.75-0.75c0-1.781 1.469-3.25 3.25-3.25 0.406 0 0.75-0.344 0.75-0.75zM28 15c0 0.391-0.125 0.75-0.313 1.078-2.875 4.734-8.141 7.922-13.687 7.922s-10.813-3.203-13.687-7.922c-0.187-0.328-0.313-0.688-0.313-1.078s0.125-0.75 0.313-1.078c2.875-4.719 8.141-7.922 13.687-7.922s10.813 3.203 13.687 7.922c0.187 0.328 0.313 0.688 0.313 1.078z"></path>
+</symbol>
   </defs>
 </svg>
 
@@ -21,8 +24,6 @@
   <div class="wrapper-navigation">
     <app-navigation></app-navigation>
   </div>
-
-  <!-- Main area for employee  -->
   <main class="employee">
     <div class="wrapper-to-btn">
     <h2 class="heading">Medarbejdere</h2>
@@ -35,32 +36,59 @@
       <app-employees-list [employees]="employees" 
                           [clicable]="true">
       </app-employees-list>
+    <div class="wrapper-create-form" [ngClass]="{invisible: showCreateForm}">
+      <form action="" method="post">
+        <fieldset class="create-form animate" [formGroup]="createEmployee">
+          <mat-form-field class="change-information">
+            <mat-label>Navn:</mat-label>
+            <input matInput
+                  formControlName="employeeName"
+                  [(ngModel)]="createNewEmployee.employeeName"
+                  type="text"
+                  placeholder="Angiv medarbejder navn"
+                  name="employee"
+                  id="employee"
+                  title="Medarbejder navn"
+                  autofocus required>
+          </mat-form-field>
+          <mat-form-field class="change-information">
+            <mat-label>Farve:</mat-label>
+            <input matInput
+                  formControlName="colorCode"
+                  [(ngModel)]="createNewEmployee.colorCode"
+                  type="color"
+                  id="colorPicker"
+                  title="Click on the line and set the color"
+                  required>
+          </mat-form-field>
+          <mat-form-field class="change-information">
+            <mat-label>Login:</mat-label>
+            <input matInput
+                  formControlName="login"
+                  [(ngModel)]="createNewEmployee.login"
+                  type="text"
+                  placeholder="Angiv login"
+                  name="login"
+                  id="login"
+                  title="Medarbejder login"
+                  required>
+          </mat-form-field>
+          <mat-form-field class="change-information">
+            <mat-label>Adgangskode:</mat-label>
+            <input matInput
+                  formControlName="password"
+                  [(ngModel)]="createNewEmployee.password"
+                  type="text"
+                  placeholder="Angiv adgangskoden"
+                  name="password"
+                  id="password"
+                  title="Medarbejder adganskoden"
+                  required>
+          </mat-form-field>
+          <button class="create-button" (click)="addEmployee()">Opret</button>
+          <button class="cancel-button" (click)="toggleShowCreateForm()">Fortryd</button>
+        </fieldset>
+      </form>
+    </div>
   </main>
-
-  <div class="wrapper-create-form" [hidden] = "showCreateForm">
-    <form action="" method="post">
-      <fieldset class="create-form animate" [formGroup]="createEmployee">
-        <legend><span class="legend-text">Ny medarbejder</span></legend>
-
-          <label for="employee">Navn:</label>
-          <input formControlName="employeeName" [(ngModel)]="createNewEmployee.employeeName"
-                 type="text" placeholder="Angiv medarbejder navn" name="employee" id="employee" title="Medarbejder navn" autofocus required>
-
-          <label for="colorPicker">Farve:</label>
-          <input formControlName="colorCode" type="color" id="colorPicker" title="Click on the line and set the color"
-                 [(ngModel)]="createNewEmployee.colorCode" required>
-
-          <label for="login">Login:</label>
-          <input formControlName="login" [(ngModel)]="createNewEmployee.login"
-                 type="text" placeholder="Angiv login" name="login" id="login" title="Medarbejder login" autofocus required>
-
-          <label for="password">Adgangskode:</label>
-          <input formControlName="password" [(ngModel)]="createNewEmployee.password"
-                 type="text" placeholder="Angiv adgangskoden" name="password" id="password" title="Medarbejder adganskoden" autofocus required>
-
-        <button  (click)="addEmployee()" class="create-button primary-button">Opret</button>
-        <button class="cancel-button primary-button" (click)="toggleShowCreateForm()">Fortryd</button>
-      </fieldset>
-    </form>
-  </div>
 </div>

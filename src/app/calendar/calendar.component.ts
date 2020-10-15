@@ -1,5 +1,4 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { ViewEncapsulation} from '@angular/core';
 import { DatePipe } from '@angular/common';
 import {MatDatepickerInputEvent} from '@angular/material/datepicker';
 import { BehaviorSubject } from 'rxjs';
@@ -8,7 +7,6 @@ import { BehaviorSubject } from 'rxjs';
   selector: 'app-calendar',
   templateUrl: './calendar.component.html',
   styleUrls: ['./calendar.component.css'],
-  encapsulation : ViewEncapsulation.None,
 })
 export class CalendarComponent  implements OnInit {
 
