@@ -29,6 +29,7 @@
   margin-bottom: 20px;
   transition: box-shadow .5s;
   height: 100vh;
+  position: relative;
 }
 
 .wrapper-to-btn {
@@ -69,73 +70,84 @@
 }
 
 /*Create  new employee form*/
-
 .wrapper-create-form {
-  position: fixed;
-  z-index: 1;
-  left: 0;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 5px 5px rgba(10,16,20,.24), 0 0 2px rgba(10,16,20,.12);
+  border-radius: 5px;
+  position: absolute;
   top: 0;
+  z-index: 1;
+  background: white;
   width: 100%;
-  height: 100%;
-  background-color: var(--black-color);
-  opacity: 0.9;
-  padding-top: 60px;
-  transition: 0.4s ease-out;
+  height: inherit;
+}
+
+.create-form {
+  border: none;
+  margin: 0 auto;
+  text-align: center;
+  width: 100%;
 }
 
 .invisible {
   display: none;
 }
 
-.create-form {
-  display: flex;
-  flex-direction: column;
-  padding: 20px;
-  width: 40%;
-  height: 30%;
-  margin: 0 auto;
+.create-button,
+.cancel-button {
+  font-size: 16px;
+  display: inline-block;
+  padding: 5px;
+  margin: auto auto 10px;
+  border: none;
+  background-color: cadetblue;
+  border-radius: 5px;
+  box-shadow: 0 5px 5px rgba(10,16,20,.24), 0 0 2px rgba(10,16,20,.12);
+  transition: box-shadow .5s;
 }
 
-.legend-text {
-  color: var(--white-color);
-  font-size: 18px;
-}
-
-.create-form > label {
-  color: var(--white-color);
-  font-size: 18px;
-  padding: 10px;
-}
-
-input[type = "text"],
-input[type = "color"]{
-  background-color: var(--component-bg-color);
-  height: 30px;
-  width: 100%;
-}
-
-.create-button {
-  height: 30px;
-  padding: 0 5px;
-  width: 100px;
-  margin: 30px auto 0;
-}
-
+.create-holidays-btn:hover,
 .create-button:hover {
-  background-color: var(--bt-create-hover-color);
+  box-shadow: 0 0 0 2px cadetblue inset, 0 0 0 4px white inset;
+  transition: 0.4s ease-out;
+}
+
+.cancel-button:hover {
+  box-shadow: 0 0 0 2px red inset, 0 0 0 4px white inset;
   transition: 0.4s ease-out;
 }
 
 .cancel-button {
-  height: 30px;
-  padding: 0 5px;
-  width: 100px;
-  margin: 30px auto 0;
+  background-color: var(--red-color);
+  min-width: 90px;
+  margin-left: 5px;
 }
 
-.cancel-button:hover {
-  background-color: var(--bt-cancel-hover-color);
-  transition: 0.4s ease-out;
+.create-button {
+  min-width: 90px;
+  margin-right: 5px;
+}
+
+.change-information {
+  margin: 0 10%;
+  width: 80%;
+}
+
+/* Add Zoom Animation */
+.animate {
+  -webkit-animation: animatezoom 0.6s;
+  animation: animatezoom 0.6s
+}
+
+@-webkit-keyframes animatezoom {
+  from {-webkit-transform: scale(0)}
+  to {-webkit-transform: scale(1)}
+}
+
+@keyframes animatezoom {
+  from {transform: scale(0)}
+  to {transform: scale(1)}
 }
 
 @media only screen and (min-width: 768px) {
@@ -153,5 +165,9 @@ input[type = "color"]{
     flex-grow: 0;
     margin: 0 auto;
     width: 50%;  
+  }
+
+  form {
+    margin-top: 50px;
   }
 }

@@ -24,8 +24,6 @@
   <div class="wrapper-navigation">
     <app-navigation></app-navigation>
   </div>
-
-  <!-- Main area for employee  -->
   <main class="employee">
     <div class="wrapper-to-btn">
     <h2 class="heading">Medarbejdere</h2>
@@ -38,32 +36,59 @@
       <app-employees-list [employees]="employees" 
                           [clicable]="true">
       </app-employees-list>
+    <div class="wrapper-create-form" [ngClass]="{invisible: showCreateForm}">
+      <form action="" method="post">
+        <fieldset class="create-form animate" [formGroup]="createEmployee">
+          <mat-form-field class="change-information">
+            <mat-label>Navn:</mat-label>
+            <input matInput
+                  formControlName="employeeName"
+                  [(ngModel)]="createNewEmployee.employeeName"
+                  type="text"
+                  placeholder="Angiv medarbejder navn"
+                  name="employee"
+                  id="employee"
+                  title="Medarbejder navn"
+                  autofocus required>
+          </mat-form-field>
+          <mat-form-field class="change-information">
+            <mat-label>Farve:</mat-label>
+            <input matInput
+                  formControlName="colorCode"
+                  [(ngModel)]="createNewEmployee.colorCode"
+                  type="color"
+                  id="colorPicker"
+                  title="Click on the line and set the color"
+                  required>
+          </mat-form-field>
+          <mat-form-field class="change-information">
+            <mat-label>Login:</mat-label>
+            <input matInput
+                  formControlName="login"
+                  [(ngModel)]="createNewEmployee.login"
+                  type="text"
+                  placeholder="Angiv login"
+                  name="login"
+                  id="login"
+                  title="Medarbejder login"
+                  required>
+          </mat-form-field>
+          <mat-form-field class="change-information">
+            <mat-label>Adgangskode:</mat-label>
+            <input matInput
+                  formControlName="password"
+                  [(ngModel)]="createNewEmployee.password"
+                  type="text"
+                  placeholder="Angiv adgangskoden"
+                  name="password"
+                  id="password"
+                  title="Medarbejder adganskoden"
+                  required>
+          </mat-form-field>
+          <button class="create-button" (click)="addEmployee()">Opret</button>
+          <button class="cancel-button" (click)="toggleShowCreateForm()">Fortryd</button>
+        </fieldset>
+      </form>
+    </div>
   </main>
-
-  <div class="wrapper-create-form" [hidden] = "showCreateForm">
-    <form action="" method="post">
-      <fieldset class="create-form animate" [formGroup]="createEmployee">
-        <legend><span class="legend-text">Ny medarbejder</span></legend>
-
-          <label for="employee">Navn:</label>
-          <input formControlName="employeeName" [(ngModel)]="createNewEmployee.employeeName"
-                 type="text" placeholder="Angiv medarbejder navn" name="employee" id="employee" title="Medarbejder navn" autofocus required>
-
-          <label for="colorPicker">Farve:</label>
-          <input formControlName="colorCode" type="color" id="colorPicker" title="Click on the line and set the color"
-                 [(ngModel)]="createNewEmployee.colorCode" required>
-
-          <label for="login">Login:</label>
-          <input formControlName="login" [(ngModel)]="createNewEmployee.login"
-                 type="text" placeholder="Angiv login" name="login" id="login" title="Medarbejder login" autofocus required>
-
-          <label for="password">Adgangskode:</label>
-          <input formControlName="password" [(ngModel)]="createNewEmployee.password"
-                 type="text" placeholder="Angiv adgangskoden" name="password" id="password" title="Medarbejder adganskoden" autofocus required>
-
-        <button  (click)="addEmployee()" class="create-button primary-button">Opret</button>
-        <button class="cancel-button primary-button" (click)="toggleShowCreateForm()">Fortryd</button>
-      </fieldset>
-    </form>
-  </div>
 </div>
