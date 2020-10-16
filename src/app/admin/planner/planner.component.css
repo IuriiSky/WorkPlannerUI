@@ -1,6 +1,7 @@
 .wrapper-planner {
   display: flex;
   flex-wrap: wrap;
+  margin-bottom: 10px;
 }
 
 .wrapper-navigation {
@@ -112,6 +113,7 @@ app-calendar {
 #todoList {
   list-style: none;
   min-height: 100px;
+  flex-grow: 1;
   width: 100%;
 }
 
@@ -133,6 +135,17 @@ app-calendar {
   border-radius: 5px;
   box-shadow: 0 0 0 2px rgb(236, 136, 5) inset, 0 0 0 4px white inset;
   transition: 0.4s ease-out
+}
+.task-selected {
+  background-color: rgba(25, 118, 210, 0.356);
+  color: var(--black-color);
+  border-radius: 4px;
+  box-shadow: 0 5px 5px rgba(10,16,20,.24), 0 0 2px rgba(10,16,20,.12);
+  height: 1em;
+  transition: box-shadow .5s;
+  margin: 10px 20px;
+  padding: 12px;
+  height: auto;
 }
 
 @media only screen and (min-width: 768px) {
@@ -160,6 +173,7 @@ app-calendar {
 
   .wrapper-planner {
     justify-content: center;
+    margin-bottom: 10px;
   }
 
   .todo-list-block,

@@ -45,10 +45,10 @@
           [cdkDropListData]="employeeTasks" 
           [cdkDropListConnectedTo]="[taskList]" 
           (cdkDropListDropped)="drop($event)">
-        <li class="task" 
-              *ngFor="let employeeTask of employeeTasks" 
-              cdkDrag>
-              {{employeeTask.id}}. {{employeeTask.description}}
+        <li *ngFor="let employeeTask of employeeTasks" cdkDrag
+            [ngClass]="employeeTask?.id === selectedTask?.id ? 'task-selected' : 'task' "
+            (click)="selectTask(employeeTask)">
+              {{employeeTask.description}}
         </li>
       </ul>
   </div>
@@ -60,10 +60,12 @@
           (cdkDropListDropped)="drop($event)">
         <li class="task" 
             *ngFor="let task of remainingTasks" 
-            cdkDrag>{{task.id}}. {{task.description}}
+            cdkDrag>{{task.description}}
         </li>
+        
       </ul>
   </div>
+
   <div style="display: block; width: 100%;">
     {{selectedTask?.description}}
   </div>

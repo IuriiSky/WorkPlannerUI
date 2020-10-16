@@ -155,6 +155,9 @@ export class PlannerComponent implements OnInit,OnDestroy {
       this.setActiveEmployee(data);
     });
   }
+  selectTask(task:TaskDto){
+    this.selectedTask = task;
+  }
 
   listenToDepartment() {
     this.departmentSubscription = this.departmentService.departmentSubject
