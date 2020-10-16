@@ -10,8 +10,6 @@ import { environment } from 'src/environments/environment';
 })
 export class WorkplansService {
   
-  
-  
 
   baseApi :string;
   constructor(private http: HttpClient) 
@@ -27,9 +25,11 @@ export class WorkplansService {
   }
   updateEmployeeTask(task: EmployeeTaskDto) {
     return this.http.put<any>(environment.apiUrl + 'employeeTasks/update',task);
-    throw new Error('Method not implemented.');
   }
 
+  getWorkPlansForDepartment(date: Date|string,deparmentId:number): Observable<WorkPlanDto[]>{
+    return this.http.get<WorkPlanDto[]>(this.baseApi + 'department/' + deparmentId + '/' + date);
+  }
   getWorkPlans(date: Date|string): Observable<WorkPlanDto[]>{
     return this.http.get<WorkPlanDto[]>(this.baseApi + date);
   }

@@ -13,6 +13,7 @@ export class LoginComponent implements OnInit {
   constructor(private authService: AuthenticationService,private router: Router ) { }
   login : string;
   password: string;
+  loginError = false;
   
   doLogin()
   {
@@ -24,6 +25,7 @@ export class LoginComponent implements OnInit {
           this.router.navigate(['/employeesTasks']);
         }
     },(error =>{
+      this.loginError = true;
     }));
   }
 
