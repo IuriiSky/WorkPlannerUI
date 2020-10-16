@@ -110,6 +110,17 @@
 
 .title-item::after {
   content: '';
+  background-image: url(src/assets/images/minus.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: block;
+  width: 15px;
+  height: 15px;
+}
+
+.title-item.active::after {
+  content: '';
   background-image: url(src/assets/images/plus.svg);
   background-position: center;
   background-repeat: no-repeat;
