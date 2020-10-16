@@ -4,8 +4,6 @@ import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
-import {MatCardModule} from '@angular/material/card';
-import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 // Helpers
 import {BusyInterceptor} from './_helpers/busy.interceptor';
@@ -32,10 +30,15 @@ import { EmployeeDetailsComponent } from './admin/employee-details/employee-deta
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
   // Angular Material
+ import {MatCardModule} from '@angular/material/card';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatDividerModule} from '@angular/material/divider';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule, MatFormFieldModule, MatInputModule, DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material';
 import {MatTabsModule} from '@angular/material/tabs';
 import {DragDropModule} from '@angular/cdk/drag-drop';
+
 import { DatePipe } from '@angular/common';
 import { NavigationComponent } from './navigation/navigation.component';
 import { AuthModule } from './auth/auth.module';
@@ -43,6 +46,7 @@ import { EmployeeTasksComponent } from './employee/employee-tasks/employee-tasks
 import { CalendarComponent } from './calendar/calendar.component';
 import { MomentUtcDateAdapter } from './decorators/moment-utc-date-adapter';
 import { MatMomentDateModule, MAT_MOMENT_DATE_FORMATS } from '@angular/material-moment-adapter';
+import { TaskRepeatComponent } from './admin/task-repeat/task-repeat.component';
 
 @NgModule({
   declarations: [
@@ -62,7 +66,8 @@ import { MatMomentDateModule, MAT_MOMENT_DATE_FORMATS } from '@angular/material-
     NavigationComponent,
     EmployeeTasksComponent,
     CalendarComponent,
-    TaskOverviewComponent
+    TaskOverviewComponent,
+    TaskRepeatComponent
   ],
   imports: [
     BrowserModule,
@@ -78,13 +83,12 @@ import { MatMomentDateModule, MAT_MOMENT_DATE_FORMATS } from '@angular/material-
     MatFormFieldModule,
     MatInputModule,
     MatCardModule,
+    MatDividerModule,
+    MatCheckboxModule,
     MatSlideToggleModule,
     AuthModule,
     MatMomentDateModule
   ],
-  // exports:[
-  //   MatCardModule
-  // ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: BusyInterceptor,multi: true},
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

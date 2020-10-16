@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 //import { DataService } from './data.service';
 import { Observable } from 'rxjs';
-import { WorkPlanDto, CreateWorkPlanCommand, UpdateWorkPlanCommand, DeleteWorkPlanCommand, EmployeeTaskDto } from '../../shared/interfaces/work-plan';
+import { WorkPlanDto, CreateWorkPlanCommand, UpdateWorkPlanCommand, DeleteWorkPlanCommand, EmployeeTaskDto, WorkPlanRepeatingCommand } from '../../shared/interfaces/work-plan';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -45,8 +45,9 @@ export class WorkplansService {
   updateWorkPlan(workplan: UpdateWorkPlanCommand){
     return this.http.put<any>(this.baseApi,workplan);
   }
-
-  
+  repeatWorkPlan(repeating: WorkPlanRepeatingCommand){
+    return this.http.put<any>(this.baseApi+'repeating', repeating);
+  }
 
   deleteWorkPlan(workPlan:DeleteWorkPlanCommand){
     return this.http.put<any>(this.baseApi+'delete',workPlan);
