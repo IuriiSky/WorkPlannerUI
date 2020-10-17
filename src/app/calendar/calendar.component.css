@@ -141,7 +141,10 @@
 }
 
 .hidden-input {
-  display: none;
+  border: none;
+  height: 0px;
+  width: 0px;
+  position: relative;
 }
 
 @media only screen and (min-width: 768px) {
@@ -150,15 +153,5 @@
     order: 1;
     position: absolute;
     right: 0;
-  }
-
-  .cdk-overlay-pane {
-    position: relative;
-  }
-
-  .mat-datepicker-content {
-    position: absolute;
-    right: 0;
-    top: 20px;
   }
 }
