@@ -36,7 +36,6 @@
 <div class="wrapper-navigation">
   <app-navigation></app-navigation>
 </div>
-  
 <main *ngIf="employeeDetail" class="employee-details">
   <h2 class="heading">{{employeeDetail.name}}</h2>
   <div class="current-user-information">        
@@ -60,11 +59,10 @@
       </div>
     </div>
   </div>
-
   <div class="change-user-information">
     <ul class="user-change-options">
       <li class="option-item">
-        <span class="title-item" (click)="toggleCreateWeekend()">Planlæg en ferie</span>
+        <span class="title-item" (click)="toggleCreateWeekend()" [ngClass]="{active: showCreateWeekend}">Planlæg en ferie</span>
         <div class="wrapper-create-form" [ngClass]="{invisible: showCreateWeekend}">
           <h3 class="holidays-title">Ny ferie</h3>
             <mat-form-field>
@@ -76,7 +74,6 @@
               <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
               <mat-datepicker #picker3></mat-datepicker>
             </mat-form-field>
-
             <mat-form-field>
               <mat-label>Slut dato</mat-label>
               <input matInput [matDatepicker]="picker2" 
@@ -90,7 +87,7 @@
         </div>
       </li>
       <li class="option-item">
-        <span class="title-item" (click)="toggleShowChangeInfoForm()">Ret info</span>
+        <span class="title-item" (click)="toggleShowChangeInfoForm()" [ngClass]="{active: showChangeInfoForm}">Ret info</span>
         <div class="wrapper-create-form" [ngClass]="{invisible: showChangeInfoForm}">
           <h3 class="changes-title">Ret brugeroplysninger</h3>
           <form action="" method="post">
@@ -123,9 +120,8 @@
           </form>
         </div>
       </li>
-
       <li class="option-item">
-        <span class="title-item" (click)="toggleShowChangeCredentialsForm()">Ret adgang</span>
+        <span class="title-item" (click)="toggleShowChangeCredentialsForm()" [ngClass]="{active: showChangeCredentialsForm}">Ret adgang</span>
         <div class="wrapper-create-form" [ngClass]="{invisible: showChangeCredentialsForm}">
           <h3 class="changes-title">Ret legitimations oplysninger</h3>
           <form action="" method="post" [formGroup]="modifyCredentials">
@@ -143,7 +139,6 @@
                       autofocus 
                       required>
               </mat-form-field>             
-              
                 <input formControlName="isActive" 
                         type="checkbox"
                         class="custom-checkbox" 
