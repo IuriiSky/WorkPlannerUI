@@ -17,7 +17,6 @@ import { delay } from 'rxjs/operators';
   styleUrls: ['./planner.component.css'],
 })
 export class PlannerComponent implements OnInit,OnDestroy {
-
   constructor(
     private datepipe: DatePipe,
     private departmentService: DepartamentService,
@@ -29,23 +28,25 @@ export class PlannerComponent implements OnInit,OnDestroy {
   hideEmployeeList = true;
 
   departmentSubscription: Subscription;
-  //public currentDate: Date = new Date();
-  public currentDate: Date;
+  public currentDate: Date = new Date();
 
   public allEmployees:EmployeeDto[];
   public allTasks:TaskDto[];
 
-  public employee : EmployeeDto;
+  public selectedEmployee : EmployeeDto;
+  public selectedTask: TaskDto;
+  
   public employeeTasks : TaskDto[];
   public remainingTasks : TaskDto[];
   private employeeWorkPlan : WorkPlanDto[];
+  
 
   toggleShowEmployeeList() {
     this.hideEmployeeList = !this.hideEmployeeList;
   }
 
   drop(event: CdkDragDrop<TaskDto[]>) {
-    if(!this.employee) return;
+    if(!this.selectedEmployee) return;
 
     if (event.previousContainer !== event.container) {
       
@@ -56,6 +57,7 @@ export class PlannerComponent implements OnInit,OnDestroy {
         this.addTask(task.id);
         this.employeeTasks.push(task);
         this.remainingTasks.splice(index, 1);
+        this.selectedTask = task;
       } 
       //remove task
       else{
@@ -63,20 +65,34 @@ export class PlannerComponent implements OnInit,OnDestroy {
         this.removeTask(task.id);
         this.remainingTasks.push(task);
         this.employeeTasks.splice(index, 1);
+        if (this.selectedTask){
+          if(task.id === this.selectedTask.id){
+            this.selectedTask = undefined;
+          }
+        }
       }
     } 
   }
 
   dateChanged(date:Date){
     this.currentDate = date;
-    if(this.employee) {
-      this.setActiveEmployee(this.employee);
-    }
+    this.getAvailableEmployees(date);
   }
 
-  public setActiveEmployee(empl: EmployeeDto){
-    this.employee = empl;
+  public employeeSelected(empl: EmployeeDto){
+    this.selectedEmployee = empl;
     this.getWorkPlanForEmployee(this.currentDate,empl.id);
+  }
+
+  private setActiveEmployee(employees: EmployeeDto[]){
+    if(this.selectedEmployee){
+      let employeeAvaiable = employees.find(e => e.id === this.selectedEmployee.id) !== undefined;
+      if(employeeAvaiable){
+        this.getWorkPlanForEmployee(this.currentDate,this.selectedEmployee.id);
+        return;
+      }
+    }
+    this.employeeSelected(employees[0]);
   }
 
   private getWorkPlanForEmployee(date: Date, employeeId : number){
@@ -100,19 +116,18 @@ export class PlannerComponent implements OnInit,OnDestroy {
   private addTask(taskId: number){
     let com: CreateWorkPlanCommand =
     {
-      employeeId: this.employee.id,
+      employeeId: this.selectedEmployee.id,
       taskId: taskId,
       date: this.currentDate,
     };
     this.plannerService.createWorkPlan(com).subscribe((data:any) => {
-      
     });
   }
   private removeTask(taskId: number){
     let workPlan = this.employeeWorkPlan.find(wp => wp.taskId == taskId);
     if(workPlan === undefined){
       let com :DeleteWorkPlanCommand={
-        employeeId: this.employee.id,
+        employeeId: this.selectedEmployee.id,
         taskId: taskId,
         date: this.currentDate
       };
@@ -132,21 +147,23 @@ export class PlannerComponent implements OnInit,OnDestroy {
     }
   }
 
-  private getAllEmployees() {
+  private getAvailableEmployees(forDate: Date) {
     let departmentId = this.departmentService.departmentSubject.getValue();
-    this.employeesService.getAllEmployeesInDepartment(departmentId).subscribe((data: EmployeeDto[]) => {
+    let stringDate = this.datepipe.transform(forDate, 'yyyy-MM-dd');
+    this.employeesService.getAvailableEmployeesInDepartment(stringDate,departmentId).subscribe((data: EmployeeDto[]) => {
       this.allEmployees = data;
-      if(data.length > 0) {
-        this.setActiveEmployee(data[0]);
-      }
+      this.setActiveEmployee(data);
     });
+  }
+  selectTask(task:TaskDto){
+    this.selectedTask = task;
   }
 
   listenToDepartment() {
     this.departmentSubscription = this.departmentService.departmentSubject
       .pipe(delay(0))
       .subscribe(() => {
-        this.getAllEmployees();
+        this.getAvailableEmployees(this.currentDate);
       })
   }
 
@@ -160,5 +177,4 @@ export class PlannerComponent implements OnInit,OnDestroy {
   ngOnDestroy(): void {
     this.departmentSubscription.unsubscribe();
   }
-
 }

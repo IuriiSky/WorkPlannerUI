@@ -30,3 +30,17 @@ export class DeleteWorkPlanCommand {
     taskId: number;
     date: Date;
 }
+export interface WorkPlanRepeatingCommand{
+    taskId: number;
+    employeeId:number;
+    monday:boolean;
+    tuesday:boolean;
+    wednesday:boolean;
+    thursday:boolean;
+    friday:boolean;
+    saturday:boolean;
+    sunday:boolean;
+
+    startDate: string;
+    endDate: string;
+}

@@ -2,7 +2,7 @@
   <ul class="current-employees">
     <li class="name-list" 
       *ngFor="let employee of employees" 
-      [ngClass]="employee == selectedEmployee ? 'active' : '' ">
+      [ngClass]="employee?.id === selectedEmployee?.id ? 'active' : '' ">
       <span class="show-color" [ngStyle]="{'background-color': employee.colorCode}"></span>
       <a class="link" *ngIf="clicable" [routerLink]="['/employees', employee.id]" > {{employee.name}}</a>
       <a class="link" *ngIf="!clicable" (click)="vote(employee)">{{employee.name}}</a>

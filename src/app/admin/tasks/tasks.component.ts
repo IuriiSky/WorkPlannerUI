@@ -18,7 +18,7 @@ export class TasksComponent implements OnInit {
 
   public addNewTask: CreateTaskCommand = {
     taskDescription: '',
-};
+  };
 
   public  activeTask: TaskDto;
 
