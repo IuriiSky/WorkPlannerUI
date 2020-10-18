@@ -1,58 +1,71 @@
 <div *ngIf="task">
-   <div class="checbox-section">
-
+  <div class="checbox-section">
+    <ul class="checkbox-list">
+      <li class="checkbox-item">
         <mat-checkbox class="checkbox" [(ngModel)]="repeatDaily" (change)="setDaily($event.checked)">Daglige</mat-checkbox>
+      </li>
+      <li class="checkbox-item">
         <mat-checkbox class="checkbox" [(ngModel)]="repeatWorkingDays" (change)="setWorking($event.checked)">Arbejdsdage</mat-checkbox>
+      </li>
+      <li class="checkbox-item">
         <mat-checkbox class="checkbox" [(ngModel)]="repeatWeekend" (change)="setWeekend($event.checked)">Weekend</mat-checkbox>
+      </li>
+      <li class="checkbox-item">
         <mat-checkbox class="checkbox" [(ngModel)]="repeatCustom" (change)="setCustom($event.checked)">Vælg</mat-checkbox>
-    </div>
-    <mat-divider></mat-divider>
-
-    <div class="checbox-section">
-        <mat-checkbox class="checkbox" [(ngModel)]="repeating.monday" [disabled]="!repeatCustom">Ma</mat-checkbox>
-        <mat-checkbox class="checkbox" [(ngModel)]="repeating.tuesday" [disabled]="!repeatCustom">Ti</mat-checkbox>
-        <mat-checkbox class="checkbox" [(ngModel)]="repeating.wednesday" [disabled]="!repeatCustom">On</mat-checkbox>
-        <mat-checkbox class="checkbox" [(ngModel)]="repeating.thursday" [disabled]="!repeatCustom">To</mat-checkbox>
-        <mat-checkbox class="checkbox" [(ngModel)]="repeating.friday" [disabled]="!repeatCustom">Fr</mat-checkbox>
-        <mat-checkbox class="checkbox" [(ngModel)]="repeating.saturday" [disabled]="!repeatCustom">Lø</mat-checkbox>
-        <mat-checkbox class="checkbox" [(ngModel)]="repeating.sunday" [disabled]="!repeatCustom">Sø</mat-checkbox>
-    </div>
-    <mat-divider></mat-divider>
-
-    <div>
-        <p>Gentagelse i næste...</p>
-    </div>
-    <div class="checbox-section">
-        <mat-checkbox class="checkbox" [(ngModel)]="next7Days" (change)="setNext7Days($event.checked)">7 dage</mat-checkbox>
-        <mat-checkbox class="checkbox" [(ngModel)]="next14Days" (change)="setNext14Days($event.checked)">14 dage</mat-checkbox>
-        <mat-checkbox class="checkbox" [(ngModel)]="next28Days" (change)="setNext28Days($event.checked)">28 dage</mat-checkbox>
-        <mat-checkbox class="checkbox" [(ngModel)]="nextCustom" (change)="setNextCustom($event.checked)">Vælg</mat-checkbox>
-    </div>
-    <mat-divider></mat-divider>
-    <div>
-          <mat-form-field>
-            <mat-label>Start dato</mat-label>
-            <input matInput [matDatepicker]="picker4" 
-                   placeholder="Start Date"
-                   [(ngModel)]="repeating.startDate"
-                   [disabled]= "!nextCustom"
-                   required>
-            <mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
-            <mat-datepicker #picker4></mat-datepicker>
-          </mat-form-field>
-
-          <mat-form-field>
-            <mat-label>Slut dato</mat-label>
-            <input matInput [matDatepicker]="picker5" 
-                   placeholder="End Date"
-                   [(ngModel)]="repeating.endDate"
-                   [disabled]= "!nextCustom"  
-                   required>
-            <mat-datepicker-toggle matSuffix [for]="picker5"></mat-datepicker-toggle>
-            <mat-datepicker #picker5></mat-datepicker>
-          </mat-form-field>
-        <button (click)="generateRepeating()">Gem</button>
-      </div>
-
-
+      </li>
+    </ul>
+  </div>
+  <mat-divider></mat-divider>
+  <div class="checbox-section-days">
+      <mat-checkbox class="checkbox" [(ngModel)]="repeating.monday" [disabled]="!repeatCustom">Ma</mat-checkbox>
+      <mat-checkbox class="checkbox" [(ngModel)]="repeating.tuesday" [disabled]="!repeatCustom">Ti</mat-checkbox>
+      <mat-checkbox class="checkbox" [(ngModel)]="repeating.wednesday" [disabled]="!repeatCustom">On</mat-checkbox>
+      <mat-checkbox class="checkbox" [(ngModel)]="repeating.thursday" [disabled]="!repeatCustom">To</mat-checkbox>
+      <mat-checkbox class="checkbox" [(ngModel)]="repeating.friday" [disabled]="!repeatCustom">Fr</mat-checkbox>
+      <mat-checkbox class="checkbox" [(ngModel)]="repeating.saturday" [disabled]="!repeatCustom">Lø</mat-checkbox>
+      <mat-checkbox class="checkbox" [(ngModel)]="repeating.sunday" [disabled]="!repeatCustom">Sø</mat-checkbox>
+  </div>
+  <mat-divider></mat-divider>
+  <div>
+  <div class="checbox-section">
+    <p class="repet-title">Gentagelse i næste...</p>
+      <ul class="checkbox-list">
+        <li class="checkbox-item">
+          <mat-checkbox class="checkbox" [(ngModel)]="next7Days" (change)="setNext7Days($event.checked)">7 dage</mat-checkbox>
+        </li>
+        <li class="checkbox-item">
+          <mat-checkbox class="checkbox" [(ngModel)]="next14Days" (change)="setNext14Days($event.checked)">14 dage</mat-checkbox>
+        </li>
+        <li class="checkbox-item">
+          <mat-checkbox class="checkbox" [(ngModel)]="next28Days" (change)="setNext28Days($event.checked)">28 dage</mat-checkbox>
+        </li>
+        <li class="checkbox-item">
+          <mat-checkbox class="checkbox" [(ngModel)]="nextCustom" (change)="setNextCustom($event.checked)">Vælg</mat-checkbox>
+        </li>
+      </ul>
+  </div>
+  <mat-divider></mat-divider>
+  <div class="checbox-section-days">
+    <mat-form-field>
+      <mat-label>Start dato</mat-label>
+        <input matInput [matDatepicker]="picker4"
+              placeholder="Start Date"
+              [(ngModel)]="repeating.startDate"
+              [disabled]= "!nextCustom"
+              required>
+        <mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
+          <mat-datepicker #picker4></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Slut dato</mat-label>
+        <input matInput [matDatepicker]="picker5"
+              placeholder="End Date"
+              [(ngModel)]="repeating.endDate"
+              [disabled]= "!nextCustom"
+              required>
+        <mat-datepicker-toggle matSuffix [for]="picker5"></mat-datepicker-toggle>
+          <mat-datepicker #picker5></mat-datepicker>
+    </mat-form-field>
+  </div>
+    <button class="create-button" (click)="generateRepeating()">Gem</button>
 </div>

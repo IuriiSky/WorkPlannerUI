@@ -1,6 +1,62 @@
-.checbox-section {
+.checbox-section,
+.checbox-section-days {
     margin: 12px 0;
   }
+
 .checkbox {
     margin: 0 12px;
   }
+
+.checbox-section-days {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.checkbox-list {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  height: 50px;
+  flex-direction: column;
+  max-width: 320px;
+}
+
+.checkbox-item {
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+.create-button {
+  font-size: 16px;
+  display: flex;
+  padding: 5px 10px;
+  margin: 0 auto 50px;
+  border: none;
+  background-color: cadetblue;
+  border-radius: 5px;
+  box-shadow: 0 5px 5px rgba(10,16,20,.24), 0 0 2px rgba(10,16,20,.12);
+  transition: box-shadow .5s;;
+}
+
+.create-button:hover {
+  box-shadow: 0 0 0 2px cadetblue inset, 0 0 0 4px white inset;
+  transition: 0.4s ease-out;
+} 
+
+@media only screen and (min-width: 768px) {
+  .checkbox-list {
+    justify-content: center;
+    margin: 0 auto;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    width: 100%;
+    height: auto;
+  }
+
+  .repet-title {
+    text-align: center;
+    font-size: 16px;
+    margin: 0 10px 10px;
+  }
+}
