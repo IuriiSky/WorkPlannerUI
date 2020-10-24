@@ -5,9 +5,9 @@ import {
   HttpEvent,
   HttpInterceptor, HttpResponse, HttpErrorResponse
 } from '@angular/common/http';
-import { Observable,throwError } from 'rxjs';
+import { Observable} from 'rxjs';
 import {LoadingService} from '../services/loading.service';
-import { catchError, delay, finalize } from 'rxjs/operators';
+import {finalize } from 'rxjs/operators';
 
 /**
  * This class is for intercepting http requests. When a request starts, we set the loadingSub property
