@@ -2,7 +2,7 @@ var swVersionIdentification = 'v2';
 
 
 self.addEventListener('install', function (event) {
-      console.log("Installing service worker " + swVersionIdentification);
+      // console.log("Installing service worker " + swVersionIdentification);
   event.waitUntil(
     caches.open(swVersionIdentification).then(function (cache) {
       return cache.addAll([

@@ -43,7 +43,7 @@ export class EmployeesComponent implements OnInit, OnDestroy {
     this.createNewEmployee.departmentId = this.departmentService.departmentSubject.getValue();
     this.employeesService.createEmployee(this.createNewEmployee).subscribe(employee => {
       this.createNewEmployee.employeeName = '';
-      this.createNewEmployee.colorCode = '';
+      this.createNewEmployee.colorCode = '#ff0000';
       this.createNewEmployee.login = '';
       this.createNewEmployee.password = '';
       this.createNewEmployee.departmentId = 0;
