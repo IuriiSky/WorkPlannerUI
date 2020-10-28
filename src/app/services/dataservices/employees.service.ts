@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-import { EmployeeDto, CreateEmployeeCommand, EmployeeDetailsDto, UpdateEmployeeCommand, PlanHolidayCommand } from '../shared/interfaces/employee';
+import { EmployeeDto, CreateEmployeeCommand, EmployeeDetailsDto, UpdateEmployeeCommand, PlanHolidayCommand, UpdateEmployeeCredentialsCommand } from '../../shared/interfaces/employee';
 import { Observable } from 'rxjs';
-import { DataService } from './data.service';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -11,11 +11,9 @@ import { DataService } from './data.service';
 export class EmployeesService {
 
   baseApi :string;
-  httpOptions : any;
-  constructor(private http: HttpClient, dataService: DataService)
+  constructor(private http: HttpClient)
   {
-    this.baseApi = dataService.baseApiUrl + 'Employees/';
-    this.httpOptions = dataService.httpOptions;
+    this.baseApi = environment.apiUrl + 'Employees/';
   }
 
   getAllEmployees() : Observable<EmployeeDto[]> 
@@ -28,8 +26,8 @@ export class EmployeesService {
     return  this.http.get<EmployeeDto[]>(this.baseApi+'inDepartment?departmentId='+departmentId);
   }
 
-  getAvailableEmployees(date:Date|string) :Observable<EmployeeDto[]> {
-    return this.http.get<EmployeeDto[]>(this.baseApi);
+  getAvailableEmployeesInDepartment(date:Date|string,departmentId:number) :Observable<EmployeeDto[]> {
+    return this.http.get<EmployeeDto[]>(this.baseApi + 'available?date=' + date + '&departmentId=' + departmentId);
   }
 
   getEmployeeDetails(employeeId: number) {
@@ -42,6 +40,9 @@ export class EmployeesService {
 
   updateEmployee(employee: UpdateEmployeeCommand) {
     return this.http.put<any>(this.baseApi + employee.employeeId + '/update', employee);
+  }
+  updateCredentials(updateCredentialsCommand: UpdateEmployeeCredentialsCommand) {
+    return this.http.put<any>(this.baseApi + updateCredentialsCommand.employeeId + '/updatecredentials', updateCredentialsCommand);
   }
 
   planEmployeeHoliday(employeeId: number, holiday: PlanHolidayCommand ) {

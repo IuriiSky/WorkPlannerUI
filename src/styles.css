@@ -8,6 +8,8 @@
    --white-color: #ffffff;
    --black-color: #000000;
    --red-color: #ff0000;
+   --error-message-color: #721c24;
+   --error-background-color: #f8d7da;
 
 
    --main-bg-color: #3aa8ce;;
@@ -73,7 +75,7 @@
       -webkit-transform: translate(-50%, -50%);
       transform: translate(-50%, -50%);
     }
-    
+
     .show-loading .loader-wrap {
       opacity: 1;
       pointer-events: all;

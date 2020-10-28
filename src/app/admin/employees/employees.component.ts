@@ -1,10 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CreateEmployeeCommand, EmployeeDto } from '../../shared/interfaces/employee';
-import { EmployeesService } from '../../services/employees.service';
+import { EmployeesService } from '../../services/dataservices/employees.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { DepartamentService } from 'src/app/services/departament.service';
 import { delay } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
+import { AuthenticationService } from 'src/app/auth/authentication.service';
 
 
 @Component({
@@ -14,7 +15,7 @@ import { Subscription } from 'rxjs';
 })
 export class EmployeesComponent implements OnInit, OnDestroy {
 
-  constructor(private employeesService: EmployeesService,private departmentService: DepartamentService) {
+  constructor(private employeesService: EmployeesService,private departmentService: DepartamentService,private authService : AuthenticationService) {
     
   }
   
@@ -42,7 +43,7 @@ export class EmployeesComponent implements OnInit, OnDestroy {
     this.createNewEmployee.departmentId = this.departmentService.departmentSubject.getValue();
     this.employeesService.createEmployee(this.createNewEmployee).subscribe(employee => {
       this.createNewEmployee.employeeName = '';
-      this.createNewEmployee.colorCode = '';
+      this.createNewEmployee.colorCode = '#ff0000';
       this.createNewEmployee.login = '';
       this.createNewEmployee.password = '';
       this.createNewEmployee.departmentId = 0;
@@ -52,10 +53,17 @@ export class EmployeesComponent implements OnInit, OnDestroy {
   }
 
   getAllEmployees() {
-    let departmentId = this.departmentService.departmentSubject.getValue();
-    this.employeesService.getAllEmployeesInDepartment(departmentId).subscribe((data: EmployeeDto[]) => {
-      this.employees = data;
-    });
+    if(this.authService.isSuperAdmin()){
+
+      this.employeesService.getAllEmployees().subscribe((data: EmployeeDto[]) => {
+        this.employees = data;
+      });
+    }else if(this.authService.isAdmin()){
+      let departmentId = this.departmentService.departmentSubject.getValue();
+      this.employeesService.getAllEmployeesInDepartment(departmentId).subscribe((data: EmployeeDto[]) => {
+        this.employees = data;
+      });
+    }
   }
 
 

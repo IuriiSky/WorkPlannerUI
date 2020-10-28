@@ -20,135 +20,140 @@
     <symbol id="icon-cancel-circle" viewBox="0 0 32 32">
       <path d="M16 0c-8.837 0-16 7.163-16 16s7.163 16 16 16 16-7.163 16-16-7.163-16-16-16zM16 29c-7.18 0-13-5.82-13-13s5.82-13 13-13 13 5.82 13 13-5.82 13-13 13z"></path>
       <path d="M21 8l-5 5-5-5-3 3 5 5-5 5 3 3 5-5 5 5 3-3-5-5 5-5z"></path>
+    </symbol>
+    <symbol id="icon-plus" viewBox="0 0 32 32">
+      <path d="M31 12h-11v-11c0-0.552-0.448-1-1-1h-6c-0.552 0-1 0.448-1 1v11h-11c-0.552 0-1 0.448-1 1v6c0 0.552 0.448 1 1 1h11v11c0 0.552 0.448 1 1 1h6c0.552 0 1-0.448 1-1v-11h11c0.552 0 1-0.448 1-1v-6c0-0.552-0.448-1-1-1z"></path>
+    </symbol>
+    <symbol id="icon-minus" viewBox="0 0 32 32">
+      <path d="M0 13v6c0 0.552 0.448 1 1 1h30c0.552 0 1-0.448 1-1v-6c0-0.552-0.448-1-1-1h-30c-0.552 0-1 0.448-1 1z"></path>
+    </symbol>
+    <symbol id="icon-eye" viewBox="0 0 28 28">
+      <path d="M26 15c-1.484-2.297-3.516-4.266-5.953-5.516 0.625 1.062 0.953 2.281 0.953 3.516 0 3.859-3.141 7-7 7s-7-3.141-7-7c0-1.234 0.328-2.453 0.953-3.516-2.438 1.25-4.469 3.219-5.953 5.516 2.672 4.125 6.984 7 12 7s9.328-2.875 12-7zM14.75 9c0-0.406-0.344-0.75-0.75-0.75-2.609 0-4.75 2.141-4.75 4.75 0 0.406 0.344 0.75 0.75 0.75s0.75-0.344 0.75-0.75c0-1.781 1.469-3.25 3.25-3.25 0.406 0 0.75-0.344 0.75-0.75zM28 15c0 0.391-0.125 0.75-0.313 1.078-2.875 4.734-8.141 7.922-13.687 7.922s-10.813-3.203-13.687-7.922c-0.187-0.328-0.313-0.688-0.313-1.078s0.125-0.75 0.313-1.078c2.875-4.719 8.141-7.922 13.687-7.922s10.813 3.203 13.687 7.922c0.187 0.328 0.313 0.688 0.313 1.078z"></path>
   </symbol>
   </defs>
 </svg>
-
-  <!-- Admin list link -->
-  <div class="admin-links">
-    <ul class="admin-list">
-      <li class="bg-wrapper">
-        <a class="link" routerLink="/Planner">
-          <svg class="svg-size">
-            <use xlink:href="#icon-calendar"/>
-          </svg>
-          <span>Planner</span> 
-        </a>
+<div class="wrapper">
+<div class="wrapper-navigation">
+  <app-navigation></app-navigation>
+</div>
+<main *ngIf="employeeDetail" class="employee-details">
+  <h2 class="heading">{{employeeDetail.name}}</h2>
+  <div class="current-user-information">        
+    <div class="wrapper-lists-info" 
+          *ngIf="employeeDetail">
+      <p class="info"> Navn: {{employeeDetail.name}}</p>
+      <p class="info"> Farve: <span [ngStyle]="{'background-color': employeeDetail.colorCode}" 
+                                    [title]="employeeDetail.colorCode"
+                                    id="color">
+                              </span>
+      </p>
+      <h3 *ngIf = "employeeDetail.holidays.length > 0" class="info">Planlagte ferie:</h3>
+      <div class="holidays" *ngFor=" let holiday of employeeDetail.holidays">
+        <span class="date-from"> Fra: </span><span class="date">{{holiday.startDate| date: 'dd-MM-yyyy'}}</span>
+        <span class="date-to">Til: </span><span class="date"> {{holiday.endDate| date: 'dd-MM-yyyy'}} </span>
+          <div class="delete-holiday-btn" (click)="deleteHolidays(holiday)">
+            <svg class="svg-icon-bin">
+              <use xlink:href="#icon-bin"/>
+            </svg>
+          </div>
+      </div>
+    </div>
+  </div>
+  <div class="change-user-information">
+    <ul class="user-change-options">
+      <li class="option-item">
+        <span class="title-item" (click)="toggleCreateWeekend()" [ngClass]="{active: showCreateWeekend}">Planlæg en ferie</span>
+        <div class="wrapper-create-form" [ngClass]="{invisible: showCreateWeekend}">
+          <h3 class="holidays-title">Ny ferie</h3>
+            <mat-form-field>
+              <mat-label>Start dato</mat-label>
+              <input matInput [matDatepicker]="picker3" 
+                     placeholder="Start Date"
+                     [(ngModel)]="employeeHoliday.startDate"
+                     required>
+              <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+              <mat-datepicker #picker3></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Slut dato</mat-label>
+              <input matInput [matDatepicker]="picker2" 
+                     placeholder="End Date"
+                     [(ngModel)]="employeeHoliday.endDate"  
+                     required>
+              <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+              <mat-datepicker #picker2></mat-datepicker>
+            </mat-form-field>
+          <button class="create-holidays-btn" (click)="createHolidays()">Opret ferie</button>
+        </div>
       </li>
-      <li class="bg-wrapper">
-        <a class="link" routerLink="/Employees">
-          <svg class="svg-size" >
-            <use xlink:href="#icon-users"/>
-          </svg>
-          <span>Emloyees</span> 
-        </a>
+      <li class="option-item">
+        <span class="title-item" (click)="toggleShowChangeInfoForm()" [ngClass]="{active: showChangeInfoForm}">Ret info</span>
+        <div class="wrapper-create-form" [ngClass]="{invisible: showChangeInfoForm}">
+          <h3 class="changes-title">Ret brugeroplysninger</h3>
+          <form action="" method="post">
+            <fieldset class="create-form" [formGroup]="modifyEmployee">    
+              <mat-form-field class="change-information">
+                <mat-label>Ny navn</mat-label>
+                <input matInput 
+                      formControlName="employeeName" 
+                      [(ngModel)]="employeeUpdate.employeeName" 
+                      type="text"
+                      placeholder="Angiv medarbejders navn" 
+                      name="employee" 
+                      id="employee" 
+                      title="Medarbejders navn" 
+                      autofocus 
+                      required>
+              </mat-form-field>
+              <mat-form-field class="change-information">
+                <mat-label>Ny farve</mat-label>
+                <input matInput 
+                      formControlName="colorCode" 
+                      type="color" 
+                      id="colorPicker" 
+                      [(ngModel)]="employeeUpdate.colorCode" 
+                      required>
+              </mat-form-field>
+            <button class="create-button" (click)="updateUserInfo()">Godkend</button>
+            <button class="cancel-button" (click)="toggleShowChangeInfoForm()">Fortryd</button>
+            </fieldset>
+          </form>
+        </div>
       </li>
-      <li class="bg-wrapper">
-        <a class="link" routerLink="/Tasks">
-          <svg class="svg-size">
-            <use xlink:href="#icon-list-numbered"/>
-          </svg>
-          <span>Tasks</span>
-        </a>
+      <li class="option-item">
+        <span class="title-item" (click)="toggleShowChangeCredentialsForm()" [ngClass]="{active: showChangeCredentialsForm}">Ret adgang</span>
+        <div class="wrapper-create-form" [ngClass]="{invisible: showChangeCredentialsForm}">
+          <h3 class="changes-title">Ret legitimations oplysninger</h3>
+          <form action="" method="post" [formGroup]="modifyCredentials">
+            <fieldset class="create-form">
+              <mat-form-field>
+              <mat-label>Nyt kodeord</mat-label>
+                <input matInput 
+                      formControlName="password" 
+                      [(ngModel)]="credentialsUpdate.password" 
+                      type="text"
+                      placeholder="Angiv ny kodeord" 
+                      name="password" 
+                      id="password" 
+                      title="Angiv ny kodeord til medarbejder" 
+                      autofocus 
+                      required>
+              </mat-form-field>             
+                <input formControlName="isActive" 
+                        type="checkbox"
+                        class="custom-checkbox" 
+                        id="activeStatus" 
+                        [(ngModel)]="credentialsUpdate.isActive" 
+                        value="ya" 
+                        required>
+                <label for="activeStatus">Adgang til systemet</label>
+              <button class="create-button" (click)="updateCredentials()">Godkend</button>
+              <button class="cancel-button" (click)="toggleShowChangeCredentialsForm()">Fortryd</button>
+            </fieldset>
+          </form>
+        </div>
       </li>
     </ul>
   </div>
-<!-- Main area  -->
-
-<div *ngIf="employeeDetail" class="wrapper">
-  <app-admin></app-admin>
-  
-  <main class="employee-details">
-    <h2 class="heading">{{employeeDetail.name}}</h2>
-      <svg class="svg-size setting-button" (click)="sidenavSettings()">
-        <use xlink:href="#icon-cog"/>
-      </svg>
-
-    <div id="worker" class="worker"> 
-      <div class="animation-wraper" >         
-        <div class="wrapper-lists-info animation" 
-            *ngIf="employeeDetail" 
-            [ngClass]="{animation: showInfo}">
-          <p class="info"> Name: {{employeeDetail.name}}</p>
-          <p class="info"> Color:
-            <span [ngStyle]="{'background-color': employeeDetail.colorCode}" 
-            [title]="employeeDetail.colorCode"
-            id="color"> </span>
-          </p>
-          <h3 class="info">Holidays:</h3>
-          <div class="holidays" *ngFor=" let holiday of employeeDetail.holidays">
-            <div><span> From: </span><span class="date">{{holiday.startDate| date: 'dd-MM-yyyy'}}</span>
-                <span>To: </span><span class="date"> {{holiday.endDate| date: 'dd-MM-yyyy'}} </span>
-                <button class="delete-holiday-btn" (click)="deleteHolidays(holiday)">
-                  <svg class="svg-icon-bin">
-                    <use xlink:href="#icon-bin"/>
-                  </svg>
-                </button>
-            </div>
-          </div>
-        </div>
-        <div class="sidenav-settings animationset"
-            [ngClass]="{animationset: showSettings}">         
-          <div class="holidays-wrapper">
-              <h3 class="holidays">Set Hollidays</h3>
-                <mat-form-field>
-                  <mat-label>Start date</mat-label>
-                  <input matInput [matDatepicker]="picker3" 
-                         placeholder="Start Date"
-                         [(ngModel)]="employeeHoliday.startDate"
-                         required>
-                  <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
-                  <mat-datepicker #picker3></mat-datepicker>
-                </mat-form-field>
-
-                <mat-form-field>
-                  <mat-label>End date</mat-label>
-                  <input matInput [matDatepicker]="picker2" 
-                         placeholder="End Date"
-                         [(ngModel)]="employeeHoliday.endDate"  
-                         required>
-                  <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-                  <mat-datepicker #picker2></mat-datepicker>
-                </mat-form-field>
-              <button class="create-holidays-btn" (click)="createHolidays()">Create holiday</button>
-          </div>
-          <div class="changes-btn">
-            <button class="change-name" (click)="toggleShowChangeNameForm()">Change name</button>
-            <button class="change-color" (click)="toggleShowChangeColorForm()">Change color</button>
-          </div>
-          <button class="close-button" (click)="closeSidenavSettings()">
-            <svg class="svg-icon-cancel-circle">
-              <use xlink:href="#icon-cancel-circle"/>
-            </svg>
-          </button>
-        </div>
-      </div>
-    </div>
-
-<!--    Sidenav components-->
-    <div class="wrapper-create-form invisible" [ngClass]="{invisible: showChangeNameForm}">
-      <form action="" method="post">
-        <fieldset class="create-form animate" [formGroup]="modifyEmployee">
-          <legend><span>Change employee name</span></legend>
-          <label for="employee">Employee new name:</label>
-          <input formControlName="employeeName" [(ngModel)]="employeeUpdate.employeeName" type="text"
-                 placeholder="Enter employee name" name="employee" id="employee" title="Enter name" autofocus required>
-          <button class="create-button primary-button" (click)="updateName()">Change</button>
-          <button class="cancel-button primary-button" (click)="toggleShowChangeNameForm()">Cancel</button>
-        </fieldset>
-      </form>
-    </div>
-    <div class="wrapper-create-form invisible" [ngClass]="{invisible: showChangeColorForm}">
-      <form action="" method="post" [formGroup]="modifyEmployee">
-        <fieldset class="create-form animate">
-          <legend><span>Change color</span></legend>
-          <label for="colorPicker">Employee color:</label>
-          <input formControlName="colorCode" type="color" value="#8e2929" id="colorPicker" [(ngModel)]="employeeUpdate.colorCode" required>
-          <button class="create-button primary-button" (click)="updateColor()">Change</button>
-          <button class="cancel-button primary-button" (click)="toggleShowChangeColorForm()">Cancel</button>
-        </fieldset>
-      </form>
-    </div>
-  </main>
+</main>
 </div>
-

@@ -1,0 +1,157 @@
+.button-week {
+  background-color: transparent;
+  border: none;
+  padding: 0 10px;
+}
+
+.previous-week-svg,
+.next-week-svg {
+  height: 25px;
+  width: 25px;
+}
+
+.previous-week-svg:hover,
+.next-week-svg:hover {
+  fill: var(--red-color);
+}
+
+.wrapper-custom-calendar {
+  background-color: grey;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.selected-day {
+  font-size: 26px;
+  padding: 8px;
+  display: flex;
+  justify-content: center;
+}
+
+.selected-week {
+  font-size: 26px;
+  padding: 0 10px;
+  display: flex;
+  justify-content: center;
+}
+
+.selected-day + .card-footer {
+  margin-top: 0px;
+}
+
+.simple-calendar {
+  display: flex;
+  order: -1;
+}
+
+.custom-calendar {
+  margin: 0 20px;
+}
+
+.custom-calendar > .card > .card-footer {
+  margin-top: 0px;
+}
+
+.custom-calendar > .card > .card-footer:hover {
+  color: #6e6e6e;
+}
+
+.current-week {
+  display: flex;
+  justify-content: center;
+  padding: 9px;
+}
+
+.day {
+  margin: 0 10px;
+}
+
+.day-active {
+  border: 2px solid var(--red-color);
+  padding: 5px;
+  color: var(--black-color);
+  font-weight: bold;
+  border-radius: 20px;
+}
+
+.day:hover {
+    color: var(--red-color);
+}
+
+.simple-calendar > .card > .card-footer {
+  margin-top: 0;
+}
+
+.mat-form-field-simple .mat-form-field-wrapper{
+  display: none;
+}
+
+.mat-form-field-custom .mat-form-field-wrapper{
+  margin-bottom: -1.25em;
+}
+
+.material-button {
+  background: transparent;
+  border: none;
+  margin: 0px auto;
+  padding: 8px 0px 9px;
+  width: 100%;
+}
+
+.card {
+  background-color: #fff;
+  border-radius: 4px;
+  box-shadow: 0 5px 5px rgba(10,16,20,.24), 0 0 2px rgba(10,16,20,.12);
+  transition: box-shadow .5s;
+  min-width: 100px;
+  margin: 5px;
+}
+  
+.card:hover {
+  box-shadow: 0 8px 8px rgba(10,16,20,.24), 0 0 8px rgba(10,16,20,.12);
+}
+    
+.card:hover .card-footer {
+  background-color: rgba(25,118,210,.1);
+  color: var(--main-bg-color);
+}
+  
+.link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+  
+.svg-size {
+  height: 25px;
+  width: 25px;
+}
+  
+.card-footer {
+  font-size: 16px;
+  bottom: 0;
+  border-top: .5px solid #dbdbdb;
+  position: relative;
+  text-align: center;
+  color: #6e6e6e;
+  padding: 10px 16px;
+  margin: 10px 0 0;
+}
+
+.hidden-input {
+  border: none;
+  height: 0px;
+  width: 0px;
+  position: relative;
+}
+
+@media only screen and (min-width: 768px) {
+  .simple-calendar {
+    display: flex;
+    order: 1;
+    position: absolute;
+    right: 0;
+  }
+}

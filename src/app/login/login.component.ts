@@ -13,17 +13,19 @@ export class LoginComponent implements OnInit {
   constructor(private authService: AuthenticationService,private router: Router ) { }
   login : string;
   password: string;
+  loginError = false;
   
   doLogin()
   {
     this.authService.login(this.login,this.password).subscribe(
       (user:User) =>{
-        if(this.authService.isAdmin(user)){
+        if(this.authService.hasAdminRole(user) || this.authService.hasSuperAdminRole(user)){
           this.router.navigate(['/admin']);
         }else{
-          this.router.navigate(['/Tasks']);
+          this.router.navigate(['/employeesTasks']);
         }
     },(error =>{
+      this.loginError = true;
     }));
   }
 

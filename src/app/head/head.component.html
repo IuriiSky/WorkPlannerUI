@@ -26,13 +26,13 @@
       <li *ngIf="isUserLoggedIn" class="humburger-menu-item">
         <a (click)="doLogout()" class="login" title="LogOut">LogOut</a>
       </li>
-      <li class="humburger-menu-item">
+      <li *ngIf="isAdmin" class="humburger-menu-item">
         <button id="department-2"
                 class="department"
                 (click)="selectDepartment(2)"
                 [ngClass]="isDeparmentSelected(2) ? 'department-active' : 'department'">{{nameDepartament2}}</button>
       </li>
-      <li class="humburger-menu-item">
+      <li *ngIf="isAdmin" class="humburger-menu-item">
         <button  id="departmen-1"
                 class="department" 
                 (click)="selectDepartment(1)"

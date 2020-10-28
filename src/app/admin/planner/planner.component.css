@@ -1,153 +1,184 @@
 .wrapper-planner {
-    display: flex;
-    flex-wrap: wrap;
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
 }
 
-.current-date {
-    display: flex;
-    margin: 0 auto;
+.wrapper-navigation {
+  background: lavender;
+  display: flex;
+  justify-content: center;
+  width: 100%;
 }
 
-.button-day {
-    background-color: transparent;
-    border: none;
-    margin: 15px;
-    height: auto;
-    padding: 0 10px;
+#icon-calendar {
+  fill: var(--bt-create-hover-color);
 }
 
-.previous-day-svg,
-.next-day-svg {
-    height: 25px;
-    width: 25px;
+app-calendar {
+  width: 100%;
 }
 
-.previous-day-svg:hover,
-.next-day-svg:hover {
-    fill: #3f51b5;
+.wrapper-employee-list-block {
+  display: block;
+  margin: 10px 10px 0px;
+  width: 100%;
 }
 
-.time-line {
-    background-color: green;
-    width: 100%
+.employee-list-block {
+  display: block;
+  width: 100%;
+  border-radius: 5px;
+}
+
+.employee-list-block:before {
+  content: 'Vælg medarbejder';
+  background-color: lightseagreen;
+  display: flex;
+  justify-content: flex-end;
+  padding: 2px 10px;
+  font-weight: bold;
+  font-style: italic;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.title-list {
+  text-align: center;
+  padding: 10px;
+  text-align: center;
+  border-left: 3px solid lightseagreen;
+  border-right: 3px solid lightseagreen;
+  border-bottom: 3px solid lightseagreen;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  font-weight: bold;
+}
+
+.wrapper-employee-list {
+  border-left: 3px solid lightseagreen;
+  border-right: 3px solid lightseagreen;
+  border-bottom: 3px solid lightseagreen;
+  box-sizing: border-box;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.invisible {
+  display: none;
+}
+
+.background-block {
+  margin: 0px 5px;
+  box-shadow: 0 5px 5px rgba(10,16,20,.24), 0 0 2px rgba(10,16,20,.12);
+  transition: box-shadow .5s;
+  border-radius: 5px;
+  width: 100%;
+}
+
+
+.todo-list-block {
+  border: 3px solid olivedrab;
+  margin: 10px 10px 0;
+  min-height: 150px;
+}
+
+.todo-list-block:before {
+  content: 'Dagens opgaver';
+  background-color: olivedrab;
+  display: flex;
+  justify-content: flex-end;
+  padding: 2px 10px;
+  font-weight: bold;
+  font-style: italic;
+}
+
+.task-list-block {
+  border: 3px solid orange;
+  margin: 10px 10px 0;
+  min-height: 150px;
+}
+
+.task-list-block:before {
+  content: 'Alle opgave';
+  background-color: orange;
+  display: flex;
+  justify-content: flex-end;
+  padding: 2px 10px;
+  font-weight: bold;
+  font-style: italic;
 }
 
 #taskList,
 #todoList {
-    list-style: none;
-    width: 100%;
-    height: 100%;
+  list-style: none;
+  min-height: 100px;
+  flex-grow: 1;
+  width: 100%;
 }
 
 .task {
-    background-color: rgba(25,118,210,.1);
-    color: var(--black-color);
-    border-radius: 4px;
-    box-shadow: 0 5px 5px rgba(10,16,20,.24), 0 0 2px rgba(10,16,20,.12);
-    height: 1em;
-    transition: box-shadow .5s;
-    margin: 10px 20px;
-    padding: 12px;
-    height: auto;
+  background-color: rgba(25,118,210,.1);
+  color: var(--black-color);
+  border-radius: 4px;
+  box-shadow: 0 5px 5px rgba(10,16,20,.24), 0 0 2px rgba(10,16,20,.12);
+  height: 1em;
+  transition: box-shadow .5s;
+  margin: 10px 20px;
+  padding: 12px;
+  height: auto;
 }
 
 .task:hover {
-    border: none;
-    background-color: cadetblue;
-    border-radius: 5px;
-    box-shadow: 0 0 0 2px rgb(236, 136, 5) inset, 0 0 0 4px white inset;
-    transition: 0.4s ease-out
+  border: none;
+  background-color: cadetblue;
+  border-radius: 5px;
+  box-shadow: 0 0 0 2px rgb(236, 136, 5) inset, 0 0 0 4px white inset;
+  transition: 0.4s ease-out
+}
+.task-selected {
+  background-color: rgba(25, 118, 210, 0.356);
+  color: var(--black-color);
+  border-radius: 4px;
+  box-shadow: 0 5px 5px rgba(10,16,20,.24), 0 0 2px rgba(10,16,20,.12);
+  height: 1em;
+  transition: box-shadow .5s;
+  margin: 10px 20px;
+  padding: 12px;
+  height: auto;
 }
 
-.page-wrapper {
-    display: flex;
-    flex-direction: row;
-    flex-basis: 100%;
-}
-
-/* Admin block */
-
-.task-list-block {
-    flex-basis: 33%;
-}
-
-.todo-list-block {
-    flex-basis: 33%;
-}
-
-.employee-list-block {
-    flex-basis: 24%;
-}
-
-.admin-block {
-    flex-basis: 10%;
-}
-
-.background-block {
-    margin: 0px 5px;
-    box-shadow: 0 5px 5px rgba(10,16,20,.24), 0 0 2px rgba(10,16,20,.12);
-    transition: box-shadow .5s;
-    border-radius: 5px;
-}
-  .card {
-    /* width: 20%; */
-    background-color: #fff;
-    border-radius: 4px;
-    box-shadow: 0 5px 5px rgba(10,16,20,.24), 0 0 2px rgba(10,16,20,.12);
-    transition: box-shadow .5s;
-    max-width: 100px;
-    min-width: 50px;
-    margin: 24px 8px;
+@media only screen and (min-width: 768px) {
+  .employee-list-block {
+    background: var(--white-color);
+    max-width: 768px;
+    margin: 10px auto 0;
+    width: 100%;
   }
-  
-  .card:hover {
-    box-shadow: 0 8px 8px rgba(10,16,20,.24), 0 0 8px rgba(10,16,20,.12);
+
+  .todo-list-block,
+  .task-list-block {
+    flex: 0 0 50%;
+    margin: 10px 0px 0px;
+    box-sizing: border-box;
+    background: var(--white-color);
   }
-  
-  .card:hover .svg-size {
-    fill: var(--main-bg-color);
+
+  .wrapper-navigation {
+    padding-bottom: 10px;
   }
-  
-  .card:hover .card-footer {
-    
-      background-color: rgba(25,118,210,.1);
-      color: var(--main-bg-color);
-  }
-  
-  .link {
-    display: flex;
+}
+
+@media only screen and (min-width: 1024px) {
+
+  .wrapper-planner {
     justify-content: center;
-    align-items: center;
-    padding: 10px;
-  }
-  
-  .svg-size {
-    height: 25px;
-    width: 25px;
-  }
-  
-  .card-footer {
-    font-size: 16px;
-    bottom: 0;
-    border-top: .5px solid #dbdbdb;
-    position: relative;
-    text-align: center;
-    color: #6e6e6e;
-    padding: 10px 16px;
-    margin: 10px 0 0;
+    margin-bottom: 10px;
   }
 
-
-  app-employees-list > .wrapper-lists {
-      display: block;
-      width: 100%;
+  .todo-list-block,
+  .task-list-block {
+    max-width: 502px;
+    margin: 10px 5px;
   }
-
-  @media only screen and (max-width: 640px) {
-    /* For mobile phones: */
-  }
-  
-  
-  @media only screen and (max-width: 480px) {
-    /* For mobile phones: */
-  }
+}

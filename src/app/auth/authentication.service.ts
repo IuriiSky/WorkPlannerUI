@@ -36,14 +36,45 @@ export class AuthenticationService {
     ).toPromise();
   }
 
-  isAdmin(user: User):boolean {
-    return user.info.Role === "admin";
+  hasSuperAdminRole(user: User): boolean {
+    if(user && user.info){
+      return user.info.Role === "superadmin";
+    }
+    return false;
   }
-  isUserLoggedIn():boolean{
-    return !this.isUserNotLoggedIn();
+
+  hasAdminRole(user: User):boolean {
+    if(user && user.info){
+      return user.info.Role === "admin";
+    }
+    return false;
   }
-  isUserNotLoggedIn():boolean{
+
+  hasUserRole(user: User):boolean {
+    if(user && user.info){
+      return user.info.Role === "user";
+    }
+    return false;
+  }
+  
+  isLoggedIn():boolean{
+    return !this.isNotLoggedIn();
+  }
+  isNotLoggedIn():boolean{
     return (this.user === undefined || this.userSubject === null) && !this.refreshTokenInProgress;
+  }
+
+
+  isSuperAdmin():boolean{
+    return this.isLoggedIn() && this.hasSuperAdminRole(this.user);
+  }
+  
+
+  isAdmin():boolean {
+    return this.isLoggedIn() && (this.hasAdminRole(this.user) || this.hasSuperAdminRole(this.user));
+  }
+  isUser():boolean {
+    return this.isLoggedIn() && this.hasUserRole(this.user);
   }
 
    getUser(): Observable<User> {

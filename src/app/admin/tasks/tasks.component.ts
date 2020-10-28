@@ -1,5 +1,5 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
-import { TasksService } from '../../services/tasks.service';
+import { TasksService } from '../../services/dataservices/tasks.service';
 import { TaskDto, CreateTaskCommand, UpdateTaskCommand } from '../../shared/interfaces/task';
 import {Router} from '@angular/router';
 import {FormControl, FormGroup} from '@angular/forms';
@@ -18,7 +18,7 @@ export class TasksComponent implements OnInit {
 
   public addNewTask: CreateTaskCommand = {
     taskDescription: '',
-};
+  };
 
   public  activeTask: TaskDto;
 
