@@ -74,7 +74,7 @@
                   [(ngModel)]="currentDate"
                   (dateChange)="dateChangeFromCalendar($event)"
                   required>
-            <mat-datepicker #picker panelClass="datepickerOne"></mat-datepicker>
+            <mat-datepicker #picker></mat-datepicker>
           <button mat-button (click)="picker.open()" class="material-button">
             <svg class="svg-size">
               <use xlink:href="#calendar"/>
