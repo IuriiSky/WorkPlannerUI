@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { WorkplansService } from 'src/app/services/dataservices/workplans.service';
 import { EmployeeDto } from 'src/app/shared/interfaces/employee';
 import { TaskDto } from 'src/app/shared/interfaces/task';
@@ -15,7 +15,7 @@ export class TaskRepeatComponent implements OnInit {
   constructor(private plannerService: WorkplansService) { }
 
   private today = new Date();
-
+  
   repeating: WorkPlanRepeatingCommand = {
     taskId:0,
     employeeId:0,
@@ -151,12 +151,16 @@ export class TaskRepeatComponent implements OnInit {
       this.setDefaultNextDays();
     }
   }
+
   generateRepeating(){
     this.repeating.employeeId = this.employee.id;
     this.repeating.taskId = this.task.id;
     
     this.plannerService.repeatWorkPlan(this.repeating)
-    .subscribe((data:any) => {});
+    .subscribe((data:any) => 
+    {
+      this.initDefaultRepeating();
+    });
   }
   private setDefaultNextDays(){
     this.repeating.startDate = this.today.toISOString();
@@ -168,8 +172,42 @@ export class TaskRepeatComponent implements OnInit {
     date.setDate(this.today.getDate() + days);
     return date.toISOString(); 
   }
+  private initDefaultRepeating()
+  {
+    this.repeating.taskId=0;
+    this.repeating.employeeId=0;
+    this.repeating.startDate= this.today.toISOString();
+    this.repeating.endDate= this.today.toISOString();
+    this.repeating.monday= false;
+    this.repeating.tuesday= false;
+    this.repeating.wednesday= false;
+    this.repeating.thursday= false;
+    this.repeating.friday= false;
+    this.repeating.saturday= false;
+    this.repeating.sunday= false;
+    //console.log(this.repeating.startDate);
+
+    this.repeatDaily = false;
+    this.repeatWorkingDays = false;
+    this.repeatWeekend = false;
+    this.repeatCustom = false;
+
+    this.next7Days = false;
+    this.next14Days = false;
+    this.next28Days = false;
+    this.nextCustom = false;
+
+  }
+  
+  ngOnChanges(changes: SimpleChanges): void {
+    let taskChange = changes["task"];
+    if (taskChange && !taskChange.firstChange){
+      this.initDefaultRepeating();
+    }
+  }
 
   ngOnInit() {
+    this.initDefaultRepeating();
   }
 
 }

@@ -95,6 +95,7 @@ import { TaskRepeatComponent } from './admin/task-repeat/task-repeat.component';
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     { provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS },
     { provide: DateAdapter, useClass: MomentUtcDateAdapter },
+    
     EmployeesService,
     DatePipe
   ],
