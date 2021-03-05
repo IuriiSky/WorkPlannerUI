@@ -45,9 +45,20 @@ import { AuthModule } from './auth/auth.module';
 import { EmployeeTasksComponent } from './employee/employee-tasks/employee-tasks.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { MomentUtcDateAdapter } from './decorators/moment-utc-date-adapter';
-import { MatMomentDateModule, MAT_MOMENT_DATE_FORMATS } from '@angular/material-moment-adapter';
+import { MatMomentDateModule} from '@angular/material-moment-adapter';
 import { TaskRepeatComponent } from './admin/task-repeat/task-repeat.component';
 
+export const DateFormats = {
+  parse: {
+      dateInput: ['DD/MM/YYYY']
+  },
+  display: {
+      dateInput: 'DD/MM/YYYY',
+      monthYearLabel: 'MMM YYYY',
+      dateA11yLabel: 'LL',
+      monthYearA11yLabel: 'MMMM YYYY',
+  },
+};
 @NgModule({
   declarations: [
     AppComponent,
@@ -93,8 +104,9 @@ import { TaskRepeatComponent } from './admin/task-repeat/task-repeat.component';
     { provide: HTTP_INTERCEPTORS, useClass: BusyInterceptor,multi: true},
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-    { provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS },
     { provide: DateAdapter, useClass: MomentUtcDateAdapter },
+    { provide: MAT_DATE_FORMATS, useValue: DateFormats },
+    
     EmployeesService,
     DatePipe
   ],

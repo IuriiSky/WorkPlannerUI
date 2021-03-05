@@ -20,6 +20,7 @@ export class CalendarComponent  implements OnInit {
 
     currentDateSubject : BehaviorSubject<Date>;
     currentDate: Date;
+    today: Date;
 
     currentWeekDay: number;
     currentMonthDay: number;
@@ -43,7 +44,11 @@ export class CalendarComponent  implements OnInit {
     moveCurrentDate(days:number) {
       let date = new Date(this.currentDate.getTime());
       date.setDate(this.currentDate.getDate() + days);
-      this.selectedDateChanged(date); 
+      date.setHours(0,0,0,0);
+
+      if(date >= this.today){
+        this.selectedDateChanged(date); 
+      }
     }
 
     nextWeek() {
@@ -96,6 +101,9 @@ export class CalendarComponent  implements OnInit {
 
   ngOnInit() {
     this.currentDate = new Date();
+    this.today = new Date();
+    this.today.setHours(0,0,0,0);
+
     this.currentDateSubject = new BehaviorSubject<Date>(this.currentDate);
     this.listenToDateChanged();
   }
