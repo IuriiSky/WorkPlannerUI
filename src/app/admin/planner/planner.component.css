@@ -32,7 +32,7 @@ app-calendar {
 }
 
 .employee-list-block:before {
-  content: 'Vælg medarbejder';
+  content: 'Tryk for at vælge medarbejder';
   background-color: lightseagreen;
   display: flex;
   justify-content: flex-end;

@@ -155,6 +155,7 @@ export class PlannerComponent implements OnInit,OnDestroy {
       this.setActiveEmployee(data);
     });
   }
+  
   selectTask(task:TaskDto){
     this.selectedTask = task;
   }
@@ -163,15 +164,16 @@ export class PlannerComponent implements OnInit,OnDestroy {
     this.departmentSubscription = this.departmentService.departmentSubject
       .pipe(delay(0))
       .subscribe(() => {
-        this.getAvailableEmployees(this.currentDate);
+        let departmentId = this.departmentService.departmentSubject.getValue();
+        this.tasksService.getAllTasks(departmentId).subscribe((data: TaskDto[]) => {
+          this.allTasks = data;
+          this.getAvailableEmployees(this.currentDate);    
+        });
       })
   }
-
+  
   ngOnInit() {
-    this.tasksService.getAllTasks().subscribe((data: TaskDto[]) => {
-      this.allTasks = data;
       this.listenToDepartment();
-    });
   }
 
   ngOnDestroy(): void {

@@ -5,6 +5,7 @@ export interface TaskDto {
 
 export interface CreateTaskCommand {
     taskDescription: string;
+    departmentId:number;
 }
 
 export interface UpdateTaskCommand {
