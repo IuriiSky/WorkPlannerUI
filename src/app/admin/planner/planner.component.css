@@ -44,6 +44,7 @@ app-calendar {
 }
 
 .title-list {
+  cursor: pointer;
   text-align: center;
   padding: 10px;
   text-align: center;
@@ -54,6 +55,14 @@ app-calendar {
   border-bottom-right-radius: 5px;
   font-weight: bold;
 }
+
+/* .title-list:after{
+  content: '\02795';  Unicode character for "plus" sign (+) 
+  font-size: 13px;
+  color: #777;
+  float: right;
+  margin-left: 5px;
+} */
 
 .wrapper-employee-list {
   border-left: 3px solid lightseagreen;
