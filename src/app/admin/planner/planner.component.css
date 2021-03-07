@@ -56,13 +56,13 @@ app-calendar {
   font-weight: bold;
 }
 
-/* .title-list:after{
-  content: '\02795';  Unicode character for "plus" sign (+) 
+.title-list:after{
+  content: '\1F87b';  /* Unicode character for "arrow" sign */
   font-size: 13px;
   color: #777;
   float: right;
   margin-left: 5px;
-} */
+}
 
 .wrapper-employee-list {
   border-left: 3px solid lightseagreen;

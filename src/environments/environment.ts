@@ -4,10 +4,10 @@
 
 export const environment = {
   production: false,
-  apiUrl:'http://localhost:64162/api/',
-  //apiUrl: 'http://workplanner.softwaris.eu/api/',
-  identityServerUrl:'http://localhost:64162/',
-  //identityServerUrl:'http://workplanner.softwaris.eu/',
+  //apiUrl:'http://localhost:64162/api/',
+  apiUrl: 'http://wp-test-api.softwaris.eu/api/',
+  //identityServerUrl:'http://localhost:64162/',
+  identityServerUrl:'http://wp-test-api.softwaris.eu/',
   clientId: 'WebClient',
   clientSecret : 'd30120c1-c1b2-4f3b-bb55-a32ad0dbb66d64b9c69f',
   //clientSecret : 'verylongsectet',

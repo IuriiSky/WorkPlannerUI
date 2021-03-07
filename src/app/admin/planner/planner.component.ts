@@ -167,7 +167,7 @@ export class PlannerComponent implements OnInit,OnDestroy {
         let departmentId = this.departmentService.departmentSubject.getValue();
         this.tasksService.getAllTasks(departmentId).subscribe((data: TaskDto[]) => {
           this.allTasks = data;
-          this.getAvailableEmployees(this.currentDate);    
+          //this.getAvailableEmployees(this.currentDate);    
         });
       })
   }
