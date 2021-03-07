@@ -3,6 +3,9 @@ import { TasksService } from '../../services/dataservices/tasks.service';
 import { TaskDto, CreateTaskCommand, UpdateTaskCommand } from '../../shared/interfaces/task';
 import {Router} from '@angular/router';
 import {FormControl, FormGroup} from '@angular/forms';
+import { DepartamentService } from 'src/app/services/departament.service';
+import { Subscription } from 'rxjs';
+import { delay } from 'rxjs/operators';
 
 @Component({
   selector: 'app-tasks',
@@ -11,13 +14,14 @@ import {FormControl, FormGroup} from '@angular/forms';
 })
 export class TasksComponent implements OnInit {
 
-  constructor( private tasksService: TasksService) 
+  constructor( private tasksService: TasksService,private departmentService: DepartamentService) 
   {  }
-
+  departmentSubscription: Subscription;
   public tasks: TaskDto[];
 
   public addNewTask: CreateTaskCommand = {
     taskDescription: '',
+    departmentId : 0
   };
 
   public  activeTask: TaskDto;
@@ -40,12 +44,14 @@ export class TasksComponent implements OnInit {
   }
 
   getAllTasks() {
-    this.tasksService.getAllTasks().subscribe((data) => {
+    let departmentId = this.departmentService.departmentSubject.getValue();
+    this.tasksService.getAllTasks(departmentId).subscribe((data) => {
       this.tasks = data;
     });
   }
 
   createNewTask() {
+    this.addNewTask.departmentId = this.departmentService.departmentSubject.getValue();
     this.tasksService.createTask(this.addNewTask).subscribe(task => {
       this.addNewTask.taskDescription = '';
       this.showCreateForm = true;
@@ -66,10 +72,21 @@ export class TasksComponent implements OnInit {
     });
   }
 
+  listenToDepartment() {
+    this.departmentSubscription = this.departmentService.departmentSubject
+      .pipe(delay(0))
+      .subscribe(() => {
+        this.getAllTasks();
+      })
+  }
+
   ngOnInit() {
-    this.getAllTasks();
+    this.listenToDepartment()
     this.createTask = new FormGroup({
       taskDescription: new FormControl(''),
     });
+  }
+  ngOnDestroy(): void {
+    this.departmentSubscription.unsubscribe();
   }
 }

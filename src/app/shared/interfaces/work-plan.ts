@@ -6,7 +6,8 @@ export class EmployeeTaskDto{
 }
 export class WorkPlanDto {
     employeeId: number;
-    employeeName: string ;
+    employeeName: string;
+    colorCode: string;
     taskId: number;
     taskDescription: string ;
     date: Date;

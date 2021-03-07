@@ -32,7 +32,7 @@ app-calendar {
 }
 
 .employee-list-block:before {
-  content: 'Vælg medarbejder';
+  content: 'Tryk for at vælge medarbejder';
   background-color: lightseagreen;
   display: flex;
   justify-content: flex-end;
@@ -44,6 +44,7 @@ app-calendar {
 }
 
 .title-list {
+  cursor: pointer;
   text-align: center;
   padding: 10px;
   text-align: center;
@@ -53,6 +54,14 @@ app-calendar {
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
   font-weight: bold;
+}
+
+.title-list:after{
+  content: '\1F87b';  /* Unicode character for "arrow" sign */
+  font-size: 13px;
+  color: #777;
+  float: right;
+  margin-left: 5px;
 }
 
 .wrapper-employee-list {

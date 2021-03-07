@@ -38,6 +38,8 @@ export class TaskOverviewComponent implements OnInit {
         {
           let employeeTasks = new EmployeeTasks();
           employeeTasks.employeeName = workPlan.employeeName;
+          employeeTasks.employeeColor = workPlan.colorCode;
+
           employeeTasks.tasks.push(workPlan);
           this.taskOverview.push(employeeTasks);          
         }
@@ -72,5 +74,7 @@ export class TaskOverviewComponent implements OnInit {
 
 class EmployeeTasks{
   employeeName:string;
+  employeeColor:string;
   tasks:WorkPlanDto[]=[];
 }
+
