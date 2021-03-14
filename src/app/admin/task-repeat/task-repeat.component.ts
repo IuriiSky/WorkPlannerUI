@@ -206,6 +206,11 @@ export class TaskRepeatComponent implements OnInit {
     let taskChange = changes["task"];
     if (taskChange && !taskChange.firstChange){
       this.initDefaultRepeating();
+      return;
+    }
+    let dateChange = changes["baseDate"];
+    if(dateChange && !dateChange.firstChange){
+      this.initDefaultRepeating();
     }
   }
 
