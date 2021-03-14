@@ -17,8 +17,8 @@ export class TasksService {
     //this.httpOptions = dataService.httpOptions;
   }
 
-  getAllTasks(): Observable<TaskDto[]> {
-    return  this.http.get<TaskDto[]>(this.baseApi);
+  getAllTasks(departmentId:number): Observable<TaskDto[]> {
+    return  this.http.get<TaskDto[]>(this.baseApi+'?departmentId=' + departmentId);
   }
 
   createTask(task: CreateTaskCommand) {
