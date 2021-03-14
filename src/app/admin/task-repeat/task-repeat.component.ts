@@ -12,15 +12,17 @@ import { WorkPlanRepeatingCommand } from 'src/app/shared/interfaces/work-plan';
 export class TaskRepeatComponent implements OnInit {
   @Input('selectedTask') task: TaskDto;
   @Input('selectedEmployee') employee: EmployeeDto;
+  @Input('startDate') baseDate: Date = new Date();
   constructor(private plannerService: WorkplansService) { }
 
-  private today = new Date();
   
   repeating: WorkPlanRepeatingCommand = {
     taskId:0,
     employeeId:0,
-    startDate: this.today.toISOString(),
-    endDate: this.today.toISOString(),
+
+    startDate: this.baseDate.toISOString(),
+    endDate: this.baseDate.toISOString(),
+
     monday: false,
     tuesday: false,
     wednesday: false,
@@ -163,21 +165,23 @@ export class TaskRepeatComponent implements OnInit {
     });
   }
   private setDefaultNextDays(){
-    this.repeating.startDate = this.today.toISOString();
-    this.repeating.endDate = this.today.toISOString();  
+    this.repeating.startDate = this.baseDate.toISOString();
+    this.repeating.endDate = this.baseDate.toISOString();  
   }
 
   private getDateDiff(days:number): string {
-    let date = new Date(this.today.getTime());
-    date.setDate(this.today.getDate() + days);
+    let date = new Date(this.baseDate.getTime());
+    date.setDate(this.baseDate.getDate() + days);
     return date.toISOString(); 
   }
   private initDefaultRepeating()
   {
     this.repeating.taskId=0;
     this.repeating.employeeId=0;
-    this.repeating.startDate= this.today.toISOString();
-    this.repeating.endDate= this.today.toISOString();
+    
+    this.repeating.startDate= this.baseDate.toISOString();
+    this.repeating.endDate= this.baseDate.toISOString();
+
     this.repeating.monday= false;
     this.repeating.tuesday= false;
     this.repeating.wednesday= false;
@@ -185,7 +189,6 @@ export class TaskRepeatComponent implements OnInit {
     this.repeating.friday= false;
     this.repeating.saturday= false;
     this.repeating.sunday= false;
-    //console.log(this.repeating.startDate);
 
     this.repeatDaily = false;
     this.repeatWorkingDays = false;
