@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { WorkplansService } from 'src/app/services/dataservices/workplans.service';
 import { EmployeeDto } from 'src/app/shared/interfaces/employee';
@@ -13,15 +14,15 @@ export class TaskRepeatComponent implements OnInit {
   @Input('selectedTask') task: TaskDto;
   @Input('selectedEmployee') employee: EmployeeDto;
   @Input('startDate') baseDate: Date = new Date();
-  constructor(private plannerService: WorkplansService) { }
 
+  constructor(private plannerService: WorkplansService, private datepipe: DatePipe,) { }
   
   repeating: WorkPlanRepeatingCommand = {
     taskId:0,
     employeeId:0,
 
-    startDate: this.baseDate.toISOString(),
-    endDate: this.baseDate.toISOString(),
+    startDate: this.datepipe.transform(this.baseDate,'yyyy-MM-dd'),
+    endDate: this.datepipe.transform(this.baseDate,'yyyy-MM-dd'),
 
     monday: false,
     tuesday: false,
@@ -165,22 +166,22 @@ export class TaskRepeatComponent implements OnInit {
     });
   }
   private setDefaultNextDays(){
-    this.repeating.startDate = this.baseDate.toISOString();
-    this.repeating.endDate = this.baseDate.toISOString();  
+    this.repeating.startDate = this.datepipe.transform(this.baseDate,'yyyy-MM-dd');
+    this.repeating.endDate = this.datepipe.transform(this.baseDate,'yyyy-MM-dd');  
   }
 
   private getDateDiff(days:number): string {
     let date = new Date(this.baseDate.getTime());
     date.setDate(this.baseDate.getDate() + days);
-    return date.toISOString(); 
+    return this.datepipe.transform(date,'yyyy-MM-dd'); 
   }
   private initDefaultRepeating()
   {
     this.repeating.taskId=0;
     this.repeating.employeeId=0;
     
-    this.repeating.startDate= this.baseDate.toISOString();
-    this.repeating.endDate= this.baseDate.toISOString();
+    this.repeating.startDate = this.datepipe.transform(this.baseDate,'yyyy-MM-dd');
+    this.repeating.endDate = this.datepipe.transform(this.baseDate,'yyyy-MM-dd');
 
     this.repeating.monday= false;
     this.repeating.tuesday= false;
