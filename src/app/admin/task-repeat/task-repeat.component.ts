@@ -1,5 +1,5 @@
 import { DatePipe } from '@angular/common';
-import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 import { WorkplansService } from 'src/app/services/dataservices/workplans.service';
 import { EmployeeDto } from 'src/app/shared/interfaces/employee';
 import { TaskDto } from 'src/app/shared/interfaces/task';
@@ -14,6 +14,7 @@ export class TaskRepeatComponent implements OnInit {
   @Input('selectedTask') task: TaskDto;
   @Input('selectedEmployee') employee: EmployeeDto;
   @Input('startDate') baseDate: Date = new Date();
+  @Output() repeatingSaved: EventEmitter<any> = new EventEmitter();
 
   constructor(private plannerService: WorkplansService, private datepipe: DatePipe,) { }
   
@@ -163,6 +164,7 @@ export class TaskRepeatComponent implements OnInit {
     .subscribe((data:any) => 
     {
       this.initDefaultRepeating();
+      this.repeatingSaved.emit(null);
     });
   }
   private setDefaultNextDays(){
@@ -213,6 +215,8 @@ export class TaskRepeatComponent implements OnInit {
     if(dateChange && !dateChange.firstChange){
       this.initDefaultRepeating();
     }
+
+    //selectedTask
   }
 
   ngOnInit() {

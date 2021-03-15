@@ -111,6 +111,12 @@ export class PlannerComponent implements OnInit,OnDestroy {
     this.remainingTasks = this.allTasks.filter(t =>{
       return !workPlan.some(wp => wp.taskId == t.id);
     });
+    if (this.selectedTask){
+      let isAssigned = this.employeeTasks.findIndex(t => t.id == this.selectedTask.id) !== -1;
+      if(!isAssigned){
+        this.selectedTask = undefined;
+      }
+    }
   }
 
   private addTask(taskId: number){
@@ -118,7 +124,7 @@ export class PlannerComponent implements OnInit,OnDestroy {
     {
       employeeId: this.selectedEmployee.id,
       taskId: taskId,
-      date: this.currentDate,
+      date: this.datepipe.transform(this.currentDate,'yyyy-MM-dd'),
     };
     this.plannerService.createWorkPlan(com).subscribe((data:any) => {
     });
@@ -129,7 +135,7 @@ export class PlannerComponent implements OnInit,OnDestroy {
       let com :DeleteWorkPlanCommand={
         employeeId: this.selectedEmployee.id,
         taskId: taskId,
-        date: this.currentDate
+        date: this.datepipe.transform(this.currentDate,'yyyy-MM-dd')
       };
       this.plannerService.deleteWorkPlan(com).subscribe((data:any) => {
       });
@@ -139,7 +145,7 @@ export class PlannerComponent implements OnInit,OnDestroy {
       let com :DeleteWorkPlanCommand={
         employeeId: workPlan.employeeId,
         taskId: workPlan.taskId,
-        date: workPlan.date
+        date: this.datepipe.transform(workPlan.date,'yyyy-MM-dd')
       };
       
       this.plannerService.deleteWorkPlan(com).subscribe((data:any) => {
@@ -158,6 +164,9 @@ export class PlannerComponent implements OnInit,OnDestroy {
   
   selectTask(task:TaskDto){
     this.selectedTask = task;
+  }
+  onRepeatingSaved(emit:any){
+    this.getWorkPlanForEmployee(this.currentDate,this.selectedEmployee.id);
   }
 
   listenToDepartment() {

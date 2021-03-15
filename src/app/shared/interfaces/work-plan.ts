@@ -17,19 +17,19 @@ export class WorkPlanDto {
 export class CreateWorkPlanCommand {
     employeeId: number;
     taskId: number;
-    date: Date;
+    date: string;
 }
 
 export class UpdateWorkPlanCommand{
     employeeId: number;
     taskId: number;
-    date: Date;
+    date: string;
 }
 
 export class DeleteWorkPlanCommand {
     employeeId: number;
     taskId: number;
-    date: Date;
+    date: string;
 }
 export interface WorkPlanRepeatingCommand{
     taskId: number;
