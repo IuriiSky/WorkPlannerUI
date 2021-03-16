@@ -20,7 +20,7 @@
 <div class="wrapper-navigation">
     <app-navigation></app-navigation>
 </div>
-
+<app-calendar [onlyFutureDays]="false" (selectedDate)="dateChanged($event)"></app-calendar>
 <div  class="wrapper-lists">
     <ul class="employees-list" >
       <li class="name-employee" *ngFor="let userTask of taskOverview">
@@ -31,4 +31,7 @@
           </ul>
       </li>
     </ul>
+</div>
+<div class="name" *ngIf="taskOverview.length === 0">
+  Data til denne dag eksistere ikke
 </div>

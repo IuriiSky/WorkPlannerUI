@@ -23,13 +23,26 @@ export class TaskOverviewComponent implements OnInit {
   timerSubsription : Subscription;
 
   taskOverview : EmployeeTasks[] = [];
+  public currentDate: Date = new Date();
+  refreshTaskInProgress = false;
 
-  getTaskOverview()
+  dateChanged(date:Date){
+    this.currentDate = date;
+    this.getTaskOverview(date);
+  }
+
+  getTaskOverview(date: Date )
   {
+    if(this.refreshTaskInProgress === true) return;
+
+    this.refreshTaskInProgress = true;
     this.taskOverview = [];
-    let todayString = this.datepipe.transform(new Date(), 'yyyy-MM-dd');
+    let dayString = this.datepipe.transform(date, 'yyyy-MM-dd');
     let departmentId = this.departmentService.departmentSubject.getValue();
-    this.plannerService.getWorkPlansForDepartment(todayString,departmentId).subscribe((data : WorkPlanDto[]) => {
+
+    this.plannerService.getWorkPlansForDepartment(dayString,departmentId).subscribe(
+      
+      (data : WorkPlanDto[]) => {
       data.forEach(workPlan =>{
         if(this.taskOverview.find(o => o.employeeName === workPlan.employeeName)){
           this.taskOverview.find(o => o.employeeName === workPlan.employeeName).tasks.push(workPlan);
@@ -44,7 +57,9 @@ export class TaskOverviewComponent implements OnInit {
           this.taskOverview.push(employeeTasks);          
         }
       })
-    });
+    },
+    (erro)=>{},
+    ()=>{this.refreshTaskInProgress=false;});
   }
 
   listenToDepartment() {
@@ -57,7 +72,7 @@ export class TaskOverviewComponent implements OnInit {
         }  
         const source = timer(0, this.updatePeriod);
         this.timerSubsription = source.subscribe(x =>{
-          this.getTaskOverview();
+          this.getTaskOverview(this.currentDate);
         });
     })
   }
