@@ -10,6 +10,7 @@ import { LoginComponent } from './login/login.component';
 import { AdminGuard } from './auth/admin.guard';
 import { EmployeeTasksComponent } from './employee/employee-tasks/employee-tasks.component';
 import { TaskOverviewComponent } from './admin/task-overview/task-overview.component';
+import {TaskWeekOverviewComponent} from './admin/task-week-overview/task-week-overview.component';
 
 
 const routes: Routes = [
@@ -21,7 +22,8 @@ const routes: Routes = [
   {path: 'planner', component: PlannerComponent, canActivate: [AdminGuard]},
   {path: 'employeesTasks', component: EmployeeTasksComponent },
   {path: 'login', component: LoginComponent},
-  {path: 'overview', component: TaskOverviewComponent}
+  {path: 'overview', component: TaskOverviewComponent},
+  {path: 'week-overview', component: TaskWeekOverviewComponent}
 ];
 
 @NgModule({
