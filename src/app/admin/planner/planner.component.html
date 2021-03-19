@@ -66,7 +66,7 @@
       </ul>
   </div>
 
-  <div style="display: block; width: 100%;">
-    <app-task-repeat [selectedTask]="selectedTask" [selectedEmployee]="selectedEmployee"></app-task-repeat>
+  <div *ngIf="selectedTask" style="display: block; width: 100%;">
+    <app-task-repeat [selectedTask]="selectedTask" [selectedEmployee]="selectedEmployee" [startDate]="currentDate" (repeatingSaved)="onRepeatingSaved($event)"></app-task-repeat>
   </div>
 </div>

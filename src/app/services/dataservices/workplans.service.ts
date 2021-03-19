@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 //import { DataService } from './data.service';
 import { Observable } from 'rxjs';
-import { WorkPlanDto, CreateWorkPlanCommand, UpdateWorkPlanCommand, DeleteWorkPlanCommand, EmployeeTaskDto, WorkPlanRepeatingCommand } from '../../shared/interfaces/work-plan';
+import { WorkPlanDto, CreateWorkPlanCommand, UpdateWorkPlanCommand, DeleteWorkPlanCommand, EmployeeTaskDto, WorkPlanRepeatingCommand, DeleteFutureEmployeeTaskCommand } from '../../shared/interfaces/work-plan';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -25,6 +25,10 @@ export class WorkplansService {
   }
   updateEmployeeTask(task: EmployeeTaskDto) {
     return this.http.put<any>(environment.apiUrl + 'employeeTasks/update',task);
+  }
+
+  deleteFutureTask(deleteFutureCommand: DeleteFutureEmployeeTaskCommand){
+    return this.http.put<any>(environment.apiUrl + 'employeeTasks/deletefuture',deleteFutureCommand);
   }
 
   getWorkPlansForDepartment(date: Date|string,deparmentId:number): Observable<WorkPlanDto[]>{

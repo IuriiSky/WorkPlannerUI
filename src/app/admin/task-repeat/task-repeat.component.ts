@@ -1,4 +1,5 @@
-import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
+import { DatePipe } from '@angular/common';
+import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 import { WorkplansService } from 'src/app/services/dataservices/workplans.service';
 import { EmployeeDto } from 'src/app/shared/interfaces/employee';
 import { TaskDto } from 'src/app/shared/interfaces/task';
@@ -12,15 +13,18 @@ import { WorkPlanRepeatingCommand } from 'src/app/shared/interfaces/work-plan';
 export class TaskRepeatComponent implements OnInit {
   @Input('selectedTask') task: TaskDto;
   @Input('selectedEmployee') employee: EmployeeDto;
-  constructor(private plannerService: WorkplansService) { }
+  @Input('startDate') baseDate: Date = new Date();
+  @Output() repeatingSaved: EventEmitter<any> = new EventEmitter();
 
-  private today = new Date();
+  constructor(private plannerService: WorkplansService, private datepipe: DatePipe,) { }
   
   repeating: WorkPlanRepeatingCommand = {
     taskId:0,
     employeeId:0,
-    startDate: this.today.toISOString(),
-    endDate: this.today.toISOString(),
+
+    startDate: this.datepipe.transform(this.baseDate,'yyyy-MM-dd'),
+    endDate: this.datepipe.transform(this.baseDate,'yyyy-MM-dd'),
+
     monday: false,
     tuesday: false,
     wednesday: false,
@@ -160,24 +164,27 @@ export class TaskRepeatComponent implements OnInit {
     .subscribe((data:any) => 
     {
       this.initDefaultRepeating();
+      this.repeatingSaved.emit(null);
     });
   }
   private setDefaultNextDays(){
-    this.repeating.startDate = this.today.toISOString();
-    this.repeating.endDate = this.today.toISOString();  
+    this.repeating.startDate = this.datepipe.transform(this.baseDate,'yyyy-MM-dd');
+    this.repeating.endDate = this.datepipe.transform(this.baseDate,'yyyy-MM-dd');  
   }
 
   private getDateDiff(days:number): string {
-    let date = new Date(this.today.getTime());
-    date.setDate(this.today.getDate() + days);
-    return date.toISOString(); 
+    let date = new Date(this.baseDate.getTime());
+    date.setDate(this.baseDate.getDate() + days);
+    return this.datepipe.transform(date,'yyyy-MM-dd'); 
   }
   private initDefaultRepeating()
   {
     this.repeating.taskId=0;
     this.repeating.employeeId=0;
-    this.repeating.startDate= this.today.toISOString();
-    this.repeating.endDate= this.today.toISOString();
+    
+    this.repeating.startDate = this.datepipe.transform(this.baseDate,'yyyy-MM-dd');
+    this.repeating.endDate = this.datepipe.transform(this.baseDate,'yyyy-MM-dd');
+
     this.repeating.monday= false;
     this.repeating.tuesday= false;
     this.repeating.wednesday= false;
@@ -185,7 +192,6 @@ export class TaskRepeatComponent implements OnInit {
     this.repeating.friday= false;
     this.repeating.saturday= false;
     this.repeating.sunday= false;
-    //console.log(this.repeating.startDate);
 
     this.repeatDaily = false;
     this.repeatWorkingDays = false;
@@ -203,7 +209,14 @@ export class TaskRepeatComponent implements OnInit {
     let taskChange = changes["task"];
     if (taskChange && !taskChange.firstChange){
       this.initDefaultRepeating();
+      return;
     }
+    let dateChange = changes["baseDate"];
+    if(dateChange && !dateChange.firstChange){
+      this.initDefaultRepeating();
+    }
+
+    //selectedTask
   }
 
   ngOnInit() {

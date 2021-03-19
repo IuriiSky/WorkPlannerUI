@@ -3,7 +3,14 @@ export class EmployeeTaskDto{
     description: string;
     isDone: boolean;
     date: Date;
+    canBeRemovedByEmployee:boolean;
 }
+export class DeleteFutureEmployeeTaskCommand{
+    taskId: number;
+    deleteFrom: string;
+}
+
+
 export class WorkPlanDto {
     employeeId: number;
     employeeName: string;
@@ -17,19 +24,19 @@ export class WorkPlanDto {
 export class CreateWorkPlanCommand {
     employeeId: number;
     taskId: number;
-    date: Date;
+    date: string;
 }
 
 export class UpdateWorkPlanCommand{
     employeeId: number;
     taskId: number;
-    date: Date;
+    date: string;
 }
 
 export class DeleteWorkPlanCommand {
     employeeId: number;
     taskId: number;
-    date: Date;
+    date: string;
 }
 export interface WorkPlanRepeatingCommand{
     taskId: number;

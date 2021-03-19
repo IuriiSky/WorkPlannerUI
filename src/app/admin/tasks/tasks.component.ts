@@ -21,14 +21,16 @@ export class TasksComponent implements OnInit {
 
   public addNewTask: CreateTaskCommand = {
     taskDescription: '',
-    departmentId : 0
+    departmentId : 0,
+    canBeRemovedByEmployee:false,
   };
 
-  public  activeTask: TaskDto;
+  //public  activeTask: TaskDto;
 
   public rewriteTask: UpdateTaskCommand = {
     taskId: 0,
     taskDescription: '',
+    canBeRemovedByEmployee:false,
   };
 
   createTask: FormGroup;
@@ -59,12 +61,16 @@ export class TasksComponent implements OnInit {
     });
   }
 
-  setActiveTask(taskDto: TaskDto) {
-    this.activeTask = taskDto;
+  taskClicked(taskDto: TaskDto) {
+    // console.log('her');
+    // this.activeTask = taskDto;
+    this.rewriteTask.taskId = taskDto.id;
+    this.rewriteTask.taskDescription = taskDto.description;
+    this.rewriteTask.canBeRemovedByEmployee = taskDto.canBeRemovedByEmployee;
   }
 
   updateTask() {
-    this.rewriteTask.taskId = Number(this.activeTask.id);
+    //this.rewriteTask.taskId = Number(this.activeTask.id);
     this.tasksService.updateTask(this.rewriteTask).subscribe(task => {
       this.rewriteTask.taskDescription = this.addNewTask.taskDescription;
       this.showUpdateTaskForm = true;

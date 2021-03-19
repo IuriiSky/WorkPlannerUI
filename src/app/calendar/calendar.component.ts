@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import {MatDatepickerInputEvent} from '@angular/material/datepicker';
 import { BehaviorSubject } from 'rxjs';
@@ -10,11 +10,11 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class CalendarComponent  implements OnInit {
 
+  @Input('onlyFutureDays') onlyFutureDays: boolean = true;
   @Output() selectedDate = new EventEmitter<Date>();
 
   constructor(private datepipe: DatePipe)  { }
 
-    //days:string[] = ["Man","Tir","Ons","Tor","Fre","Lør","Søn"];
     days:string[] = ["Ma","Ti","On","To","Fr","Lø","Sø"];
     moths:string[] = ["Januar","Februar","Marts","April","Maj","Juni","Juli","August","September","Oktober","November","December"];
 
@@ -46,7 +46,8 @@ export class CalendarComponent  implements OnInit {
       date.setDate(this.currentDate.getDate() + days);
       date.setHours(0,0,0,0);
 
-      if(date >= this.today){
+      //this.selectedDateChanged(date); 
+      if(date >= this.today || !this.onlyFutureDays){
         this.selectedDateChanged(date); 
       }
     }
