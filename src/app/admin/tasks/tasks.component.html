@@ -32,7 +32,7 @@
           </svg>
         </button>
     </div>
-  <app-tasks-list [tasks]="tasks" (voted)="setActiveTask($event); toggleShowUpdateTaskForm()"></app-tasks-list>
+  <app-tasks-list [tasks]="tasks" (voted)="taskClicked($event); toggleShowUpdateTaskForm()"></app-tasks-list>
     <!--    Create task form-->
     <div class="wrapper-create-form" [ngClass]="{invisible: showCreateForm}">
       <form action="" method="post">
@@ -49,6 +49,14 @@
                   title="Angiv description"
                   autofocus required>
           </mat-form-field>
+          <input type="checkbox"
+                 class="custom-checkbox" 
+                 id="removableCreate" 
+                 [(ngModel)]="addNewTask.canBeRemovedByEmployee"
+                 [ngModelOptions]="{standalone: true}"
+                 required>
+                <label for="removableCreate">Kan fjernes af medarbejder</label>
+
         <button class="create-button" (click)="createNewTask()">Godkend</button>
         <button class="cancel-button" (click)="toggleShowCreateForm()">Fortryd</button>
         </fieldset>
@@ -69,6 +77,13 @@
                   title="Angiv ny beskrivelse"
                   autofocus required>
           </mat-form-field>
+          <input type="checkbox"
+                 class="custom-checkbox" 
+                 id="removableUpdate" 
+                 [(ngModel)]="rewriteTask.canBeRemovedByEmployee"                  
+                 [ngModelOptions]="{standalone: true}"
+                 required>
+                <label for="removableUpdate">Kan fjernes af medarbejder</label>
         <button class="create-button" (click)="updateTask()">Godkend</button>
         <button class="cancel-button" (click)="toggleShowUpdateTaskForm()">Fortryd</button>
         </fieldset>

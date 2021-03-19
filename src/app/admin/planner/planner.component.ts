@@ -96,7 +96,6 @@ export class PlannerComponent implements OnInit,OnDestroy {
   }
 
   private getWorkPlanForEmployee(date: Date, employeeId : number){
-    
     let stringDate = this.datepipe.transform(date, 'yyyy-MM-dd');
     this.plannerService.getWorkPlansForEmployee(stringDate, employeeId).subscribe((data : WorkPlanDto[]) => {
       this.employeeWorkPlan = data;
@@ -105,16 +104,20 @@ export class PlannerComponent implements OnInit,OnDestroy {
   }
 
   private recalculateTask(workPlan :WorkPlanDto[]){
-    this.employeeTasks = this.allTasks.filter(t => {
-      return workPlan.some(wp => wp.taskId == t.id);
-    });
-    this.remainingTasks = this.allTasks.filter(t =>{
-      return !workPlan.some(wp => wp.taskId == t.id);
-    });
-    if (this.selectedTask){
-      let isAssigned = this.employeeTasks.findIndex(t => t.id == this.selectedTask.id) !== -1;
-      if(!isAssigned){
-        this.selectedTask = undefined;
+    if(this.allTasks){
+
+      this.employeeTasks = this.allTasks.filter(t => {
+        return workPlan.some(wp => wp.taskId == t.id);
+      });
+      this.remainingTasks = this.allTasks.filter(t =>{
+        return !workPlan.some(wp => wp.taskId == t.id);
+      });
+      
+      if (this.selectedTask){
+        let isAssigned = this.employeeTasks.findIndex(t => t.id == this.selectedTask.id) !== -1;
+        if(!isAssigned){
+          this.selectedTask = undefined;
+        }
       }
     }
   }

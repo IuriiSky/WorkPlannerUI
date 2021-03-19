@@ -12,6 +12,11 @@
             <mat-card-actions class="centered">
                 <mat-slide-toggle class="slider" [(ngModel)]="task.isDone" (change)="slideToggled(task)">
                 </mat-slide-toggle>
+                <button mat-button 
+                    class="button remove-button"
+                    *ngIf="task.canBeRemovedByEmployee && task.isDone"
+                     (click)="deleteFutureTask(task)"> 
+                    Fjern fremtidige  </button>
             </mat-card-actions>
         </mat-card>
     </div>

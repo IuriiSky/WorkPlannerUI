@@ -37,6 +37,15 @@
     font-weight: 500;
     font-size: 1em;
   }
+  .remove-button {
+    background-color: red; 
+    border: none;
+    border-radius: 4px;
+    color: var(--white-color);
+    font-weight: 500;
+    font-size: 1em;
+    display: block;
+  }
 
 .todaytasks{
     background-color:#cdd0c9;

@@ -2,7 +2,7 @@ import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Subscription, timer } from 'rxjs';
 import { WorkplansService } from 'src/app/services/dataservices/workplans.service';
-import { EmployeeTaskDto } from 'src/app/shared/interfaces/work-plan';
+import { DeleteFutureEmployeeTaskCommand, EmployeeTaskDto } from 'src/app/shared/interfaces/work-plan';
 
 @Component({
   selector: 'app-employee-tasks',
@@ -28,6 +28,18 @@ export class EmployeeTasksComponent implements OnInit {
     (err)=>{
       console.log(err);  
     });
+  }
+
+  deleteFutureTask(task:EmployeeTaskDto){
+    if (confirm('Det  handling du er i gang i, fjerne alle fremtidige opgaver af vælgte type. Er du sikker ?')) {
+      let delFuture: DeleteFutureEmployeeTaskCommand = {
+        taskId: task.taskId,
+        deleteFrom: this.datepipe.transform(task.date,'yyyy-MM-dd')
+      };
+      this.plannerService.deleteFutureTask(delFuture).subscribe(
+        (data:any)=>{this.ngOnInit();}
+        );
+    }
   }
 
   getTodaysTask(){
@@ -64,7 +76,7 @@ export class EmployeeTasksComponent implements OnInit {
     });
   }
   
-  private updatePeriod : number = 10 * 1000;
+  private updatePeriod : number = 10 * 60 * 1000;
   timerSubsription : Subscription;
   createTodayTaskRefreshSubscription(){
     if(this.timerSubsription){

@@ -3,7 +3,14 @@ export class EmployeeTaskDto{
     description: string;
     isDone: boolean;
     date: Date;
+    canBeRemovedByEmployee:boolean;
 }
+export class DeleteFutureEmployeeTaskCommand{
+    taskId: number;
+    deleteFrom: string;
+}
+
+
 export class WorkPlanDto {
     employeeId: number;
     employeeName: string;
