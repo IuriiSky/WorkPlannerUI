@@ -4,7 +4,6 @@ import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
-
 // Helpers
 import {BusyInterceptor} from './_helpers/busy.interceptor';
 import { JwtInterceptor } from './auth/jwt.interceptor';
@@ -22,6 +21,7 @@ import { EmployeesListComponent } from './admin/employees-list/employees-list.co
 import { TasksListComponent } from './admin/tasks-list/tasks-list.component';
 import { LoginComponent } from './login/login.component';
 import { TaskOverviewComponent } from './admin/task-overview/task-overview.component';
+import { TaskWeekOverviewComponent } from './admin/task-week-overview/task-week-overview.component';
   // Shared components
 import { LoadingComponent } from './shared/components/loading/loading.component';
   // Services
@@ -30,7 +30,7 @@ import { EmployeeDetailsComponent } from './admin/employee-details/employee-deta
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
   // Angular Material
- import {MatCardModule} from '@angular/material/card';
+import {MatCardModule} from '@angular/material/card';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatDividerModule} from '@angular/material/divider';
@@ -78,7 +78,8 @@ export const DateFormats = {
     EmployeeTasksComponent,
     CalendarComponent,
     TaskOverviewComponent,
-    TaskRepeatComponent
+    TaskRepeatComponent,
+    TaskWeekOverviewComponent
   ],
   imports: [
     BrowserModule,
@@ -101,12 +102,12 @@ export const DateFormats = {
     MatMomentDateModule
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: BusyInterceptor,multi: true},
+    { provide: HTTP_INTERCEPTORS, useClass: BusyInterceptor, multi: true},
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     { provide: DateAdapter, useClass: MomentUtcDateAdapter },
     { provide: MAT_DATE_FORMATS, useValue: DateFormats },
-    
+
     EmployeesService,
     DatePipe
   ],

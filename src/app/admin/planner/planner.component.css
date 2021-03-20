@@ -47,21 +47,38 @@ app-calendar {
   cursor: pointer;
   text-align: center;
   padding: 10px;
-  text-align: center;
   border-left: 3px solid lightseagreen;
   border-right: 3px solid lightseagreen;
   border-bottom: 3px solid lightseagreen;
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
   font-weight: bold;
+  position: relative;
 }
 
-.title-list:after{
-  content: '\1F87b';  /* Unicode character for "arrow" sign */
-  font-size: 13px;
-  color: #777;
-  float: right;
-  margin-left: 5px;
+/*.title-list:after{*/
+.title-list:after {
+  content: '';
+  background-image: url("../../../assets/images/arrow-up2.svg");
+  background-size: contain;
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  top: 7px;
+  right: 7px;
+}
+
+.arrow:after {
+  content: '';
+  background-image: url("../../../assets/images/arrow-down2.svg");
+  background-size: contain;
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  top: 7px;
+  right: 7px;
 }
 
 .wrapper-employee-list {
@@ -79,7 +96,7 @@ app-calendar {
 
 .background-block {
   margin: 0px 5px;
-  box-shadow: 0 5px 5px rgba(10,16,20,.24), 0 0 2px rgba(10,16,20,.12);
+  box-shadow: 0 5px 5px rgba(10, 16, 20, .24), 0 0 2px rgba(10, 16, 20, .12);
   transition: box-shadow .5s;
   border-radius: 5px;
   width: 100%;
@@ -127,10 +144,10 @@ app-calendar {
 }
 
 .task {
-  background-color: rgba(25,118,210,.1);
+  background-color: rgba(25, 118, 210, .1);
   color: var(--black-color);
   border-radius: 4px;
-  box-shadow: 0 5px 5px rgba(10,16,20,.24), 0 0 2px rgba(10,16,20,.12);
+  box-shadow: 0 5px 5px rgba(10, 16, 20, .24), 0 0 2px rgba(10, 16, 20, .12);
   height: 1em;
   transition: box-shadow .5s;
   margin: 10px 20px;
@@ -145,11 +162,12 @@ app-calendar {
   box-shadow: 0 0 0 2px rgb(236, 136, 5) inset, 0 0 0 4px white inset;
   transition: 0.4s ease-out
 }
+
 .task-selected {
   background-color: rgba(25, 118, 210, 0.356);
   color: var(--black-color);
   border-radius: 4px;
-  box-shadow: 0 5px 5px rgba(10,16,20,.24), 0 0 2px rgba(10,16,20,.12);
+  box-shadow: 0 5px 5px rgba(10, 16, 20, .24), 0 0 2px rgba(10, 16, 20, .12);
   height: 1em;
   transition: box-shadow .5s;
   margin: 10px 20px;

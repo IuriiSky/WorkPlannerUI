@@ -1,7 +1,8 @@
 <div class="todaytasks">
+    <button class="button primary-button" (click)="ngOnInit()">Forny opgaver</button>
     <div class="separator">I DAG</div>
     <div *ngFor="let task of todaysTasks">
-        <mat-card [ngClass]="task.isDone ? 'task-done' : 'task'" >
+        <mat-card [ngClass]="task.isDone ? 'task-done' : 'task'">
             <mat-card-title>
                 {{task.isDone ? 'Færdig' : 'Planlagt'}}
             </mat-card-title>
@@ -9,16 +10,19 @@
                 {{task.description}}
             </mat-card-content>
             <mat-card-actions class="centered">
-                <mat-slide-toggle class="slider"
-                    [(ngModel)]="task.isDone" 
-                    (change)="slideToggled(task)"
-                    > 
+                <mat-slide-toggle class="slider" [(ngModel)]="task.isDone" (change)="slideToggled(task)">
                 </mat-slide-toggle>
+                <button mat-button 
+                    class="button remove-button"
+                    *ngIf="task.canBeRemovedByEmployee && task.isDone"
+                     (click)="deleteFutureTask(task)"> 
+                    Fjern fremtidige  </button>
             </mat-card-actions>
         </mat-card>
     </div>
+
     <div *ngIf=!tommorowTasks>
-        <button class="button primary-button" (click)="getTommorowTasks()">Hent for i morgen</button>
+        <button class="button primary-button" (click)="getTommorowTasks()">Hent for i morgen</button>      
     </div>
 </div>
 

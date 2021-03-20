@@ -81,6 +81,7 @@
   position: absolute;
   top: 80px;
   width: 100%;
+  z-index: 1;
   }
 
 .humburger-menu-list {
@@ -127,7 +128,7 @@
 
   .ham,
   .hamRotate,
-  .ham1, 
+  .ham1,
   .active {
     display: none;
   }

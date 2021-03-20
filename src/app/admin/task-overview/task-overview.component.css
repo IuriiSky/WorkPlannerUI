@@ -7,7 +7,7 @@
   display: flex;
   justify-content: center;
   width: 100%;
-  }
+}
 
 .employees-list {
   display: flex;
@@ -32,7 +32,7 @@
   display: flex;
   flex-wrap: wrap;
   margin: 5px;
-  list-style: none; 
+  list-style: none;
 }
 
 .task {
@@ -47,7 +47,7 @@
 }
 
 @media only screen and (min-width: 768px) {
-.wrapper-navigation {
+  .wrapper-navigation {
     padding-bottom: 10px;
   }
 
@@ -55,19 +55,17 @@
     display: flex;
   }
 
-.name {
-  display: flex;
-  padding: 5px;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-  font-size: 20px;
-  letter-spacing: 1px;
-  flex: 0 0 25%;
+  .name {
+    display: flex;
+    padding: 5px;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 20px;
+    letter-spacing: 1px;
+    flex: 0 0 25%;
   }
-}
 
-@media only screen and (min-width: 768px) {
   .wrapper-lists {
     margin: 0 auto;
     max-width: 1024px;

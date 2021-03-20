@@ -1,7 +1,8 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { Subscription, timer } from 'rxjs';
 import { WorkplansService } from 'src/app/services/dataservices/workplans.service';
-import { EmployeeTaskDto } from 'src/app/shared/interfaces/work-plan';
+import { DeleteFutureEmployeeTaskCommand, EmployeeTaskDto } from 'src/app/shared/interfaces/work-plan';
 
 @Component({
   selector: 'app-employee-tasks',
@@ -11,21 +12,45 @@ import { EmployeeTaskDto } from 'src/app/shared/interfaces/work-plan';
 export class EmployeeTasksComponent implements OnInit {
 
   constructor(private plannerService: WorkplansService,private datepipe: DatePipe,) { }
+  
   public todaysTasks : EmployeeTaskDto[];
   public tommorowTasks : EmployeeTaskDto[];
   public weekTasks : EmployeeTaskDto[];
-  private today : Date;
+  
+  private today : Date = new Date();
+  
   
   slideToggled(task:EmployeeTaskDto){
     this.plannerService.updateEmployeeTask(task).subscribe(
       (data : any) => {
-        this.todaysTasks.sort((t1,t2)=>{
-          return (t1.isDone === t2.isDone)?0: t1.isDone? 1 : -1;
-        })
+        this.getTodaysTask();
     },
     (err)=>{
       console.log(err);  
     });
+  }
+
+  deleteFutureTask(task:EmployeeTaskDto){
+    if (confirm('Det  handling du er i gang i, fjerne alle fremtidige opgaver af vælgte type. Er du sikker ?')) {
+      let delFuture: DeleteFutureEmployeeTaskCommand = {
+        taskId: task.taskId,
+        deleteFrom: this.datepipe.transform(task.date,'yyyy-MM-dd')
+      };
+      this.plannerService.deleteFutureTask(delFuture).subscribe(
+        (data:any)=>{this.ngOnInit();}
+        );
+    }
+  }
+
+  getTodaysTask(){
+    let todayString = this.datepipe.transform(this.today, 'yyyy-MM-dd');
+    this.plannerService.getEmployeesOwnTasksForDate(todayString).subscribe((data : EmployeeTaskDto[]) => {
+      data.sort((t1,t2)=>{
+        return (t1.isDone === t2.isDone)?0: t1.isDone? 1 : -1;
+      })
+      this.todaysTasks = data;
+    });
+
   }
   
   getTommorowTasks(){
@@ -45,26 +70,32 @@ export class EmployeeTasksComponent implements OnInit {
     let aboutWeek = new Date();
     aboutWeek.setDate(this.today.getDate() + 7);
     let aboutWeekString =  this.datepipe.transform(aboutWeek, 'yyyy-MM-dd');
-    console.log(aboutWeekString);
+    
     this.plannerService.getEmployeesOwnTasksForDateRange(afterTommorowString,aboutWeekString).subscribe((data : EmployeeTaskDto[]) => {
       this.weekTasks = data;
     });
-
   }
-  // nextDay() {
-  //   let date = new Date(this.currentDate.getTime());
-  //   date.setDate(this.currentDate.getDate() + 1);
-  //   this.currentDate = date;
-  //   this.setActiveEmployee(this.employee);
-  // }
+  
+  private updatePeriod : number = 10 * 60 * 1000;
+  timerSubsription : Subscription;
+  createTodayTaskRefreshSubscription(){
+    if(this.timerSubsription){
+      this.timerSubsription.unsubscribe();
+    } 
+    const source = timer(0, this.updatePeriod);
+    this.timerSubsription = source.subscribe(x =>
+      {
+        this.getTodaysTask();
+      });
+  }
 
   ngOnInit() {
-    this.today = new Date();
-    let todayString = this.datepipe.transform(this.today, 'yyyy-MM-dd');
-    this.plannerService.getEmployeesOwnTasksForDate(todayString).subscribe((data : EmployeeTaskDto[]) => {
-      //this.mapTasks(data);
-      this.todaysTasks = data;
-    });
+    this.tommorowTasks = undefined;
+    this.weekTasks = undefined;
+    this.createTodayTaskRefreshSubscription();
   }
 
+  ngOnDestroy(): void {
+    this.timerSubsription.unsubscribe();
+  }
 }
