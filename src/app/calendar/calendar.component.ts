@@ -11,6 +11,7 @@ import {BehaviorSubject} from 'rxjs';
 export class CalendarComponent implements OnInit {
 
   @Input('onlyFutureDays') onlyFutureDays: boolean = true;
+  @Input('showOnlyWeeks') showOnlyWeeks: boolean = false;
   @Output() selectedDate = new EventEmitter<Date>();
 
   constructor(private datepipe: DatePipe)  { }
@@ -45,7 +46,6 @@ export class CalendarComponent implements OnInit {
       date.setDate(this.currentDate.getDate() + days);
       date.setHours(0,0,0,0);
 
-      //this.selectedDateChanged(date); 
       if(date >= this.today || !this.onlyFutureDays){
         this.selectedDateChanged(date); 
       }

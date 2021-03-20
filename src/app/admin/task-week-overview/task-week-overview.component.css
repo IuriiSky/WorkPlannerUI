@@ -98,19 +98,25 @@
 
 /*Employee tasks list*/
 
-.employees-list {
+.weektask-list {
   display: flex;
   flex-direction: column;
   list-style: none;
 }
 
-.name-employee {
+.dayOfWeek {
   border-radius: 5px;
   border: 2px solid black;
-  margin: 5px;
+  margin: 10px;
+}
+.pastDayOfWeek {
+  border-radius: 5px;
+  border: 2px solid black;
+  margin: 10px;
+  background: #e2e0e0;
 }
 
-.name {
+.day {
   display: block;
   text-align: center;
   padding: 5px 0;
@@ -122,6 +128,7 @@
   flex-wrap: wrap;
   margin: 5px;
   list-style: none;
+  
 }
 
 .task {
@@ -163,11 +170,14 @@
     width: 100%;
   }
 
-  .name-employee {
+  .dayOfWeek {
+    display: flex;
+  }
+  .pastDayOfWeek {
     display: flex;
   }
 
-  .name {
+  .day {
     display: flex;
     padding: 5px;
     align-items: center;

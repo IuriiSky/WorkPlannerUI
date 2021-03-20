@@ -97,15 +97,14 @@ export class PlannerComponent implements OnInit, OnDestroy {
 
   private getWorkPlanForEmployee(date: Date, employeeId : number){
     let stringDate = this.datepipe.transform(date, 'yyyy-MM-dd');
-    this.plannerService.getWorkPlansForEmployee(stringDate, employeeId).subscribe((data: WorkPlanDto[]) => {
+    this.plannerService.getWorkPlansForEmployee(employeeId,stringDate).subscribe((data: WorkPlanDto[]) => {
       this.employeeWorkPlan = data;
       this.recalculateTask(data);
     });
   }
 
   private recalculateTask(workPlan :WorkPlanDto[]){
-    if(this.allTasks){
-
+    if(this.allTasks !== undefined){
       this.employeeTasks = this.allTasks.filter(t => {
         return workPlan.some(wp => wp.taskId == t.id);
       });

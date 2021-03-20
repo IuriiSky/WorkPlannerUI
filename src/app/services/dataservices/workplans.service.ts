@@ -34,21 +34,21 @@ export class WorkplansService {
   getWorkPlansForDepartment(date: Date|string,deparmentId:number): Observable<WorkPlanDto[]>{
     return this.http.get<WorkPlanDto[]>(this.baseApi + 'department/' + deparmentId + '/' + date);
   }
-  getWorkPlans(date: Date|string): Observable<WorkPlanDto[]>{
-    return this.http.get<WorkPlanDto[]>(this.baseApi + date);
-  }
+  // getWorkPlans(date: Date|string): Observable<WorkPlanDto[]>{
+  //   return this.http.get<WorkPlanDto[]>(this.baseApi + date);
+  // }
 
-  getWorkPlansForEmployee(date: Date|string, employeeId:number): Observable<WorkPlanDto[]>{
-    return this.http.get<WorkPlanDto[]>(this.baseApi+ 'employee/' +  employeeId + '/' + date );
+  getWorkPlansForEmployee(employeeId:number, fromDate: string,toDate: string = ""): Observable<WorkPlanDto[]>{
+    return this.http.get<WorkPlanDto[]>(this.baseApi+ 'employee/' +  employeeId + '?fromDate=' + fromDate + "&toDate="+ toDate );
   }
 
   createWorkPlan(workplan: CreateWorkPlanCommand){
     return this.http.post<any>(this.baseApi,workplan);
   }
 
-  updateWorkPlan(workplan: UpdateWorkPlanCommand){
-    return this.http.put<any>(this.baseApi,workplan);
-  }
+  // updateWorkPlan(workplan: UpdateWorkPlanCommand){
+  //   return this.http.put<any>(this.baseApi,workplan);
+  // }
   repeatWorkPlan(repeating: WorkPlanRepeatingCommand){
     return this.http.put<any>(this.baseApi+'repeating', repeating);
   }

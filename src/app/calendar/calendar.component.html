@@ -27,7 +27,7 @@
 </svg>
 
 <div class="wrapper-custom-calendar">
-  <div class="month-day">
+  <div *ngIf='!showOnlyWeeks' class="month-day">
     <div class="card">
       <div class="selected-day">{{currentMonthDay}}</div>
       <p class="card-footer">{{currentMonth}}</p>
@@ -62,7 +62,8 @@
           </svg>
         </div>
       </div>
-      <p class="card-footer">
+      
+      <p *ngIf='!showOnlyWeeks' class="card-footer">
           <span class="day" *ngFor="let day of days; let i = index"
                 [ngClass]="isDaySelected(i) ? 'day-active' : 'day' "
                 (click)="daySelected(i)">{{day}}</span>

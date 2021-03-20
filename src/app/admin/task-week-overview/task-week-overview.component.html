@@ -30,17 +30,19 @@
     </symbol>
   </defs>
 </svg>
+
 <div class="wrapper">
   <div class="wrapper-navigation">
     <app-navigation></app-navigation>
   </div>
-  <app-calendar class="app-calendar" (selectedDate)="dateChanged($event)"></app-calendar>
+  <app-calendar class="app-calendar" [showOnlyWeeks]="true" [onlyFutureDays]="false" (selectedDate)="dateChanged($event)"></app-calendar>
 </div>
 <!--  Employee list-->
 <div class="wrapper-employee-list-block">
   <div class="employee-list-block">
-    <div class="title-list" [ngClass]="{arrow: hideEmployeeList}" title="vælg medarbejderen"
+    <div class="title-list" [ngClass]="{arrow: hideEmployeeList}" title="vælg medarbejder"
          (click)="toggleShowEmployeeList()">{{selectedEmployee?.name}}</div>
+
     <div class="wrapper-employee-list" [ngClass]="{invisible: hideEmployeeList}">
       <app-employees-list [employees]="allEmployees"
                           [selectedEmployee]="selectedEmployee"
@@ -53,22 +55,13 @@
 
 <!--  Tasks list-->
 <div class="wrapper-lists">
-  <ul class="employees-list">
-    <li *ngFor="let userTask of taskOverview">
-      <div class="name-employee" *ngIf="userTask.employeeName === selectedEmployee?.name">
-        <div class="name" [ngStyle]="{'background-color': userTask.employeeColor}">
-          <span>{{userTask.employeeName}}</span>
-        </div>
-        <ul class="tasks-list week">
-          <li class="day-of-week">
-            <span class="day-name">{{currentDate}}</span>
-            <ul class="tasks-list">
-              <li class="task " *ngFor="let task of userTask.tasks"
-                  [ngClass]="task.isDone ? 'complete' : '' ">{{task.taskDescription}}</li>
-            </ul>
-          </li>
-        </ul>
-      </div>
+  <ul class="weektask-list">
+    <li *ngFor="let day of weekOverview.days" [ngClass]="day.isPast?'pastDayOfWeek':'dayOfWeek'" >
+      <div class="day" [ngStyle]="{'background-color': weekOverview.employeeColor}"><span>{{day.getWeekDay()}}</span></div>
+      <ul class="tasks-list" >
+          <li class="task " *ngFor="let task of day.tasks"
+          [ngClass]="task.isDone ? 'complete' : '' ">{{task.taskDescription}}</li>
+      </ul>
     </li>
   </ul>
-</div>
+</div> 
