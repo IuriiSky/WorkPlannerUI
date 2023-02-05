@@ -18,7 +18,6 @@ export class HeadComponent implements OnInit {
     private departmentService : DepartamentService,
     private router: Router) 
   { 
-    //this.isUserLoggedIn = authService.isUserLoggedIn();
   }
   isLoading: boolean = false;
   isUserLoggedIn: boolean;

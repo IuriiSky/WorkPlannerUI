@@ -73,7 +73,6 @@ export const DateFormats = {
     TasksListComponent,
     LoginComponent,
     LoadingComponent,
-    LoadingComponent,
     NavigationComponent,
     EmployeeTasksComponent,
     CalendarComponent,
